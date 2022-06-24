@@ -1,7 +1,7 @@
 displayName: "Random Mindustry"
 name: "random-mindustry"
 author: "gorodmi & Mythril"
-main: "com.gorodmi.Main"
+main: "com.gorodmi.randomMindustry.Main"
 description: "random"
 version: 1.0
 minGameVersion: 136
