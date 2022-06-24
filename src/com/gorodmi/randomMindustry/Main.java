@@ -1,14 +1,14 @@
 package com.gorodmi.randomMindustry;
 
-import arc.Events;
-import arc.util.Log;
-import mindustry.game.EventType;
-import mindustry.mod.Mod;
-import mindustry.type.Item;
+import arc.*;
+import arc.util.*;
+import mindustry.game.EventType.*;
+import mindustry.mod.*;
+import mindustry.type.*;
 
 public class Main extends Mod{
     public Main(){
-        Events.on(EventType.ClientLoadEvent.class, (e) -> {
+        Events.on(ClientLoadEvent.class, (e) -> {
             ResourceMapper.init();
             BlockMapper.init();
             for (ItemPack pack : ResourceMapper.itemMap.values()) {
