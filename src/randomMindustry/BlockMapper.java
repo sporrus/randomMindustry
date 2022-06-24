@@ -7,6 +7,7 @@ import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.BuildVisibility;
+import mindustry.world.meta.Env;
 
 public class BlockMapper {
     public static void init() {
@@ -16,7 +17,7 @@ public class BlockMapper {
     }
 
     public static void modify(Block block) {
-        if (block instanceof GenericCrafter) modifyCrafter((GenericCrafter) block);
+        if (block instanceof GenericCrafter && block.supportsEnv(17)) modifyCrafter((GenericCrafter) block);
     }
 
     public static void modifyCrafter(GenericCrafter block) {
