@@ -29,7 +29,7 @@ public class BlockMapper{
 
     public static void modify(Block block){
         // ores dont have nodes so im putting this on the front
-        if (block instanceof OreBlock) modifyOre(block);
+        if (block instanceof OreBlock) modifyOre((OreBlock)block);
         
         TechTree.TechNode node = block.techNode;
         if(node == null) return;
@@ -59,29 +59,29 @@ public class BlockMapper{
     public static void modifyOre(OreBlock block) {
         switch(block.itemDrop.hardness) {
             case 1:
-                Block b = tier1.random();
-                tier1.remove(b);
-                block.itemDrop = b.itemDrop;
+                Block t1 = tier1.random();
+                tier1.remove(t1);
+                block.itemDrop = t1.itemDrop;
                 break;
             case 2:
-                Block b = tier2.random();
-                tier2.remove(b);
-                block.itemDrop = b.itemDrop;
+                Block t2 = tier2.random();
+                tier2.remove(t2);
+                block.itemDrop = t2.itemDrop;
                 break;
             case 3:
-                Block b = tier3.random();
-                tier3.remove(b);
-                block.itemDrop = b.itemDrop;
+                Block t3 = tier3.random();
+                tier3.remove(t3);
+                block.itemDrop = t3.itemDrop;
                 break;
             case 4:
-                Block b = tier4.random();
-                tier4.remove(b);
-                block.itemDrop = b.itemDrop;
+                Block t4 = tier4.random();
+                tier4.remove(t4);
+                block.itemDrop = t4.itemDrop;
                 break;
             case 5:
-                Block b = tier5.random();
-                tier5.remove(b);
-                block.itemDrop = b.itemDrop;
+                Block t5 = tier5.random();
+                tier5.remove(t5);
+                block.itemDrop = t5.itemDrop;
                 break;
         }
     }
