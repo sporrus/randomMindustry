@@ -1,4 +1,4 @@
-package example;
+package com.gorodmi;
 
 import arc.*;
 import arc.util.*;
@@ -9,9 +9,8 @@ import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 
-public class ExampleJavaMod extends Mod{
-
-    public ExampleJavaMod(){
+public class Main extends Mod{
+    public Main(){
         Log.info("Loaded ExampleJavaMod constructor.");
 
         //listen for game load event
@@ -32,5 +31,4 @@ public class ExampleJavaMod extends Mod{
     public void loadContent(){
         Log.info("Loading some example content.");
     }
-
 }
