@@ -27,8 +27,8 @@ public class BlockMapper{
     }
 
     public static void modifyCrafter(GenericCrafter block){
-        Item item = ResourceMapper.getCraftItem();
-        if (item == null) item = ResourceMapper.getAnyItem();
+        Item item = ResourceMapper.getGenericCrafterOut();
+        if (item == null) item = ResourceMapper.getRandomItem(false);
         int count = ResourceMapper.getRandomInt(10)+1;
         block.outputItems = new ItemStack[]{new ItemStack(
                 item, count

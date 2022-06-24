@@ -55,7 +55,7 @@ public class ResourceMapper {
         Seq<ItemStack> seq = new Seq<>();
         int minTier = Math.max(maxTier - 2, 0);
         int itemStackCount = Math.min(getRandomInt(maxItemStackCount) + 1, getRange(minTier, maxTier));
-        while (seq.size <= getRandomInt(itemStackCount))
+        while (seq.size <= 0)
             for (int i = 0; i < itemStackCount; i++) {
                 int count = getRandomInt(maxItemCount) + 1;
                 int tier = getRandomInt(minTier, maxTier);
