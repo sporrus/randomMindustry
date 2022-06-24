@@ -6,6 +6,8 @@ import arc.util.*;
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
 
+import randomMindustry.*;
+
 import static mindustry.Vars.*;
 
 public class SettingsLoader{
