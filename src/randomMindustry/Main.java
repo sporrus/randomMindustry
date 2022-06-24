@@ -1,10 +1,10 @@
 package randomMindustry;
 
-import arc.Events;
-import arc.util.Log;
-import mindustry.game.EventType.ClientLoadEvent;
-import mindustry.mod.Mod;
-import mindustry.type.Item;
+import arc.*;
+import arc.util.*;
+import mindustry.game.EventType.*;
+import mindustry.mod.*;
+import mindustry.type.*;
 
 public class Main extends Mod{
     public Main(){
