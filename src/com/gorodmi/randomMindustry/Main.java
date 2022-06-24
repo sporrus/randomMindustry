@@ -7,8 +7,8 @@ import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.type.*;
 
-import randomMindustry.*;
-import randomMindustry.content.*;
+import com.gorodmi.randomMindustry.*;
+import com.gorodmi.randomMindustry.content.*;
 
 import static arc.Core.*;
 import static mindustry.Vars.*;
