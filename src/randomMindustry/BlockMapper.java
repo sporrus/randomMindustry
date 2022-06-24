@@ -1,19 +1,17 @@
-package com.gorodmi.randomMindustry;
+package randomMindustry;
 
 import arc.struct.Seq;
-import arc.util.Log;
 import mindustry.Vars;
-import mindustry.content.Blocks;
-import mindustry.content.UnitTypes;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
+import mindustry.world.meta.BuildVisibility;
 
 public class BlockMapper {
     public static void init() {
         Seq<Block> blocks = Vars.content.blocks().copy();
-        blocks.shuffle();
+//        blocks.shuffle();
         blocks.each(BlockMapper::modify);
     }
 

@@ -1,4 +1,4 @@
-package com.gorodmi.randomMindustry;
+package randomMindustry;
 
 import mindustry.content.Items;
 import mindustry.type.Item;

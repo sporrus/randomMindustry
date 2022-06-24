@@ -1,13 +1,8 @@
-package com.gorodmi.randomMindustry.content;
+package randomMindustry.content;
 
-import arc.*;
-import arc.util.*;
-import mindustry.*;
 import mindustry.gen.*;
-import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
 
-import static arc.Core.*;
 import static mindustry.Vars.*;
 
 public class RMSettings{
