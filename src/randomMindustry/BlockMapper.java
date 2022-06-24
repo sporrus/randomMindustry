@@ -17,11 +17,11 @@ public class BlockMapper{
     public static void init(){
         Seq<Block> blocks = content.blocks().copy();
         
-        tier1.addAll(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 1));
-        tier2.addAll(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 2));
-        tier3.addAll(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 3));
-        tier4.addAll(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 4));
-        tier5.addAll(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 5));
+        tier1 = new Seq<>(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 1));
+        tier2 = new Seq<>(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 2));
+        tier3 = new Seq<>(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 3));
+        tier4 = new Seq<>(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 4));
+        tier5 = new Seq<>(blocks.select(b -> b instanceof OreBlock && b.itemDrop.hardness == 5));
         
         blocks.shuffle();
         blocks.each(BlockMapper::modify);
