@@ -59,29 +59,29 @@ public class BlockMapper{
     public static void modifyOre(OreBlock block) {
         switch(block.itemDrop.hardness) {
             case 1:
-                Item i = tier1.random();
-                tier1.remove(i);
-                block.itemDrop = i;
+                Block b = tier1.random();
+                tier1.remove(b);
+                block.itemDrop = b.itemDrop;
                 break;
             case 2:
-                Item i = tier2.random();
-                tier2.remove(i);
-                block.itemDrop = i;
+                Block b = tier2.random();
+                tier2.remove(b);
+                block.itemDrop = b.itemDrop;
                 break;
             case 3:
-                Item i = tier3.random();
-                tier3.remove(i);
-                block.itemDrop = i;
+                Block b = tier3.random();
+                tier3.remove(b);
+                block.itemDrop = b.itemDrop;
                 break;
             case 4:
-                Item i = tier4.random();
-                tier4.remove(i);
-                block.itemDrop = i;
+                Block b = tier4.random();
+                tier4.remove(b);
+                block.itemDrop = b.itemDrop;
                 break;
             case 5:
-                Item i = tier5.random();
-                tier5.remove(i);
-                block.itemDrop = i;
+                Block b = tier5.random();
+                tier5.remove(b);
+                block.itemDrop = b.itemDrop;
                 break;
         }
     }
