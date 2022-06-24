@@ -1,4 +1,4 @@
-package randomMindustry.content;
+package randomMindustry;
 
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
