@@ -5,7 +5,7 @@ import arc.util.*;
 import mindustry.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
-import mindustry.type.*
+import mindustry.type.*;
 
 import randomMindustry.*;
 
