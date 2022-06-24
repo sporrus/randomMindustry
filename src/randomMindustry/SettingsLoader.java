@@ -19,7 +19,7 @@ public class SettingsLoader{
         SettingsMenuDialog dialog = ui.settings;
         
         dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
-            c.textPref("rm-seed", "0");
+            c.areaTextPref("rm-seed", "0");
             c.pref(new GenerateButton());
         });
     }
