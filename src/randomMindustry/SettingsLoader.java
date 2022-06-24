@@ -50,6 +50,7 @@ public class SettingsLoader{
                 Main.generate();
             }).get();
             button.label(() -> bundle.get(title));
+            table.row();
             
             addDesc(button);
         }
