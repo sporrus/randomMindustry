@@ -3,12 +3,16 @@ package randomMindustry;
 import arc.*;
 import arc.math.*;
 import arc.util.*;
+import arc.scene.ui.*;
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
+import mindustry.ui.dialogs.SettingsMenuDialog.*;
+import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable.*;
 
 import randomMindustry.*;
 
 import static mindustry.Vars.*;
+import static arc.Core.*;
 
 public class SettingsLoader{
     public static void init(){
@@ -16,8 +20,20 @@ public class SettingsLoader{
         
         dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
             c.textPref("rm-seed", "0");
-            c.button("@setting.rm-regenerate", () -> {
-                String seed = Core.settings.getString("rm-seed");
+            c.pref(new GenerateButton());
+        });
+    }
+    
+    static class GenerateButton extends Setting{
+        public GenerateButton(){
+            super("rm-generate");
+            title = "setting.rm-generate.name";
+        }
+        
+        @Override
+        public void add(SettingsTable table){
+            ImageButton button = table.button(Icon.refresh, () -> {
+                String seed = settings.getString("rm-seed");
                 try {
                     Main.rand = new Rand(Long.parseLong(seed));
                     Log.info(seed);
@@ -32,7 +48,10 @@ public class SettingsLoader{
                     return;
                 }
                 Main.generate();
-            }).center().row();
-        });
+            }).get();
+            button.label(() -> bundle.get(title));
+            
+            addDesc(button);
+        }
     }
 }
