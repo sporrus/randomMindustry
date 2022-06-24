@@ -1,7 +1,7 @@
 package randomMindustry;
 
-import arc.struct.Seq;
-import mindustry.type.Item;
+import arc.struct.*;
+import mindustry.type.*;
 
 public class ItemPack {
     public Seq<Item> locked = new Seq<>();
