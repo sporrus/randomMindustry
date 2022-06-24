@@ -12,7 +12,7 @@ import static mindustry.Vars.*;
 
 public class BlockMapper{
     // TODO: separate for both planets?
-    static Seq<Item> tier1, tier2, tier3, tier4, tier5;
+    static Seq<Block> tier1, tier2, tier3, tier4, tier5;
     
     public static void init(){
         Seq<Block> blocks = content.blocks().copy();
