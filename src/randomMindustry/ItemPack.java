@@ -19,7 +19,6 @@ public class ItemPack {
 
     public ItemPack copy() {
         ItemPack newPack = new ItemPack(tag, tier, localTier, all.toArray(Item.class));
-        newPack.locked = new Seq<>(locked.toArray(Item.class));
         return newPack;
     }
 }
