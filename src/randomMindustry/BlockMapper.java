@@ -33,6 +33,6 @@ public class BlockMapper {
     }
 
     public static void modifyBlock(Block block) {
-        block.requirements = ResourceMapper.getRandomStack(ResourceMapper.getRandomInt(2), 5, 1000, true);
+        block.requirements = ResourceMapper.getRandomStack(ResourceMapper.getRandomInt(2)+1, 5, 1000, true);
     }
 }

@@ -40,12 +40,12 @@ public class ResourceMapper {
         Seq<ItemStack> stacks = new Seq<>();
         for (int i = 0; i < count; i++) {
             Item item = getItemFromTier(getRandomInt(maxTier), unique);
-            if (item == null) break;
+            if (item == null) continue;
             ItemStack stack = new ItemStack(item, getRandomInt(maxItemsInStack) + 1);
             stacks.add(stack);
         }
         itemMap = temp.copy();
-        return stacks.toArray();
+        return stacks.toArray(ItemStack.class);
     }
 
     public static Item getItemFromTier(int tier, boolean locked) {
@@ -54,7 +54,7 @@ public class ResourceMapper {
         Item item = getItemFromPack(itemMap.get(tags.get(tagIndex) + tier), locked);
         while (item == null) {
             tagIndex++;
-            if (!itemMap.containsKey(tags.get(tagIndex) + tier)) {
+            if (tagIndex >= tags.size || !itemMap.containsKey(tags.get(tagIndex) + tier)) {
                 if (loop) return null;
                 tagIndex = 0;
                 loop = true;
@@ -80,6 +80,7 @@ public class ResourceMapper {
     }
 
     public static Item getItemFromPack(ItemPack pack, boolean locked) {
+        if (pack == null) return null;
         Seq<Item> seq = (locked ? pack.locked : pack.all);
         Item item = seq.random();
         if (locked) seq.remove(item);
