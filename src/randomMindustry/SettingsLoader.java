@@ -15,7 +15,7 @@ public class SettingsLoader{
         dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
             c.area("rm-seed", str -> {});
             c.textPref("rm-seed", "0");
-            c.button("rm-regenerate", () -> {
+            c.button("@setting.rm-regenerate", () -> {
                 String seed = Core.settings.getString("rm-seed");
                 try {
                     Main.rand = new Rand(Long.parseLong(seed));
