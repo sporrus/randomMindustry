@@ -14,7 +14,7 @@ public class Main extends Mod{
             ResourceMapper.init();
             BlockMapper.init();
             BulletMapper.init();
-            for (ItemPack pack : ResourceMapper.itemMap.values()) {
+            for (ItemPack pack : ResourceMapper.itemMap) {
                 Log.info(pack.tag + " " + pack.tier + " locked:");
                 for (Item item : pack.locked) Log.info(item + item.emoji());
             }

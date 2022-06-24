@@ -6,92 +6,117 @@ import mindustry.type.*;
 
 public class ResourceMapper {
     public static Seq<String> tags = Seq.with("hand", "drill", "craft");
-    public static ObjectMap<String, ItemPack> itemMap = new ObjectMap<>();
+    public static Seq<ItemPack> itemMap = new Seq<>();
 
     // TODO: make randomized items
     public static void init() {
-        itemMap.put("hand0", new ItemPack("hand", 0,
+        itemMap.add(new ItemPack("hand", 0, 0,
                 Items.copper, Items.lead, Items.scrap
         ));
-        itemMap.put("drill0", new ItemPack("drill", 0,
+        itemMap.add(new ItemPack("drill", 1, 0,
                 Items.sand, Items.coal
         ));
-        itemMap.put("drill1", new ItemPack("drill", 1,
-                Items.titanium
-        ));
-        itemMap.put("drill2", new ItemPack("drill", 2,
-                Items.thorium
-        ));
-        itemMap.put("craft0", new ItemPack("craft", 0,
+        itemMap.add(new ItemPack("craft", 2, 0,
                 Items.metaglass, Items.graphite, Items.silicon, Items.sporePod, Items.pyratite
         ));
-        itemMap.put("craft1", new ItemPack("craft", 1,
-                Items.plastanium, Items.phaseFabric, Items.surgeAlloy, Items.sporePod, Items.blastCompound
+        itemMap.add(new ItemPack("drill", 3, 1,
+                Items.titanium
+        ));
+        itemMap.add(new ItemPack("craft", 4, 1,
+                Items.plastanium, Items.surgeAlloy, Items.sporePod
+        ));
+        itemMap.add(new ItemPack("drill", 5, 2,
+                Items.thorium
+        ));
+        itemMap.add(new ItemPack("craft", 6, 1,
+                Items.phaseFabric, Items.blastCompound
         ));
     }
 
-    public static Item getAnyItem() {
-        return randomSeq(randomSeq(itemMap.values().toSeq()).all);
+    public static int getTierOfItem(Item item) {
+        for (ItemPack pack : itemMap) if (pack.all.contains(item)) return pack.tier;
+        return -1;
     }
 
-    public static ItemStack[] getRandomStack(int maxTier, int maxItemCount, int maxItemsInStack, boolean unique) {
-        ObjectMap<String, ItemPack> temp = itemMap.copy();
-        int count = getRandomInt(maxItemCount) + 1;
-        Seq<ItemStack> stacks = new Seq<>();
-        for (int i = 0; i < count; i++) {
-            Item item = getItemFromTier(getRandomInt(maxTier), unique);
-            if (item == null) continue;
-            ItemStack stack = new ItemStack(item, getRandomInt(maxItemsInStack) + 1);
-            stacks.add(stack);
-        }
-        itemMap = temp.copy();
-        return stacks.toArray(ItemStack.class);
+    public static Seq<ItemPack> getItemMapCopy() {
+        Seq<ItemPack> newSeq = new Seq<>();
+        for (ItemPack pack : itemMap) newSeq.add(pack.copy());
+        return newSeq;
     }
 
-    public static Item getItemFromTier(int tier, boolean locked) {
-        boolean loop = false;
-        int tagIndex = tags.indexOf(tags.random());
-        Item item = getItemFromPack(itemMap.get(tags.get(tagIndex) + tier), locked);
-        while (item == null) {
-            tagIndex++;
-            if (tagIndex >= tags.size || !itemMap.containsKey(tags.get(tagIndex) + tier)) {
-                if (loop) return null;
-                tagIndex = 0;
-                loop = true;
+    public static int getRange(int minTier, int maxTier) {
+        int range = 0;
+        for (int i = minTier; i < maxTier; i++) range += getPackByTier(i).all.size;
+        return range;
+    }
+
+    public static ItemStack[] getRandomItemStacks(int maxTier, int maxItemStackCount, int maxItemCount, boolean unique) {
+        Seq<ItemPack> copy = getItemMapCopy();
+        Seq<ItemStack> seq = new Seq<>();
+        int minTier = Math.max(maxTier - 2, 0);
+        int itemStackCount = Math.min(getRandomInt(maxItemStackCount) + 1, getRange(minTier, maxTier));
+        while (seq.size <= getRandomInt(itemStackCount))
+            for (int i = 0; i < itemStackCount; i++) {
+                int count = getRandomInt(maxItemCount) + 1;
+                int tier = getRandomInt(minTier, maxTier);
+                Item item = getRandomByPack(getPackByTier(tier, copy), true);
+                if (item == null) continue;
+                seq.add(new ItemStack(item, count));
             }
-            item = getItemFromPack(itemMap.get(tags.get(tagIndex) + tier), locked);
+        return seq.toArray(ItemStack.class);
+    }
+
+    public static Item getRandomItem(boolean lock) {
+        return getRandomByPack(itemMap.random(), lock);
+    }
+
+    public static Item getGenericCrafterOut() {
+        return getRandomByPack(getPacksByTag("craft").random(), true);
+    }
+
+    public static Item getRandomByPack(ItemPack pack, boolean lock) {
+        if (lock) {
+            Item item = pack.locked.random();
+            if (item == null) return null;
+            pack.locked.remove(item);
+            return item;
         }
-        return item;
+        return pack.all.random();
     }
 
-    public static Item getCraftItem() {
-        return getItemFromTag("craft", true);
+    public static ItemPack getPackByTagAndLocalTier(String tag, int tier) {
+        Seq<ItemPack> seq = getPacksByTag(tag);
+        for (ItemPack pack : itemMap) if (pack.localTier == tier) return pack;
+        return null;
     }
 
-    public static Item getItemFromTag(String tag, boolean locked) {
-        int tier = 0;
-        Item item = getItemFromPack(itemMap.get(tag + tier), locked);
-        while (item == null) {
-            tier++;
-            if (!itemMap.containsKey(tag + tier)) return null;
-            item = getItemFromPack(itemMap.get(tag + tier), locked);
-        }
-        return item;
+    public static Seq<ItemPack> getPacksByTag(String tag) {
+        Seq<ItemPack> seq = new Seq<>();
+        for (ItemPack pack : itemMap) if (pack.tag.equalsIgnoreCase(tag)) seq.add(pack);
+        return seq;
     }
 
-    public static Item getItemFromPack(ItemPack pack, boolean locked) {
-        if (pack == null) return null;
-        Seq<Item> seq = (locked ? pack.locked : pack.all);
-        Item item = seq.random();
-        if (locked) seq.remove(item);
-        return item;
+    public static Seq<ItemPack> getPacksByLocalTier(int tier) {
+        Seq<ItemPack> seq = new Seq<>();
+        for (ItemPack pack : itemMap) if (pack.localTier == tier) seq.add(pack);
+        return seq;
     }
 
-    public static <T> T randomSeq(Seq<T> seq) {
-        return seq.random();
+    public static ItemPack getPackByTier(int tier) {
+        return getPackByTier(tier, itemMap);
+    }
+
+    public static ItemPack getPackByTier(int tier, Seq<ItemPack> itemMap) {
+        ItemPack pack = null;
+        for (ItemPack newPack : itemMap) if (newPack.tier == tier) pack = newPack;
+        return pack;
     }
 
     public static int getRandomInt(int max) {
         return (int) (Math.random() * max);
+    }
+
+    public static int getRandomInt(int min, int max) {
+        return min + getRandomInt(max - min);
     }
 }

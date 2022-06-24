@@ -33,9 +33,10 @@ public class BlockMapper{
         block.outputItems = new ItemStack[]{new ItemStack(
                 item, count
         )};
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getTierOfItem(item), 5, 1000, true);
     }
 
-    public static void modifyBlock(Block block){
-        block.requirements = ResourceMapper.getRandomStack(ResourceMapper.getRandomInt(2)+1, 5, 1000, true);
+    public static void modifyBlock(Block block) {
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(5)+1, 5, 1000, true);
     }
 }
