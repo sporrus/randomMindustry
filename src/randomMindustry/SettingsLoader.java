@@ -9,10 +9,8 @@ public class SettingsLoader{
     public static void init(){
         SettingsMenuDialog dialog = ui.settings;
         
-        dialog.addCategory("@setting.rm", Icon.effect /* TODO */, c -> {
-            c.checkPref("rm-ammo", true);
-            c.checkPref("rm-block-output", true);
-            c.checkPref("rm-block-input", true);
+        dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
+            // TODO: Add settings.
         });
     }
 }
