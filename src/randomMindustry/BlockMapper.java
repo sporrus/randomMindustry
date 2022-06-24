@@ -5,7 +5,6 @@ import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
-import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.production.*;
 
 public class BlockMapper {
@@ -21,7 +20,7 @@ public class BlockMapper {
         while (node.parent != null) node = node.parent;
         if (Planets.serpulo.techTree != node) return;
         if (block instanceof GenericCrafter) modifyCrafter((GenericCrafter) block);
-//        if (block instanceof Wall) modifyBlock(block);
+        if (block instanceof GenericCrafter) modifyBlock(block);
     }
 
     public static void modifyCrafter(GenericCrafter block) {
@@ -34,6 +33,6 @@ public class BlockMapper {
     }
 
     public static void modifyBlock(Block block) {
-        block.requirements = ResourceMapper.getRandomStack(ResourceMapper.getRandomInt(2), 5, 1000, false);
+        block.requirements = ResourceMapper.getRandomStack(ResourceMapper.getRandomInt(2), 5, 1000, true);
     }
 }

@@ -1,18 +1,11 @@
 package randomMindustry;
 
-import arc.struct.ObjectMap;
-import arc.struct.Seq;
-import mindustry.content.Items;
-import mindustry.type.Item;
-import mindustry.type.ItemStack;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import arc.struct.*;
+import mindustry.content.*;
+import mindustry.type.*;
 
 public class ResourceMapper {
-    public static String[] tags = new String[]{"hand", "drill", "craft"};
+    public static Seq<String> tags = Seq.with("hand", "drill", "craft");
     public static ObjectMap<String, ItemPack> itemMap = new ObjectMap<>();
 
     // TODO: make randomized items
@@ -41,24 +34,32 @@ public class ResourceMapper {
         return randomSeq(randomSeq(itemMap.values().toSeq()).all);
     }
 
-    public static ItemStack[] getRandomStack(int maxTier, int maxItemCount, int maxItemsInStack, boolean locked) {
-        ItemStack[] stacks = new ItemStack[getRandomInt(maxItemCount) + 1];
-        for (int i = 0; i < stacks.length; i++) {
-            stacks[0] = new ItemStack(
-                    getItemFromTier(getRandomInt(maxTier), locked),
-                    getRandomInt(maxItemsInStack)
-            );
+    public static ItemStack[] getRandomStack(int maxTier, int maxItemCount, int maxItemsInStack, boolean unique) {
+        ObjectMap<String, ItemPack> temp = itemMap.copy();
+        int count = getRandomInt(maxItemCount) + 1;
+        Seq<ItemStack> stacks = new Seq<>();
+        for (int i = 0; i < count; i++) {
+            Item item = getItemFromTier(getRandomInt(maxTier), unique);
+            if (item == null) break;
+            ItemStack stack = new ItemStack(item, getRandomInt(maxItemsInStack) + 1);
+            stacks.add(stack);
         }
-        return stacks;
+        itemMap = temp.copy();
+        return stacks.toArray();
     }
 
     public static Item getItemFromTier(int tier, boolean locked) {
-        int tagIndex = 0;
-        Item item = getItemFromPack(itemMap.get(tags[tagIndex] + tier), locked);
+        boolean loop = false;
+        int tagIndex = tags.indexOf(tags.random());
+        Item item = getItemFromPack(itemMap.get(tags.get(tagIndex) + tier), locked);
         while (item == null) {
             tagIndex++;
-            if (!itemMap.containsKey(tags[tagIndex] + tier)) return null;
-            item = getItemFromPack(itemMap.get(tags[tagIndex] + tier), locked);
+            if (!itemMap.containsKey(tags.get(tagIndex) + tier)) {
+                if (loop) return null;
+                tagIndex = 0;
+                loop = true;
+            }
+            item = getItemFromPack(itemMap.get(tags.get(tagIndex) + tier), locked);
         }
         return item;
     }
@@ -80,14 +81,13 @@ public class ResourceMapper {
 
     public static Item getItemFromPack(ItemPack pack, boolean locked) {
         Seq<Item> seq = (locked ? pack.locked : pack.all);
-        if (seq.size <= 0) return null;
-        int i = getRandomInt(seq.size);
-        if (locked) return seq.remove(i);
-        return seq.get(i);
+        Item item = seq.random();
+        if (locked) seq.remove(item);
+        return item;
     }
 
     public static <T> T randomSeq(Seq<T> seq) {
-        return seq.get(getRandomInt(seq.size));
+        return seq.random();
     }
 
     public static int getRandomInt(int max) {
