@@ -1,13 +1,11 @@
 package randomMindustry;
 
-import arc.struct.Seq;
-import mindustry.Vars;
-import mindustry.type.Item;
-import mindustry.type.ItemStack;
-import mindustry.world.Block;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.meta.BuildVisibility;
-import mindustry.world.meta.Env;
+import arc.struct.*;
+import mindustry.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.production.*;
+import mindustry.world.meta.*;
 
 public class BlockMapper {
     public static void init() {
