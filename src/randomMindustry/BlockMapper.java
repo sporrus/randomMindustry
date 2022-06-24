@@ -2,28 +2,38 @@ package randomMindustry;
 
 import arc.struct.*;
 import mindustry.*;
+import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
+import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.production.*;
-import mindustry.world.meta.*;
 
 public class BlockMapper {
     public static void init() {
         Seq<Block> blocks = Vars.content.blocks().copy();
-//        blocks.shuffle();
+        blocks.shuffle();
         blocks.each(BlockMapper::modify);
     }
 
     public static void modify(Block block) {
-        if (block instanceof GenericCrafter && block.supportsEnv(17)) modifyCrafter((GenericCrafter) block);
+        TechTree.TechNode node = block.techNode;
+        if (node == null) return;
+        while (node.parent != null) node = node.parent;
+        if (Planets.serpulo.techTree != node) return;
+        if (block instanceof GenericCrafter) modifyCrafter((GenericCrafter) block);
+//        if (block instanceof Wall) modifyBlock(block);
     }
 
     public static void modifyCrafter(GenericCrafter block) {
-        Item item = ResourceMapper.getLocked("craft");
-        if (item == null) item = ResourceMapper.getAll();
+        Item item = ResourceMapper.getCraftItem();
+        if (item == null) item = ResourceMapper.getAnyItem();
         int count = ResourceMapper.getRandomInt(10)+1;
         block.outputItems = new ItemStack[]{new ItemStack(
                 item, count
         )};
+    }
+
+    public static void modifyBlock(Block block) {
+        block.requirements = ResourceMapper.getRandomStack(ResourceMapper.getRandomInt(2), 5, 1000, false);
     }
 }

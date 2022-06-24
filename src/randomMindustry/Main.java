@@ -1,22 +1,15 @@
 package randomMindustry;
 
-import arc.*;
-import arc.util.*;
-import mindustry.*;
-import mindustry.game.EventType.*;
-import mindustry.mod.*;
-import mindustry.type.*;
-
-import randomMindustry.*;
-
-import static arc.Core.*;
-import static mindustry.Vars.*;
+import arc.Events;
+import arc.util.Log;
+import mindustry.game.EventType.ClientLoadEvent;
+import mindustry.mod.Mod;
+import mindustry.type.Item;
 
 public class Main extends Mod{
     public Main(){
         Events.on(ClientLoadEvent.class, (e) -> {
-            SettingsLoader.init();          
-            
+            SettingsLoader.init();
             ResourceMapper.init();
             BlockMapper.init();
             for (ItemPack pack : ResourceMapper.itemMap.values()) {

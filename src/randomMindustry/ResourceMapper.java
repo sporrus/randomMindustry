@@ -1,7 +1,10 @@
 package randomMindustry;
 
+import arc.struct.ObjectMap;
+import arc.struct.Seq;
 import mindustry.content.Items;
 import mindustry.type.Item;
+import mindustry.type.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ResourceMapper {
-    public static String[] tagPriority = new String[]{"hand", "drill", "craft"};
-    public static Map<String, ItemPack> itemMap = new HashMap<>();
+    public static String[] tags = new String[]{"hand", "drill", "craft"};
+    public static ObjectMap<String, ItemPack> itemMap = new ObjectMap<>();
 
     // TODO: make randomized items
     public static void init() {
@@ -34,54 +37,57 @@ public class ResourceMapper {
         ));
     }
 
-    public static Item getLocked(String tag, int tier) {
-        ItemPack pack = itemMap.get(tag + tier);
-        return getLocked(pack);
+    public static Item getAnyItem() {
+        return randomSeq(randomSeq(itemMap.values().toSeq()).all);
     }
 
-    public static Item getLocked(ItemPack pack) {
-        if (pack.locked.size() <= 0) return null;
-        Item item = randomList(pack.locked);
-        if (item == null) return null;
-        pack.locked.remove(item);
-        return item;
+    public static ItemStack[] getRandomStack(int maxTier, int maxItemCount, int maxItemsInStack, boolean locked) {
+        ItemStack[] stacks = new ItemStack[getRandomInt(maxItemCount) + 1];
+        for (int i = 0; i < stacks.length; i++) {
+            stacks[0] = new ItemStack(
+                    getItemFromTier(getRandomInt(maxTier), locked),
+                    getRandomInt(maxItemsInStack)
+            );
+        }
+        return stacks;
     }
 
-    public static Item getLocked(String tag) {
-        int tier = 0;
-        Item item = getLocked(tag, tier);
+    public static Item getItemFromTier(int tier, boolean locked) {
+        int tagIndex = 0;
+        Item item = getItemFromPack(itemMap.get(tags[tagIndex] + tier), locked);
         while (item == null) {
-            tier++;
-            if (!itemMap.containsKey(tag + tier)) return null;
-            item = getLocked(tag, tier);
+            tagIndex++;
+            if (!itemMap.containsKey(tags[tagIndex] + tier)) return null;
+            item = getItemFromPack(itemMap.get(tags[tagIndex] + tier), locked);
         }
         return item;
     }
 
-    public static Item getLocked() {
-        ItemPack pack = randomList(new ArrayList<>(itemMap.values()));
-        return getLocked(pack);
+    public static Item getCraftItem() {
+        return getItemFromTag("craft", true);
     }
 
-    public static Item getAll(String tag, int tier) {
-        ItemPack pack = itemMap.get(tag + tier);
-        return getAll(pack);
-    }
-
-    public static Item getAll(ItemPack pack) {
-        if (pack.all.size() <= 0) return null;
-        Item item = randomList(pack.all);
-        pack.all.remove(item);
+    public static Item getItemFromTag(String tag, boolean locked) {
+        int tier = 0;
+        Item item = getItemFromPack(itemMap.get(tag + tier), locked);
+        while (item == null) {
+            tier++;
+            if (!itemMap.containsKey(tag + tier)) return null;
+            item = getItemFromPack(itemMap.get(tag + tier), locked);
+        }
         return item;
     }
 
-    public static Item getAll() {
-        ItemPack pack = randomList(new ArrayList<>(itemMap.values()));
-        return getAll(pack);
+    public static Item getItemFromPack(ItemPack pack, boolean locked) {
+        Seq<Item> seq = (locked ? pack.locked : pack.all);
+        if (seq.size <= 0) return null;
+        int i = getRandomInt(seq.size);
+        if (locked) return seq.remove(i);
+        return seq.get(i);
     }
 
-    public static <T> T randomList(List<T> list) {
-        return list.get(getRandomInt(list.size()));
+    public static <T> T randomSeq(Seq<T> seq) {
+        return seq.get(getRandomInt(seq.size));
     }
 
     public static int getRandomInt(int max) {
