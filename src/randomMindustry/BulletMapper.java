@@ -16,12 +16,5 @@ public class BulletMapper{
                 w.bullet = content.bullets().random();
             });
         });
-        
-        // TODO: Randomize ammoTypes as well?
-        content.blocks().each(b -> {
-            if(b.shootType != null){
-                b.shootType = content.bullets().random();
-            }
-        });
     }
 }
