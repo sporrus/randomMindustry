@@ -19,8 +19,8 @@ public class BlockMapper {
         if (node == null) return;
         while (node.parent != null) node = node.parent;
         if (Planets.serpulo.techTree != node) return;
+        modifyBlock(block);
         if (block instanceof GenericCrafter) modifyCrafter((GenericCrafter) block);
-        if (block instanceof GenericCrafter) modifyBlock(block);
     }
 
     public static void modifyCrafter(GenericCrafter block) {
