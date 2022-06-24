@@ -1,0 +1,20 @@
+package randomMindustry;
+
+import arc.*;
+import arc.struct.*;
+import mindustry.*;
+import mindustry.world.*;
+import mindustry.type.*;
+
+import static mindustry.Vars.*;
+
+public class BulletMapper{
+    // TODO: Apply settings.
+    public static void init(){
+        content.units().each(u -> {
+            u.weapons.each(w -> {
+                w.bullet = content.bullets().random();
+            });
+        });
+    }
+}
