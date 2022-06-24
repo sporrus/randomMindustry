@@ -10,6 +10,7 @@ public class ResourceMapper {
 
     // TODO: make randomized items
     public static void init() {
+        itemMap = new Seq<>();
         itemMap.add(new ItemPack("hand", 0, 0,
                 Items.copper, Items.lead, Items.scrap
         ));
@@ -66,21 +67,21 @@ public class ResourceMapper {
     }
 
     public static Item getRandomItem(boolean lock) {
-        return getRandomByPack(itemMap.random(), lock);
+        return getRandomByPack(itemMap.random(Main.rand), lock);
     }
 
     public static Item getGenericCrafterOut() {
-        return getRandomByPack(getPacksByTag("craft").random(), true);
+        return getRandomByPack(getPacksByTag("craft").random(Main.rand), true);
     }
 
     public static Item getRandomByPack(ItemPack pack, boolean lock) {
         if (lock) {
-            Item item = pack.locked.random();
+            Item item = pack.locked.random(Main.rand);
             if (item == null) return null;
             pack.locked.remove(item);
             return item;
         }
-        return pack.all.random();
+        return pack.all.random(Main.rand);
     }
 
     public static ItemPack getPackByTagAndLocalTier(String tag, int tier) {
@@ -112,7 +113,7 @@ public class ResourceMapper {
     }
 
     public static int getRandomInt(int max) {
-        return (int) (Math.random() * max);
+        return Main.rand.nextInt(max);
     }
 
     public static int getRandomInt(int min, int max) {

@@ -1,11 +1,5 @@
 package randomMindustry;
 
-import arc.*;
-import arc.struct.*;
-import mindustry.*;
-import mindustry.world.*;
-import mindustry.type.*;
-
 import static mindustry.Vars.*;
 
 public class BulletMapper{
@@ -13,7 +7,7 @@ public class BulletMapper{
     public static void init(){
         content.units().each(u -> {
             u.weapons.each(w -> {
-                w.bullet = content.bullets().random();
+                w.bullet = content.bullets().random(Main.rand);
             });
         });
     }

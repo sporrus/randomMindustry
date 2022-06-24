@@ -1,5 +1,6 @@
 package randomMindustry;
 
+import arc.math.*;
 import arc.struct.*;
 import mindustry.*;
 import mindustry.content.*;
@@ -16,6 +17,16 @@ public class BlockMapper{
         blocks.each(BlockMapper::modify);
     }
 
+    public static <T> void shuffle(Seq<T> seq, Rand rand){
+        T[] items = seq.items;
+        for(int i = seq.size - 1; i >= 0; i--){
+            int ii = rand.random(i);
+            T temp = items[i];
+            items[i] = items[ii];
+            items[ii] = temp;
+        }
+    }
+
     public static void modify(Block block){
         TechTree.TechNode node = block.techNode;
         if(node == null) return;
@@ -23,6 +34,8 @@ public class BlockMapper{
         if(Planets.serpulo.techTree != node) return;
         if(block instanceof GenericCrafter){
             modifyCrafter((GenericCrafter)block);
+        }else if (block == Blocks.mechanicalDrill){
+            modifyMechanicalDrill(block);
         }else{
             modifyBlock(block);
         }
@@ -35,10 +48,14 @@ public class BlockMapper{
         block.outputItems = new ItemStack[]{new ItemStack(
                 item, count
         )};
-        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getTierOfItem(item), 5, 1000, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getTierOfItem(item), 5, block.health / 2, true);
     }
 
     public static void modifyBlock(Block block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(5)+1, 5, 1000, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(5)+1, 5, block.health / 2, true);
+    }
+
+    public static void modifyMechanicalDrill(Block block) {
+        block.requirements = ResourceMapper.getRandomItemStacks(1, 2, block.health / 2, true);
     }
 }
