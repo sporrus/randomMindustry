@@ -1,4 +1,4 @@
-package com.gorodmi.content;
+package com.gorodmi.randomMindustry.content;
 
 import arc.*;
 import arc.util.*;
