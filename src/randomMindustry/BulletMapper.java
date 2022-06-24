@@ -3,6 +3,8 @@ package randomMindustry;
 import arc.*;
 import arc.struct.*;
 import mindustry.*;
+import mindustry.world.*;
+import mindustry.type.*;
 
 import static mindustry.Vars.*;
 
