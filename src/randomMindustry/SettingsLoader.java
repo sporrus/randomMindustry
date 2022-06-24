@@ -13,10 +13,7 @@ public class SettingsLoader{
         SettingsMenuDialog dialog = ui.settings;
         
         dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
-            // TODO: Add settings.
-            c.area("rm-seed", (str) -> {
-
-            });
+            c.area("rm-seed", str -> {});
             c.textPref("rm-seed", "0");
             c.button("rm-regenerate", () -> {
                 String seed = Core.settings.getString("rm-seed");
