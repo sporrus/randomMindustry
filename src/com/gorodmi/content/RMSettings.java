@@ -16,6 +16,8 @@ public class RMSettings{
         
         dialog.addCategory("@setting.rm", Icon.effect /* TODO */, c -> {
             c.checkPref("rm-ammo", true);
+            c.checkPref("rm-block-output", true);
+            c.checkPref("rm-block-input", true);
         });
     }
 }
