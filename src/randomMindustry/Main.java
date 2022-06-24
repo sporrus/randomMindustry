@@ -2,9 +2,13 @@ package randomMindustry;
 
 import arc.*;
 import arc.util.*;
+import mindustry.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.type.*;
+
+import static arc.Core.*;
+import static mindustry.Vars.*;
 
 public class Main extends Mod{
     public Main(){
