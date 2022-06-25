@@ -38,12 +38,13 @@ public class SettingsLoader{
                     Main.rand = new Rand(Long.parseLong(seed));
                     Log.info(seed);
                     Log.info(Main.rand.seed0);
-                    Log.info("we am insane");
+                    ui.loadfrag.show("@msg.rm-generating");
+                    Time.runTask(120f, ui.loadfrag::hide);
                 } catch (Exception ex) {
-                    BaseDialog error = new BaseDialog("frog");
-                    error.cont.add("[red]Seed invalid!").row();
-                    error.cont.add(ex.getMessage());
-                    error.cont.button("alr", error::hide).size(100f, 50f);
+                    BaseDialog error = new BaseDialog("");
+                    error.cont.add("[scarlet]Seed invalid!").row();
+                    error.cont.add(ex.getMessage()).row();
+                    error.buttons.button("@ok", error::hide).size(100f, 50f);
                     error.show();
                     return;
                 }
