@@ -26,7 +26,7 @@ public class Main extends Mod{
     }
 
     public static void generate() {
-        Log.info(bundle.get("@msg.rm-log-generating"));
+        Log.info(bundle.get("msg.rm-log-generating"));
         ResourceMapper.init();
         BlockMapper.init();
         BulletMapper.init();
