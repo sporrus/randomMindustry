@@ -3,6 +3,7 @@ package randomMindustry;
 import arc.*;
 import arc.math.*;
 import arc.util.*;
+import arc.flabel.*;
 import arc.scene.ui.*;
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
@@ -42,7 +43,7 @@ public class SettingsLoader{
                     Time.runTask(120f, ui.loadfrag::hide);
                 } catch (Exception ex) {
                     BaseDialog error = new BaseDialog("");
-                    error.cont.add("@msg.rm-seed-invalid").row();
+                    error.cont.add(new FLabel("{wave}" + bundle.get("msg.rm-seed-invalid"))).row();
                     error.cont.add(ex.getMessage()).row();
                     error.buttons.button("@ok", error::hide).size(100f, 50f);
                     error.show();
