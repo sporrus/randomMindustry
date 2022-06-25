@@ -69,6 +69,7 @@ public class BlockMapper{
         block.requirements = ResourceMapper.getRandomItemStacks(1, 2, block.health / 2, true);
     }
     
+    // Suggested by Ilya246.
     public static void modifyCore(CoreBlock block){
         Seq<UnitType> coreUnits = content.units().select(u -> u.mineTier >= 1 && u.buildSpeed > 0 && (u.flying || u.canBoost));
         
