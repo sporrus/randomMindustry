@@ -53,7 +53,7 @@ public class ResourceMapper {
                 getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("craft", 4, 1,
-                getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true)
+                getRandomByPack(all, true),getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("drill", 5, 2,
                 getRandomByPack(all, true)
