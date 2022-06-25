@@ -13,7 +13,7 @@ import static mindustry.Vars.*;
 public class BlockMapper{
     public static void init(){
         Seq<Block> blocks = content.blocks().copy();
-        blocks.shuffle();
+        shuffle(blocks, Main.rand);
         blocks.each(BlockMapper::modify);
     }
 
