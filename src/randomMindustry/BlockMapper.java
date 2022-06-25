@@ -51,8 +51,6 @@ public class BlockMapper{
         )};
         int tier = ResourceMapper.getTierOfItem(item);
         Consume[] save = block.consumers;
-        block.outputLiquids = new LiquidStack[0];
-        block.outputsLiquid = false;
         block.consumers = new Consume[0];
         for (Consume consume : save) block.removeConsumer(consume);
         block.consumeItems(ResourceMapper.getRandomItemStacks(tier, 3, 10, true));
