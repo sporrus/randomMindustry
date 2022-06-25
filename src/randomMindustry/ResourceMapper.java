@@ -1,13 +1,10 @@
 package randomMindustry;
 
-import arc.math.Rand;
 import arc.struct.*;
-import arc.util.Log;
-import mindustry.Vars;
+import arc.util.*;
+import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
-import mindustry.world.Block;
-import mindustry.world.blocks.production.GenericCrafter;
 
 public class ResourceMapper {
     public static Seq<String> tags = Seq.with("hand", "drill", "craft");

@@ -1,7 +1,6 @@
 package randomMindustry;
 
 import arc.struct.*;
-import arc.util.Log;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -9,7 +8,6 @@ import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 import mindustry.world.blocks.storage.*;
 
-import static arc.Core.*;
 import static mindustry.Vars.*;
 
 public class BlockMapper {

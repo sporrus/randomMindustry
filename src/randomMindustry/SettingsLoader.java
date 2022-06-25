@@ -1,6 +1,5 @@
 package randomMindustry;
 
-import arc.*;
 import arc.math.*;
 import arc.util.*;
 import arc.flabel.*;
@@ -9,8 +8,6 @@ import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable.*;
-
-import randomMindustry.*;
 
 import static mindustry.Vars.*;
 import static arc.Core.*;

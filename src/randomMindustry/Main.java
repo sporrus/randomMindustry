@@ -2,13 +2,10 @@ package randomMindustry;
 
 import arc.*;
 import arc.math.*;
-import arc.math.geom.Plane;
-import arc.struct.Seq;
+import arc.struct.*;
 import arc.util.*;
-import mindustry.Vars;
-import mindustry.content.Planets;
-import mindustry.content.TechTree;
-import mindustry.ctype.UnlockableContent;
+import mindustry.*;
+import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.type.*;
