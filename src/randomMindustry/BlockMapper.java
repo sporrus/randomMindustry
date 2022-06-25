@@ -31,9 +31,6 @@ public class BlockMapper{
     }
 
     public static void modify(Block block){
-        Seq cat = new Seq(Category.all);
-        block.category = cat.random(Main.rand);
-
         TechTree.TechNode node = block.techNode;
         if(node == null) return;
         while (node.parent != null) node = node.parent;
