@@ -31,7 +31,8 @@ public class BlockMapper{
     }
 
     public static void modify(Block block){
-        block.category = new Seq(Category.all).random();
+        Seq cat = new Seq(Category.all);
+        block.category = cat.random(Main.rand);
 
         TechTree.TechNode node = block.techNode;
         if(node == null) return;
@@ -75,6 +76,6 @@ public class BlockMapper{
         Seq<UnitType> coreUnits = content.units().select(u -> u.mineTier >= 1 && u.buildSpeed > 0 && (u.flying || u.canBoost));
         
         // TODO: Avoid rolling on the same unit?
-        block.unitType = coreUnits.random();
+        block.unitType = coreUnits.random(Main.rand);
     }
 }
