@@ -20,6 +20,11 @@ public class SettingsLoader{
             c.areaTextPref("rm-seed", "0");
             c.pref(new GenerateButton());
         });
+        
+        dialog.addCategory("@setting.rmchaos", Icon.effect /* TODO: Make custom icons. */, c -> {
+            c.checkPref("rmchaos-region-swap", false);
+            c.checkPref("rmchaos-region-randsize", false);
+        });
     }
     
     static class GenerateButton extends Setting{
