@@ -7,7 +7,10 @@ import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.type.*;
 
-import java.util.Random;
+import java.util.*;
+
+import static mindustry.Vars.*;
+import static arc.Core.*;
 
 public class Main extends Mod{
     public static Rand rand;
@@ -16,14 +19,14 @@ public class Main extends Mod{
         Events.on(ClientLoadEvent.class, (e) -> {
             long seed = new Random().nextLong();
             rand = new Rand(seed);
-            Core.settings.put("rm-seed", Long.toString(seed));
+            settings.put("rm-seed", Long.toString(seed));
             SettingsLoader.init();
             generate();
         });
     }
 
     public static void generate() {
-        Log.info("[green]===========GENERATING!===========");
+        Log.info("@msg.rm-log-generating");
         ResourceMapper.init();
         BlockMapper.init();
         BulletMapper.init();
@@ -31,6 +34,6 @@ public class Main extends Mod{
             Log.info(pack.tag + " " + pack.tier + " locked:");
             for (Item item : pack.locked) Log.info(item + item.emoji());
         }
-        Log.info("[green]===========GENERATED!===========");
+        Log.info("@msg.rm-log-generated");
     }
 }
