@@ -26,7 +26,7 @@ public class Main extends Mod{
     }
 
     public static void generate() {
-        Log.info("@msg.rm-log-generating");
+        Log.info(bundle.get("@msg.rm-log-generating"));
         ResourceMapper.init();
         BlockMapper.init();
         BulletMapper.init();
@@ -34,6 +34,6 @@ public class Main extends Mod{
             Log.info(pack.tag + " " + pack.tier + " locked:");
             for (Item item : pack.locked) Log.info(item + item.emoji());
         }
-        Log.info("@msg.rm-log-generated");
+        Log.info(bundle.get("msg.rm-log-generated"));
     }
 }
