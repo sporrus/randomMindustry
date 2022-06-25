@@ -7,6 +7,7 @@ import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.production.*;
+import mindustry.world.consumers.Consume;
 
 import static mindustry.Vars.*;
 
@@ -48,7 +49,15 @@ public class BlockMapper{
         block.outputItems = new ItemStack[]{new ItemStack(
                 item, count
         )};
-        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getTierOfItem(item), 5, block.health / 2, true);
+        int tier = ResourceMapper.getTierOfItem(item);
+        Consume[] save = block.consumers;
+        block.outputLiquids = new LiquidStack[0];
+        block.outputsLiquid = false;
+        block.consumers = new Consume[0];
+        for (Consume consume : save) block.removeConsumer(consume);
+        block.consumeItems(ResourceMapper.getRandomItemStacks(tier, 3, 10, true));
+        block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, block.health / 2, true);
+        block.init();
     }
 
     public static void modifyBlock(Block block) {
