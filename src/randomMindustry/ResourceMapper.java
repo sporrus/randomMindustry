@@ -1,37 +1,81 @@
 package randomMindustry;
 
+import arc.math.Rand;
 import arc.struct.*;
+import arc.util.Log;
+import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.type.*;
+import mindustry.world.Block;
+import mindustry.world.blocks.production.GenericCrafter;
 
 public class ResourceMapper {
     public static Seq<String> tags = Seq.with("hand", "drill", "craft");
     public static Seq<ItemPack> itemMap = new Seq<>();
 
+    //        itemMap.add(new ItemPack("hand", 0, 0,
+    //                Items.copper, Items.lead, Items.scrap
+    //        ));
+    //        itemMap.add(new ItemPack("drill", 1, 0,
+    //                Items.sand, Items.coal
+    //        ));
+    //        itemMap.add(new ItemPack("craft", 2, 0,
+    //                Items.metaglass, Items.graphite, Items.silicon, Items.sporePod, Items.pyratite
+    //        ));
+    //        itemMap.add(new ItemPack("drill", 3, 1,
+    //                Items.titanium
+    //        ));
+    //        itemMap.add(new ItemPack("craft", 4, 1,
+    //                Items.plastanium, Items.surgeAlloy, Items.sporePod
+    //        ));
+    //        itemMap.add(new ItemPack("drill", 5, 2,
+    //                Items.thorium
+    //        ));
+    //        itemMap.add(new ItemPack("craft", 6, 1,
+    //                Items.phaseFabric, Items.blastCompound
+    //        ));
+
     // TODO: make randomized items
     public static void init() {
+        Seq<Item> items = Vars.content.items().select((item) -> Main.getRoot(item).contains(Planets.serpulo));
+        ItemPack all = new ItemPack("all", 0, 0, items.toArray(Item.class));
+        Log.info(items.size);
+
         itemMap = new Seq<>();
         itemMap.add(new ItemPack("hand", 0, 0,
-                Items.copper, Items.lead, Items.scrap
+                getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("drill", 1, 0,
-                Items.sand, Items.coal
+                getRandomByPack(all, true),getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("craft", 2, 0,
-                Items.metaglass, Items.graphite, Items.silicon, Items.sporePod, Items.pyratite
+                getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("drill", 3, 1,
-                Items.titanium
+                getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("craft", 4, 1,
-                Items.plastanium, Items.surgeAlloy, Items.sporePod
+                getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("drill", 5, 2,
-                Items.thorium
+                getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("craft", 6, 1,
-                Items.phaseFabric, Items.blastCompound
+                getRandomByPack(all, true),getRandomByPack(all, true)
         ));
+
+        ItemPack hand = getPackByTier(0);
+        Blocks.oreCopper.itemDrop = getRandomByPack(hand, true);
+        Blocks.oreLead.itemDrop = getRandomByPack(hand, true);
+        Blocks.oreScrap.itemDrop = getRandomByPack(hand, true);
+        ItemPack drill0 = getPackByTier(1);
+        Blocks.oreCoal.itemDrop = getRandomByPack(drill0, true);
+        Blocks.sand.itemDrop = getRandomByPack(drill0, true);
+        Blocks.darksand.itemDrop = Blocks.sand.itemDrop;
+        ItemPack drill1 = getPackByTier(3);
+        Blocks.oreTitanium.itemDrop = getRandomByPack(drill1, true);
+        ItemPack drill2 = getPackByTier(5);
+        Blocks.oreThorium.itemDrop = getRandomByPack(drill2, true);
     }
 
     public static int getTierOfItem(Item item) {
@@ -51,13 +95,13 @@ public class ResourceMapper {
         return range;
     }
 
-    public static ItemStack[] getRandomItemStacks(int maxTier, int maxItemStackCount, int maxItemCount, boolean unique) {
+    public static ItemStack[] getRandomItemStacks(int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
         Seq<ItemPack> copy = getItemMapCopy();
         Seq<ItemStack> seq = new Seq<>();
         int minTier = Math.max(maxTier - 2, 0);
         int itemStackCount = Math.min(getRandomInt(maxItemStackCount) + 1, getRange(minTier, maxTier));
         for (int i = 0; i < itemStackCount; i++) {
-            int count = getRandomInt(maxItemCount) + 1;
+            int count = getRandomIntMult(itemMult, maxItemCount, itemMult);
             int tier = getRandomInt(minTier, maxTier);
             Item item = getRandomByPack(getPackByTier(tier, copy), true);
             if (item == null) continue;
@@ -116,7 +160,15 @@ public class ResourceMapper {
         return Main.rand.nextInt(max);
     }
 
+    public static int getRandomIntMult(int max, int mult) {
+        return Main.rand.nextInt(max / mult) * mult;
+    }
+
     public static int getRandomInt(int min, int max) {
         return min + getRandomInt(max - min);
+    }
+
+    public static int getRandomIntMult(int min, int max, int mult) {
+        return min + getRandomIntMult(max - min, mult);
     }
 }

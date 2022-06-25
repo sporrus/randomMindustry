@@ -18,7 +18,6 @@ public class ItemPack {
     }
 
     public ItemPack copy() {
-        ItemPack newPack = new ItemPack(tag, tier, localTier, all.toArray(Item.class));
-        return newPack;
+        return new ItemPack(tag, tier, localTier, all.toArray(Item.class));
     }
 }
