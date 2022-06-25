@@ -37,10 +37,10 @@ public class SettingsLoader{
                     Log.info(seed);
                     Log.info(Main.rand.seed0);
                     ui.loadfrag.show("@msg.rm-generating");
-                    Time.runTask(120f, ui.loadfrag::hide);
+                    Time.runTask(30f, ui.loadfrag::hide);
                 } catch (Exception ex) {
                     BaseDialog error = new BaseDialog("");
-                    error.cont.add(new FLabel("{wave}" + bundle.get("msg.rm-seed-invalid"))).row();
+                    error.cont.add(new FLabel("{wave}{shake}{wind}{sick}" + bundle.get("msg.rm-seed-invalid"))).row();
                     error.cont.add(ex.getMessage()).row();
                     error.buttons.button("@ok", error::hide).size(100f, 50f);
                     error.show();
