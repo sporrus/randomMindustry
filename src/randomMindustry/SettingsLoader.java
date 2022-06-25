@@ -38,7 +38,7 @@ public class SettingsLoader{
                     Main.rand = new Rand(Long.parseLong(seed));
                     Log.info(seed);
                     Log.info(Main.rand.seed0);
-                    Log.info("i am insane");
+                    Log.info("we am insane");
                 } catch (Exception ex) {
                     BaseDialog error = new BaseDialog("frog");
                     error.cont.add("[red]Seed invalid!").row();
