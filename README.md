@@ -1,1 +1,1 @@
-#me when bruh
+so random, you feel like playing first time
