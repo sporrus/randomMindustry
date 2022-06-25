@@ -7,8 +7,10 @@ import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.production.*;
-import mindustry.world.consumers.Consume;
+import mindustry.world.consumers.*;
+import mindustry.world.blocks.storage.*;
 
+import static arc.Core.*;
 import static mindustry.Vars.*;
 
 public class BlockMapper{
@@ -39,6 +41,7 @@ public class BlockMapper{
             modifyMechanicalDrill(block);
         }else{
             modifyBlock(block);
+            if(block instanceof CoreBlock) modifyCore((CoreBlock)block);
         }
     }
 
@@ -64,5 +67,12 @@ public class BlockMapper{
 
     public static void modifyMechanicalDrill(Block block) {
         block.requirements = ResourceMapper.getRandomItemStacks(1, 2, block.health / 2, true);
+    }
+    
+    public static void modifyCore(CoreBlock block){
+        Seq<UnitType> coreUnits = content.units().select(u -> u.mineTier >= 1 && u.buildSpeed > 0 && (u.flying || u.canBoost));
+        
+        // TODO: Avoid rolling on the same unit?
+        block.unitType = coreUnits.random();
     }
 }
