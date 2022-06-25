@@ -35,6 +35,7 @@ public class ResourceMapper {
     // TODO: make randomized items
     public static void init() {
         Seq<Item> items = Vars.content.items().select((item) -> Main.getRoot(item).contains(Planets.serpulo));
+        Main.shuffle(items);
         ItemPack all = new ItemPack("all", 0, 0, items.toArray(Item.class));
         Log.info(items.size);
 
