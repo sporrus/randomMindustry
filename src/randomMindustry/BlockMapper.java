@@ -21,8 +21,8 @@ public class BlockMapper {
         if (!Main.getRoot(block).contains(Planets.serpulo)) return;
         if (block instanceof GenericCrafter) {
             modifyCrafter((GenericCrafter) block);
-        } else if (block == Blocks.mechanicalDrill) {
-            modifyMechanicalDrill(block);
+        } else if (block instanceof Drill) {
+            modifyDrill((Drill) block);
         } else if (block instanceof CoreBlock) {
             modifyCore((CoreBlock) block);
         } else {
@@ -50,8 +50,9 @@ public class BlockMapper {
         block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(5) + 1, 5, block.health / 2, 5, true);
     }
 
-    public static void modifyMechanicalDrill(Block block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(1, 2, block.health / 2, 5, true);
+    public static void modifyDrill(Drill block) {
+        int localTier = block.tier - 1;
+        block.requirements = ResourceMapper.getRandomItemStacks(localTier, 5, block.health / 2, 5, true);
     }
     
     // Suggested by Ilya246.
