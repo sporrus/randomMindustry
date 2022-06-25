@@ -23,8 +23,6 @@ public class BlockMapper {
             modifyCrafter((GenericCrafter) block);
         } else if (block instanceof Drill) {
             modifyDrill((Drill) block);
-        } else if (block instanceof CoreBlock) {
-            modifyCore((CoreBlock) block);
         } else {
             modifyBlock(block);
         }
@@ -53,13 +51,5 @@ public class BlockMapper {
     public static void modifyDrill(Drill block) {
         int localTier = block.tier - 1;
         block.requirements = ResourceMapper.getRandomItemStacks(localTier, 5, block.health / 2, 5, true);
-    }
-    
-    // Suggested by Ilya246.
-    public static void modifyCore(CoreBlock block){
-        Seq<UnitType> coreUnits = content.units().select(u -> u.mineTier >= 1 && u.buildSpeed > 0 && (u.flying || u.canBoost));
-        
-        // TODO: Avoid rolling on the same unit? nah
-        block.unitType = coreUnits.random(Main.rand);
     }
 }
