@@ -103,10 +103,10 @@ public class ResourceMapper {
     public static ItemStack[] getRandomItemStacks(int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
         Seq<ItemPack> copy = getItemMapCopy();
         Seq<ItemStack> seq = new Seq<>();
-        int minTier = Math.max(maxTier - 2, 0);
+        int minTier = Math.max(maxTier - 1, 0);
         int itemStackCount = Math.min(getRandomInt(maxItemStackCount) + 1, getRange(minTier, maxTier));
         for (int i = 0; i < itemStackCount; i++) {
-            int count = getRandomIntMult(itemMult, maxItemCount, itemMult);
+            int count = getRandomIntMult(maxItemCount / 2 + itemMult, maxItemCount, itemMult);
             int tier = getRandomInt(minTier, maxTier);
             Item item = getRandomByPack(getPackByTier(tier, copy), true);
             if (item == null) continue;

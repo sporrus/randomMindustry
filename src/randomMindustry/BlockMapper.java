@@ -4,6 +4,7 @@ import arc.struct.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
+import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 import mindustry.world.blocks.storage.*;
@@ -23,6 +24,8 @@ public class BlockMapper {
             modifyCrafter((GenericCrafter) block);
         } else if (block instanceof Drill) {
             modifyDrill((Drill) block);
+        } else if (block instanceof Conveyor) {
+            modifyConveyor((Conveyor) block);
         } else {
             modifyBlock(block);
         }
@@ -44,8 +47,12 @@ public class BlockMapper {
         block.init();
     }
 
+    public static void modifyConveyor(Conveyor block) {
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 3, block.health / 4, 1, true);
+    }
+
     public static void modifyBlock(Block block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(5) + 1, 5, block.health / 2, 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.health / 2, 5, true);
     }
 
     public static void modifyDrill(Drill block) {
