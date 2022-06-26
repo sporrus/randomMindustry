@@ -65,24 +65,31 @@ public class ResourceMapper {
         ItemPack hand = getPackByTier(0);
         Blocks.oreCopper.itemDrop = getRandomByPack(hand, true);
         Blocks.oreCopper.itemDrop.hardness = 1;
+        Blocks.oreCopper.itemDrop.lowPriority = false;
         Blocks.oreLead.itemDrop = getRandomByPack(hand, true);
         Blocks.oreLead.itemDrop.hardness = 1;
+        Blocks.oreLead.itemDrop.lowPriority = false;
         Blocks.oreScrap.itemDrop = getRandomByPack(hand, true);
         Blocks.oreScrap.itemDrop.hardness = 1;
+        Blocks.oreScrap.itemDrop.lowPriority = false;
         ItemPack drill0 = getPackByTier(1);
         Blocks.oreCoal.itemDrop = getRandomByPack(drill0, true);
         Blocks.oreCoal.itemDrop.hardness = 2;
+        Blocks.oreCoal.itemDrop.lowPriority = false;
         Blocks.sand.itemDrop = getRandomByPack(drill0, true);
         Blocks.sand.localizedName = Blocks.sand.itemDrop.localizedName;
         Blocks.sand.itemDrop.hardness = 2;
+        Blocks.sand.itemDrop.lowPriority = true;
         Blocks.darksand.itemDrop = Blocks.sand.itemDrop;
         Blocks.darksand.localizedName = Blocks.darksand.itemDrop.localizedName;
         ItemPack drill1 = getPackByTier(3);
         Blocks.oreTitanium.itemDrop = getRandomByPack(drill1, true);
         Blocks.oreTitanium.itemDrop.hardness = 3;
+        Blocks.oreTitanium.itemDrop.lowPriority = false;
         ItemPack drill2 = getPackByTier(5);
         Blocks.oreThorium.itemDrop = getRandomByPack(drill2, true);
         Blocks.oreThorium.itemDrop.hardness = 4;
+        Blocks.oreThorium.itemDrop.lowPriority = false;
     }
 
     public static int getTierOfItem(Item item) {
