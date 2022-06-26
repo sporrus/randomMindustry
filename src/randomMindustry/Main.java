@@ -8,6 +8,7 @@ import mindustry.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;
+import mindustry.gen.Call;
 import mindustry.gen.Player;
 import mindustry.mod.*;
 import mindustry.type.*;
@@ -82,6 +83,7 @@ public class Main extends Mod {
     public void registerClientCommands(CommandHandler handler) {
         handler.<Player>register("find", "<item>", "Finds factories with output as item", (arr, player) -> {
             String itemName = arr[0];
+            StringBuilder cost = new StringBuilder();
             content.blocks().select((block -> {
                 if (!(block instanceof GenericCrafter)) return false;
                 ItemStack[] items = ((GenericCrafter) block).outputItems;
@@ -89,7 +91,6 @@ public class Main extends Mod {
                 for (ItemStack itemStack : items) if (itemStack.item.name.equalsIgnoreCase(itemName)) return true;
                 return false;
             })).each(block -> {
-                StringBuilder cost = new StringBuilder();
                 cost.append(block.name).append(" ").append(block.emoji()).append(" => ");
                 for (Consume consume : block.consumers) {
                     if (consume instanceof ConsumeItems) {
@@ -102,23 +103,24 @@ public class Main extends Mod {
                 for (ItemStack stack : ((GenericCrafter) block).outputItems) {
                     cost.append(stack.amount).append(stack.item.emoji()).append(" ");
                 }
-                player.sendMessage(cost.toString());
+                cost.append("\n");
             });
             Seq<ItemPack> ores = ResourceMapper.getPacksByTag("drill").addAll(ResourceMapper.getPacksByTag("hand"));
             ores.each(pack -> {
                 pack.all.each(item -> {
                     if (item.name.equalsIgnoreCase(itemName)) {
                         if (pack.tag.equalsIgnoreCase("hand"))
-                            player.sendMessage("hands " + UnitTypes.alpha.emoji() + " => " + item.emoji());
+                            cost.append("hands ").append(UnitTypes.alpha.emoji()).append(" => ").append(item.emoji());
                         else if (pack.localTier == 0)
-                            player.sendMessage(Blocks.mechanicalDrill.name + " " + Blocks.mechanicalDrill.emoji() + " => " + item.emoji());
+                            cost.append(Blocks.mechanicalDrill.name + " " + Blocks.mechanicalDrill.emoji() + " => " + item.emoji());
                         else if (pack.localTier == 1)
-                            player.sendMessage(Blocks.pneumaticDrill.name + " " + Blocks.pneumaticDrill.emoji() + " => " + item.emoji());
+                            cost.append(Blocks.pneumaticDrill.name + " " + Blocks.pneumaticDrill.emoji() + " => " + item.emoji());
                         else if (pack.localTier == 2)
-                            player.sendMessage(Blocks.laserDrill.name + " " + Blocks.laserDrill.emoji() + " => " + item.emoji());
+                            cost.append(Blocks.laserDrill.name + " " + Blocks.laserDrill.emoji() + " => " + item.emoji());
                     }
                 });
             });
+            Call.infoPopup(player.con, cost.toString(), 30, 0, 500, 500, 500, 500);
         });
     }
 }

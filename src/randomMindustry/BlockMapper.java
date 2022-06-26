@@ -1,10 +1,16 @@
 package randomMindustry;
 
+import arc.assets.loaders.SoundLoader;
 import arc.struct.*;
+import mindustry.Vars;
 import mindustry.content.*;
+import mindustry.entities.bullet.BulletType;
+import mindustry.gen.Sounds;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
+import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.blocks.defense.turrets.Turret;
 import mindustry.world.blocks.distribution.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
@@ -32,8 +38,24 @@ public class BlockMapper {
             modifyConveyor((Conveyor) block);
         } else if (block instanceof Wall) {
             modifyWall((Wall) block);
+        } else if (block instanceof Turret) {
+            modifyTurret((Turret) block);
         } else {
             modifyBlock(block);
+        }
+    }
+
+    public static void modifyTurret(Turret block) {
+        block.shootSound = Sounds.getSound(ResourceMapper.getRandomInt(0, 71));
+        if (block instanceof ItemTurret) {
+            Seq<Object> ammo = new Seq<>();
+            Seq<Item> items = content.items().select((item -> Main.getRoot(item).contains(Planets.serpulo)));
+            Seq<BulletType> bullets = content.bullets();
+            int count = ResourceMapper.getRandomInt(1, 5);
+            for (int i = 0; i < count; i++) {
+                ammo.add(items.random(Main.rand), bullets.random(Main.rand));
+            }
+            ((ItemTurret) block).ammo(ammo.toArray());
         }
     }
 

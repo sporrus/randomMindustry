@@ -119,7 +119,7 @@ public class ResourceMapper {
         int minTier = Math.max(maxTier - 2, 0);
         int itemStackCount = Math.min(getRandomInt(maxItemStackCount) + 1, getRange(minTier, maxTier));
         for (int i = 0; i < itemStackCount; i++) {
-            int count = getRandomIntMult(maxItemCount / 2, maxItemCount, itemMult);
+            int count = getRandomIntMult(Math.max(0, maxItemCount - 100), maxItemCount, itemMult);
             int tier = getRandomInt(minTier, maxTier);
             Item item = getRandomByPack(getPackByTier(tier, copy), true);
             if (item == null) continue;
@@ -178,8 +178,10 @@ public class ResourceMapper {
         return Main.rand.nextInt(max);
     }
 
-    public static int getRandomIntMult(int max, double mult) {
-        return (int) (Main.rand.nextInt((int) Math.ceil(max / mult)) * mult);
+    public static int getRandomIntMult(int max, int mult) {
+        int num = Main.rand.nextInt(max);
+        num -= num % mult;
+        return num + mult;
     }
 
     public static int getRandomInt(int min, int max) {
