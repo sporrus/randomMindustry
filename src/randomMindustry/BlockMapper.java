@@ -10,6 +10,7 @@ import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 
 import static mindustry.Vars.*;
+import static arc.Core.*;
 
 public class BlockMapper {
     public static void init() {
@@ -21,7 +22,7 @@ public class BlockMapper {
     public static void modify(Block block) {
         Seq<Category> cats = new Seq<>();
         cats.addAll(Category.all);
-        block.category = cats.random(Main.rand);
+        if (settings.getBool("rmchaos-category-rand", false)) block.category = cats.random(Main.rand);
         if (!Main.getRoot(block).contains(Planets.serpulo)) return;
         if (block instanceof GenericCrafter) {
             modifyCrafter((GenericCrafter) block);
