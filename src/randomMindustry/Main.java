@@ -22,6 +22,19 @@ public class Main extends Mod {
     public static Rand rand;
 
     public Main() {
+        Events.on(ClientLoadEvent.class, e -> {
+            long seed = new Rand().nextLong();
+            rand = new Rand(seed);
+            settings.put("rm-seed", Long.toString(seed));
+            SettingsLoader.init();
+            generate();
+        });
+        Events.on(ServerLoadEvent.class, e -> {
+            long seed = new Rand().nextLong();
+            rand = new Rand(seed);
+            Log.info("seed is " + seed);
+            generate();
+        });
     }
 
     public static <T> void shuffle(Seq<T> seq) {
@@ -61,15 +74,6 @@ public class Main extends Mod {
             }
         }
         Log.info(bundle.get("msg.rm-log-generated"));
-    }
-
-    @Override
-    public void init() {
-        long seed = new Rand().nextLong();
-        rand = new Rand(seed);
-        settings.put("rm-seed", Long.toString(seed));
-        SettingsLoader.init();
-        generate();
     }
 
     @Override
