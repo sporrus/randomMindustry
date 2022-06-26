@@ -41,25 +41,25 @@ public class ResourceMapper {
 
         itemMap = new Seq<>();
         itemMap.add(new ItemPack("hand", 0, 0,
-                getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true)
+                getRandomByPack(all, true), getRandomByPack(all, true), getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("drill", 1, 0,
-                getRandomByPack(all, true),getRandomByPack(all, true)
+                getRandomByPack(all, true), getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("craft", 2, 0,
-                getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true),getRandomByPack(all, true)
+                getRandomByPack(all, true), getRandomByPack(all, true), getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("drill", 3, 1,
                 getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("craft", 4, 1,
-                getRandomByPack(all, true),getRandomByPack(all, true)
+                getRandomByPack(all, true), getRandomByPack(all, true), getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("drill", 5, 2,
                 getRandomByPack(all, true)
         ));
         itemMap.add(new ItemPack("craft", 6, 1,
-                getRandomByPack(all, true),getRandomByPack(all, true)
+                getRandomByPack(all, true), getRandomByPack(all, true), getRandomByPack(all, true)
         ));
 
         ItemPack hand = getPackByTier(0);
