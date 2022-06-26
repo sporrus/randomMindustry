@@ -8,7 +8,7 @@ import arc.math.*;
 import static arc.Core.*;
 
 public class RegionMapper{
-    public static oldRegions = atlas.getRegions().copy();
+    public static Seq<AtlasRegion> oldRegions = atlas.getRegions().copy();
 
     public static void init(){
         if(settings.getBool("rmchaos-region-swap", false)){
