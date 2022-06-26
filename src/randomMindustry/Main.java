@@ -29,6 +29,7 @@ public class Main extends Mod {
             rand = new Rand(seed);
             settings.put("rm-seed", Long.toString(seed));
             SettingsLoader.init();
+            RegionMapper.init();
             generate();
         });
         Events.on(ServerLoadEvent.class, e -> {
@@ -64,7 +65,6 @@ public class Main extends Mod {
 
     public static void generate() {
         Log.info(bundle.get("msg.rm-log-generating"));
-        RegionMapper.init();
         ResourceMapper.init();
         BlockMapper.init();
         BulletMapper.init();
