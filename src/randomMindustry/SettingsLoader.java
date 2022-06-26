@@ -1,5 +1,7 @@
 package randomMindustry;
 
+import arc.scene.*;
+import arc.scene.event.*;
 import arc.math.*;
 import arc.util.*;
 import arc.flabel.*;
@@ -18,6 +20,7 @@ public class SettingsLoader{
         
         dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
             c.areaTextPref("rm-seed", "0");
+            c.pref(new RandomButton());
             c.pref(new GenerateButton());
         });
         
@@ -25,6 +28,22 @@ public class SettingsLoader{
             c.checkPref("rmchaos-region-swap", false);
             c.checkPref("rmchaos-region-randsize", false);
         });
+    }
+    
+    static class RandomButton extends Setting{
+        public RandomButton(){
+            super("rm-random");
+            title = "setting.rm-random.name";
+        }
+        
+        @Override
+        public void add(SettingsTable table){
+            ImageButton button = table.button(Icon.refresh, () -> settings.put("rm-seed", Long.toString(new Rand().nextLong())).get();
+            button.label(() -> bundle.get(title));
+            table.row();
+            
+            addDesc(button);
+        }
     }
     
     static class GenerateButton extends Setting{
