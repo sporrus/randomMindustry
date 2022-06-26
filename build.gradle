@@ -7,6 +7,12 @@ sourceCompatibility = JavaVersion.VERSION_16
 
 sourceSets.main.java.srcDirs = ["src"]
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 repositories{
     mavenCentral()
     maven{ url 'https://www.jitpack.io' }
