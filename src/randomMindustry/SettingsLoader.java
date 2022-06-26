@@ -38,7 +38,7 @@ public class SettingsLoader{
         
         @Override
         public void add(SettingsTable table){
-            ImageButton button = table.button(Icon.refresh, () -> settings.put("rm-seed", Long.toString(new Rand().nextLong())).get();
+            ImageButton button = table.button(Icon.refresh, () -> settings.put("rm-seed", Long.toString(new Rand().nextLong()))).get();
             button.label(() -> bundle.get(title));
             table.row();
             
