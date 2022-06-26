@@ -8,7 +8,7 @@ import static arc.Core.*;
 
 public class RegionMapper{
     public static void init(){
-        if(settings.getBool("rmchaos-region-swap"){
+        if(settings.getBool("rmchaos-region-swap", false){
             Seq<TextureRegion> regionsCopy = atlas.getRegions().copy();
             
             atlas.getRegions().each(region -> {
@@ -18,7 +18,7 @@ public class RegionMapper{
             });
         }
         
-        if(settings.getBool("rmchaos-region-randsize"){
+        if(settings.getBool("rmchaos-region-randsize", false){
             atlas.getRegions().each(region -> {
                 region.width = Mathf.random(0, region.width);
                 region.height = Mathf.random(0, region.height);
