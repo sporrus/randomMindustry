@@ -4,10 +4,10 @@ import arc.struct.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
-import mindustry.world.blocks.distribution.Conveyor;
+import mindustry.world.blocks.defense.*;
+import mindustry.world.blocks.distribution.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
-import mindustry.world.blocks.storage.*;
 
 import static mindustry.Vars.*;
 
@@ -26,6 +26,8 @@ public class BlockMapper {
             modifyDrill((Drill) block);
         } else if (block instanceof Conveyor) {
             modifyConveyor((Conveyor) block);
+        } else if (block instanceof Wall) {
+            modifyWall((Wall) block);
         } else {
             modifyBlock(block);
         }
@@ -56,7 +58,11 @@ public class BlockMapper {
     }
 
     public static void modifyDrill(Drill block) {
-        int localTier = block.tier - 1;
+        int localTier = block.tier * 2 - 3;
         block.requirements = ResourceMapper.getRandomItemStacks(localTier, 5, block.health / 2, 5, true);
+    }
+
+    public static void modifyWall(Wall block) {
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.size * 10, 5, true);
     }
 }

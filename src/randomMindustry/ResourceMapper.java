@@ -73,8 +73,10 @@ public class ResourceMapper {
         Blocks.oreCoal.itemDrop = getRandomByPack(drill0, true);
         Blocks.oreCoal.itemDrop.hardness = 2;
         Blocks.sand.itemDrop = getRandomByPack(drill0, true);
+        Blocks.sand.localizedName = Blocks.sand.itemDrop.localizedName;
         Blocks.sand.itemDrop.hardness = 2;
         Blocks.darksand.itemDrop = Blocks.sand.itemDrop;
+        Blocks.darksand.localizedName = Blocks.darksand.itemDrop.localizedName;
         ItemPack drill1 = getPackByTier(3);
         Blocks.oreTitanium.itemDrop = getRandomByPack(drill1, true);
         Blocks.oreTitanium.itemDrop.hardness = 3;
@@ -96,17 +98,21 @@ public class ResourceMapper {
 
     public static int getRange(int minTier, int maxTier) {
         int range = 0;
-        for (int i = minTier; i < maxTier; i++) range += getPackByTier(i).all.size;
+        for (int i = minTier; i < maxTier; i++) {
+            ItemPack pack = getPackByTier(i);
+            if (pack == null) continue;
+            range += pack.all.size;
+        }
         return range;
     }
 
     public static ItemStack[] getRandomItemStacks(int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
         Seq<ItemPack> copy = getItemMapCopy();
         Seq<ItemStack> seq = new Seq<>();
-        int minTier = Math.max(maxTier - 1, 0);
+        int minTier = Math.max(maxTier - 2, 0);
         int itemStackCount = Math.min(getRandomInt(maxItemStackCount) + 1, getRange(minTier, maxTier));
         for (int i = 0; i < itemStackCount; i++) {
-            int count = getRandomIntMult(maxItemCount / 2 + itemMult, maxItemCount, itemMult);
+            int count = getRandomIntMult(maxItemCount / 2, maxItemCount, itemMult);
             int tier = getRandomInt(minTier, maxTier);
             Item item = getRandomByPack(getPackByTier(tier, copy), true);
             if (item == null) continue;
@@ -165,8 +171,8 @@ public class ResourceMapper {
         return Main.rand.nextInt(max);
     }
 
-    public static int getRandomIntMult(int max, int mult) {
-        return Main.rand.nextInt(max / mult) * mult;
+    public static int getRandomIntMult(int max, double mult) {
+        return (int) (Main.rand.nextInt((int) Math.ceil(max / mult)) * mult);
     }
 
     public static int getRandomInt(int min, int max) {
