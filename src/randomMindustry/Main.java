@@ -112,15 +112,15 @@ public class Main extends Mod {
                         if (pack.tag.equalsIgnoreCase("hand"))
                             cost.append("hands ").append(UnitTypes.alpha.emoji()).append(" => ").append(item.emoji());
                         else if (pack.localTier == 0)
-                            cost.append(Blocks.mechanicalDrill.name + " " + Blocks.mechanicalDrill.emoji() + " => " + item.emoji());
+                            cost.append(Blocks.mechanicalDrill.name).append(" ").append(Blocks.mechanicalDrill.emoji()).append(" => ").append(item.emoji());
                         else if (pack.localTier == 1)
-                            cost.append(Blocks.pneumaticDrill.name + " " + Blocks.pneumaticDrill.emoji() + " => " + item.emoji());
+                            cost.append(Blocks.pneumaticDrill.name).append(" ").append(Blocks.pneumaticDrill.emoji()).append(" => ").append(item.emoji());
                         else if (pack.localTier == 2)
-                            cost.append(Blocks.laserDrill.name + " " + Blocks.laserDrill.emoji() + " => " + item.emoji());
+                            cost.append(Blocks.laserDrill.name).append(" ").append(Blocks.laserDrill.emoji()).append(" => ").append(item.emoji());
                     }
                 });
             });
-            Call.infoPopup(player.con, cost.toString(), 30, 0, 500, 500, 500, 500);
+            player.sendMessage(cost.toString());
         });
     }
 }
