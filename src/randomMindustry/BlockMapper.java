@@ -19,7 +19,8 @@ public class BlockMapper {
     }
 
     public static void modify(Block block) {
-        Seq<Category> cats = new Seq(Category.all);
+        Seq<Category> cats = new Seq<>();
+        cats.addAll(Category.all);
         block.category = cats.random();
         if (!Main.getRoot(block).contains(Planets.serpulo)) return;
         if (block instanceof GenericCrafter) {
