@@ -79,7 +79,7 @@ public class Main extends Mod {
 
     @Override
     public void registerClientCommands(CommandHandler handler) {
-        handler.<Player>register("find", "<item>", "Finds factories with output as item", (arr) -> {
+        handler.<Player>register("find", "<item>", "Finds factories with output as item", (arr, player) -> {
             String itemName = arr[0];
             content.blocks().select((block -> {
                 if (!(block instanceof GenericCrafter)) return false;
