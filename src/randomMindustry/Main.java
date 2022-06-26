@@ -23,7 +23,7 @@ public class Main extends Mod {
 
     public Main() {
         Events.on(ClientLoadEvent.class, e -> {
-            long seed = new Random().nextLong();
+            long seed = new Rand().nextLong();
             rand = new Rand(seed);
             settings.put("rm-seed", Long.toString(seed));
             SettingsLoader.init();
