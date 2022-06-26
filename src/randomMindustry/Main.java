@@ -21,23 +21,35 @@ import static mindustry.Vars.*;
 import static arc.Core.*;
 
 public class Main extends Mod {
+    public static long seed;
     public static Rand rand;
 
     public Main() {
         Events.on(ClientLoadEvent.class, e -> {
-            long seed = new Rand().nextLong();
-            rand = new Rand(seed);
-            settings.put("rm-seed", Long.toString(seed));
             SettingsLoader.init();
             RegionMapper.init();
-            generate();
+            load();
+            settings.put("rm-seed", Long.toString(seed));
+            netClient.addPacketHandler("seed", (str) -> {
+                seed = Long.parseLong(str);
+                rand = new Rand(seed);
+                generate();
+            });
         });
+
         Events.on(ServerLoadEvent.class, e -> {
-            long seed = new Rand().nextLong();
-            rand = new Rand(seed);
-            Log.info("seed is " + seed);
-            generate();
+            load();
+            Events.on(PlayerConnectionConfirmed.class, (playerConnectionConfirmed) -> {
+                Call.clientPacketReliable(playerConnectionConfirmed.player.con, "seed", Long.toString(seed));
+            });
         });
+    }
+
+    public static void load() {
+        seed = new Rand().nextLong();
+        rand = new Rand(seed);
+        Log.info("seed is " + seed);
+        generate();
     }
 
     public static <T> void shuffle(Seq<T> seq) {
