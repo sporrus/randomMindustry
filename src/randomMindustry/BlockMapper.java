@@ -10,6 +10,8 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.blocks.defense.turrets.LaserTurret;
+import mindustry.world.blocks.defense.turrets.LiquidTurret;
 import mindustry.world.blocks.defense.turrets.Turret;
 import mindustry.world.blocks.distribution.*;
 import mindustry.world.blocks.production.*;
@@ -56,7 +58,20 @@ public class BlockMapper {
                 ammo.add(items.random(Main.rand), bullets.random(Main.rand));
             }
             ((ItemTurret) block).ammo(ammo.toArray());
+        } else if (block instanceof LiquidTurret) {
+            Seq<Object> ammo = new Seq<>();
+            Seq<Liquid> items = content.liquids().select((liquid -> Main.getRoot(liquid).contains(Planets.serpulo)));
+            Seq<BulletType> bullets = content.bullets();
+            int count = ResourceMapper.getRandomInt(1, 5);
+            for (int i = 0; i < count; i++) {
+                ammo.add(items.random(Main.rand), bullets.random(Main.rand));
+            }
+            ((LiquidTurret) block).ammo(ammo.toArray());
+        } else if (block instanceof LaserTurret) {
+            ((LaserTurret) block).shootType = content.bullets().random(Main.rand);
+            block.consumePower(ResourceMapper.getRandomInt(20000) / 1000f);
         }
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.health / 2, 5, true);
     }
 
     public static void modifyCrafter(GenericCrafter block) {
