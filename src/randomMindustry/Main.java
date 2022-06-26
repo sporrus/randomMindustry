@@ -22,7 +22,7 @@ public class Main extends Mod {
     public static Rand rand;
 
     public Main() {
-        Events.on(ClientLoadEvent.class, (e) -> {
+        Events.on(ClientLoadEvent.class, e -> {
             long seed = new Random().nextLong();
             rand = new Rand(seed);
             settings.put("rm-seed", Long.toString(seed));
