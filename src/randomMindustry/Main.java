@@ -8,6 +8,7 @@ import mindustry.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;
+import mindustry.gen.Player;
 import mindustry.mod.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
@@ -78,7 +79,7 @@ public class Main extends Mod {
 
     @Override
     public void registerClientCommands(CommandHandler handler) {
-        handler.register("find", "<item>", "Finds factories with output as item", (arr) -> {
+        handler.<Player>register("find", "<item>", "Finds factories with output as item", (arr) -> {
             String itemName = arr[0];
             content.blocks().select((block -> {
                 if (!(block instanceof GenericCrafter)) return false;
@@ -100,20 +101,20 @@ public class Main extends Mod {
                 for (ItemStack stack : ((GenericCrafter) block).outputItems) {
                     cost.append(stack.amount).append(stack.item.emoji()).append(" ");
                 }
-                Log.info(cost.toString());
+                player.sendMessage(cost.toString());
             });
             Seq<ItemPack> ores = ResourceMapper.getPacksByTag("drill").addAll(ResourceMapper.getPacksByTag("hand"));
             ores.each(pack -> {
                 pack.all.each(item -> {
                     if (item.name.equalsIgnoreCase(itemName)) {
                         if (pack.tag.equalsIgnoreCase("hand"))
-                            Log.info("hands " + UnitTypes.alpha.emoji() + " => " + item.emoji());
+                            player.sendMessage("hands " + UnitTypes.alpha.emoji() + " => " + item.emoji());
                         else if (pack.localTier == 0)
-                            Log.info(Blocks.mechanicalDrill.name + " " + Blocks.mechanicalDrill.emoji() + " => " + item.emoji());
+                            player.sendMessage(Blocks.mechanicalDrill.name + " " + Blocks.mechanicalDrill.emoji() + " => " + item.emoji());
                         else if (pack.localTier == 1)
-                            Log.info(Blocks.pneumaticDrill.name + " " + Blocks.pneumaticDrill.emoji() + " => " + item.emoji());
+                            player.sendMessage(Blocks.pneumaticDrill.name + " " + Blocks.pneumaticDrill.emoji() + " => " + item.emoji());
                         else if (pack.localTier == 2)
-                            Log.info(Blocks.laserDrill.name + " " + Blocks.laserDrill.emoji() + " => " + item.emoji());
+                            player.sendMessage(Blocks.laserDrill.name + " " + Blocks.laserDrill.emoji() + " => " + item.emoji());
                     }
                 });
             });
