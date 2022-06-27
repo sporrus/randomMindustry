@@ -36,6 +36,13 @@ public class ResourceMapper {
     public static void init() {
         Seq<Item> items = Vars.content.items().select((item) -> Main.getRoot(item).contains(Planets.serpulo));
         Main.shuffle(items);
+        items.each((item -> {
+            item.explosiveness = Main.rand.random(100) / 100f;
+            item.flammability = Main.rand.random(100) / 100f;
+            item.charge = Main.rand.random(100) / 100f;
+            item.radioactivity = Main.rand.random(100) / 100f;
+            item.cost = Main.rand.random(100);
+        }));
         ItemPack all = new ItemPack("all", 0, 0, items.toArray(Item.class));
         Log.info(items.size);
 
