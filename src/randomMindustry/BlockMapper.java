@@ -12,6 +12,8 @@ import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.*;
 import mindustry.world.blocks.production.*;
+import mindustry.world.blocks.units.*;
+import mindustry.world.blocks.units.UnitFactory.*;
 import mindustry.world.consumers.*;
 
 import static mindustry.Vars.*;
@@ -39,9 +41,13 @@ public class BlockMapper {
             modifyWall((Wall) block);
         } else if (block instanceof Turret) {
             modifyTurret((Turret) block);
+        } else if (block instanceof UnitFactory) {
+            modifyUnitFactory((UnitFactory) block);
         } else {
             modifyBlock(block);
         }
+        
+        block.init();
     }
 
     public static void modifyTurret(Turret block) {
@@ -102,5 +108,16 @@ public class BlockMapper {
 
     public static void modifyWall(Wall block) {
         block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.size * 10, 5, true);
+    }
+    
+    public static void modifyUnitFactory(UnitFactory block){
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.health / 2, 5, true);
+        
+        Seq<UnitPlan> plans = block.plans;
+        
+        plans.each(plan -> {
+            // randomize plan build time and unit?
+            plan.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(3) + 1, 5, (int) (plan.unit.health / 2), 5, true);
+        });
     }
 }
