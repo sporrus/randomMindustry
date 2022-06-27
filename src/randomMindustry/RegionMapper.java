@@ -21,11 +21,11 @@ public class RegionMapper{
             });
         }
         
-        if(settings.getBool("rmchaos-region-randsize", false)){
+        /*if(settings.getBool("rmchaos-region-randsize", false)){
             atlas.getRegions().each(region -> {
                 region.width = Mathf.random(0, region.width);
                 region.height = Mathf.random(0, region.height);
             });
-        }
+        }*/
     }
 }
