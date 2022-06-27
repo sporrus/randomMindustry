@@ -43,6 +43,11 @@ public class Main extends Mod {
             Events.on(PlayerConnectionConfirmed.class, (playerConnectionConfirmed) -> {
                 Call.clientPacketReliable(playerConnectionConfirmed.player.con, "seed", Long.toString(seed));
             });
+            Events.on(WorldLoadEvent.class, (worldLoadEvent) -> {
+                load();
+                Call.clientPacketReliable("seed", Long.toString(seed));
+                Call.announce("selected seed:" + seed);
+            });
         });
     }
 
