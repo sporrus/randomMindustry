@@ -41,6 +41,8 @@ public class BlockMapper {
             modifyWall((Wall) block);
         } else if (block instanceof Turret) {
             modifyTurret((Turret) block);
+        } else if (block instanceof UnitFactory) {
+            modifyUnitFactory((UnitFactory) block);
         } else {
             modifyBlock(block);
         }
@@ -107,6 +109,13 @@ public class BlockMapper {
     }
     
     public static void modifyUnitFactory(UnitFactory block){
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.health / 2, 5, true);
         
+        Seq<UnitPlan> plans = block.plans;
+        
+        plans.each(plan -> {
+            // randomize plan build time and unit?
+            plan.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, plan.unit.health / 2, 5, true);
+        });
     }
 }
