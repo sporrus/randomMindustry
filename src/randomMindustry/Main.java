@@ -71,7 +71,7 @@ public class Main extends Mod {
 
     public static Seq<Planet> getRoot(UnlockableContent content) {
         Seq<Planet> planets = new Seq<>();
-        content.planets().each((planet -> {
+        Vars.content.planets().each((planet -> {
             if (planet.techTree == null) return;
             planet.techTree.each((node) -> {
                 if (node.content == content) {
