@@ -81,7 +81,6 @@ public class Main extends Mod {
         RegionMapper.init();
         ResourceMapper.init();
         BlockMapper.init();
-        BulletMapper.init();
         for (ItemPack pack : ResourceMapper.itemMap) {
             Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
             for (Item item : pack.all) {
