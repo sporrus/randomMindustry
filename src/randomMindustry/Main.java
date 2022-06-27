@@ -27,7 +27,6 @@ public class Main extends Mod {
     public Main() {
         Events.on(ClientLoadEvent.class, e -> {
             SettingsLoader.init();
-            RegionMapper.init();
             load();
             settings.put("rm-seed", Long.toString(seed));
             netClient.addPacketHandler("seed", (str) -> {
@@ -77,6 +76,7 @@ public class Main extends Mod {
 
     public static void generate() {
         Log.info(bundle.get("msg.rm-log-generating"));
+        RegionMapper.init();
         ResourceMapper.init();
         BlockMapper.init();
         BulletMapper.init();
