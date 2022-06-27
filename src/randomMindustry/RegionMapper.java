@@ -1,9 +1,9 @@
 package randomMindustry;
 
 import arc.struct.*;
-import arc.graphics.g2d.*;
 import arc.graphics.g2d.TextureAtlas.*;
 import arc.math.*;
+import mindustry.*;
 
 import static arc.Core.*;
 
@@ -11,6 +11,8 @@ public class RegionMapper{
     public static Seq<AtlasRegion> oldRegions = atlas.getRegions().copy();
 
     public static void init(){
+        if (Vars.headless) return;
+
         if(settings.getBool("rmchaos-region-swap", false)){
             Seq<AtlasRegion> regionsCopy = atlas.getRegions().copy();
             
