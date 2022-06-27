@@ -90,7 +90,6 @@ public class BlockMapper {
         for (Consume consume : save) block.removeConsumer(consume);
         block.consumeItems(ResourceMapper.getRandomItemStacks(tier, 3, 10, 1, true));
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, block.health / 2, 5, true);
-        block.init();
     }
 
     public static void modifyConveyor(Conveyor block) {
