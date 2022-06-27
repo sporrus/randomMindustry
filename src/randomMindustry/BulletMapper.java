@@ -2,7 +2,7 @@ package randomMindustry;
 
 import arc.struct.*;
 import arc.math.*;
-import arc.assets.loaders.*;
+import mindustry.gen.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 
@@ -11,6 +11,7 @@ import static mindustry.Vars.*;
 public class BulletMapper{
     public static void init(){
         Seq<Effect> effects = Effect.all;
+        effects.remove(Fx.dynamicExplosion);
         
         // Currently only visual, will be fixed later on.
         content.bullets().each(b -> {
