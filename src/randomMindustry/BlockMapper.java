@@ -46,6 +46,8 @@ public class BlockMapper {
         } else {
             modifyBlock(block);
         }
+        
+        block.init();
     }
 
     public static void modifyTurret(Turret block) {
