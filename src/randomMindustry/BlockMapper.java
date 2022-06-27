@@ -43,6 +43,8 @@ public class BlockMapper {
             modifyTurret((Turret) block);
         } else if (block instanceof UnitFactory) {
             modifyUnitFactory((UnitFactory) block);
+        } else if (block instanceof Reconstructor) {
+            modifyReconstructor((Reconstructor) block);
         } else {
             modifyBlock(block);
         }
