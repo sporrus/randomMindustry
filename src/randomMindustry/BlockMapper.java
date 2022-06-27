@@ -12,6 +12,8 @@ import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.*;
 import mindustry.world.blocks.production.*;
+import mindustry.world.blocks.units.*;
+import mindustry.world.blocks.units.UnitFactory.*;
 import mindustry.world.consumers.*;
 
 import static mindustry.Vars.*;
@@ -102,5 +104,9 @@ public class BlockMapper {
 
     public static void modifyWall(Wall block) {
         block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.size * 10, 5, true);
+    }
+    
+    public static void modifyUnitFactory(UnitFactory block){
+        
     }
 }
