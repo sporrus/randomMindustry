@@ -26,7 +26,7 @@ public class SettingsLoader{
         
         dialog.addCategory("@setting.rmchaos", Icon.effect /* TODO: Make custom icons. */, c -> {
             c.checkPref("rmchaos-region-swap", false);
-            c.checkPref("rmchaos-region-randsize", false);
+            // c.checkPref("rmchaos-region-randsize", false);
             c.checkPref("rmchaos-category-rand", false);
         });
     }
