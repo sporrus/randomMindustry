@@ -74,7 +74,7 @@ public class BlockMapper {
             ((LaserTurret) block).shootType = content.bullets().random(Main.rand);
             block.consumePower(ResourceMapper.getRandomInt(20000) / 1000f);
         }
-        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.health / 2, 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, (int) (block.health / 2), 5, true);
     }
 
     public static void modifyCrafter(GenericCrafter block) {
@@ -89,20 +89,20 @@ public class BlockMapper {
         block.consumers = new Consume[0];
         for (Consume consume : save) block.removeConsumer(consume);
         block.consumeItems(ResourceMapper.getRandomItemStacks(tier, 3, 10, 1, true));
-        block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, block.health / 2, 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) (block.health / 2), 5, true);
     }
 
     public static void modifyConveyor(Conveyor block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 3, block.health / 4, 1, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 3, (int) (block.health / 4), 1, true);
     }
 
     public static void modifyBlock(Block block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.health / 2, 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, (int) (block.health / 2), 5, true);
     }
 
     public static void modifyDrill(Drill block) {
         int localTier = block.tier * 2 - 3;
-        block.requirements = ResourceMapper.getRandomItemStacks(localTier, 5, block.health / 2, 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(localTier, 5, (int) (block.health / 2), 5, true);
     }
 
     public static void modifyWall(Wall block) {
@@ -110,7 +110,7 @@ public class BlockMapper {
     }
     
     public static void modifyUnitFactory(UnitFactory block){
-        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, block.health / 2, 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, (int) (block.health / 2), 5, true);
         
         Seq<UnitPlan> plans = block.plans;
         
@@ -118,5 +118,14 @@ public class BlockMapper {
             // randomize plan build time and unit?
             plan.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(3) + 1, 5, (int) (plan.unit.health / 2), 5, true);
         });
+    }
+    
+    public static void modifyReconstructor(Reconstructor block){
+        block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, (int) (block.health / 2), 5, true);
+        
+        Consume[] save = block.consumers;
+        block.consumers = new Consume[0];
+        for(Consume consume : save) block.removeConsumer(consume);
+        block.consumeItems(ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(5) + 1, 5, (int) (block.health / 2), 5, true));
     }
 }
