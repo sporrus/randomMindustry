@@ -15,6 +15,9 @@ import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.units.*;
 import mindustry.world.blocks.units.UnitFactory.*;
 import mindustry.world.consumers.*;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.Stats;
+import mindustry.world.modules.ItemModule;
 
 import static mindustry.Vars.*;
 import static arc.Core.*;
@@ -54,6 +57,8 @@ public class BlockMapper {
 
     public static void modifyTurret(Turret block) {
         block.shootSound = Sounds.getSound(ResourceMapper.getRandomInt(0, 71));
+        block.stats = new Stats();
+        block.stats.intialized = true;
         if (block instanceof ItemTurret) {
             Seq<Object> ammo = new Seq<>();
             Seq<Item> items = content.items().select((item -> Main.getRoot(item).contains(Planets.serpulo)));
@@ -62,6 +67,9 @@ public class BlockMapper {
             for (int i = 0; i < count; i++) {
                 ammo.add(items.random(Main.rand), bullets.random(Main.rand));
             }
+            Consume[] save = block.nonOptionalConsumers;
+            block.consumers = new Consume[0];
+            for (Consume consume : save) block.removeConsumer(consume);
             ((ItemTurret) block).ammo(ammo.toArray());
         } else if (block instanceof LiquidTurret) {
             Seq<Object> ammo = new Seq<>();
@@ -76,6 +84,7 @@ public class BlockMapper {
             ((LaserTurret) block).shootType = content.bullets().random(Main.rand);
             block.consumePower(ResourceMapper.getRandomInt(20000) / 1000f);
         }
+        block.setStats();
         block.requirements = ResourceMapper.getRandomItemStacks(ResourceMapper.getRandomInt(6) + 1, 5, (int) (block.health / 2), 5, true);
     }
 
