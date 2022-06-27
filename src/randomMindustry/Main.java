@@ -29,9 +29,12 @@ public class Main extends Mod {
             load();
             settings.put("rm-seed", Long.toString(seed));
             netClient.addPacketHandler("seed", (str) -> {
+                Call.sendMessage("generating... prev seed is "+ seed);
                 seed = Long.parseLong(str);
                 rand = new Rand(seed);
+                Call.sendMessage("new seed is " + seed);
                 generate();
+                Call.sendMessage("generated!");
             });
         });
 
@@ -132,6 +135,10 @@ public class Main extends Mod {
                 });
             });
             player.sendMessage(cost.toString());
+        });
+        handler.<Player>register("seed", "sends seed and syncs", (arr, player) -> {
+            player.sendMessage("seed is " + seed);
+            Call.clientPacketReliable(player.con, "seed", Long.toString(seed));
         });
     }
 }
