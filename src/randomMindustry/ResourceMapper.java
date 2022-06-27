@@ -41,7 +41,7 @@ public class ResourceMapper {
             item.flammability = Main.rand.random(100) / 100f;
             item.charge = Main.rand.random(100) / 100f;
             item.radioactivity = Main.rand.random(100) / 100f;
-            item.cost = Main.rand.random(100);
+            item.cost = Main.rand.random(100) / 100f;
         }));
         ItemPack all = new ItemPack("all", 0, 0, items.toArray(Item.class));
         Log.info(items.size);
