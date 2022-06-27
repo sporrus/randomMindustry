@@ -10,6 +10,7 @@ import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
+import mindustry.ui.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
@@ -70,7 +71,7 @@ public class Main extends Mod {
 
     public static Seq<Planet> getRoot(UnlockableContent content) {
         Seq<Planet> planets = new Seq<>();
-        Vars.content.planets().each((planet -> {
+        content.planets().each((planet -> {
             if (planet.techTree == null) return;
             planet.techTree.each((node) -> {
                 if (node.content == content) {
@@ -91,7 +92,7 @@ public class Main extends Mod {
             for (Item item : pack.all) {
                 if (pack.locked.contains(item)) Log.info("[red]==LOCKED==");
                 if (item == null) Log.info("some null item :skull:");
-                else Log.info(item + item.emoji());
+                else Log.info(item + (char)Fonts.getUnicode(item.name));
             }
         }
         Log.info(bundle.get("msg.rm-log-generated"));
@@ -109,17 +110,17 @@ public class Main extends Mod {
                 for (ItemStack itemStack : items) if (itemStack.item.name.equalsIgnoreCase(itemName)) return true;
                 return false;
             })).each(block -> {
-                cost.append(block.name).append(" ").append(block.emoji()).append(" => ");
+                cost.append(block.localizedName).append("[] ").append((char)Fonts.getUnicode(block.name)).append(" => ");
                 for (Consume consume : block.consumers) {
                     if (consume instanceof ConsumeItems) {
                         ItemStack[] items = ((ConsumeItems) consume).items;
                         for (ItemStack itemStack : items)
-                            cost.append(itemStack.amount).append(itemStack.item.emoji()).append(" ");
+                            cost.append(itemStack.amount).append((char)Fonts.getUnicode(itemStack.item.name)).append(" ");
                     }
                 }
                 cost.append("=> ");
                 for (ItemStack stack : ((GenericCrafter) block).outputItems) {
-                    cost.append(stack.amount).append(stack.item.emoji()).append(" ");
+                    cost.append(stack.amount).append((char)Fonts.getUnicode(stack.item.name)).append(" ");
                 }
                 cost.append("\n");
             });
@@ -128,13 +129,13 @@ public class Main extends Mod {
                 pack.all.each(item -> {
                     if (item.name.equalsIgnoreCase(itemName)) {
                         if (pack.tag.equalsIgnoreCase("hand"))
-                            cost.append("hands ").append(UnitTypes.alpha.emoji()).append(" => ").append(item.emoji());
+                            cost.append("hands ").append((char)Fonts.getUnicode(UnitTypes.alpha.name)).append(" => ").append((char)Fonts.getUnicode(item.name));
                         else if (pack.localTier == 0)
-                            cost.append(Blocks.mechanicalDrill.name).append(" ").append(Blocks.mechanicalDrill.emoji()).append(" => ").append(item.emoji());
+                            cost.append(Blocks.mechanicalDrill.localizedName).append("[] ").append((char)Fonts.getUnicode(Blocks.mechanicalDrill.name)).append(" => ").append((char)Fonts.getUnicode(item.name));
                         else if (pack.localTier == 1)
-                            cost.append(Blocks.pneumaticDrill.name).append(" ").append(Blocks.pneumaticDrill.emoji()).append(" => ").append(item.emoji());
+                            cost.append(Blocks.pneumaticDrill.localizedName).append("[] ").append((char)Fonts.getUnicode(Blocks.pneumaticDrill.name)).append(" => ").append((char)Fonts.getUnicode(item.name));
                         else if (pack.localTier == 2)
-                            cost.append(Blocks.laserDrill.name).append(" ").append(Blocks.laserDrill.emoji()).append(" => ").append(item.emoji());
+                            cost.append(Blocks.laserDrill.localizedName).append("[] ").append((char)Fonts.getUnicode(Blocks.laserDrill.name)).append(" => ").append((char)Fonts.getUnicode(item.name));
                     }
                 });
             });
