@@ -31,20 +31,20 @@ public class BlockMapper {
         cats.addAll(Category.all);
         if (settings.getBool("rmchaos-category-rand", false)) block.category = cats.random(Main.rand);
         if (!Main.getRoot(block).contains(Planets.serpulo)) return;
-        if (block instanceof GenericCrafter) {
-            modifyCrafter((GenericCrafter) block);
-        } else if (block instanceof Drill) {
-            modifyDrill((Drill) block);
-        } else if (block instanceof Conveyor) {
-            modifyConveyor((Conveyor) block);
-        } else if (block instanceof Wall) {
-            modifyWall((Wall) block);
-        } else if (block instanceof Turret) {
-            modifyTurret((Turret) block);
-        } else if (block instanceof UnitFactory) {
-            modifyUnitFactory((UnitFactory) block);
-        } else if (block instanceof Reconstructor) {
-            modifyReconstructor((Reconstructor) block);
+        if (block instanceof GenericCrafter gencrafter) {
+            modifyCrafter(gencrafter);
+        } else if (block instanceof Drill drill) {
+            modifyDrill(drill);
+        } else if (block instanceof Conveyor conveyor) {
+            modifyConveyor(conveyor);
+        } else if (block instanceof Wall wall) {
+            modifyWall(wall);
+        } else if (block instanceof Turret turret) {
+            modifyTurret(turret);
+        } else if (block instanceof UnitFactory ufactory) {
+            modifyUnitFactory(ufactory);
+        } else if (block instanceof Reconstructor recons) {
+            modifyReconstructor(recons);
         } else {
             modifyBlock(block);
         }
