@@ -92,7 +92,7 @@ public class Main extends Mod {
             for (Item item : pack.all) {
                 if (pack.locked.contains(item)) Log.info("[red]==LOCKED==");
                 if (item == null) Log.info("some null item :skull:");
-                else Log.info(item + (char)Fonts.getUnicode(item.name));
+                else Log.info(item + Fonts.getUnicode(item.name));
             }
         }
         Log.info(bundle.get("msg.rm-log-generated"));
