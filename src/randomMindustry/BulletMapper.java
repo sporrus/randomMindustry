@@ -3,6 +3,7 @@ package randomMindustry;
 import arc.struct.*;
 import arc.math.*;
 import mindustry.gen.*;
+import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 
@@ -18,13 +19,14 @@ public class BulletMapper{
             b.hitSound = Sounds.getSound(ResourceMapper.getRandomInt(0, 71));
             b.despawnSound = Sounds.getSound(ResourceMapper.getRandomInt(0, 71));
             
-            b.shootEffect = effects.random(Main.rand);
+            // some fx crash game
+            /*b.shootEffect = effects.random(Main.rand);
             b.smokeEffect = effects.random(Main.rand);
             b.chargeEffect = effects.random(Main.rand);
             b.hitEffect = effects.random(Main.rand);
             b.despawnEffect = effects.random(Main.rand);
             b.trailEffect = effects.random(Main.rand);
-            b.healEffect = effects.random(Main.rand);
+            b.healEffect = effects.random(Main.rand);*/
         });
     }
 }
