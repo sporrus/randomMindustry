@@ -1,4 +1,4 @@
-package randomMindustry.ui.dialogs.*;
+package randomMindustry.ui.dialogs;
 
 import arc.struct.*; 
 import arc.scene.ui.*;
@@ -46,7 +46,7 @@ public class ItemFinderDialog extends BaseDialog{
                 
                 // add other finder stuff here
             }).row();
-        })
+        });
         
         if(output.getChildren().isEmpty()){
             output.add("@none.found");
