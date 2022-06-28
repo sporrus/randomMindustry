@@ -27,7 +27,9 @@ public class RandomUtil {
     }
 
     public static int getRandomIntMult(int min, int max, int mult) {
-        return getRandomIntMult(max - min, mult) + min;
+        int num = rand.nextInt(max - min) + min;
+        num -= num % mult;
+        return num + mult;
     }
 
     public static void newSeed() {
