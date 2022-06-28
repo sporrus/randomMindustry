@@ -69,7 +69,8 @@ public class BlockMapper {
             for (int i = 0; i < count; i++) {
                 ammo.add(items.random(RandomUtil.getRand()), bullets.random(RandomUtil.getRand()));
             }
-            Util.removeConsumers(block, (consume -> new Seq<>(block.nonOptionalConsumers).contains(consume)));
+            Seq<Consume> nonOptionalConsumers = new Seq<>(block.nonOptionalConsumers);
+            Util.removeConsumers(block, nonOptionalConsumers::contains);
             turret.ammo(ammo.toArray());
         } else if (block instanceof LiquidTurret turret) {
             Seq<Object> ammo = new Seq<>();
@@ -77,7 +78,8 @@ public class BlockMapper {
             Seq<BulletType> bullets = content.bullets();
             int count = RandomUtil.getRand().random(1, 5);
             for (int i = 0; i < count; i++) ammo.add(liquids.random(RandomUtil.getRand()), bullets.random(RandomUtil.getRand()));
-            Util.removeConsumers(block, (consume -> new Seq<>(block.nonOptionalConsumers).contains(consume)));
+            Seq<Consume> nonOptionalConsumers = new Seq<>(block.nonOptionalConsumers);
+            Util.removeConsumers(block, nonOptionalConsumers::contains);
             turret.ammo(ammo.toArray());
         } else if (block instanceof LaserTurret turret) {
             turret.consumePower(RandomUtil.getRand().random(20000) / 1000f);
