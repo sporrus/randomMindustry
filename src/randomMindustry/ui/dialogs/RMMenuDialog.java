@@ -11,6 +11,7 @@ public class RMMenuDialog extends BaseDialog{
         shouldPause = true;
         
         shown(this::rebuild);
+        onResize(this::rebuild);
         
         addCloseButton();
     }
