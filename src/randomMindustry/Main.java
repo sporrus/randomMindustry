@@ -107,47 +107,6 @@ public class Main extends Mod {
 
     @Override
     public void registerClientCommands(CommandHandler handler) {
-        handler.<Player>register("find", "<item>", "Finds factories with output as item", (arr, player) -> {
-            String itemName = arr[0];
-            StringBuilder cost = new StringBuilder();
-            content.blocks().select((block -> {
-                if (!(block instanceof GenericCrafter)) return false;
-                ItemStack[] items = ((GenericCrafter) block).outputItems;
-                if (items == null) return false;
-                for (ItemStack itemStack : items) if (itemStack.item.name.equalsIgnoreCase(itemName)) return true;
-                return false;
-            })).each(block -> {
-                cost.append(block.localizedName).append("[] ").append((char)Fonts.getUnicode(block.name)).append(" => ");
-                for (Consume consume : block.consumers) {
-                    if (consume instanceof ConsumeItems) {
-                        ItemStack[] items = ((ConsumeItems) consume).items;
-                        for (ItemStack itemStack : items)
-                            cost.append(itemStack.amount).append((char)Fonts.getUnicode(itemStack.item.name)).append(" ");
-                    }
-                }
-                cost.append("=> ");
-                for (ItemStack stack : ((GenericCrafter) block).outputItems) {
-                    cost.append(stack.amount).append((char)Fonts.getUnicode(stack.item.name)).append(" ");
-                }
-                cost.append("\n");
-            });
-            Seq<ItemPack> ores = ResourceMapper.getPacksByTag("drill").addAll(ResourceMapper.getPacksByTag("hand"));
-            ores.each(pack -> {
-                pack.all.each(item -> {
-                    if (item.name.equalsIgnoreCase(itemName)) {
-                        if (pack.tag.equalsIgnoreCase("hand"))
-                            cost.append("hands ").append((char)Fonts.getUnicode(UnitTypes.alpha.name)).append(" => ").append((char)Fonts.getUnicode(item.name));
-                        else if (pack.localTier == 0)
-                            cost.append(Blocks.mechanicalDrill.localizedName).append("[] ").append((char)Fonts.getUnicode(Blocks.mechanicalDrill.name)).append(" => ").append((char)Fonts.getUnicode(item.name));
-                        else if (pack.localTier == 1)
-                            cost.append(Blocks.pneumaticDrill.localizedName).append("[] ").append((char)Fonts.getUnicode(Blocks.pneumaticDrill.name)).append(" => ").append((char)Fonts.getUnicode(item.name));
-                        else if (pack.localTier == 2)
-                            cost.append(Blocks.laserDrill.localizedName).append("[] ").append((char)Fonts.getUnicode(Blocks.laserDrill.name)).append(" => ").append((char)Fonts.getUnicode(item.name));
-                    }
-                });
-            });
-            player.sendMessage(cost.toString());
-        });
         handler.<Player>register("seed", "sends seed and syncs", (arr, player) -> {
             player.sendMessage("seed is " + seed);
             Call.clientPacketReliable(player.con, "seed", Long.toString(seed));

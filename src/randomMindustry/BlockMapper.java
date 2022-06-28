@@ -100,6 +100,7 @@ public class BlockMapper {
         block.consumers = new Consume[0];
         for (Consume consume : save) block.removeConsumer(consume);
         block.consumeItems(ResourceMapper.getRandomItemStacks(tier, 3, 10, 1, true));
+        block.craftTime = Main.rand.random(300f);
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) (block.health / 2), 5, true);
     }
 
