@@ -28,7 +28,7 @@ public class Main extends Mod {
 
     public Main() {
         Events.on(ClientLoadEvent.class, e -> {
-            ui.paused.buttons.button(Icon.effect, () -> {
+            ui.settings.buttons.button(Icon.effect, () -> {
                 RMMenuDialog dialog = new RMMenuDialog();
                 dialog.show();
             }).size(210f, 64f);
