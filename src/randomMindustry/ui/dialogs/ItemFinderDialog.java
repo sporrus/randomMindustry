@@ -51,7 +51,7 @@ public class ItemFinderDialog extends BaseDialog{
                     if(!(b instanceof GenericCrafter crafter)) return false;
                     ItemStack[] itemStacks = crafter.outputItems;
                     if(itemStacks == null) return false;
-                    for(ItemStack itemStack : itemStacks) if (itemStack.item.localizedName.equalsIgnoreCase(i.localizedName)) return true;
+                    for(ItemStack itemStack : itemStacks) if (itemStack.item.name.equalsIgnoreCase(i.name)) return true;
                     return true;
                 }).each(b -> {
                     t.image(b.uiIcon).size(40);
