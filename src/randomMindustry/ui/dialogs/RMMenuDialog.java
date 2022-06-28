@@ -20,12 +20,12 @@ public class RMMenuDialog extends BaseDialog{
             cont.defaults().width(220f).height(55).pad(5f);
             
             cont.button("@rm-credits", Icon.info, () -> {}).row();
-            cont.button("@rm-item-finder", Icon.search, () -> {}).row();
+            cont.button("@rm-item-finder", Icon.zoom, () -> {}).row();
         }else{
             cont.defaults().size(130f).pad(5);
             
             cont.buttonRow("@rm-credits", Icon.info, () -> {}).row();
-            cont.buttonRow("@rm-item-finder", Icon.search, () -> {}).row();
+            cont.buttonRow("@rm-item-finder", Icon.zoom, () -> {}).row();
         }
     }
 }
