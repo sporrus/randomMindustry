@@ -5,7 +5,12 @@ import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import mindustry.gen.*;
 import mindustry.type.*;
+import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
+import mindustry.world.blocks.production.*;
+import mindustry.world.consumers.*;
+
+import randomMindustry.*;
 
 import static mindustry.Vars.*;
 
@@ -42,9 +47,27 @@ public class ItemFinderDialog extends BaseDialog{
             output.table(t -> {
                 t.setBackground(Tex.button);
                 
-                t.add(i.localizedName).row();
-                
-                // add other finder stuff here
+                content.blocks().select(b -> {
+                    if(!(b instanceof GenericCrafter crafter)) return false;
+                    ItemStack[] itemStacks = crafter.outputItems;
+                    if(itemStacks == null) return false;
+                    for(ItemStack itemStack : itemStacks) if (itemStack.item.localizedName.equalsIgnoreCase(i.localizedName)) return true;
+                    return true;
+                }).each(b -> {
+                    t.image(b.uiIcon).size(40);
+                    t.image(Icon.right).size(40);
+                    for(Consume consume : b.consumers){
+                        if(consume instanceof ConsumeItems citems){
+                            ItemStack[] itemStacks = citems.items;
+                            for(ItemStack itemStack : itemStacks) t.add(new ItemDisplay(itemStack.item, itemStack.amount, false));
+                        }
+                    }
+                    t.image(Icon.right).size(40);
+                    for(ItemStack itemStack : ((GenericCrafter)block).outputItems) t.add(new ItemDisplay(itemStack.item, itemStack.amount, false));
+                    t.row();
+                    
+                    // display if drillable by "hand"
+                });
             }).row();
         });
         
