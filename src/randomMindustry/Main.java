@@ -31,6 +31,7 @@ public class Main extends Mod {
         load();
         settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
         netClient.addPacketHandler("seed", (str) -> {
+            RandomUtil.setSeed(Long.parseLong(str));
             load();
             generate();
         });
