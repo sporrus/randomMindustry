@@ -15,6 +15,8 @@ import mindustry.type.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 
+import randomMindustry.ui.dialogs.*;
+
 import java.util.*;
 
 import static mindustry.Vars.*;
@@ -26,6 +28,11 @@ public class Main extends Mod {
 
     public Main() {
         Events.on(ClientLoadEvent.class, e -> {
+            ui.paused.buttons.button(Icon.effect, () -> {
+                RMMenuDialog dialog = new RMMenuDialog();
+                dialog.show();
+            }).size(210f, 64f);
+            
             SettingsLoader.init();
             load();
             settings.put("rm-seed", Long.toString(seed));
