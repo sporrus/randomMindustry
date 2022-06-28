@@ -10,8 +10,8 @@ import mindustry.ui.dialogs.*;
 import static mindustry.Vars.*;
 
 public class ItemFinderDialog extends BaseDialog{
-    private TextField search;
-    private Table output;
+    private TextField search = new TextField();
+    private Table output = new Table();
     
     public ItemFinderDialog(){
         super("@rm-item-finder");
