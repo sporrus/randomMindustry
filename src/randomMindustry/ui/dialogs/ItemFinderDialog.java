@@ -63,7 +63,7 @@ public class ItemFinderDialog extends BaseDialog{
                         }
                     }
                     t.image(Icon.right).size(40);
-                    for(ItemStack itemStack : ((GenericCrafter)block).outputItems) t.add(new ItemDisplay(itemStack.item, itemStack.amount, false));
+                    for(ItemStack itemStack : ((GenericCrafter)b).outputItems) t.add(new ItemDisplay(itemStack.item, itemStack.amount, false));
                     t.row();
                     
                     // display if drillable by "hand"
