@@ -20,7 +20,7 @@ import mindustry.world.blocks.environment.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
-import randomMindustry.*;
+import randomMindustry.random.mappers.ResourceMapper;
 
 import static arc.Core.settings;
 import static mindustry.Vars.*;
@@ -42,6 +42,7 @@ public class ItemFinderDialog extends BaseDialog {
         cont.table(s -> {
             s.image(Icon.zoom).padRight(8);
             search = s.field(null, text -> rebuild()).growX().get();
+            // todo: uhhh @players.search??? change it
             search.setMessageText("@players.search");
         }).top().row();
 
@@ -63,23 +64,21 @@ public class ItemFinderDialog extends BaseDialog {
             table.row();
             table.table(inset -> {
                 inset.left();
-                Seq<Block> ores = content.blocks().select(o -> o instanceof OreBlock && o.itemDrop == i);
+                Seq<Block> ores = content.blocks().select(o -> o.itemDrop == i);
                 ores.each(b -> {
-                    if (b instanceof OreBlock) {
-                        TextureRegion image;
-                        if (b.itemDrop.hardness == 1) image = UnitTypes.alpha.uiIcon;
-                        else if (b.itemDrop.hardness == 2) image = Blocks.mechanicalDrill.uiIcon;
-                        else if (b.itemDrop.hardness == 3) image = Blocks.pneumaticDrill.uiIcon;
-                        else if (b.itemDrop.hardness == 4) image = Blocks.laserDrill.uiIcon;
-                        else image = Blocks.blastDrill.uiIcon;
+                    TextureRegion image;
+                    if (b.itemDrop.hardness == 1) image = UnitTypes.alpha.uiIcon;
+                    else if (b.itemDrop.hardness == 2) image = Blocks.mechanicalDrill.uiIcon;
+                    else if (b.itemDrop.hardness == 3) image = Blocks.pneumaticDrill.uiIcon;
+                    else if (b.itemDrop.hardness == 4) image = Blocks.laserDrill.uiIcon;
+                    else image = Blocks.blastDrill.uiIcon;
 
-                        inset.image(image).size(30);
-                        inset.image(Icon.right).padLeft(10).size(30);
-                        inset.image(b.fullIcon).padLeft(10).size(30);
-                        inset.image(Icon.right).padLeft(10).size(30);
-                        inset.image(i.fullIcon).padLeft(10).size(30);
-                        inset.row();
-                    }
+                    inset.image(image).size(30);
+                    inset.image(Icon.right).padLeft(10).size(30);
+                    inset.image(b.fullIcon).padLeft(10).size(30);
+                    inset.image(Icon.right).padLeft(10).size(30);
+                    inset.image(i.fullIcon).padLeft(10).size(30);
+                    inset.row();
                 });
                 Seq<Block> recipes = findRecipe(i);
                 recipes.each(b -> {
@@ -106,8 +105,6 @@ public class ItemFinderDialog extends BaseDialog {
             boolean lock = locked.contains(i);
             output.table(t -> {
                 t.button(i.localizedName, lock ? Icon.lock : new TextureRegionDrawable(i.uiIcon), itemDialog::show).color(lock ? Color.red : Color.white).growX();
-
-                // add other finder stuff here
             }).expandX().fill(0.5f, 0).row();
         });
 

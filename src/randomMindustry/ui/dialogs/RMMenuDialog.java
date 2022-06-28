@@ -23,17 +23,10 @@ public class RMMenuDialog extends BaseDialog{
 
         if(!mobile){
             cont.defaults().width(220f).height(55).pad(5f);
-            
-            cont.button("@rm-item-finder", Icon.zoom, this::itemFinder).row();
+            cont.button("@rm-item-finder", Icon.zoom, Dialogs.itemFinderDialog::show).row();
         }else{
             cont.defaults().size(130f).pad(5);
-            
-            cont.buttonRow("@rm-item-finder", Icon.zoom, this::itemFinder);
+            cont.buttonRow("@rm-item-finder", Icon.zoom, Dialogs.itemFinderDialog::show);
         }
-    }
-    
-    void itemFinder(){
-        ItemFinderDialog dialog = new ItemFinderDialog();
-        dialog.show();
     }
 }

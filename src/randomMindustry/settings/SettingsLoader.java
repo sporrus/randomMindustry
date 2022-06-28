@@ -1,4 +1,4 @@
-package randomMindustry;
+package randomMindustry.settings;
 
 import arc.scene.*;
 import arc.scene.event.*;
@@ -10,6 +10,8 @@ import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable.*;
+import randomMindustry.Main;
+import randomMindustry.random.util.RandomUtil;
 
 import static mindustry.Vars.*;
 import static arc.Core.*;
@@ -58,24 +60,20 @@ public class SettingsLoader{
             ImageButton button = table.button(Icon.refresh, () -> {
                 String seed = settings.getString("rm-seed");
                 try {
-                    Main.rand = new Rand(Long.parseLong(seed));
-                    Log.info(seed);
-                    Log.info(Main.rand.seed0);
+                    RandomUtil.setSeed(Long.parseLong(seed));
                     ui.loadfrag.show("@msg.rm-generating");
-                    Time.runTask(30f, ui.loadfrag::hide);
+                    Main.generate();
+                    ui.loadfrag.hide();
                 } catch (Exception ex) {
                     BaseDialog error = new BaseDialog("");
                     error.cont.add(new FLabel("{wave}{shake}{wind}{sick}" + bundle.get("msg.rm-seed-invalid"))).row();
                     error.cont.add(ex.getMessage()).row();
                     error.buttons.button("@ok", error::hide).size(100f, 50f);
                     error.show();
-                    return;
                 }
-                Main.generate();
             }).get();
             button.label(() -> bundle.get(title));
             table.row();
-            
             addDesc(button);
         }
     }

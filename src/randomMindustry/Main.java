@@ -4,89 +4,54 @@ import arc.*;
 import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
-import mindustry.*;
-import mindustry.content.*;
-import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
-import mindustry.ui.*;
-import mindustry.type.*;
-import mindustry.world.blocks.production.*;
-import mindustry.world.consumers.*;
 
+import mindustry.type.Item;
+import randomMindustry.random.mappers.BlockMapper;
+import randomMindustry.random.mappers.RegionMapper;
+import randomMindustry.random.mappers.ResourceMapper;
+import randomMindustry.random.util.RandomUtil;
+import randomMindustry.settings.SettingsLoader;
 import randomMindustry.ui.dialogs.*;
-
-import java.util.*;
 
 import static mindustry.Vars.*;
 import static arc.Core.*;
 
 public class Main extends Mod {
-    public static long seed;
-    public static Rand rand;
-
     public Main() {
-        Events.on(ClientLoadEvent.class, e -> {
-            ui.paused.buttons.button(Icon.effect, () -> {
-                RMMenuDialog dialog = new RMMenuDialog();
-                dialog.show();
-            }).size(210f, 64f);
-            
-            SettingsLoader.init();
-            load();
-            settings.put("rm-seed", Long.toString(seed));
-            netClient.addPacketHandler("seed", (str) -> {
-                Call.sendMessage("generating... prev seed is "+ seed);
-                seed = Long.parseLong(str);
-                rand = new Rand(seed);
-                Call.sendMessage("new seed is " + seed);
-                generate();
-                Call.sendMessage("generated!");
-            });
-        });
+        Events.on(ClientLoadEvent.class, e -> client());
+        Events.on(ServerLoadEvent.class, e -> server());
+    }
 
-        Events.on(ServerLoadEvent.class, e -> {
+    public static void client() {
+        ui.paused.buttons.button(Icon.effect, Dialogs.menuDialog::show).size(210f, 64f);
+        SettingsLoader.init();
+        load();
+        settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
+        netClient.addPacketHandler("seed", (str) -> {
             load();
-            Events.on(PlayerConnectionConfirmed.class, (playerConnectionConfirmed) -> {
-                Call.clientPacketReliable(playerConnectionConfirmed.player.con, "seed", Long.toString(seed));
-            });
-            Events.on(WorldLoadEvent.class, (worldLoadEvent) -> {
-                load();
-                Call.clientPacketReliable("seed", Long.toString(seed));
-                Call.announce("selected seed:" + seed);
-            });
+            generate();
+        });
+    }
+
+    public static void server() {
+        load();
+        Events.on(PlayerConnectionConfirmed.class, (playerConnectionConfirmed) -> {
+            Call.clientPacketReliable(playerConnectionConfirmed.player.con, "seed", Long.toString(RandomUtil.getSeed()));
+        });
+        Events.on(WorldLoadEvent.class, (worldLoadEvent) -> {
+            load();
+            Call.clientPacketReliable("seed", Long.toString(RandomUtil.getSeed()));
+            Call.infoPopup("selected seed:" + RandomUtil.getSeed(), 60, Align.left, 0, 0, 0, 0);
         });
     }
 
     public static void load() {
-        seed = new Rand().nextLong();
-        rand = new Rand(seed);
-        Log.info("seed is " + seed);
+        RandomUtil.newSeed();
+        Log.info("seed is " + RandomUtil.getSeed());
         generate();
-    }
-
-    public static <T> void shuffle(Seq<T> seq) {
-        T[] items = seq.items;
-        for (int i = seq.size - 1; i >= 0; i--) {
-            int ii = rand.random(i);
-            T temp = items[i];
-            items[i] = items[ii];
-            items[ii] = temp;
-        }
-    }
-
-    public static Seq<Planet> getRoot(UnlockableContent content) {
-        Seq<Planet> planets = new Seq<>();
-        Vars.content.planets().each((planet -> {
-            if (planet.techTree == null) return;
-            planet.techTree.each((node) -> {
-                if (node.content == content) {
-                    planets.add(planet);
-                }
-            });
-        }));
-        return planets;
     }
 
     public static void generate() {
@@ -94,7 +59,7 @@ public class Main extends Mod {
         RegionMapper.init();
         ResourceMapper.init();
         BlockMapper.init();
-        for (ItemPack pack : ResourceMapper.itemMap) {
+        for (ResourceMapper.ItemPack pack : ResourceMapper.itemMap) {
             Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
             for (Item item : pack.all) {
                 if (pack.locked.contains(item)) Log.info("[red]==LOCKED==");
@@ -108,8 +73,8 @@ public class Main extends Mod {
     @Override
     public void registerClientCommands(CommandHandler handler) {
         handler.<Player>register("seed", "sends seed and syncs", (arr, player) -> {
-            player.sendMessage("seed is " + seed);
-            Call.clientPacketReliable(player.con, "seed", Long.toString(seed));
+            player.sendMessage("seed is " + RandomUtil.getSeed());
+            Call.clientPacketReliable(player.con, "seed", Long.toString(RandomUtil.getSeed()));
         });
     }
 }

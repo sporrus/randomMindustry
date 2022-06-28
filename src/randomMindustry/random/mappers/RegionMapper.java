@@ -1,9 +1,11 @@
-package randomMindustry;
+package randomMindustry.random.mappers;
 
 import arc.struct.*;
 import arc.graphics.g2d.TextureAtlas.*;
 import arc.math.*;
 import mindustry.*;
+import randomMindustry.Main;
+import randomMindustry.random.util.RandomUtil;
 
 import static arc.Core.*;
 
@@ -18,7 +20,7 @@ public class RegionMapper{
             Seq<AtlasRegion> regionsCopy = atlas.getRegions().copy();
             
             atlas.getRegions().each(region -> {
-                AtlasRegion newRegion = regionsCopy.random(Main.rand);
+                AtlasRegion newRegion = regionsCopy.random(RandomUtil.getRand());
                 regionsCopy.remove(newRegion);
                 region.set(newRegion);
             });
