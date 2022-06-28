@@ -27,7 +27,7 @@ public class ItemFinderDialog extends BaseDialog{
             s.image(Icon.zoom).padRight(8);
             search = s.field(null, text -> rebuild()).growX().get();
             search.setMessageText("@players.search");
-        });
+        }).row();
         
         cont.pane(output);
     }
