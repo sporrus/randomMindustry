@@ -7,7 +7,7 @@ import static mindustry.Vars.*;
 
 public class RMMenuDialog extends BaseDialog{
     public RMMenuDialog(){
-        super("@dialog.rm-menu");
+        super("@rm-menu");
         shouldPause = true;
         
         shown(this::rebuild);
