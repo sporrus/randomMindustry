@@ -16,6 +16,8 @@ public class RMMenuDialog extends BaseDialog{
     }
     
     void rebuild(){
+        cont.clear();
+
         if(!mobile){
             cont.defaults().width(220f).height(55).pad(5f);
             
