@@ -59,7 +59,6 @@ public class ResourceMapper {
             b.itemDrop = item;
             unlock(item);
         });
-        Log.info(ores);
         Blocks.darksand.itemDrop = Blocks.sand.itemDrop;
         Blocks.darksand.localizedName = "Dark " + Blocks.sand.itemDrop.localizedName;
         Blocks.sand.localizedName = Blocks.sand.itemDrop.localizedName;
@@ -111,18 +110,12 @@ public class ResourceMapper {
             pack.relock();
             all = combine(true, all, pack);
         }
-        Log.info(minTier);
-        Log.info(maxTier);
-        Log.info(all);
         int itemStackCount = Math.min(RandomUtil.getRand().random(maxItemStackCount) + 1, getRange(minTier, maxTier));
         for (int i = 0; i < itemStackCount; i++) {
             Log.info(i);
             int count = RandomUtil.getRandomIntMult(Math.max(0, maxItemCount - 100), maxItemCount, itemMult);
             seq.add(new ItemStack(all.random(true), count));
         }
-        Log.info(all);
-        Log.info(seq);
-        Log.info("===");
         return seq.toArray(ItemStack.class);
     }
 
