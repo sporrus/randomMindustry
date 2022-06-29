@@ -74,6 +74,7 @@ public class BlockMapper {
             ConsumeItemFilter consumeItemFilter = new ConsumeItemFilter(selectedConsumers::contains);
             block.consume(consumeItemFilter);
         }
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
     }
 
     public static void modifyTurret(Turret block) {
