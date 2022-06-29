@@ -9,20 +9,14 @@ import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.*;
-import mindustry.world.blocks.power.ConsumeGenerator;
-import mindustry.world.blocks.power.NuclearReactor;
-import mindustry.world.blocks.power.PowerGenerator;
+import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.units.*;
-import mindustry.world.blocks.units.UnitFactory.*;
 import mindustry.world.consumers.*;
-import mindustry.world.meta.Stats;
-import randomMindustry.Main;
-import randomMindustry.random.util.RandomUtil;
-import randomMindustry.util.Util;
-import randomMindustry.util.techTrees.TechUtil;
-
-import java.util.Arrays;
+import mindustry.world.meta.*;
+import randomMindustry.random.util.*;
+import randomMindustry.util.*;
+import randomMindustry.util.techTrees.*;
 
 import static mindustry.Vars.*;
 import static arc.Core.*;
@@ -146,7 +140,7 @@ public class BlockMapper {
     public static void modifyUnitFactory(UnitFactory block){
         block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         
-        Seq<UnitPlan> plans = block.plans;
+        Seq<UnitFactory.UnitPlan> plans = block.plans;
         
         plans.each(plan -> {
             // randomize plan build time and unit?

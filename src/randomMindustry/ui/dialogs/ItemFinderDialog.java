@@ -16,11 +16,10 @@ import mindustry.type.*;
 import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
 import mindustry.world.*;
-import mindustry.world.blocks.environment.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
-import randomMindustry.random.mappers.ResourceMapper;
+import randomMindustry.random.mappers.*;
 
 import static arc.Core.settings;
 import static mindustry.Vars.*;

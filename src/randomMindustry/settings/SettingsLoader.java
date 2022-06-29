@@ -1,17 +1,14 @@
 package randomMindustry.settings;
 
-import arc.scene.*;
-import arc.scene.event.*;
 import arc.math.*;
-import arc.util.*;
 import arc.flabel.*;
 import arc.scene.ui.*;
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable.*;
-import randomMindustry.Main;
-import randomMindustry.random.util.RandomUtil;
+import randomMindustry.*;
+import randomMindustry.random.util.*;
 
 import static mindustry.Vars.*;
 import static arc.Core.*;

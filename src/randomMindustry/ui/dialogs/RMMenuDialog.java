@@ -3,8 +3,6 @@ package randomMindustry.ui.dialogs;
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
 
-import randomMindustry.ui.dialogs.*;
-
 import static mindustry.Vars.*;
 
 public class RMMenuDialog extends BaseDialog{

@@ -1,9 +1,9 @@
 package randomMindustry.util;
 
-import arc.func.Boolf;
-import arc.struct.Seq;
-import mindustry.world.Block;
-import mindustry.world.consumers.Consume;
+import arc.func.*;
+import arc.struct.*;
+import mindustry.world.*;
+import mindustry.world.consumers.*;
 
 public class Util {
     public static void removeAllConsumers(Block block) {

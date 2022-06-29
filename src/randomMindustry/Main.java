@@ -1,23 +1,20 @@
 package randomMindustry;
 
 import arc.*;
-import arc.math.*;
-import arc.struct.*;
 import arc.util.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
-
-import mindustry.type.Item;
-import randomMindustry.random.mappers.BlockMapper;
-import randomMindustry.random.mappers.RegionMapper;
-import randomMindustry.random.mappers.ResourceMapper;
-import randomMindustry.random.util.RandomUtil;
-import randomMindustry.settings.SettingsLoader;
+import mindustry.type.*;
+import randomMindustry.random.mappers.*;
+import randomMindustry.random.util.*;
+import randomMindustry.settings.*;
 import randomMindustry.ui.dialogs.*;
 
-import static mindustry.Vars.*;
-import static arc.Core.*;
+import static arc.Core.bundle;
+import static arc.Core.settings;
+import static mindustry.Vars.netClient;
+import static mindustry.Vars.ui;
 
 public class Main extends Mod {
     public Main() {

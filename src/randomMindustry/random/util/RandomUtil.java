@@ -1,11 +1,11 @@
 package randomMindustry.random.util;
 
-import arc.math.Rand;
-import arc.struct.Seq;
-import randomMindustry.Main;
+import arc.math.*;
+import arc.struct.*;
 
 import java.util.Random;
 
+// TODO: maybe make it extend Rand? seems lame to type getRand() everytime
 public class RandomUtil {
     private static final Rand rand = new Rand();
     private static long seed;

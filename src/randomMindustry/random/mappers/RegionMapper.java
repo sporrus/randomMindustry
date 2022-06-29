@@ -2,10 +2,8 @@ package randomMindustry.random.mappers;
 
 import arc.struct.*;
 import arc.graphics.g2d.TextureAtlas.*;
-import arc.math.*;
 import mindustry.*;
-import randomMindustry.Main;
-import randomMindustry.random.util.RandomUtil;
+import randomMindustry.random.util.*;
 
 import static arc.Core.*;
 

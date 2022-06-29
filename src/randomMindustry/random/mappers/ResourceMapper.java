@@ -5,11 +5,9 @@ import arc.util.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
-import mindustry.world.Block;
-import mindustry.world.blocks.environment.OreBlock;
-import randomMindustry.Main;
-import randomMindustry.random.util.RandomUtil;
-import randomMindustry.util.techTrees.TechUtil;
+import mindustry.world.*;
+import randomMindustry.random.util.*;
+import randomMindustry.util.techTrees.*;
 
 public class ResourceMapper {
     public static Seq<ItemPack> itemMap = new Seq<>();
