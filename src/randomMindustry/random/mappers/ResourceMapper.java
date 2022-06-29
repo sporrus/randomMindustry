@@ -110,7 +110,6 @@ public class ResourceMapper {
         }
         int itemStackCount = Math.min(RandomUtil.getRand().random(maxItemStackCount) + 1, getRange(minTier, maxTier));
         for (int i = 0; i < itemStackCount; i++) {
-            Log.info(i);
             int count = RandomUtil.getRandomIntMult(Math.max(0, maxItemCount - 100), maxItemCount, itemMult);
             seq.add(new ItemStack(all.random(true), count));
         }
