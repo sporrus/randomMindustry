@@ -4,7 +4,7 @@ author: gorodmi & Mythril
 main: randomMindustry.Main
 subtitle: Version: 0.1-testing
 description: Randomizes almost everything!
-version: 0.1-testing
+version: v1.0.0
 minGameVersion: 136
 java: true
 repo: gorodmi/randomMindustry
