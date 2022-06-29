@@ -2,7 +2,7 @@ displayName: Random Mindustry
 name: random-mindustry
 author: gorodmi & Mythril
 main: randomMindustry.Main
-subtitle: Version: 0.1-testing
+subtitle: Version: v1.0.0
 description: Randomizes almost everything!
 version: v1.0.0
 minGameVersion: 136
