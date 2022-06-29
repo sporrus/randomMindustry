@@ -25,7 +25,6 @@ public class ResourceMapper {
             item.charge = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.cost = RandomUtil.getRand().random(100) / 100f;
         }));
-        Blocks
         ItemPack all = new ItemPack("all", 0, 0, items.toArray(Item.class));
         Log.info(items.size);
 

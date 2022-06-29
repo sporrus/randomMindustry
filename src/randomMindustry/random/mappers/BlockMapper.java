@@ -9,6 +9,9 @@ import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.*;
+import mindustry.world.blocks.power.ConsumeGenerator;
+import mindustry.world.blocks.power.NuclearReactor;
+import mindustry.world.blocks.power.PowerGenerator;
 import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.units.*;
 import mindustry.world.blocks.units.UnitFactory.*;
@@ -50,11 +53,30 @@ public class BlockMapper {
             modifyUnitFactory(ufactory);
         } else if (block instanceof Reconstructor recons) {
             modifyReconstructor(recons);
+        } else if (block instanceof PowerGenerator generator) {
+            modifyGenerator(generator);
         } else {
             modifyBlock(block);
         }
         
         block.init();
+    }
+
+    public static void modifyGenerator(PowerGenerator block) {
+        if (block instanceof ConsumeGenerator generator) {
+            Util.removeAllConsumers(block);
+            Seq<Consume> consumes = new Seq<>(new Consume[]{new ConsumeItemExplosive(), new ConsumeItemCharged(), new ConsumeItemFlammable(), new ConsumeItemRadioactive()});
+            Seq<Liquid> liquids = content.liquids().copy();
+            if (RandomUtil.getRand().chance(0.25)) {
+                block.consumeLiquid(liquids.random(RandomUtil.getRand()), RandomUtil.getRand().random(5f));
+            }
+            int consumers = RandomUtil.getRand().random(1,3);
+            for (int i = 0; i < consumers; i++) {
+                Consume consume = consumes.random();
+                block.consume(consume);
+                consumes.remove(consume);
+            }
+        }
     }
 
     public static void modifyTurret(Turret block) {
