@@ -63,19 +63,22 @@ public class BlockMapper {
     }
 
     public static void modifyGenerator(PowerGenerator block) {
-        if (block instanceof ConsumeGenerator generator) {
+        if (block instanceof ConsumeGenerator) {
             Util.removeAllConsumers(block);
-            Seq<Consume> consumes = new Seq<>(new Consume[]{new ConsumeItemExplosive(), new ConsumeItemCharged(), new ConsumeItemFlammable(), new ConsumeItemRadioactive()});
-            Seq<Liquid> liquids = content.liquids().copy();
+            Seq<Item> consumes = content.items().select((l) -> TechUtil.getRoot(l).contains(Planets.serpulo));
+            Seq<Liquid> liquids = content.liquids().select((l) -> TechUtil.getRoot(l).contains(Planets.serpulo));
             if (RandomUtil.getRand().chance(0.25)) {
-                block.consumeLiquid(liquids.random(RandomUtil.getRand()), RandomUtil.getRand().random(5f));
+                block.consumeLiquid(liquids.random(RandomUtil.getRand()), RandomUtil.getRand().random(1f));
             }
+            Seq<Item> selectedConsumers = new Seq<>();
             int consumers = RandomUtil.getRand().random(1,3);
             for (int i = 0; i < consumers; i++) {
-                Consume consume = consumes.random();
-                block.consume(consume);
+                Item consume = consumes.random();
+                selectedConsumers.add(consume);
                 consumes.remove(consume);
             }
+            ConsumeItemFilter consumeItemFilter = new ConsumeItemFilter(selectedConsumers::contains);
+            block.consume(consumeItemFilter);
         }
     }
 
