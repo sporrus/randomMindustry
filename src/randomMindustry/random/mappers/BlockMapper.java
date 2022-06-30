@@ -107,8 +107,8 @@ public class BlockMapper {
             turret.consumePower(RandomUtil.getRand().random(20000) / 1000f);
             turret.shootType = content.bullets().random(RandomUtil.getRand());
         }
-        block.setStats();
         block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5,(int) Math.floor(block.health / 2d), 5, true);
+        block.setStats();
     }
 
     public static void modifyCrafter(GenericCrafter block) {
