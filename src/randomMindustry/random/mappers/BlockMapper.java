@@ -96,12 +96,12 @@ public class BlockMapper {
                 break;
             case 2:
                 block.shoot = new ShootBarrel(){{
-                    Seq<Float> barrelSeq = new Seq<>();
+                    float[] barrelArray = {};
                     int barrelAmount = RandomUtil.getRand().random(0, 10);
                     for(int i = 0; i < barrelAmount; i++){
-                        barrelSeq.addAll(RandomUtil.getRand().random(-10f, 10f), RandomUtil.getRand().random(-10f, 10f), RandomUtil.getRand().random(-10f, 10f));
+                        for(int j = 0; j < 3; j++) barrelArray.push(RandomUtil.getRand().random(-10f, 10f));
                     }
-                    barrels = barrelSeq.toArray();
+                    barrels = barrelArray;
                 }};
                 break;
             case 3:
