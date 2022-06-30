@@ -23,6 +23,15 @@ public class RegionMapper{
                 region.set(newRegion);
             });
         }
+
+        if(settings.getBool("rmchaos-region-skullify", false)){
+            atlas.getRegions().each(region -> {
+                AtlasRegion newRegion = atlas.getRegionMap().get("random-mindustry-skull");
+                newRegion.width = region.width;
+                newRegion.height = region.height;
+                region.set(newRegion);
+            });
+        }
         
         /*if(settings.getBool("rmchaos-region-randsize", false)){
             atlas.getRegions().each(region -> {
