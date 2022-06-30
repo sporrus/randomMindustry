@@ -82,7 +82,7 @@ public class BlockMapper {
     public static void modifyTurret(Turret block) {
         block.shootSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
         block.loopSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
-        block.reload = RandomUtil.getRand().random(300f);
+        block.reload = RandomUtil.getRand().random(100f);
         
         int pattern = RandomUtil.getRand().random(0, 5);
         switch(pattern){
@@ -90,8 +90,8 @@ public class BlockMapper {
                 block.shoot = new ShootPattern();
                 break;
             case 1:
-                block.shoot = new ShootAlternate(RandomUtil.getRand().random(0f, 15f)){{
-                    barrels = RandomUtil.getRand().random(0, 5);
+                block.shoot = new ShootAlternate(RandomUtil.getRand().random(1f, 15f)){{
+                    barrels = RandomUtil.getRand().random(1, 5);
                 }};
                 break;
             case 2:
@@ -107,22 +107,22 @@ public class BlockMapper {
                 break;
             case 3:
                 block.shoot = new ShootHelix(){{
-                    scl = RandomUtil.getRand().random(0f, 20f);
-                    mag = RandomUtil.getRand().random(0f, 10f);
+                    scl = RandomUtil.getRand().random(1f, 20f);
+                    mag = RandomUtil.getRand().random(1f, 10f);
                 }};
                 break;
             case 4:
-                block.shoot = new ShootSine(RandomUtil.getRand().random(0f, 20f), RandomUtil.getRand().random(0f, 10f));
+                block.shoot = new ShootSine(RandomUtil.getRand().random(1f, 20f), RandomUtil.getRand().random(1f, 10f));
                 break;
             case 5:
                 block.shoot = new ShootSpread(){{
-                    spread = RandomUtil.getRand().random(0f, 15f);
+                    spread = RandomUtil.getRand().random(1f, 15f);
                 }};
                 break;
         }
-        block.shoot.shots = RandomUtil.getRand().random(0, 10);
-        block.shoot.shotDelay = RandomUtil.getRand().random(0, 300);
-        block.shoot.firstShotDelay = RandomUtil.getRand().random(0, 300);
+        block.shoot.shots = RandomUtil.getRand().random(1, 10);
+        block.shoot.shotDelay = RandomUtil.getRand().random(1f, 60f);
+        block.shoot.firstShotDelay = RandomUtil.getRand().random(1f, 60f);
         
         if (block instanceof ItemTurret turret) {
             Seq<Object> ammo = new Seq<>();
