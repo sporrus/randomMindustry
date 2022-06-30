@@ -14,6 +14,8 @@ import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.units.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
+import mindustry.entities.pattern.*;
+
 import randomMindustry.random.util.*;
 import randomMindustry.util.*;
 import randomMindustry.util.techTrees.*;
@@ -80,7 +82,48 @@ public class BlockMapper {
     public static void modifyTurret(Turret block) {
         block.shootSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
         block.loopSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
-        block.reload = RandomUtil.getRand().random(300f);
+        block.reload = RandomUtil.getRand().random(100f);
+        
+        int pattern = RandomUtil.getRand().random(0, 5);
+        switch(pattern){
+            case 0:
+                block.shoot = new ShootPattern();
+                break;
+            case 1:
+                block.shoot = new ShootAlternate(RandomUtil.getRand().random(1f, 15f)){{
+                    barrels = RandomUtil.getRand().random(1, 5);
+                }};
+                break;
+            case 2:
+                block.shoot = new ShootBarrel(){{
+                    int barrelAmount = RandomUtil.getRand().random(0, 10);
+                    float[] barrelArray = new float[barrelAmount];
+                    for(int i = 0; i < barrelAmount; i++){
+                        for(int j = 0; j < 3; j++)
+                            barrelArray[i] = RandomUtil.getRand().random(-10f, 10f);
+                    }
+                    barrels = barrelArray;
+                }};
+                break;
+            case 3:
+                block.shoot = new ShootHelix(){{
+                    scl = RandomUtil.getRand().random(1f, 20f);
+                    mag = RandomUtil.getRand().random(1f, 10f);
+                }};
+                break;
+            case 4:
+                block.shoot = new ShootSine(RandomUtil.getRand().random(1f, 20f), RandomUtil.getRand().random(1f, 10f));
+                break;
+            case 5:
+                block.shoot = new ShootSpread(){{
+                    spread = RandomUtil.getRand().random(1f, 15f);
+                }};
+                break;
+        }
+        block.shoot.shots = RandomUtil.getRand().random(1, 10);
+        block.shoot.shotDelay = RandomUtil.getRand().random(1f, 60f);
+        block.shoot.firstShotDelay = RandomUtil.getRand().random(1f, 60f);
+        
         if (block instanceof ItemTurret turret) {
             Seq<Object> ammo = new Seq<>();
             Seq<Item> items = content.items().select((item -> TechUtil.getRoot(item).contains(Planets.serpulo)));
