@@ -96,10 +96,11 @@ public class BlockMapper {
                 break;
             case 2:
                 block.shoot = new ShootBarrel(){{
-                    float[] barrelArray = {};
                     int barrelAmount = RandomUtil.getRand().random(0, 10);
+                    float[] barrelArray = new float[barrelAmount];
                     for(int i = 0; i < barrelAmount; i++){
-                        for(int j = 0; j < 3; j++) barrelArray.push(RandomUtil.getRand().random(-10f, 10f));
+                        for(int j = 0; j < 3; j++)
+                            barrelArray[i] = RandomUtil.getRand().random(-10f, 10f));
                     }
                     barrels = barrelArray;
                 }};
