@@ -100,7 +100,7 @@ public class BlockMapper {
                     float[] barrelArray = new float[barrelAmount];
                     for(int i = 0; i < barrelAmount; i++){
                         for(int j = 0; j < 3; j++)
-                            barrelArray[i] = RandomUtil.getRand().random(-10f, 10f));
+                            barrelArray[i] = RandomUtil.getRand().random(-10f, 10f);
                     }
                     barrels = barrelArray;
                 }};
