@@ -80,6 +80,7 @@ public class BlockMapper {
     public static void modifyTurret(Turret block) {
         block.shootSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
         block.loopSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
+        block.reload = RandomUtil.getRand().random(300f);
         block.stats = new Stats();
         block.stats.intialized = true;
         if (block instanceof ItemTurret turret) {
