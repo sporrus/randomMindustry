@@ -33,6 +33,8 @@ public class BlockMapper {
         cats.addAll(Category.all);
         if (settings.getBool("rmchaos-category-rand", false)) block.category = cats.random(RandomUtil.getRand());
         if (!TechUtil.getRoot(block).contains(Planets.serpulo)) return;
+        block.stats = new Stats();
+        block.stats.intialized = true;
         if (block instanceof GenericCrafter gencrafter) {
             modifyCrafter(gencrafter);
         } else if (block instanceof Drill drill) {
@@ -52,8 +54,7 @@ public class BlockMapper {
         } else {
             modifyBlock(block);
         }
-        
-        block.init();
+        block.setStats();
     }
 
     public static void modifyGenerator(PowerGenerator block) {
@@ -81,8 +82,6 @@ public class BlockMapper {
         block.shootSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
         block.loopSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
         block.reload = RandomUtil.getRand().random(300f);
-        block.stats = new Stats();
-        block.stats.intialized = true;
         if (block instanceof ItemTurret turret) {
             Seq<Object> ammo = new Seq<>();
             Seq<Item> items = content.items().select((item -> TechUtil.getRoot(item).contains(Planets.serpulo)));
@@ -108,7 +107,6 @@ public class BlockMapper {
             turret.shootType = content.bullets().random(RandomUtil.getRand());
         }
         block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5,(int) Math.floor(block.health / 2d), 5, true);
-        block.setStats();
     }
 
     public static void modifyCrafter(GenericCrafter block) {

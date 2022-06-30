@@ -6,6 +6,7 @@ import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
+import mindustry.world.meta.Stats;
 import randomMindustry.random.util.*;
 import randomMindustry.util.techTrees.*;
 
@@ -17,11 +18,14 @@ public class ResourceMapper {
         Seq<Item> items = Vars.content.items().select((item) -> TechUtil.getRoot(item).contains(Planets.serpulo));
         RandomUtil.shuffle(items);
         items.each((item -> {
+            item.stats = new Stats();
+            item.stats.intialized = true;
             item.explosiveness = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.flammability = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.radioactivity = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.charge = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.cost = RandomUtil.getRand().random(100) / 100f;
+            item.setStats();
         }));
         ItemPack all = new ItemPack("all", 0, 0, items.toArray(Item.class));
         Log.info(items.size);
