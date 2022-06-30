@@ -1,6 +1,7 @@
 package randomMindustry.util;
 
 import arc.func.*;
+import arc.graphics.g2d.Lines;
 import arc.graphics.g2d.TextureRegion;
 import arc.struct.*;
 import mindustry.content.Blocks;
@@ -8,8 +9,11 @@ import mindustry.content.UnitTypes;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.world.*;
+import mindustry.world.blocks.defense.turrets.ReloadTurret;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.consumers.*;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.Stats;
 
 import static mindustry.Vars.content;
 
@@ -61,5 +65,25 @@ public class Util {
             }
             return false;
         }));
+    }
+
+    public static void resetStats(Block block) {
+        block.stats = new Stats();
+        block.stats.intialized = false;
+    }
+
+    public static void updateStats(Block block) {
+        for (Consume consume : block.consumers) {
+            consume.display(block.stats);
+        }
+        ConsumeLiquidBase coolant = null;
+        if (block instanceof ReloadTurret) {
+            coolant = ((ReloadTurret) block).coolant;
+            ((ReloadTurret) block).coolant = null;
+        }
+        block.init();
+        if (block instanceof ReloadTurret) {
+            ((ReloadTurret) block).coolant = coolant;
+        }
     }
 }

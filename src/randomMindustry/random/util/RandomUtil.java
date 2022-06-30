@@ -21,13 +21,25 @@ public class RandomUtil {
     }
 
     public static int getRandomIntMult(int max, int mult) {
-        int num = rand.nextInt(max);
+        int num = rand.random(max);
+        num -= num % mult;
+        return num + mult;
+    }
+
+    public static float getRandomFloatMult(float max, float mult) {
+        float num = rand.random(max);
+        num -= num % mult;
+        return num + mult;
+    }
+
+    public static float getRandomFloatMult(float min, float max, float mult) {
+        float num = rand.random(max - min) + min;
         num -= num % mult;
         return num + mult;
     }
 
     public static int getRandomIntMult(int min, int max, int mult) {
-        int num = rand.nextInt(max - min) + min;
+        int num = rand.random(max - min) + min;
         num -= num % mult;
         return num + mult;
     }

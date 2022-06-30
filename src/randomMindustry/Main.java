@@ -1,6 +1,9 @@
 package randomMindustry;
 
 import arc.*;
+import arc.graphics.Color;
+import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.Lines;
 import arc.util.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;

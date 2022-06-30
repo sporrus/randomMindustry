@@ -33,8 +33,7 @@ public class BlockMapper {
         cats.addAll(Category.all);
         if (settings.getBool("rmchaos-category-rand", false)) block.category = cats.random(RandomUtil.getRand());
         if (!TechUtil.getRoot(block).contains(Planets.serpulo)) return;
-        block.stats = new Stats();
-        block.stats.intialized = true;
+        Util.resetStats(block);
         if (block instanceof GenericCrafter gencrafter) {
             modifyCrafter(gencrafter);
         } else if (block instanceof Drill drill) {
@@ -54,7 +53,7 @@ public class BlockMapper {
         } else {
             modifyBlock(block);
         }
-        block.setStats();
+        Util.updateStats(block);
     }
 
     public static void modifyGenerator(PowerGenerator block) {
