@@ -44,13 +44,15 @@ public class BulletMapper{
             bullet.knockback = RandomUtil.getRand().random(-10f, 10f);
             bullet.hitShake = RandomUtil.getRand().random(-10f, 10f);
             bullet.despawnShake = RandomUtil.getRand().random(-10f, 10f);
-            
+
             // size and rotation
-            bullet.width = RandomUtil.getRand().random(bullet.width + (bullet.width / 2f));
-            bullet.height = RandomUtil.getRand().random(bullet.height + (bullet.height / 2f));
-            bullet.shrinkX = RandomUtil.getRand().random(-1f, 1f);
-            bullet.shrinkY = RandomUtil.getRand().random(-1f, 1f);
-            bullet.spin = RandomUtil.getRand().random(45f);
+            if (bullet instanceof BasicBulletType basicBulletType) {
+                basicBulletType.width = RandomUtil.getRand().random(basicBulletType.width + (basicBulletType.width / 2f));
+                basicBulletType.height = RandomUtil.getRand().random(basicBulletType.height + (basicBulletType.height / 2f));
+                basicBulletType.shrinkX = RandomUtil.getRand().random(-1f, 1f);
+                basicBulletType.shrinkY = RandomUtil.getRand().random(-1f, 1f);
+                basicBulletType.spin = RandomUtil.getRand().random(45f);
+            }
             
             // status effect 
             bullet.status = content.statusEffects().random(RandomUtil.getRand());
