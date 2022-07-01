@@ -1,15 +1,13 @@
 package randomMindustry;
 
 import arc.*;
-import arc.graphics.Color;
-import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
 import arc.util.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.type.*;
 import randomMindustry.random.mappers.*;
+import randomMindustry.random.mappers.blocks.BlockMapper;
 import randomMindustry.random.util.*;
 import randomMindustry.settings.*;
 import randomMindustry.ui.dialogs.*;

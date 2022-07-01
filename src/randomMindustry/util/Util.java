@@ -32,7 +32,6 @@ public class Util {
         save.removeAll(remove);
         block.consumers = new Consume[0];
         for (Consume consume : remove) block.removeConsumer(consume);
-        for (Consume consume : save) block.consume(consume);
     }
 
     public static Seq<Block> findRecipeOut(Item item) {
