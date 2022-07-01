@@ -24,49 +24,49 @@ public class RandomUtil {
     public static int getRandomIntMultClient(int max, int mult) {
         int num = clientRand.random(max);
         num -= num % mult;
-        return num + mult;
+        return num;
     }
 
     public static float getRandomFloatMultClient(float max, float mult) {
         float num = clientRand.random(max);
         num -= num % mult;
-        return num + mult;
+        return num;
     }
 
     public static float getRandomFloatMultClient(float min, float max, float mult) {
         float num = clientRand.random(max - min) + min;
         num -= num % mult;
-        return num + mult;
+        return num;
     }
 
     public static int getRandomIntMultClient(int min, int max, int mult) {
         int num = clientRand.random(max - min) + min;
         num -= num % mult;
-        return num + mult;
+        return num;
     }
 
     public static int getRandomIntMult(int max, int mult) {
         int num = rand.random(max);
         num -= num % mult;
-        return num + mult;
+        return num;
     }
 
     public static float getRandomFloatMult(float max, float mult) {
         float num = rand.random(max);
         num -= num % mult;
-        return num + mult;
+        return num;
     }
 
     public static float getRandomFloatMult(float min, float max, float mult) {
         float num = rand.random(max - min) + min;
         num -= num % mult;
-        return num + mult;
+        return num;
     }
 
     public static int getRandomIntMult(int min, int max, int mult) {
         int num = rand.random(max - min) + min;
         num -= num % mult;
-        return num + mult;
+        return num;
     }
 
     public static void newSeed() {

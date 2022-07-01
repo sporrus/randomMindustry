@@ -4,7 +4,6 @@ import arc.struct.*;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
-import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
@@ -17,8 +16,8 @@ import static mindustry.Vars.*;
 
 public class TurretMapper {
     public static void map(Turret block) {
-        block.shootSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
-        block.loopSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
+        block.shootSound = Util.generateSound();
+        block.loopSound = Util.generateSound();
         block.reload = RandomUtil.getRand().random(100f);
 
         int pattern = RandomUtil.getRand().random(0, 5);

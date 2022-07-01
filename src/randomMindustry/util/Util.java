@@ -1,15 +1,18 @@
 package randomMindustry.util;
 
+import arc.audio.Sound;
 import arc.func.*;
 import arc.graphics.g2d.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.content.*;
+import mindustry.gen.Sounds;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
+import randomMindustry.random.util.RandomUtil;
 
 import static mindustry.Vars.content;
 
@@ -74,5 +77,11 @@ public class Util {
         block.checkStats();
         Log.info(block);
         Log.info(block.consumers.length);
+    }
+
+    public static Sound generateSound() {
+        int id = RandomUtil.getRand().random(0, 70);
+        if (id == Sounds.getSoundId(Sounds.swish)) id = 71;
+        return Sounds.getSound(id);
     }
 }
