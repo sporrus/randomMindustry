@@ -122,7 +122,6 @@ public class BlockMapper {
         }
         block.shoot.shots = RandomUtil.getRand().random(1, 10);
         block.shoot.shotDelay = RandomUtil.getRand().random(1f, 60f);
-        block.shoot.firstShotDelay = RandomUtil.getRand().random(1f, 60f);
         
         if (block instanceof ItemTurret turret) {
             Seq<Object> ammo = new Seq<>();
@@ -144,7 +143,16 @@ public class BlockMapper {
             Seq<Consume> nonOptionalConsumers = new Seq<>(block.nonOptionalConsumers);
             Util.removeConsumers(block, nonOptionalConsumers::contains);
             turret.ammo(ammo.toArray());
-        } else if (block instanceof LaserTurret turret) {
+        } else if (block instanceof ContinuousLiquidTurret turret) {
+            Seq<Object> ammo = new Seq<>();
+            Seq<Liquid> liquids = content.liquids().select((liquid -> TechUtil.getRoot(liquid).contains(Planets.serpulo)));
+            Seq<BulletType> bullets = content.bullets();
+            int count = RandomUtil.getRand().random(1, 5);
+            for (int i = 0; i < count; i++) ammo.add(liquids.random(RandomUtil.getRand()), bullets.random(RandomUtil.getRand()));
+            Seq<Consume> nonOptionalConsumers = new Seq<>(block.nonOptionalConsumers);
+            Util.removeConsumers(block, nonOptionalConsumers::contains);
+            turret.ammo(ammo.toArray());
+        } else if (block instanceof PowerTurret turret) {
             turret.consumePower(RandomUtil.getRand().random(20000) / 1000f);
             turret.shootType = content.bullets().random(RandomUtil.getRand());
         }
