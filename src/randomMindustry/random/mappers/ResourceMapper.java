@@ -6,7 +6,7 @@ import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
-import mindustry.world.meta.Stats;
+import mindustry.world.meta.*;
 import randomMindustry.random.util.*;
 import randomMindustry.util.techTrees.*;
 

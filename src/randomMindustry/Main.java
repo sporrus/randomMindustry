@@ -7,15 +7,13 @@ import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.type.*;
 import randomMindustry.random.mappers.*;
-import randomMindustry.random.mappers.blocks.BlockMapper;
+import randomMindustry.random.mappers.blocks.*;
 import randomMindustry.random.util.*;
 import randomMindustry.settings.*;
 import randomMindustry.ui.dialogs.*;
 
-import static arc.Core.bundle;
-import static arc.Core.settings;
-import static mindustry.Vars.netClient;
-import static mindustry.Vars.ui;
+import static arc.Core.*;
+import static mindustry.Vars.*;
 
 public class Main extends Mod {
     public Main() {

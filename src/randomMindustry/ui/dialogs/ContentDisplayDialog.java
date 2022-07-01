@@ -1,38 +1,18 @@
 package randomMindustry.ui.dialogs;
 
-import arc.Core;
-import arc.graphics.g2d.TextureRegion;
-import arc.scene.ui.ScrollPane;
-import arc.scene.ui.layout.Table;
-import arc.struct.OrderedMap;
-import arc.struct.Seq;
-import arc.util.Scaling;
-import mindustry.Vars;
-import mindustry.content.Blocks;
-import mindustry.content.UnitTypes;
-import mindustry.ctype.UnlockableContent;
-import mindustry.gen.Icon;
-import mindustry.gen.Iconc;
-import mindustry.graphics.Pal;
-import mindustry.type.Item;
-import mindustry.type.ItemStack;
-import mindustry.type.LiquidStack;
-import mindustry.ui.ItemDisplay;
-import mindustry.ui.LiquidDisplay;
-import mindustry.ui.dialogs.BaseDialog;
-import mindustry.world.Block;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.consumers.Consume;
-import mindustry.world.consumers.ConsumeItems;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatCat;
-import mindustry.world.meta.StatValue;
-import mindustry.world.meta.Stats;
-import randomMindustry.util.Util;
+import arc.*;
+import arc.scene.ui.*;
+import arc.scene.ui.layout.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.ctype.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.ui.dialogs.*;
+import mindustry.world.meta.*;
 
-import static arc.Core.settings;
-import static mindustry.Vars.content;
-import static mindustry.Vars.iconXLarge;
+import static arc.Core.*;
+import static mindustry.Vars.*;
 
 public abstract class ContentDisplayDialog extends BaseDialog {
     public Table contentTable;

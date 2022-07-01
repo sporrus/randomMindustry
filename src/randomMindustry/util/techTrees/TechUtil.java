@@ -1,9 +1,9 @@
 package randomMindustry.util.techTrees;
 
-import arc.struct.Seq;
-import mindustry.Vars;
-import mindustry.ctype.UnlockableContent;
-import mindustry.type.Planet;
+import arc.struct.*;
+import mindustry.*;
+import mindustry.ctype.*;
+import mindustry.type.*;
 
 public class TechUtil {
     public static Seq<Planet> getRoot(UnlockableContent content) {

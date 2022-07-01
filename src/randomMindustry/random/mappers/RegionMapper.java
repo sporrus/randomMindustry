@@ -18,8 +18,10 @@ public class RegionMapper{
             Seq<AtlasRegion> regionsCopy = atlas.getRegions().copy();
             
             atlas.getRegions().each(region -> {
-                AtlasRegion newRegion = regionsCopy.random(RandomUtil.getRand());
+                AtlasRegion newRegion = regionsCopy.random(RandomUtil.getClientRand());
                 regionsCopy.remove(newRegion);
+                newRegion.width = region.width;
+                newRegion.height = region.height;
                 region.set(newRegion);
             });
         }
@@ -41,12 +43,5 @@ public class RegionMapper{
                 region.set(newRegion);
             });
         }
-        
-        /*if(settings.getBool("rmchaos-region-randsize", false)){
-            atlas.getRegions().each(region -> {
-                region.width = Mathf.random(0, region.width);
-                region.height = Mathf.random(0, region.height);
-            });
-        }*/
     }
 }

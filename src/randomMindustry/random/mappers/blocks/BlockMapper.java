@@ -2,8 +2,6 @@ package randomMindustry.random.mappers.blocks;
 
 import arc.struct.*;
 import mindustry.content.*;
-import mindustry.entities.bullet.*;
-import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
@@ -13,9 +11,8 @@ import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.units.*;
 import mindustry.world.consumers.*;
-import mindustry.entities.pattern.*;
 
-import randomMindustry.random.mappers.ResourceMapper;
+import randomMindustry.random.mappers.*;
 import randomMindustry.random.util.*;
 import randomMindustry.util.*;
 import randomMindustry.util.techTrees.*;

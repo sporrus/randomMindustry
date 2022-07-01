@@ -1,27 +1,15 @@
 package randomMindustry.ui.dialogs;
 
-import arc.*;
 import arc.graphics.*;
-import arc.graphics.g2d.*;
 import arc.scene.style.*;
 import arc.struct.*;
 import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
-import arc.util.*;
-import mindustry.content.*;
-import mindustry.ctype.*;
 import mindustry.gen.*;
-import mindustry.graphics.*;
 import mindustry.type.*;
-import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
-import mindustry.world.*;
-import mindustry.world.blocks.production.*;
-import mindustry.world.consumers.*;
-import mindustry.world.meta.*;
 import randomMindustry.random.mappers.*;
 
-import static arc.Core.settings;
 import static mindustry.Vars.*;
 
 public class ItemFinderDialog extends BaseDialog {

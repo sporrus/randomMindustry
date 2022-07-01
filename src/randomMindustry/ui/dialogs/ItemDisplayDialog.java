@@ -1,28 +1,17 @@
 package randomMindustry.ui.dialogs;
 
-import arc.func.Cons;
-import arc.graphics.Color;
-import arc.graphics.g2d.TextureRegion;
-import arc.struct.Seq;
-import arc.util.Log;
-import mindustry.Vars;
-import mindustry.content.Blocks;
-import mindustry.content.UnitTypes;
-import mindustry.ctype.UnlockableContent;
-import mindustry.gen.Icon;
-import mindustry.graphics.Pal;
-import mindustry.type.Item;
-import mindustry.type.ItemStack;
-import mindustry.type.LiquidStack;
-import mindustry.ui.ItemDisplay;
-import mindustry.ui.LiquidDisplay;
-import mindustry.world.Block;
-import mindustry.world.blocks.environment.OreBlock;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.consumers.Consume;
-import mindustry.world.consumers.ConsumeItems;
-import mindustry.world.meta.BuildVisibility;
-import randomMindustry.util.Util;
+import arc.graphics.*;
+import arc.struct.*;
+import mindustry.ctype.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.ui.*;
+import mindustry.world.*;
+import mindustry.world.blocks.production.*;
+import mindustry.world.consumers.*;
+import mindustry.world.meta.*;
+import randomMindustry.util.*;
 
 public class ItemDisplayDialog extends ContentDisplayDialog {
     @Override

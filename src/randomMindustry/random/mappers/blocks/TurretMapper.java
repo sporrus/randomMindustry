@@ -1,22 +1,19 @@
 package randomMindustry.random.mappers.blocks;
 
-import arc.struct.Seq;
-import mindustry.content.Planets;
-import mindustry.entities.bullet.BulletType;
+import arc.struct.*;
+import mindustry.content.*;
+import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
-import mindustry.gen.Sounds;
-import mindustry.type.Item;
-import mindustry.type.Liquid;
-import mindustry.world.Block;
+import mindustry.gen.*;
+import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
-import mindustry.world.consumers.Consume;
-import mindustry.world.consumers.ConsumeCoolant;
-import randomMindustry.random.mappers.ResourceMapper;
-import randomMindustry.random.util.RandomUtil;
-import randomMindustry.util.Util;
-import randomMindustry.util.techTrees.TechUtil;
+import mindustry.world.consumers.*;
+import randomMindustry.random.mappers.*;
+import randomMindustry.random.util.*;
+import randomMindustry.util.*;
+import randomMindustry.util.techTrees.*;
 
-import static mindustry.Vars.content;
+import static mindustry.Vars.*;
 
 public class TurretMapper {
     public static void map(Turret block) {
