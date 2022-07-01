@@ -27,6 +27,7 @@ public class SettingsLoader{
             c.checkPref("rmchaos-region-swap", false);
              c.checkPref("rmchaos-region-skullify", false);
              c.checkPref("rmchaos-router", false);
+             c.checkPref("rmchaos-bundle-swap", false);
             c.checkPref("rmchaos-category-rand", false);
         });
     }
