@@ -101,7 +101,7 @@ public class BlockMapper {
                     for(int i = 0; i < barrelArray.length; i+=3){
                         barrelArray[i] = RandomUtil.getRand().random(-10f, 10f);
                         barrelArray[i+1] = RandomUtil.getRand().random(-10f, 10f);
-                        barrelArray[i+2] = RandomUtil.getRand().random(-40f, 40f);
+                        barrelArray[i+2] = RandomUtil.getRand().random(0, 360f);
                     }
                     barrels = barrelArray;
                 }};
