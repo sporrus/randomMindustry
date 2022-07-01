@@ -2,6 +2,7 @@ package randomMindustry;
 
 import arc.*;
 import arc.util.*;
+import mindustry.Vars;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
@@ -51,7 +52,7 @@ public class Main extends Mod {
     }
 
     public static void generate() {
-        ui.loadfrag.show("@msg.rm-generating");
+        if (!Vars.headless) ui.loadfrag.show("@msg.rm-generating");
         Log.info(bundle.get("msg.rm-log-generating"));
         RegionMapper.init();
         BundleMapper.init();
@@ -67,7 +68,7 @@ public class Main extends Mod {
             }
         }
         Log.info(bundle.get("msg.rm-log-generated"));
-        ui.loadfrag.hide();
+        if (!Vars.headless) ui.loadfrag.hide();
     }
 
     @Override
