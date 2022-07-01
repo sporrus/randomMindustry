@@ -78,7 +78,7 @@ public class BlockMapper {
     public static void modifyCrafter(GenericCrafter block) {
         Item item = ResourceMapper.getGenericCrafterOut();
         if (item == null) item = ResourceMapper.getRandomItem(false);
-        int count = RandomUtil.getRand().random(10);
+        int count = RandomUtil.getRand().random(1,10);
         block.outputItems = new ItemStack[]{new ItemStack(item, count)};
         Util.removeAllConsumers(block);
         int tier = ResourceMapper.getTierOfItem(item);
