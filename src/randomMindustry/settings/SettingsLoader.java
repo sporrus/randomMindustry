@@ -59,9 +59,7 @@ public class SettingsLoader{
                 String seed = settings.getString("rm-seed");
                 try {
                     RandomUtil.setSeed(Long.parseLong(seed));
-                    ui.loadfrag.show("@msg.rm-generating");
                     Main.generate();
-                    ui.loadfrag.hide();
                 } catch (Exception ex) {
                     BaseDialog error = new BaseDialog("");
                     error.cont.add(new FLabel("{wave}{shake}{wind}{sick}" + bundle.get("msg.rm-seed-invalid"))).row();
