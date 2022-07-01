@@ -133,7 +133,7 @@ public class BlockMapper {
                 ammo.add(items.random(RandomUtil.getRand()), bullets.random(RandomUtil.getRand()));
             }
             Seq<Consume> nonOptionalConsumers = new Seq<>(block.nonOptionalConsumers);
-            Util.removeAllConsumers(block);
+            Util.removeConsumers(block, nonOptionalConsumers::contains);
             turret.ammo(ammo.toArray());
         } else if (block instanceof LiquidTurret turret) {
             Seq<Object> ammo = new Seq<>();
