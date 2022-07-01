@@ -56,10 +56,10 @@ public class Main extends Mod {
 
     public static void generate() {
         Log.info(bundle.get("msg.rm-log-generating"));
-        BulletMapper.init();
         RegionMapper.init();
         ResourceMapper.init();
         BlockMapper.init();
+        BulletMapper.init();
         for (ResourceMapper.ItemPack pack : ResourceMapper.itemMap) {
             Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
             for (Item item : pack.all) {
