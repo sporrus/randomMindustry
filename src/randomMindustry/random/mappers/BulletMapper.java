@@ -17,22 +17,16 @@ public class BulletMapper{
         Seq<BulletType> bullets = content.bullets();
         RandomUtil.shuffle(bullets);
         bullets.each(bullet -> {
-            // avoid recursion
-            Seq<BulletType> bulletSeq = bullets.select(b -> b != bullet);
-            
             bullet.hitSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
             bullet.despawnSound = Sounds.getSound(RandomUtil.getRand().random(0, 71));
             
-            /* bullet.hitEffect = effects.random(RandomUtil.getRand());
+            bullet.hitEffect = effects.random(RandomUtil.getRand());
             bullet.despawnEffect = effects.random(RandomUtil.getRand());
             bullet.shootEffect = effects.random(RandomUtil.getRand());
             bullet.chargeEffect = effects.random(RandomUtil.getRand());
             bullet.smokeEffect = effects.random(RandomUtil.getRand());
             bullet.trailEffect = effects.random(RandomUtil.getRand());
-            bullet.healEffect = effects.random(RandomUtil.getRand()); */
-            
-            bullet.fragBullet = bulletSeq.random(RandomUtil.getRand());
-            bullet.fragBullets = RandomUtil.getRandomIntMult(2, 20, 2);
+            bullet.healEffect = effects.random(RandomUtil.getRand());
             
             bullet.weaveScale = RandomUtil.getRand().random(0.5f, 20f);
             bullet.weaveMag = RandomUtil.getRand().random(0.5f, 10f);
