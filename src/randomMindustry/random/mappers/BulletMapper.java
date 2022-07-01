@@ -52,6 +52,9 @@ public class BulletMapper{
                 basicBulletType.shrinkX = RandomUtil.getRand().random(-1f, 1f);
                 basicBulletType.shrinkY = RandomUtil.getRand().random(-1f, 1f);
                 basicBulletType.spin = RandomUtil.getRand().random(45f);
+                basicBulletType.shrinkX = RandomUtil.getRand().random(-1f, 1f);
+                basicBulletType.shrinkY = RandomUtil.getRand().random(-1f, 1f);
+                basicBulletType.spin = RandomUtil.getRand().random(45f);
             }
             
             // status effect 
