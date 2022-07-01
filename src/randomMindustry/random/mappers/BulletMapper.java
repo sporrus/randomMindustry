@@ -40,7 +40,7 @@ public class BulletMapper{
             bullet.healPercent = RandomUtil.getRand().random(0f, 100f);
             if(bullet.healPercent > 0) bullet.collidesTiles = bullet.collidesTeam = bullet.collides = true;
             bullet.lifetime = RandomUtil.getRand().random(bullet.lifetime + (bullet.lifetime / 2f));
-            bullet.recoil = RandomUtil.getRand().random(-3f, 3f);
+            bullet.recoil = RandomUtil.getRand().random(-1f, 1f);
             bullet.knockback = RandomUtil.getRand().random(-10f, 10f);
             bullet.hitShake = RandomUtil.getRand().random(-10f, 10f);
             bullet.despawnShake = RandomUtil.getRand().random(-10f, 10f);
