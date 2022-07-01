@@ -57,6 +57,7 @@ public class Main extends Mod {
     public static void generate() {
         Log.info(bundle.get("msg.rm-log-generating"));
         RegionMapper.init();
+        BundleMapper.init();
         ResourceMapper.init();
         BlockMapper.init();
         BulletMapper.init();
