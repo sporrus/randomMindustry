@@ -14,7 +14,7 @@ public class BulletMapper{
     public static void init(){
         Seq<Effect> effects = Effect.all.select(effect -> effect != Fx.dynamicExplosion);
         
-        Seq<BulletType> bullets = content.bullets();
+        Seq<BulletType> bullets = content.bullets().copy();
         RandomUtil.shuffle(bullets);
         bullets.each(bullet -> {
             // sfx
@@ -37,18 +37,18 @@ public class BulletMapper{
             // other stats
             bullet.rangeChange = RandomUtil.getRand().random(0.5f, 20f);
             bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f;
-            bullet.healPercent = RandomUtil.getRand().random(0f, 100f);
+            bullet.healPercent = (RandomUtil.getRand().chance(0.25) ? RandomUtil.getRand().random(0f, 100f) : 0);
             if(bullet.healPercent > 0) bullet.collidesTiles = bullet.collidesTeam = bullet.collides = true;
-            bullet.lifetime = RandomUtil.getRand().random(bullet.lifetime + (bullet.lifetime / 2f));
+            bullet.lifetime = RandomUtil.getRand().random(100f);
             bullet.recoil = RandomUtil.getRand().random(-1f, 1f);
             bullet.knockback = RandomUtil.getRand().random(-10f, 10f);
-            bullet.hitShake = RandomUtil.getRand().random(-10f, 10f);
-            bullet.despawnShake = RandomUtil.getRand().random(-10f, 10f);
+            bullet.hitShake = RandomUtil.getRand().random(-1f, 1f);
+            bullet.despawnShake = RandomUtil.getRand().random(-1f, 1f);
 
             // size and rotation
             if (bullet instanceof BasicBulletType basicBulletType) {
-                basicBulletType.width = RandomUtil.getRand().random(basicBulletType.width + (basicBulletType.width / 2f));
-                basicBulletType.height = RandomUtil.getRand().random(basicBulletType.height + (basicBulletType.height / 2f));
+                basicBulletType.width = RandomUtil.getRand().random(20f);
+                basicBulletType.height = RandomUtil.getRand().random(20f);
                 basicBulletType.shrinkX = RandomUtil.getRand().random(-1f, 1f);
                 basicBulletType.shrinkY = RandomUtil.getRand().random(-1f, 1f);
                 basicBulletType.spin = RandomUtil.getRand().random(45f);
