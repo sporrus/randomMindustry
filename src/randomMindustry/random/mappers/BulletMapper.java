@@ -36,11 +36,11 @@ public class BulletMapper{
             
             // other stats
             bullet.rangeChange = RandomUtil.getRand().random(0.5f, 20f);
-            bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f ? true : false;
+            bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f;
             bullet.healPercent = RandomUtil.getRand().random(0f, 100f);
             if(bullet.healPercent > 0) bullet.collidesTiles = bullet.collidesTeam = bullet.collides = true;
             bullet.lifetime = RandomUtil.getRand().random(bullet.lifetime + (bullet.lifetime / 2f));
-            bullet.recoil = RandomUtil.getRand().random(-25f, 25f);
+            bullet.recoil = RandomUtil.getRand().random(-3f, 3f);
             bullet.knockback = RandomUtil.getRand().random(-10f, 10f);
             bullet.hitShake = RandomUtil.getRand().random(-10f, 10f);
             bullet.despawnShake = RandomUtil.getRand().random(-10f, 10f);
