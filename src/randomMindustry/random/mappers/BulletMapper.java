@@ -35,6 +35,7 @@ public class BulletMapper{
             bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f ? true : false;
             bullet.healPercent = RandomUtil.getRand().random(0f, 100f);
             if(bullet.healPercent > 0) bullet.collidesTiles = bullet.collidesTeam = bullet.collides = true;
+            bullet.lifetime = RandomUtil.getRand().random(bullet.lifetime + (bullet.lifetime / 2));
         });
     }
 }
