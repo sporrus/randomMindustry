@@ -46,8 +46,6 @@ public class BulletMapper{
             bullet.despawnShake = RandomUtil.getRand().random(-10f, 10f);
             
             // size and rotation
-            bullet.width = RandomUtil.getRand().random(bullet.width + (bullet.width / 2f));
-            bullet.height = RandomUtil.getRand().random(bullet.height + (bullet.height / 2f));
             bullet.shrinkX = RandomUtil.getRand().random(-1f, 1f);
             bullet.shrinkY = RandomUtil.getRand().random(-1f, 1f);
             bullet.spin = RandomUtil.getRand().random(45f);
