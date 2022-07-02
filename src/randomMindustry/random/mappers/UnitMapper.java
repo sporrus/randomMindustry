@@ -1,4 +1,4 @@
-package randomMindustry.random.mapper;
+package randomMindustry.random.mappers;
 
 import arc.struct.*;
 import mindustry.type.*;
