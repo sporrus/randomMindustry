@@ -10,6 +10,7 @@ import randomMindustry.util.*;
 
 import static mindustry.Vars.*;
 
+// oh god no
 public class UnitMapper{
     public static void init(){
         Seq<UnitType> units = content.units().copy();
@@ -28,7 +29,7 @@ public class UnitMapper{
         unit.canDrown = RandomUtil.getRand().random(-2f, 2f) > 0;
         unit.createWreck = RandomUtil.getRand().random(-2f, 2f) > 0;
         unit.createScorch = RandomUtil.getRand().random(-2f, 2f) > 0;
-        unit.mineSpeed = RandomUtil.getRand().random(8f);
+        unit.mineSpeed = RandomUtil.getRand().random(6.5f, 12f);
         if(unit.mineTier <= 0) unit.mineTier = RandomUtil.getRand().random(1, 2);
         
         unit.legCount = RandomUtil.getRandomIntMult(2, 10, 2);
