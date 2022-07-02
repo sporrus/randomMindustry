@@ -12,9 +12,9 @@ import static mindustry.Vars.*;
 
 public class UnitMapper{
     public static void init(){
-        Seq<UnitType> units = content.units();
+        Seq<UnitType> units = content.units().copy();
         RandomUtil.shuffle(units);
-        units.each(this::modify);
+        units.each(u -> modify(u));
     }
     
     public static void modify(UnitType unit){
