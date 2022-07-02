@@ -44,7 +44,7 @@ public class BulletMapper {
             bullet.despawnShake = RandomUtil.getRand().random(-1f, 1f);
             
             bullet.speed = RandomUtil.getRand().random(1f, bullet.speed + (bullet.speed / 2f));
-            bullet.drag = RandomUtil.getRand().random(-0.05f, 0.05f);
+            bullet.drag = RandomUtil.getRand().random(-0.01f, 0.05f);
 
             bullet.damage = RandomUtil.getRand().random(1f, 100f);
             bullet.buildingDamageMultiplier = RandomUtil.getRand().random(0f, 2f);
