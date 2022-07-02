@@ -18,11 +18,9 @@ public class BulletMapper {
         Seq<BulletType> bullets = content.bullets().copy();
         RandomUtil.shuffle(bullets);
         bullets.each(bullet -> {
-            // sfx
             bullet.hitSound = Util.generateSound();
             bullet.despawnSound = Util.generateSound();
 
-            // fx
             bullet.hitEffect = effects.random(RandomUtil.getRand());
             bullet.despawnEffect = effects.random(RandomUtil.getRand());
             bullet.shootEffect = effects.random(RandomUtil.getRand());
@@ -31,11 +29,9 @@ public class BulletMapper {
             bullet.trailEffect = effects.random(RandomUtil.getRand());
             bullet.healEffect = effects.random(RandomUtil.getRand());
 
-            // weavin 
             bullet.weaveScale = RandomUtil.getRand().random(0.5f, 20f);
             bullet.weaveMag = RandomUtil.getRand().random(0.5f, 10f);
-
-            // other stats
+            
             bullet.rangeChange = RandomUtil.getRand().random(0.5f, 20f);
             bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f;
             bullet.healPercent = (RandomUtil.getRand().chance(0.25) ? RandomUtil.getRand().random(0f, 100f) : 0);
@@ -46,12 +42,13 @@ public class BulletMapper {
             bullet.knockback = RandomUtil.getRand().random(-10f, 10f);
             bullet.hitShake = RandomUtil.getRand().random(-1f, 1f);
             bullet.despawnShake = RandomUtil.getRand().random(-1f, 1f);
+            
+            bullet.speed = RandomUtil.getRand().random(1f, bullet.speed + (bullet.speed / 2f));
+            bullet.drag = RandomUtil.getRand().random(-0.05f, 0.05f);
 
-            // TODO: use *=
             bullet.damage = RandomUtil.getRand().random(1f, 100f);
             bullet.buildingDamageMultiplier = RandomUtil.getRand().random(0f, 2f);
 
-            // size and rotation
             if (bullet instanceof BasicBulletType basicBulletType) {
                 basicBulletType.width = RandomUtil.getRand().random(4f, 20f);
                 basicBulletType.height = RandomUtil.getRand().random(4f, 20f);
@@ -62,8 +59,7 @@ public class BulletMapper {
                 basicBulletType.shrinkY = RandomUtil.getRand().random(-1f, 1f);
                 basicBulletType.spin = RandomUtil.getRand().random(45f);
             }
-
-            // status effect 
+ 
             bullet.status = content.statusEffects().random(RandomUtil.getRand());
             bullet.statusDuration = RandomUtil.getRand().random(600f);
         });
