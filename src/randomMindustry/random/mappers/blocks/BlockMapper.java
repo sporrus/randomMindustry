@@ -66,7 +66,7 @@ public class BlockMapper {
             Seq<Item> selectedConsumers = new Seq<>();
             int consumers = RandomUtil.getRand().random(1,3);
             for (int i = 0; i < consumers; i++) {
-                Item consume = consumes.random();
+                Item consume = consumes.random(RandomUtil.getRand());
                 selectedConsumers.add(consume);
                 consumes.remove(consume);
             }
