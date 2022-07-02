@@ -39,7 +39,7 @@ public class BulletMapper {
             bullet.rangeChange = RandomUtil.getRand().random(0.5f, 20f);
             bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f;
             bullet.healPercent = (RandomUtil.getRand().chance(0.25) ? RandomUtil.getRand().random(0f, 100f) : 0);
-            if (bullet.healPercent > 0) bullet.collidesTiles = bullet.collidesTeam = bullet.collides = true;
+            if (bullet.healPercent > 0) bullet.collidesTiles = bullet.collidesTeam = true;
             else bullet.collidesTeam = false;
             bullet.lifetime = RandomUtil.getRand().random(10f, 100f);
             bullet.recoil = RandomUtil.getRand().random(-1f, 1f);
