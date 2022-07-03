@@ -35,8 +35,8 @@ public class Main extends Mod {
 
     public static void server() {
         load();
-        Events.on(PlayerConnectionConfirmed.class, (playerConnectionConfirmed) -> {
-            Call.clientPacketReliable(playerConnectionConfirmed.player.con, "seed", Long.toString(RandomUtil.getSeed()));
+        Events.on(PlayerConnect.class, (playerConnect) -> {
+            Call.clientPacketReliable(playerConnect.player.con, "seed", Long.toString(RandomUtil.getSeed()));
         });
         Events.on(WorldLoadEvent.class, (worldLoadEvent) -> {
             load();
