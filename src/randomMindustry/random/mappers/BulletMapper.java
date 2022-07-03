@@ -20,6 +20,15 @@ public class BulletMapper {
         bullets.each(bullet -> {
             Seq<BulletType> bulletSeq = content.bullets().select(b -> b != bullet);
             
+            bullet.hitEffect = effects.random(RandomUtil.getRand());
+            bullet.despawnEffect = effects.random(RandomUtil.getRand());
+            bullet.shootEffect = effects.random(RandomUtil.getRand());
+            bullet.chargeEffect = effects.random(RandomUtil.getRand());
+            bullet.smokeEffect = effects.random(RandomUtil.getRand());
+            bullet.trailEffect = effects.random(RandomUtil.getRand());
+            bullet.healEffect = effects.random(RandomUtil.getRand());
+
+
             bullet.hitSound = Util.generateSound();
             bullet.despawnSound = Util.generateSound();
 
