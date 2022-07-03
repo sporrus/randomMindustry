@@ -23,14 +23,6 @@ public class BulletMapper {
             bullet.hitSound = Util.generateSound();
             bullet.despawnSound = Util.generateSound();
 
-            bullet.hitEffect = effects.random(RandomUtil.getRand());
-            bullet.despawnEffect = effects.random(RandomUtil.getRand());
-            bullet.shootEffect = effects.random(RandomUtil.getRand());
-            bullet.chargeEffect = effects.random(RandomUtil.getRand());
-            bullet.smokeEffect = effects.random(RandomUtil.getRand());
-            bullet.trailEffect = effects.random(RandomUtil.getRand());
-            bullet.healEffect = effects.random(RandomUtil.getRand());
-
             bullet.weaveScale = RandomUtil.getRand().random(0.5f, 20f);
             bullet.weaveMag = RandomUtil.getRand().random(0.5f, 10f);
             
@@ -65,10 +57,10 @@ public class BulletMapper {
             bullet.status = content.statusEffects().random(RandomUtil.getRand());
             bullet.statusDuration = RandomUtil.getRand().random(600f);
             
-            bullet.fragBullets = RandomUtil.getRand().random(1, 20);
+            bullet.fragBullets = RandomUtil.getRand().random(1, 15);
             bullet.fragBullet = RandomUtil.getRand().random(-2f, 2f) < 0f ? null : bulletSeq.random();
             
-            bullet.intervalBullets = RandomUtil.getRand().random(2, 10);
+            bullet.intervalBullets = RandomUtil.getRand().random(2, 6);
             bullet.intervalBullet = RandomUtil.getRand().random(-2f, 2f) < 0f ? null : bulletSeq.random();
             bullet.bulletInterval = RandomUtil.getRand().random(60f, 600f);
         });
