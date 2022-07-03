@@ -57,11 +57,11 @@ public class BulletMapper {
             bullet.status = content.statusEffects().random(RandomUtil.getRand());
             bullet.statusDuration = RandomUtil.getRand().random(600f);
             
-            bullet.fragBullets = RandomUtil.getRand().random(1, 15);
-            bullet.fragBullet = RandomUtil.getRand().random(-2f, 2f) < 0f ? null : bulletSeq.random();
+            bullet.fragBullets = RandomUtil.getRand().random(10);
+            bullet.fragBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random();
             
-            bullet.intervalBullets = RandomUtil.getRand().random(2, 6);
-            bullet.intervalBullet = RandomUtil.getRand().random(-2f, 2f) < 0f ? null : bulletSeq.random();
+            bullet.intervalBullets = RandomUtil.getRand().random(5);
+            bullet.intervalBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random();
             bullet.bulletInterval = RandomUtil.getRand().random(60f, 600f);
         });
     }
