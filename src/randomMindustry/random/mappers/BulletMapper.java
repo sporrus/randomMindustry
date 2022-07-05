@@ -18,9 +18,8 @@ public class BulletMapper {
         Seq<BulletType> bullets = content.bullets().copy();
         RandomUtil.shuffle(bullets);
         bullets.each(bullet -> {
-            bullet.hitSound = Util.generateSound();
-            bullet.despawnSound = Util.generateSound();
-
+            Seq<BulletType> bulletSeq = content.bullets().select(b -> b != bullet);
+            
             bullet.hitEffect = effects.random(RandomUtil.getRand());
             bullet.despawnEffect = effects.random(RandomUtil.getRand());
             bullet.shootEffect = effects.random(RandomUtil.getRand());
@@ -28,6 +27,10 @@ public class BulletMapper {
             bullet.smokeEffect = effects.random(RandomUtil.getRand());
             bullet.trailEffect = effects.random(RandomUtil.getRand());
             bullet.healEffect = effects.random(RandomUtil.getRand());
+
+
+            bullet.hitSound = Util.generateSound();
+            bullet.despawnSound = Util.generateSound();
 
             bullet.weaveScale = RandomUtil.getRand().random(0.5f, 20f);
             bullet.weaveMag = RandomUtil.getRand().random(0.5f, 10f);
@@ -49,19 +52,26 @@ public class BulletMapper {
             bullet.damage = RandomUtil.getRand().random(1f, 100f);
             bullet.buildingDamageMultiplier = RandomUtil.getRand().random(0f, 2f);
 
-            if (bullet instanceof BasicBulletType basicBulletType) {
-                basicBulletType.width = RandomUtil.getRand().random(4f, 20f);
-                basicBulletType.height = RandomUtil.getRand().random(4f, 20f);
-                basicBulletType.shrinkX = RandomUtil.getRand().random(-1f, 1f);
-                basicBulletType.shrinkY = RandomUtil.getRand().random(-1f, 1f);
-                basicBulletType.spin = RandomUtil.getRand().random(45f);
-                basicBulletType.shrinkX = RandomUtil.getRand().random(-1f, 1f);
-                basicBulletType.shrinkY = RandomUtil.getRand().random(-1f, 1f);
-                basicBulletType.spin = RandomUtil.getRand().random(45f);
+            if (bullet instanceof BasicBulletType basicBullet) {
+                basicBullet.width = RandomUtil.getRand().random(4f, 20f);
+                basicBullet.height = RandomUtil.getRand().random(4f, 20f);
+                basicBullet.shrinkX = RandomUtil.getRand().random(-1f, 1f);
+                basicBullet.shrinkY = RandomUtil.getRand().random(-1f, 1f);
+                basicBullet.spin = RandomUtil.getRand().random(45f);
+                basicBullet.shrinkX = RandomUtil.getRand().random(-1f, 1f);
+                basicBullet.shrinkY = RandomUtil.getRand().random(-1f, 1f);
+                basicBullet.spin = RandomUtil.getRand().random(45f);
             }
  
             bullet.status = content.statusEffects().random(RandomUtil.getRand());
             bullet.statusDuration = RandomUtil.getRand().random(600f);
+            
+            bullet.fragBullets = RandomUtil.getRand().random(10);
+            bullet.fragBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random();
+            
+            bullet.intervalBullets = RandomUtil.getRand().random(5);
+            bullet.intervalBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random();
+            bullet.bulletInterval = RandomUtil.getRand().random(60f, 600f);
         });
     }
 }
