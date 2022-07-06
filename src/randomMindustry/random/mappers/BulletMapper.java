@@ -1,13 +1,12 @@
 package randomMindustry.random.mappers;
 
 import arc.struct.*;
-import mindustry.gen.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 
 import randomMindustry.random.util.*;
-import randomMindustry.util.Util;
+import randomMindustry.util.*;
 
 import static mindustry.Vars.*;
 
@@ -28,7 +27,6 @@ public class BulletMapper {
             bullet.trailEffect = effects.random(RandomUtil.getRand());
             bullet.healEffect = effects.random(RandomUtil.getRand());
 
-
             bullet.hitSound = Util.generateSound();
             bullet.despawnSound = Util.generateSound();
 
@@ -46,7 +44,7 @@ public class BulletMapper {
             bullet.hitShake = RandomUtil.getRand().random(-1f, 1f);
             bullet.despawnShake = RandomUtil.getRand().random(-1f, 1f);
             
-            bullet.speed = RandomUtil.getRand().random(1f, bullet.speed + (bullet.speed / 2f));
+            bullet.speed = RandomUtil.getRand().random(1f, 10f);
             bullet.drag = RandomUtil.getRand().random(-0.01f, 0.05f);
 
             bullet.damage = RandomUtil.getRand().random(1f, 100f);
@@ -63,7 +61,7 @@ public class BulletMapper {
                 basicBullet.spin = RandomUtil.getRand().random(45f);
             }
  
-            bullet.status = content.statusEffects().random(RandomUtil.getRand());
+            if (RandomUtil.getRand().chance(0.25)) bullet.status = content.statusEffects().random(RandomUtil.getRand());
             bullet.statusDuration = RandomUtil.getRand().random(600f);
             
             bullet.fragBullets = RandomUtil.getRand().random(10);

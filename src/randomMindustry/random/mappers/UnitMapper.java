@@ -15,7 +15,7 @@ public class UnitMapper{
     public static void init(){
         Seq<UnitType> units = content.units().copy();
         RandomUtil.shuffle(units);
-        units.each(u -> modify(u));
+        units.each(UnitMapper::modify);
     }
     
     public static void modify(UnitType unit){

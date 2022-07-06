@@ -9,6 +9,7 @@ import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
+import mindustry.world.blocks.storage.*;
 import mindustry.world.blocks.units.*;
 import mindustry.world.consumers.*;
 
@@ -42,17 +43,24 @@ public class BlockMapper {
         } else if (block instanceof Wall wall) {
             modifyWall(wall);
         } else if (block instanceof Turret turret) {
-           TurretMapper.map(turret);
+            TurretMapper.map(turret);
         } else if (block instanceof UnitFactory ufactory) {
             modifyUnitFactory(ufactory);
         } else if (block instanceof Reconstructor recons) {
             modifyReconstructor(recons);
         } else if (block instanceof PowerGenerator generator) {
             modifyGenerator(generator);
+        } else if (block instanceof CoreBlock core) {
+            modifyCore(core);
         } else {
             modifyBlock(block);
         }
         Util.updateStats(block);
+    }
+
+    public static void modifyCore(CoreBlock block) {
+        block.unitType.weapons.each((w) -> w.bullet.buildingDamageMultiplier = 0.01f);
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(3, 6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
     }
 
     public static void modifyGenerator(PowerGenerator block) {
@@ -64,7 +72,7 @@ public class BlockMapper {
                 block.consumeLiquid(liquids.random(RandomUtil.getRand()), RandomUtil.getRand().random(1f));
             }
             Seq<Item> selectedConsumers = new Seq<>();
-            int consumers = RandomUtil.getRand().random(1,3);
+            int consumers = RandomUtil.getRand().random(1, 3);
             for (int i = 0; i < consumers; i++) {
                 Item consume = consumes.random(RandomUtil.getRand());
                 selectedConsumers.add(consume);
@@ -75,10 +83,11 @@ public class BlockMapper {
         }
         block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
     }
+
     public static void modifyCrafter(GenericCrafter block) {
         Item item = ResourceMapper.getGenericCrafterOut();
         if (item == null) item = ResourceMapper.getRandomItem(false);
-        int count = RandomUtil.getRand().random(1,10);
+        int count = RandomUtil.getRand().random(1, 10);
         block.outputItems = new ItemStack[]{new ItemStack(item, count)};
         Util.removeAllConsumers(block);
         int tier = ResourceMapper.getTierOfItem(item);
@@ -103,19 +112,19 @@ public class BlockMapper {
     public static void modifyWall(Wall block) {
         block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, block.size * 10, 5, true);
     }
-    
-    public static void modifyUnitFactory(UnitFactory block){
+
+    public static void modifyUnitFactory(UnitFactory block) {
         block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
-        
+
         Seq<UnitFactory.UnitPlan> plans = block.plans;
-        
+
         plans.each(plan -> {
             // randomize plan build time and unit?
             plan.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(3) + 1, 5, (int) Math.floor(plan.unit.health / 2d), 5, true);
         });
     }
-    
-    public static void modifyReconstructor(Reconstructor block){
+
+    public static void modifyReconstructor(Reconstructor block) {
         block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         Util.removeAllConsumers(block);
         block.consumeItems(ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(5) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
