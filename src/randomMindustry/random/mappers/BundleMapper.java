@@ -6,10 +6,11 @@ import mindustry.*;
 import randomMindustry.random.util.RandomUtil;
 
 import static arc.Core.*;
+import static mindustry.Vars.*;
 
 public class BundleMapper {
     public static void init(){
-        if (Vars.headless) return;
+        if (headless) return;
 
         if(settings.getBool("rmchaos-bundle-swap", false)){
             ObjectMap<String, String> bundleCopy = bundle.getProperties().copy();
@@ -19,12 +20,25 @@ public class BundleMapper {
                 bundleCopy.put(key, set);
             });
             bundle.setProperties(bundleCopy);
+            
+            // hehe
+            content.each(c -> {
+                if(!(c instanceof UnlockableContent uc)) return;
+                String bundleName = uc.getContentType + "." + uc.name;
+                uc.localizedName = bundle.get(bundleName + ".name");
+                uc.description = bundle.get(bundleName + ".description");
+                uc.details = bundle.get(bundleName + ".details");
+            });
         }
 
         if(settings.getBool("rmchaos-router", false)){
-            ObjectMap<String, String> properties = bundle.getProperties();
-            properties.each((key, value) -> properties.put(key, "router"));
-            bundle.setProperties(properties);
+            bundle.debug("router");
+            content.each(c -> {
+                if(!(c instanceof UnlockableContent uc)) return;
+                uc.localizedName = "router";
+                uc.description = "router";
+                uc.details = "router";
+            });
         }
     }
 }
