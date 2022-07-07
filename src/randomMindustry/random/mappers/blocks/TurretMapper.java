@@ -53,7 +53,7 @@ public class TurretMapper {
         else if (block instanceof ContinuousLiquidTurret turret) modifyContinuousLiquidTurret(turret);
         else if (block instanceof PowerTurret turret) modifyPowerTurret(turret);
 
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(4) + 1, 4, (int) Math.floor(block.health / 4d), 5, true);
     }
 
     public static void modifyPowerTurret(PowerTurret turret) {
