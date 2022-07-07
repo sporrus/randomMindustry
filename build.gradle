@@ -14,8 +14,8 @@ tasks.withType(JavaCompile) {
 }
 
 repositories{
-    mavenCentral()
     maven{ url 'https://www.jitpack.io' }
+    mavenCentral()
 }
 
 ext{
