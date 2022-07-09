@@ -1,9 +1,8 @@
 package randomMindustry.random.mappers;
 
-import arc.graphics.g2d.TextureAtlas;
 import arc.struct.*;
-import mindustry.*;
-import randomMindustry.random.util.RandomUtil;
+import mindustry.ctype.*;
+import randomMindustry.random.util.*;
 
 import static arc.Core.*;
 import static mindustry.Vars.*;
@@ -24,7 +23,7 @@ public class BundleMapper {
             // hehe
             content.each(c -> {
                 if(!(c instanceof UnlockableContent uc)) return;
-                String bundleName = uc.getContentType + "." + uc.name;
+                String bundleName = uc.getContentType() + "." + uc.name;
                 uc.localizedName = bundle.get(bundleName + ".name");
                 uc.description = bundle.get(bundleName + ".description");
                 uc.details = bundle.get(bundleName + ".details");
