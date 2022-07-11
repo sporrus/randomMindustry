@@ -54,6 +54,7 @@ public class Main extends Mod {
     public static void generate() {
         if (!Vars.headless) ui.loadfrag.show("@msg.rm-generating");
         Log.info(bundle.get("msg.rm-log-generating"));
+        FxMapper.init();
         RegionMapper.init();
         BundleMapper.init();
         ResourceMapper.init();

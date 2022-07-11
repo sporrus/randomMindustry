@@ -80,7 +80,7 @@ public class Util {
     }
 
     public static Sound generateSound() {
-        int id = RandomUtil.getRand().random(0, 70);
+        int id = RandomUtil.getClientRand().random(0, 70);
         if (id == Sounds.getSoundId(Sounds.swish)) id = 71;
         return Sounds.getSound(id);
     }

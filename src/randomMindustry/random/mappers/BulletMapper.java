@@ -12,27 +12,26 @@ import static mindustry.Vars.*;
 
 public class BulletMapper {
     public static void init() {
-        Seq<Effect> effects = Effect.all.select(effect -> effect != Fx.dynamicExplosion);
-
+        Seq<Effect> effects = FxMapper.effects.copy();
         Seq<BulletType> bullets = content.bullets().copy();
         RandomUtil.shuffle(bullets);
         bullets.each(bullet -> {
             Seq<BulletType> bulletSeq = content.bullets().select(b -> b != bullet);
-            
-            bullet.hitEffect = effects.random(RandomUtil.getRand());
-            bullet.despawnEffect = effects.random(RandomUtil.getRand());
-            bullet.shootEffect = effects.random(RandomUtil.getRand());
-            bullet.chargeEffect = effects.random(RandomUtil.getRand());
-            bullet.smokeEffect = effects.random(RandomUtil.getRand());
-            bullet.trailEffect = effects.random(RandomUtil.getRand());
-            bullet.healEffect = effects.random(RandomUtil.getRand());
+
+            bullet.hitEffect = effects.random(RandomUtil.getClientRand());
+            bullet.despawnEffect = effects.random(RandomUtil.getClientRand());
+            bullet.shootEffect = effects.random(RandomUtil.getClientRand());
+            bullet.chargeEffect = effects.random(RandomUtil.getClientRand());
+            bullet.smokeEffect = effects.random(RandomUtil.getClientRand());
+            bullet.trailEffect = effects.random(RandomUtil.getClientRand());
+            bullet.healEffect = effects.random(RandomUtil.getClientRand());
 
             bullet.hitSound = Util.generateSound();
             bullet.despawnSound = Util.generateSound();
 
             bullet.weaveScale = RandomUtil.getRand().random(0.5f, 20f);
             bullet.weaveMag = RandomUtil.getRand().random(0.5f, 10f);
-            
+
             bullet.rangeChange = RandomUtil.getRand().random(0.5f, 20f);
             bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f;
             bullet.healPercent = (RandomUtil.getRand().chance(0.25) ? RandomUtil.getRand().random(0f, 100f) : 0);
@@ -41,9 +40,9 @@ public class BulletMapper {
             bullet.lifetime = RandomUtil.getRand().random(10f, 100f);
             bullet.recoil = RandomUtil.getRand().random(-1f, 1f);
             bullet.knockback = RandomUtil.getRand().random(-10f, 10f);
-            bullet.hitShake = RandomUtil.getRand().random(-1f, 1f);
-            bullet.despawnShake = RandomUtil.getRand().random(-1f, 1f);
-            
+            bullet.hitShake = RandomUtil.getClientRand().random(-1f, 1f);
+            bullet.despawnShake = RandomUtil.getClientRand().random(-1f, 1f);
+
             bullet.speed = RandomUtil.getRand().random(1f, 10f);
             bullet.drag = RandomUtil.getRand().random(-0.01f, 0.05f);
 
@@ -56,20 +55,23 @@ public class BulletMapper {
                 basicBullet.shrinkX = RandomUtil.getRand().random(-1f, 1f);
                 basicBullet.shrinkY = RandomUtil.getRand().random(-1f, 1f);
                 basicBullet.spin = RandomUtil.getRand().random(45f);
-                basicBullet.shrinkX = RandomUtil.getRand().random(-1f, 1f);
-                basicBullet.shrinkY = RandomUtil.getRand().random(-1f, 1f);
-                basicBullet.spin = RandomUtil.getRand().random(45f);
             }
- 
-            if (RandomUtil.getRand().chance(0.25)) bullet.status = content.statusEffects().random(RandomUtil.getRand());
-            bullet.statusDuration = RandomUtil.getRand().random(600f);
-            
-            bullet.fragBullets = RandomUtil.getRand().random(10);
-            bullet.fragBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random(RandomUtil.getRand());
-            
-            bullet.intervalBullets = RandomUtil.getRand().random(5);
-            bullet.intervalBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random(RandomUtil.getRand());
-            bullet.bulletInterval = RandomUtil.getRand().random(60f, 600f);
+
+            if (RandomUtil.getRand().chance(0.25)) {
+                bullet.status = content.statusEffects().random(RandomUtil.getRand());
+                bullet.statusDuration = RandomUtil.getRand().random(600f);
+            }
+
+            if (RandomUtil.getRand().chance(0.25)) {
+                bullet.fragBullets = RandomUtil.getRand().random(10);
+                bullet.fragBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random(RandomUtil.getRand());
+            }
+
+            if (RandomUtil.getRand().chance(0.25)) {
+                bullet.intervalBullets = RandomUtil.getRand().random(5);
+                bullet.intervalBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random(RandomUtil.getRand());
+                bullet.bulletInterval = RandomUtil.getRand().random(60f, 600f);
+            }
         });
     }
 }
