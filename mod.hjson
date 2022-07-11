@@ -2,9 +2,9 @@ displayName: Random Mindustry
 name: random-mindustry
 author: gorodmi & Mythril
 main: randomMindustry.Main
-subtitle: Version: v1.3.0
+subtitle: Version: v1.3.1
 description: "so random, you feel like playing first time\nEPILEPSY WARNING"
-version: v1.3.0
+version: v1.3.1
 minGameVersion: 136
 java: true
 repo: sporrus/randomMindustry
