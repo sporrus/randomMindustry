@@ -18,6 +18,7 @@ public class TurretMapper {
     public static void map(Turret block) {
         block.shootSound = Util.generateSound();
         block.loopSound = Util.generateSound();
+        block.chargeSound = Util.generateSound();
         block.reload = RandomUtil.getRand().random(100f);
         block.shootCone = RandomUtil.getRand().random(1f, 360f);
         block.inaccuracy = RandomUtil.getRand().random(1f, 180f);
@@ -25,6 +26,7 @@ public class TurretMapper {
         block.shootX = RandomUtil.getRand().random(1f, 20f);
         block.shootY = RandomUtil.getRand().random(1f, 20f);
         block.recoil = RandomUtil.getRand().random(-50f, 50f);
+        block.rotateSpeed = RandomUtil.getRand().random(1f, 20f);
 
         int pattern = RandomUtil.getRand().random(0, 5);
         switch (pattern) {
