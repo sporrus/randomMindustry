@@ -21,12 +21,12 @@ public class UnitMapper{
     public static void modify(UnitType unit){
         Seq<Effect> effects = Effect.all.select(effect -> effect != Fx.dynamicExplosion);
         
-        if(!unit.flying){
+        if(!unit.flying && !unit.naval){
             unit.canBoost = RandomUtil.getRand().random(-2f, 2f) > 0;
             unit.boostMultiplier = RandomUtil.getRand().random(5f);
         }
         
-        unit.canDrown = RandomUtil.getRand().random(-2f, 2f) > 0;
+        if(!unit.naval) unit.canDrown = RandomUtil.getRand().random(-2f, 2f) > 0;
         unit.createWreck = RandomUtil.getRand().random(-2f, 2f) > 0;
         unit.createScorch = RandomUtil.getRand().random(-2f, 2f) > 0;
         
