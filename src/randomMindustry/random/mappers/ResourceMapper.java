@@ -68,6 +68,10 @@ public class ResourceMapper {
         Blocks.darksand.playerUnmineable = false;
     }
 
+    public static int getMaxTier() {
+        return itemMap.size - 1;
+    }
+
     public static void unlock(Item item) {
         for (ItemPack pack : itemMap) pack.locked.remove(item);
     }

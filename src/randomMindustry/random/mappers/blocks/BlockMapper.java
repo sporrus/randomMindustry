@@ -49,7 +49,7 @@ public class BlockMapper {
         } else if (block instanceof Reconstructor recons) {
             modifyReconstructor(recons);
         } else if (block instanceof PowerGenerator generator) {
-            modifyGenerator(generator);
+            GeneratorMapper.map(generator);
         } else if (block instanceof CoreBlock core) {
             modifyCore(core);
         } else {
@@ -63,27 +63,6 @@ public class BlockMapper {
         block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(3, 6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
     }
 
-    public static void modifyGenerator(PowerGenerator block) {
-        if (block instanceof ConsumeGenerator) {
-            Util.removeAllConsumers(block);
-            Seq<Item> consumes = content.items().select((l) -> TechUtil.getRoot(l).contains(Planets.serpulo));
-            Seq<Liquid> liquids = content.liquids().select((l) -> TechUtil.getRoot(l).contains(Planets.serpulo));
-            if (RandomUtil.getRand().chance(0.25)) {
-                block.consumeLiquid(liquids.random(RandomUtil.getRand()), RandomUtil.getRand().random(1f));
-            }
-            Seq<Item> selectedConsumers = new Seq<>();
-            int consumers = RandomUtil.getRand().random(1, 3);
-            for (int i = 0; i < consumers; i++) {
-                Item consume = consumes.random(RandomUtil.getRand());
-                selectedConsumers.add(consume);
-                consumes.remove(consume);
-            }
-            ConsumeItemFilter consumeItemFilter = new ConsumeItemFilter(selectedConsumers::contains);
-            block.consume(consumeItemFilter);
-        }
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
-    }
-
     public static void modifyCrafter(GenericCrafter block) {
         Item item = ResourceMapper.getGenericCrafterOut();
         if (item == null) item = ResourceMapper.getRandomItem(false);
@@ -91,6 +70,9 @@ public class BlockMapper {
         block.outputItems = new ItemStack[]{new ItemStack(item, count)};
         Util.removeAllConsumers(block);
         int tier = ResourceMapper.getTierOfItem(item);
+        if (tier >= GeneratorMapper.getLowestPowerTier() && RandomUtil.getRand().chance(0.25)) {
+            block.consumePower(RandomUtil.getRand().random(20f));
+        }
         block.consumeItems(ResourceMapper.getRandomItemStacks(tier, 3, 10, 1, true));
         block.craftTime = RandomUtil.getRand().random(300f);
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
