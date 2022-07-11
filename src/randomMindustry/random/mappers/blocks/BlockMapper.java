@@ -73,6 +73,7 @@ public class BlockMapper {
         if (tier >= GeneratorMapper.getLowestPowerTier() && RandomUtil.getRand().chance(0.25)) {
             block.consumePower(RandomUtil.getRand().random(20f));
         }
+        block.localizedName = item.localizedName + " " + new Seq<>(new String[]{"Press", "Cultivator", "Mixer", "Smelter", "Compressor", "Weaver", "Klin", "Pulverizer", "Centrifuge"}).random(RandomUtil.getClientRand());
         block.consumeItems(ResourceMapper.getRandomItemStacks(tier, 3, 10, 1, true));
         block.craftTime = RandomUtil.getRand().random(300f);
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
