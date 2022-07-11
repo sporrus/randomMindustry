@@ -87,7 +87,7 @@ public class BlockMapper {
             for (int i = 1; i < itemStacks.length - 1; i++) {
                 block.description += ", " + itemStacks[i].item.localizedName.toLowerCase();
             }
-            block.description += " and " + itemStacks[itemStacks.length - 1].item.localizedName.toLowerCase();
+            block.description += " and " + itemStacks[itemStacks.length - 1].item.localizedName.toLowerCase() + ".";
         }
     }
 
