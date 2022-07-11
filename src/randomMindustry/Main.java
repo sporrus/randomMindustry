@@ -59,8 +59,8 @@ public class Main extends Mod {
         BundleMapper.init();
         ResourceMapper.init();
         BulletMapper.init();
-        BlockMapper.init();
         UnitMapper.init();
+        BlockMapper.init();
         for (ResourceMapper.ItemPack pack : ResourceMapper.itemMap) {
             Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
             for (Item item : pack.all) {
