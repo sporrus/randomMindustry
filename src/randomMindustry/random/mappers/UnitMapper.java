@@ -26,7 +26,7 @@ public class UnitMapper{
             unit.boostMultiplier = RandomUtil.getRand().random(5f);
         }
         
-        unit.canDrown = RandomUtil.getRand().random(-2f, 2f) > 0;
+        if(!naval) unit.canDrown = RandomUtil.getRand().random(-2f, 2f) > 0;
         unit.createWreck = RandomUtil.getRand().random(-2f, 2f) > 0;
         unit.createScorch = RandomUtil.getRand().random(-2f, 2f) > 0;
         
