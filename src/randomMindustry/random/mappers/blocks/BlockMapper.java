@@ -108,20 +108,22 @@ public class BlockMapper {
         block.craftTime = RandomUtil.getRand().random(300f);
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
 
-        String factory = (tier == -1 ? "creator" : genericCrafterTags.random(RandomUtil.getClientRand()));
+        if (!headless) {
+            String factory = (tier == -1 ? "creator" : genericCrafterTags.random(RandomUtil.getClientRand()));
 
-        StringBuilder from = new StringBuilder();
-        if (itemStacks.length > 0) from.append(itemStacks[0].item.localizedName.toLowerCase()).append("[lightgray]");
-        if (itemStacks.length > 1) {
-            for (int i = 1; i < itemStacks.length - 1; i++) {
-                from.append(", ").append(itemStacks[i].item.localizedName.toLowerCase()).append("[lightgray]");
+            StringBuilder from = new StringBuilder();
+            if (itemStacks.length > 0) from.append(itemStacks[0].item.localizedName.toLowerCase()).append("[lightgray]");
+            if (itemStacks.length > 1) {
+                for (int i = 1; i < itemStacks.length - 1; i++) {
+                    from.append(", ").append(itemStacks[i].item.localizedName.toLowerCase()).append("[lightgray]");
+                }
+                from.append(" and ").append(itemStacks[itemStacks.length - 1].item.localizedName.toLowerCase()).append("[lightgray]");
             }
-            from.append(" and ").append(itemStacks[itemStacks.length - 1].item.localizedName.toLowerCase()).append("[lightgray]");
-        }
-        String to = item.localizedName.toLowerCase() + "[lightgray]";
+            String to = item.localizedName.toLowerCase() + "[lightgray]";
 
-        block.localizedName = bundle.format("crafter.rm-name." + factory, item.localizedName);
-        block.description = bundle.format("crafter.rm-description." + factory, from.toString(), to);
+            block.localizedName = bundle.format("crafter.rm-name." + factory, item.localizedName);
+            block.description = bundle.format("crafter.rm-description." + factory, from.toString(), to);
+        }
     }
 
     public static void modifyConveyor(Conveyor block) {
