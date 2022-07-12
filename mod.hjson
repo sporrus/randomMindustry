@@ -2,9 +2,9 @@ displayName: Random Mindustry
 name: random-mindustry
 author: gorodmi & Mythril
 main: randomMindustry.Main
-subtitle: Version: v1.3.1
+subtitle: Version: v1.4.0
 description: "randomizes almost everything\nEPILEPSY WARNING"
-version: v1.3.1
+version: v1.4.0
 minGameVersion: 136
 java: true
 repo: sporrus/randomMindustry
