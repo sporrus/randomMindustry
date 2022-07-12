@@ -113,7 +113,7 @@ public class ResourceMapper {
 
     public static int getRange(int minTier, int maxTier) {
         int range = 0;
-        for (int i = minTier; i < maxTier; i++) {
+        for (int i = minTier; i < maxTier + 1; i++) {
             ItemPack pack = getPackByTier(i);
             if (pack == null) continue;
             range += pack.all.size;
@@ -122,8 +122,9 @@ public class ResourceMapper {
     }
 
     public static ItemStack[] getRandomItemStacks(int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
-        Seq<ItemStack> seq = new Seq<>();
+        maxTier = Math.max(Math.min(maxTier, ResourceMapper.maxTier), 0);
         int minTier = Math.max(maxTier - 2, 0);
+        ItemPack highest = getPackByTier(maxTier).copy();
         ItemPack all = getPackByTier(minTier).copy();
         all.relock();
         for (int i = minTier + 1; i < maxTier; i++) {
@@ -131,31 +132,18 @@ public class ResourceMapper {
             pack.relock();
             all = combine(true, all, pack);
         }
-        return getItemStacksFromPack(all, maxTier, maxItemStackCount, maxItemCount, itemMult, unique);
+        return getItemStacksFromPack(highest, all, maxTier, maxItemStackCount, maxItemCount, itemMult, unique);
     }
 
-    public static ItemStack[] getRandomItemStacks(String tag, int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
-        Seq<ItemStack> seq = new Seq<>();
-        int minTier = Math.max(maxTier - 2, 0);
-        ItemPack all = getPackByTier(minTier).copy();
-        all.relock();
-        for (int i = minTier + 1; i < maxTier; i++) {
-            ItemPack pack = getPackByTagAndLocalTier(tag, i);
-            if (pack == null) continue;
-            pack = pack.copy();
-            pack.relock();
-            all = combine(true, all, pack);
-        }
-        return getItemStacksFromPack(all, maxTier, maxItemStackCount, maxItemCount, itemMult, unique);
-    }
-
-    public static ItemStack[] getItemStacksFromPack(ItemPack all, int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
+    public static ItemStack[] getItemStacksFromPack(ItemPack highest, ItemPack all, int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
         Seq<ItemStack> seq = new Seq<>();
         int minTier = Math.max(maxTier - 2, 0);
         int itemStackCount = Math.min(RandomUtil.getRand().random(1, maxItemStackCount), getRange(minTier, maxTier));
         for (int i = 0; i < itemStackCount; i++) {
             int count = RandomUtil.getRandomIntMult(Math.max(0, maxItemCount - 100), maxItemCount - itemMult, itemMult) + itemMult;
-            seq.add(new ItemStack(all.random(unique), count));
+            Item item = (i == 0 ? highest : all).random(unique);
+            if (i == 0) all.locked.remove(item);
+            seq.add(new ItemStack(item, count));
         }
         return seq.toArray(ItemStack.class);
     }
@@ -227,7 +215,7 @@ public class ResourceMapper {
         }
 
         public void relock() {
-            this.all = new Seq<>(this.locked.toArray(Item.class));
+            this.locked = new Seq<>(this.all.toArray(Item.class));
         }
 
         public ItemPack copy() {

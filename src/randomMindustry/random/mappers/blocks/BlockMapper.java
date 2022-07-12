@@ -2,6 +2,7 @@ package randomMindustry.random.mappers.blocks;
 
 import arc.Core;
 import arc.struct.*;
+import arc.util.Log;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -79,7 +80,7 @@ public class BlockMapper {
         int count = RandomUtil.getRand().random(1, 10);
         block.outputItems = new ItemStack[]{new ItemStack(item, count)};
         Util.removeAllConsumers(block);
-        int tier = ResourceMapper.getTierOfItem(item);
+        int tier = ResourceMapper.getTierOfItem(item)-1;
         if (tier >= GeneratorMapper.getLowestPowerTier() && RandomUtil.getRand().chance(0.25)) {
             block.consumePower(RandomUtil.getRand().random(20f));
         }
@@ -88,7 +89,7 @@ public class BlockMapper {
         block.craftTime = RandomUtil.getRand().random(300f);
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
 
-        String factory = (tier == 0 ? "creator" : genericCrafterTags.random(RandomUtil.getClientRand()));
+        String factory = (tier == -1 ? "creator" : genericCrafterTags.random(RandomUtil.getClientRand()));
 
         StringBuilder from = new StringBuilder();
         if (itemStacks.length > 0) from.append(itemStacks[0].item.localizedName.toLowerCase()).append("[lightgray]");
@@ -113,8 +114,12 @@ public class BlockMapper {
     }
 
     public static void modifyDrill(Drill block) {
-        int localTier = block.tier;
-        block.requirements = ResourceMapper.getRandomItemStacks("drill", localTier, 5, (int) Math.floor(block.health / 4d), 5, true);
+        int localTier = block.tier - 2;
+        ResourceMapper.ItemPack drillPack = ResourceMapper.getPackByTagAndLocalTier("drill", localTier);
+        int globalTier = ResourceMapper.maxTier;
+        if (drillPack != null) globalTier = drillPack.tier - 1;
+        Log.info(block.localizedName + " - " + globalTier);
+        block.requirements = ResourceMapper.getRandomItemStacks(globalTier, 5, (int) Math.floor(block.health / 4d), 5, true);
     }
 
     public static void modifyWall(Wall block) {
@@ -128,6 +133,7 @@ public class BlockMapper {
 
         plans.each(plan -> {
             // randomize plan build time and unit?
+            plan.time = RandomUtil.getRand().random(3600);
             plan.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(3) + 1, 5, (int) Math.floor(plan.unit.health / 2d), 5, true);
         });
     }
