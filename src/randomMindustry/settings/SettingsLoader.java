@@ -3,11 +3,17 @@ package randomMindustry.settings;
 import arc.math.*;
 import arc.flabel.*;
 import arc.scene.ui.*;
+import arc.util.Log;
+import mindustry.Vars;
+import mindustry.content.Planets;
 import mindustry.gen.*;
+import mindustry.type.Planet;
+import mindustry.ui.Styles;
 import mindustry.ui.dialogs.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable.*;
 import randomMindustry.*;
+import randomMindustry.random.mappers.blocks.BlockMapper;
 import randomMindustry.random.util.*;
 
 import static mindustry.Vars.*;
@@ -19,6 +25,7 @@ public class SettingsLoader{
         
         dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
             c.areaTextPref("rm-seed", "0");
+            c.pref(new TechSelector());
             c.pref(new RandomButton());
             c.pref(new GenerateButton());
         });
@@ -30,6 +37,33 @@ public class SettingsLoader{
              c.checkPref("rmchaos-bundle-swap", false);
             c.checkPref("rmchaos-category-rand", false);
         });
+    }
+
+    static class TechSelector extends Setting {
+        public TechSelector() {
+            super("rm-tech");
+        }
+
+        @Override
+        public void add(SettingsTable table) {
+            table.table(Tex.button, t -> {
+                t.margin(10f);
+                var group = new ButtonGroup<>();
+                var style = Styles.flatTogglet;
+
+                t.defaults().size(140f, 50f);
+
+                for(Planet planet : new Planet[]{Planets.serpulo, Planets.erekir}){
+                    t.button(planet.localizedName, style, () -> {
+                        BlockMapper.setCurrentPlanet(planet);
+                    }).group(group).checked((b) -> BlockMapper.getCurrentPlanet() == planet);
+                }
+
+                t.button("@rules.anyenv", style, () -> {
+                    BlockMapper.setCurrentPlanet(null);
+                }).group(group).checked((b) -> BlockMapper.getCurrentPlanet() == null);
+            }).left().fill(false).expand(false, false).row();
+        }
     }
     
     static class RandomButton extends Setting{
@@ -67,6 +101,8 @@ public class SettingsLoader{
                     error.cont.add(ex.getMessage()).row();
                     error.buttons.button("@ok", error::hide).size(100f, 50f);
                     error.show();
+                    Log.err(ex);
+                    if (!Vars.headless) ui.loadfrag.hide();
                 }
             }).get();
             button.label(() -> bundle.get(title));

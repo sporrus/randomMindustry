@@ -25,12 +25,31 @@ import static mindustry.Vars.*;
 import static arc.Core.*;
 
 public class BlockMapper {
+    private static Planet planet = Planets.serpulo;
+    private static Seq<Block> selectedBlocks = new Seq<>();
     public static final Seq<String> genericCrafterTags = new Seq<>(new String[]{"press", "cultivator", "mixer", "smelter", "compressor", "weaver", "kiln", "pulverizer", "centrifuge", "condenser", "melter"});
 
     public static void init() {
-        Seq<Block> blocks = content.blocks().copy();
-        RandomUtil.shuffle(blocks);
-        blocks.each(BlockMapper::modify);
+        if (planet == null) selectedBlocks = content.blocks().copy();
+        else selectedBlocks = content.blocks().select((b) -> TechUtil.getRoot(b).contains(planet));
+        Seq<Block> unblocks = content.blocks().copy();
+        unblocks.removeAll(selectedBlocks);
+        unblocks.each(b -> {if (b.buildVisibility == BuildVisibility.shown) b.buildVisibility = BuildVisibility.debugOnly;});
+        selectedBlocks.each(b -> {if (b.buildVisibility == BuildVisibility.debugOnly) b.buildVisibility = BuildVisibility.shown;});
+        RandomUtil.shuffle(selectedBlocks);
+        selectedBlocks.each(BlockMapper::modify);
+    }
+
+    public static Planet getCurrentPlanet() {
+        return planet;
+    }
+
+    public static void setCurrentPlanet(Planet planet) {
+        BlockMapper.planet = planet;
+    }
+
+    public static Seq<Block> getSelectedBlocks() {
+        return selectedBlocks;
     }
 
     public static void modify(Block block) {
@@ -71,7 +90,7 @@ public class BlockMapper {
     }
 
     public static void modifyHeater(HeatProducer block) {
-
+        modifyBlock(block);
     }
 
     public static void modifyCrafter(GenericCrafter block) {

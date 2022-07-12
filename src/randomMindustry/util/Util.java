@@ -12,6 +12,7 @@ import mindustry.world.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
+import randomMindustry.random.mappers.blocks.BlockMapper;
 import randomMindustry.random.util.RandomUtil;
 
 import static mindustry.Vars.content;
@@ -30,7 +31,7 @@ public class Util {
     }
 
     public static Seq<Block> findRecipeOut(Item item) {
-        return content.blocks().select((block -> {
+        return BlockMapper.getSelectedBlocks().select((block -> {
             if (block instanceof GenericCrafter) {
                 ItemStack[] items = ((GenericCrafter) block).outputItems;
                 if (items == null) return false;
@@ -54,7 +55,7 @@ public class Util {
     }
 
     public static Seq<Block> findRecipeIn(Item item) {
-        return content.blocks().select((block -> {
+        return BlockMapper.getSelectedBlocks().select((block -> {
             if (new Seq<>(block.requirements).contains(itemStack -> itemStack.item == item)) return true;
             for (Consume consume : block.consumers) {
                 if (consume instanceof ConsumeItems consumeItems) {

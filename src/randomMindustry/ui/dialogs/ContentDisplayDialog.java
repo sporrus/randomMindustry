@@ -92,7 +92,7 @@ public abstract class ContentDisplayDialog extends BaseDialog {
         }
 
         ScrollPane pane = new ScrollPane(contentTable);
-        cont.add(pane);
+        cont.add(pane).growX().expandX();
     }
 
     public void postContent(UnlockableContent content) {

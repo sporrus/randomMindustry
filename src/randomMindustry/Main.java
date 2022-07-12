@@ -3,6 +3,7 @@ package randomMindustry;
 import arc.*;
 import arc.util.*;
 import mindustry.Vars;
+import mindustry.content.Planets;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
