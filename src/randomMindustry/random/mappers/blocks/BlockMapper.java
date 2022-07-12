@@ -1,5 +1,6 @@
 package randomMindustry.random.mappers.blocks;
 
+import arc.Core;
 import arc.struct.*;
 import mindustry.content.*;
 import mindustry.type.*;
@@ -21,8 +22,7 @@ import static mindustry.Vars.*;
 import static arc.Core.*;
 
 public class BlockMapper {
-    public static final Seq<String> genericCrafterNames = new Seq<>(new String[]{"Press", "Cultivator", "Mixer", "Smelter", "Compressor", "Weaver", "Kiln", "Pulverizer", "Centrifuge", "Condenser"});
-    public static final Seq<String> genericCrafterDescriptions = new Seq<>(new String[]{"Compresses", "Cultivates", "Mixes", "Fuses", "Produces", "Synthesizes", "Smelts", "Crushes", "Transforms", "Condenses"});
+    public static final Seq<String> genericCrafterTags = new Seq<>(new String[]{"press", "cultivator", "mixer", "smelter", "compressor", "weaver", "kiln", "pulverizer", "centrifuge", "condenser", "melter"});
 
     public static void init() {
         Seq<Block> blocks = content.blocks().copy();
@@ -79,17 +79,21 @@ public class BlockMapper {
         block.consumeItems(itemStacks);
         block.craftTime = RandomUtil.getRand().random(300f);
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
-        String factory = (tier == 0 ? "Creator" : genericCrafterNames.random(RandomUtil.getClientRand()));
-        block.localizedName = item.localizedName + " " + factory;
-        block.description = (tier == 0 ? "Creates" : genericCrafterDescriptions.get(genericCrafterNames.indexOf(factory))) + " " + item.localizedName.toLowerCase() + "[lightgray]" + (tier != 0 ? " from " : "");
-        if (itemStacks.length > 0) block.description += itemStacks[0].item.localizedName.toLowerCase() + "[lightgray]";
+
+        String factory = (tier == 0 ? "creator" : genericCrafterTags.random(RandomUtil.getClientRand()));
+
+        StringBuilder from = new StringBuilder();
+        if (itemStacks.length > 0) from.append(itemStacks[0].item.localizedName.toLowerCase()).append("[lightgray]");
         if (itemStacks.length > 1) {
             for (int i = 1; i < itemStacks.length - 1; i++) {
-                block.description += ", " + itemStacks[i].item.localizedName.toLowerCase() + "[lightgray]";
+                from.append(", ").append(itemStacks[i].item.localizedName.toLowerCase()).append("[lightgray]");
             }
-            block.description += " and " + itemStacks[itemStacks.length - 1].item.localizedName.toLowerCase() + "[lightgray]";
+            from.append(" and ").append(itemStacks[itemStacks.length - 1].item.localizedName.toLowerCase()).append("[lightgray]");
         }
-        block.description += ".";
+        String to = item.localizedName.toLowerCase() + "[lightgray]";
+
+        block.localizedName = bundle.format("crafter.rm-name." + factory, item.localizedName);
+        block.description = bundle.format("crafter.rm-description." + factory, from.toString(), to);
     }
 
     public static void modifyConveyor(Conveyor block) {
