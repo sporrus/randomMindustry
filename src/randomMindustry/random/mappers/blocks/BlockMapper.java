@@ -8,11 +8,13 @@ import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.*;
+import mindustry.world.blocks.heat.HeatProducer;
 import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.storage.*;
 import mindustry.world.blocks.units.*;
 
+import mindustry.world.meta.BuildVisibility;
 import randomMindustry.random.mappers.*;
 import randomMindustry.random.util.*;
 import randomMindustry.util.*;
@@ -34,9 +36,11 @@ public class BlockMapper {
         Seq<Category> cats = new Seq<>();
         cats.addAll(Category.all);
         if (settings.getBool("rmchaos-category-rand", false)) block.category = cats.random(RandomUtil.getRand());
-        if (!TechUtil.getRoot(block).contains(Planets.serpulo)) return;
+        if (block.buildVisibility != BuildVisibility.shown) return;
         Util.resetStats(block);
-        if (block instanceof GenericCrafter gencrafter) {
+        if (block instanceof HeatProducer heatProducer) {
+            modifyHeater(heatProducer);
+        } else if (block instanceof GenericCrafter gencrafter) {
             modifyCrafter(gencrafter);
         } else if (block instanceof Drill drill) {
             modifyDrill(drill);
@@ -62,7 +66,11 @@ public class BlockMapper {
 
     public static void modifyCore(CoreBlock block) {
         block.unitType.weapons.each((w) -> w.bullet.buildingDamageMultiplier = 0.01f);
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(3, 6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(3, ResourceMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
+    }
+
+    public static void modifyHeater(HeatProducer block) {
+
     }
 
     public static void modifyCrafter(GenericCrafter block) {
@@ -97,24 +105,24 @@ public class BlockMapper {
     }
 
     public static void modifyConveyor(Conveyor block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 3, (int) Math.floor(block.health / 4d), 1, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(ResourceMapper.maxTier) + 1, 3, (int) Math.floor(block.health / 4d), 1, true);
     }
 
     public static void modifyBlock(Block block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(ResourceMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
     }
 
     public static void modifyDrill(Drill block) {
-        int localTier = block.tier * 2 - 3;
-        block.requirements = ResourceMapper.getRandomItemStacks(localTier, 5, (int) Math.floor(block.health / 4d), 5, true);
+        int localTier = block.tier;
+        block.requirements = ResourceMapper.getRandomItemStacks("drill", localTier, 5, (int) Math.floor(block.health / 4d), 5, true);
     }
 
     public static void modifyWall(Wall block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, block.size * 10, 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(ResourceMapper.maxTier) + 1, 5, block.size * 10, 5, true);
     }
 
     public static void modifyUnitFactory(UnitFactory block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(ResourceMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
 
         Seq<UnitFactory.UnitPlan> plans = block.plans;
 
@@ -125,8 +133,8 @@ public class BlockMapper {
     }
 
     public static void modifyReconstructor(Reconstructor block) {
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(6) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
+        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(ResourceMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         Util.removeAllConsumers(block);
-        block.consumeItems(ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(5) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
+        block.consumeItems(ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(ResourceMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
     }
 }

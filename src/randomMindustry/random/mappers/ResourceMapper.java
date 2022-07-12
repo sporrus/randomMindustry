@@ -11,14 +11,20 @@ import randomMindustry.random.util.*;
 import randomMindustry.util.techTrees.*;
 
 public class ResourceMapper {
-    public static Seq<ItemPack> itemMap = new Seq<>();
+    private static Seq<Item> selectedItems = new Seq<>();
+    private static Seq<ItemPack> itemMap = new Seq<>();
+    public static final int itemCount = 16;
+    public static final int maxTier = 6;
 
     // TODO: make randomized items
     public static void init() {
-        Seq<Item> items = Vars.content.items().select((item) -> TechUtil.getRoot(item).contains(Planets.serpulo));
-        RandomUtil.shuffle(items);
-        items.each((item -> {
+        selectedItems = Vars.content.items().copy();
+        RandomUtil.shuffle(selectedItems);
+        selectedItems.truncate(itemCount);
+
+        selectedItems.each((item -> {
             item.stats = new Stats();
+            item.alwaysUnlocked = true;
             item.stats.intialized = true;
             item.explosiveness = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.flammability = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
@@ -27,8 +33,7 @@ public class ResourceMapper {
             item.cost = RandomUtil.getRand().random(100) / 100f;
             item.setStats();
         }));
-        ItemPack all = new ItemPack("all", 0, 0, items.toArray(Item.class));
-        Log.info(items.size);
+        ItemPack all = new ItemPack("all", 0, 0, selectedItems.toArray(Item.class));
 
         itemMap = new Seq<>();
         itemMap.add(new ItemPack("hand", 0, 0,
@@ -49,9 +54,11 @@ public class ResourceMapper {
         itemMap.add(new ItemPack("drill", 5, 2,
                 all.random(true)
         ));
-        itemMap.add(new ItemPack("craft", 6, 1,
+        itemMap.add(new ItemPack("craft", 6, 2,
                 all.random(true), all.random(true), all.random(true)
         ));
+
+        Items.erekirOnlyItems.clear().addAll(all.locked);
 
         ItemPack ores = combine(false, getPackByTier(0), getPackByTier(1), getPackByTier(3), getPackByTier(5));
         new Seq<>(new Block[]{Blocks.oreCopper, Blocks.oreLead, Blocks.oreScrap, Blocks.oreCoal, Blocks.sand, Blocks.oreTitanium, Blocks.oreThorium}).each(b -> {
@@ -66,6 +73,14 @@ public class ResourceMapper {
         Blocks.sand.localizedName = Blocks.sand.itemDrop.localizedName;
         Blocks.sand.playerUnmineable = false;
         Blocks.darksand.playerUnmineable = false;
+    }
+
+    public static Seq<ItemPack> getItemMap() {
+        return itemMap;
+    }
+
+    public static Seq<Item> getSelectedItems() {
+        return selectedItems;
     }
 
     public static int getMaxTier() {
@@ -116,10 +131,31 @@ public class ResourceMapper {
             pack.relock();
             all = combine(true, all, pack);
         }
+        return getItemStacksFromPack(all, maxTier, maxItemStackCount, maxItemCount, itemMult, unique);
+    }
+
+    public static ItemStack[] getRandomItemStacks(String tag, int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
+        Seq<ItemStack> seq = new Seq<>();
+        int minTier = Math.max(maxTier - 2, 0);
+        ItemPack all = getPackByTier(minTier).copy();
+        all.relock();
+        for (int i = minTier + 1; i < maxTier; i++) {
+            ItemPack pack = getPackByTagAndLocalTier(tag, i);
+            if (pack == null) continue;
+            pack = pack.copy();
+            pack.relock();
+            all = combine(true, all, pack);
+        }
+        return getItemStacksFromPack(all, maxTier, maxItemStackCount, maxItemCount, itemMult, unique);
+    }
+
+    public static ItemStack[] getItemStacksFromPack(ItemPack all, int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
+        Seq<ItemStack> seq = new Seq<>();
+        int minTier = Math.max(maxTier - 2, 0);
         int itemStackCount = Math.min(RandomUtil.getRand().random(1, maxItemStackCount), getRange(minTier, maxTier));
         for (int i = 0; i < itemStackCount; i++) {
             int count = RandomUtil.getRandomIntMult(Math.max(0, maxItemCount - 100), maxItemCount - itemMult, itemMult) + itemMult;
-            seq.add(new ItemStack(all.random(true), count));
+            seq.add(new ItemStack(all.random(unique), count));
         }
         return seq.toArray(ItemStack.class);
     }
@@ -129,7 +165,9 @@ public class ResourceMapper {
     }
 
     public static Item getGenericCrafterOut() {
-        return getPacksByTag("craft").random(RandomUtil.getRand()).random(true);
+        ItemPack pack = getPacksByTag("craft").copy().select((itemPack -> itemPack.locked.size > 0)).random(RandomUtil.getRand());
+        if (pack == null) return null;
+        return pack.random(true);
     }
 
     public static ItemPack getPackByTagAndLocalTier(String tag, int tier) {
@@ -181,6 +219,11 @@ public class ResourceMapper {
                 return item;
             }
             return all.random(RandomUtil.getRand());
+        }
+
+        public void add(Item item, boolean lock) {
+            all.add(item);
+            if (lock) locked.add(item);
         }
 
         public void relock() {

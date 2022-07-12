@@ -95,7 +95,7 @@ public class TurretMapper {
 
     public static void modifyItemTurret(ItemTurret turret) {
         Seq<Object> ammo = new Seq<>();
-        Seq<Item> items = content.items().select((item -> TechUtil.getRoot(item).contains(Planets.serpulo)));
+        Seq<Item> items = ResourceMapper.getSelectedItems().copy();
         Seq<BulletType> bullets = content.bullets();
         int count = RandomUtil.getRand().random(1, 5);
         for (int i = 0; i < count; i++)

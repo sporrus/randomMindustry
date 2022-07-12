@@ -61,7 +61,7 @@ public class Main extends Mod {
         BulletMapper.init();
         UnitMapper.init();
         BlockMapper.init();
-        for (ResourceMapper.ItemPack pack : ResourceMapper.itemMap) {
+        for (ResourceMapper.ItemPack pack : ResourceMapper.getItemMap()) {
             Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
             for (Item item : pack.all) {
                 if (pack.locked.contains(item)) Log.info("[red]==LOCKED==");

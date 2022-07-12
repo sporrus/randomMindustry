@@ -71,12 +71,9 @@ public class Util {
     }
 
     public static void updateStats(Block block) {
+        if (block == Blocks.buildTower) return; // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         block.stats = new Stats();
-        block.stats.intialized = false;
         block.init();
-        block.checkStats();
-        Log.info(block);
-        Log.info(block.consumers.length);
     }
 
     public static Sound generateSound() {

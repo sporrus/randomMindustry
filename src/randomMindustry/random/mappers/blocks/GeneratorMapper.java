@@ -22,7 +22,7 @@ public class GeneratorMapper {
             boolean hard = false;
 
             Util.removeAllConsumers(block);
-            Seq<Item> consumes = content.items().select((l) -> TechUtil.getRoot(l).contains(Planets.serpulo));
+            Seq<Item> consumes = ResourceMapper.getSelectedItems().copy();
             Seq<Liquid> liquids = content.liquids().select((l) -> TechUtil.getRoot(l).contains(Planets.serpulo));
             if (RandomUtil.getRand().chance(0.25)) {
                 hard = true;

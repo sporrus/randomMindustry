@@ -40,9 +40,9 @@ public class ItemFinderDialog extends BaseDialog {
         output.clear();
         var text = search.getText();
 
-        Seq<Item> items = content.items().select(i -> i.localizedName.toLowerCase().contains(text.toLowerCase()) && !i.hidden);
+        Seq<Item> items = ResourceMapper.getSelectedItems().sort((i1, i2) -> String.CASE_INSENSITIVE_ORDER.compare(i1.name, i2.name)).select(i -> i.localizedName.toLowerCase().contains(text.toLowerCase()));
         Seq<Item> locked = new Seq<>();
-        ResourceMapper.itemMap.each(pack -> locked.addAll(pack.locked));
+        ResourceMapper.getItemMap().each(pack -> locked.addAll(pack.locked));
 
         items.each(i -> {
             boolean lock = locked.contains(i);
