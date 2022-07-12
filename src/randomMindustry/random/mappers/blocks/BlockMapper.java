@@ -81,14 +81,15 @@ public class BlockMapper {
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
         String factory = (tier == 0 ? "Creator" : genericCrafterNames.random(RandomUtil.getClientRand()));
         block.localizedName = item.localizedName + " " + factory;
-        block.description = (tier == 0 ? "Creates" : genericCrafterDescriptions.get(genericCrafterNames.indexOf(factory))) + " " + item.localizedName.toLowerCase() + (tier != 0 ? " from " : "") + ".";
-        if (itemStacks.length > 0) block.description += itemStacks[0].item.localizedName.toLowerCase();
+        block.description = (tier == 0 ? "Creates" : genericCrafterDescriptions.get(genericCrafterNames.indexOf(factory))) + " " + item.localizedName.toLowerCase() + "[lightgray]" + (tier != 0 ? " from " : "");
+        if (itemStacks.length > 0) block.description += itemStacks[0].item.localizedName.toLowerCase() + "[lightgray]";
         if (itemStacks.length > 1) {
             for (int i = 1; i < itemStacks.length - 1; i++) {
-                block.description += ", " + itemStacks[i].item.localizedName.toLowerCase();
+                block.description += ", " + itemStacks[i].item.localizedName.toLowerCase() + "[lightgray]";
             }
-            block.description += " and " + itemStacks[itemStacks.length - 1].item.localizedName.toLowerCase() + ".";
+            block.description += " and " + itemStacks[itemStacks.length - 1].item.localizedName.toLowerCase() + "[lightgray]";
         }
+        block.description += ".";
     }
 
     public static void modifyConveyor(Conveyor block) {
