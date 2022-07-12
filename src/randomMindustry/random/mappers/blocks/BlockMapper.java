@@ -21,7 +21,7 @@ import static mindustry.Vars.*;
 import static arc.Core.*;
 
 public class BlockMapper {
-    public static final Seq<String> genericCrafterNames = new Seq<>(new String[]{"Press", "Cultivator", "Mixer", "Smelter", "Compressor", "Weaver", "Klin", "Pulverizer", "Centrifuge", "Condenser"});
+    public static final Seq<String> genericCrafterNames = new Seq<>(new String[]{"Press", "Cultivator", "Mixer", "Smelter", "Compressor", "Weaver", "Kiln", "Pulverizer", "Centrifuge", "Condenser"});
     public static final Seq<String> genericCrafterDescriptions = new Seq<>(new String[]{"Compresses", "Cultivates", "Mixes", "Fuses", "Produces", "Synthesizes", "Smelts", "Crushes", "Transforms", "Condenses"});
 
     public static void init() {
