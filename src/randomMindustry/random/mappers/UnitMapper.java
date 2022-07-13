@@ -2,6 +2,7 @@ package randomMindustry.random.mappers;
 
 import arc.struct.*;
 import mindustry.type.*;
+import mindustry.type.unit.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
@@ -47,6 +48,7 @@ public class UnitMapper{
         unit.fallEngineEffect = effects.random(RandomUtil.getRand());
         unit.deathExplosionEffect = effects.random(RandomUtil.getRand());
         
+        if(unit instanceof MissileUnitType) return;
         unit.weapons.each(weapon -> {
             weapon.shootSound = Util.generateSound();
             weapon.chargeSound = Util.generateSound();
