@@ -104,7 +104,8 @@ public class BlockMapper {
             block.consumePower(RandomUtil.getRand().random(20f));
         }
         ItemStack[] itemStacks = ResourceMapper.getRandomItemStacks(tier, 3, 10, 1, true);
-        block.consumeItems(itemStacks);
+        if (tier > -1) block.consumeItems(itemStacks);
+        else block.consumeItems();
         block.craftTime = RandomUtil.getRand().random(300f);
         block.requirements = ResourceMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
 
