@@ -153,8 +153,8 @@ public class BlockMapper {
         Seq<UnitFactory.UnitPlan> plans = block.plans;
 
         plans.each(plan -> {
-            // randomize plan build time and unit?
-            plan.time = RandomUtil.getRand().random(3600);
+            // randomize plan unit?
+            plan.time = RandomUtil.getRand().random(3600f);
             plan.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(3) + 1, 5, (int) Math.floor(plan.unit.health / 2d), 5, true);
         });
     }
