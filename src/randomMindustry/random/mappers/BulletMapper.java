@@ -32,9 +32,9 @@ public class BulletMapper {
             bullet.weaveScale = RandomUtil.getRand().random(0.5f, 20f);
             bullet.weaveMag = RandomUtil.getRand().random(0.5f, 10f);
 
-            bullet.rangeChange = RandomUtil.getRand().random(0.5f, 20f);
+            bullet.rangeChange = RandomUtil.getRand().random(0.5f, 80f);
             bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f;
-            bullet.healPercent = (RandomUtil.getRand().chance(0.25) ? RandomUtil.getRand().random(0f, 100f) : 0);
+            bullet.healPercent = RandomUtil.getRand().chance(0.75f) ? RandomUtil.getRand().random(0f, 100f) : 0;
             if (bullet.healPercent > 0) bullet.collidesTiles = bullet.collidesTeam = true;
             else bullet.collidesTeam = false;
             bullet.lifetime = RandomUtil.getRand().random(10f, 100f);
@@ -44,7 +44,7 @@ public class BulletMapper {
             bullet.despawnShake = RandomUtil.getClientRand().random(-1f, 1f);
 
             bullet.speed = RandomUtil.getRand().random(1f, 10f);
-            bullet.drag = RandomUtil.getRand().random(-0.01f, 0.05f);
+            bullet.drag = RandomUtil.getRand().random(-0.01f, 0.08f);
 
             bullet.damage = RandomUtil.getRand().random(1f, 100f);
             bullet.buildingDamageMultiplier = RandomUtil.getRand().random(0f, 2f);
@@ -57,17 +57,17 @@ public class BulletMapper {
                 basicBullet.spin = RandomUtil.getRand().random(45f);
             }
 
-            if (RandomUtil.getRand().chance(0.25)) {
+            if (RandomUtil.getRand().chance(0.5f)) {
                 bullet.status = content.statusEffects().random(RandomUtil.getRand());
                 bullet.statusDuration = RandomUtil.getRand().random(600f);
             }
 
-            if (RandomUtil.getRand().chance(0.25)) {
+            if (RandomUtil.getRand().chance(0.5f)) {
                 bullet.fragBullets = RandomUtil.getRand().random(10);
                 bullet.fragBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random(RandomUtil.getRand());
             }
 
-            if (RandomUtil.getRand().chance(0.25)) {
+            if (RandomUtil.getRand().chance(0.25f)) {
                 bullet.intervalBullets = RandomUtil.getRand().random(5);
                 bullet.intervalBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random(RandomUtil.getRand());
                 bullet.bulletInterval = RandomUtil.getRand().random(60f, 600f);
