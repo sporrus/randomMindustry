@@ -23,8 +23,8 @@ public class TurretMapper {
         block.shootCone = RandomUtil.getRand().random(1f, 360f);
         block.inaccuracy = RandomUtil.getRand().random(1f, 180f);
         block.xRand = RandomUtil.getRand().random(1f, 10f);
-        block.shootX = RandomUtil.getRand().random(1f, 20f);
-        block.shootY = RandomUtil.getRand().random(1f, 20f);
+        block.shootX = RandomUtil.getRand().random(-20f, 20f);
+        block.shootY = RandomUtil.getRand().random(-20f, 20f);
         block.recoil = RandomUtil.getRand().random(-50f, 50f);
         block.rotateSpeed = RandomUtil.getRand().random(1f, 20f);
 
