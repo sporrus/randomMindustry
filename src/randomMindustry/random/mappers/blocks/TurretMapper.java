@@ -103,9 +103,12 @@ public class TurretMapper {
         Seq<BulletType> bullets = content.bullets();
         int count = RandomUtil.getRand().random(1, 5);
         int sum = 0;
+        turret.targetAir = turret.targetGround = false;
         for (int i = 0; i < count; i++) {
             BulletType bullet = bullets.random(RandomUtil.getRand());
             sum += bullet.range;
+            turret.targetAir |= bullet.collidesAir;
+            turret.targetGround |= bullet.collidesGround;
             ammo.add(items.random(RandomUtil.getRand()), bullet);
         }
         turret.range = sum / (float)count;

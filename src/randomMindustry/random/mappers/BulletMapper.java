@@ -49,6 +49,16 @@ public class BulletMapper {
             bullet.damage = RandomUtil.getRand().random(1f, 100f);
             bullet.buildingDamageMultiplier = RandomUtil.getRand().random(0f, 2f);
 
+            bullet.collidesGround = bullet.collidesAir = false;
+            if (RandomUtil.getRand().chance(0.5)) {
+                bullet.collidesAir = true;
+                bullet.collidesGround = true;
+            } else if (RandomUtil.getRand().chance(0.5)) {
+                bullet.collidesAir = true;
+            } else {
+                bullet.collidesGround = true;
+            }
+
             if (bullet instanceof BasicBulletType basicBullet) {
                 basicBullet.width = RandomUtil.getRand().random(4f, 20f);
                 basicBullet.height = RandomUtil.getRand().random(4f, 20f);

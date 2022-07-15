@@ -47,7 +47,8 @@ public class UnitMapper{
         unit.fallEffect = effects.random(RandomUtil.getRand());
         unit.fallEngineEffect = effects.random(RandomUtil.getRand());
         unit.deathExplosionEffect = effects.random(RandomUtil.getRand());
-        
+
+        unit.targetAir = unit.targetGround = false;
         if(unit instanceof MissileUnitType) return;
         unit.weapons.each(weapon -> {
             weapon.shootSound = Util.generateSound();
@@ -66,7 +67,9 @@ public class UnitMapper{
             weapon.rotationLimit = RandomUtil.getRand().random(45f, 361f);
             
             weapon.bullet = content.bullets().random(RandomUtil.getRand());
-            
+            unit.targetAir |= weapon.bullet.collidesAir;
+            unit.targetGround |= weapon.bullet.collidesGround;
+
             int pattern = RandomUtil.getRand().random(0, 5);
             switch (pattern) {
                 case 0 -> weapon.shoot = new ShootPattern();
@@ -95,5 +98,12 @@ public class UnitMapper{
             weapon.shoot.shots = RandomUtil.getRand().random(1, 10);
             weapon.shoot.shotDelay = RandomUtil.getRand().random(1f, 60f);
         });
+
+        unit.range = Float.MAX_VALUE;
+        unit.maxRange = -Float.MAX_VALUE;
+        for(Weapon weapon : unit.weapons){
+            unit.range = Math.min(unit.range, weapon.range() - 4);
+            unit.maxRange = Math.max(unit.maxRange, weapon.range() - 4);
+        }
     }
 }
