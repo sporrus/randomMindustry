@@ -85,6 +85,7 @@ public class TurretMapper {
         turret.ammo(ammo.toArray());
     }
 
+    // TODO: crap i forgor to make v1.5.0 for liquid turrets too bad
     public static void modifyLiquidTurret(LiquidTurret turret) {
         Seq<Object> ammo = new Seq<>();
         Seq<Liquid> liquids = content.liquids().select((liquid -> TechUtil.getRoot(liquid).contains(Planets.serpulo)));
