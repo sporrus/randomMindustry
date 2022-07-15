@@ -56,12 +56,12 @@ public class Main extends Mod {
         if (!Vars.headless) ui.loadfrag.show("@msg.rm-generating");
         Log.info(bundle.get("msg.rm-log-generating"));
         FxMapper.init();
-        RegionMapper.init();
-        BundleMapper.init();
         ResourceMapper.init();
         BulletMapper.init();
         UnitMapper.init();
         BlockMapper.init();
+        RegionMapper.init();
+        BundleMapper.init();
         for (ResourceMapper.ItemPack pack : ResourceMapper.getItemMap()) {
             Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
             for (Item item : pack.all) {

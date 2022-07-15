@@ -11,6 +11,15 @@ public class BundleMapper {
     public static void init(){
         if (headless) return;
 
+        if (settings.getBool("rmchaos-bundle-letter-swap", false)) {
+            content.each(c -> {
+                if(!(c instanceof UnlockableContent uc)) return;
+                if (uc.localizedName != null) uc.localizedName = swap(uc.localizedName);
+                if (uc.description != null) uc.description = swap(uc.description);
+                if (uc.details != null) uc.details = swap(uc.details);
+            });
+        }
+
         if(settings.getBool("rmchaos-bundle-swap", false)){
             ObjectMap<String, String> bundleCopy = bundle.getProperties().copy();
 
@@ -39,5 +48,21 @@ public class BundleMapper {
                 uc.details = "router";
             });
         }
+    }
+
+    public static String swap(String str) {
+        String[] words = str.split(" +");
+        for (int i = 0; i < words.length; i++) {
+            int randomI = RandomUtil.getClientRand().nextInt(words.length);
+            StringBuilder wordB = new StringBuilder(words[i]);
+            StringBuilder newWordB = new StringBuilder(words[randomI]);
+            char temp = wordB.charAt(0);
+            wordB.setCharAt(0, newWordB.charAt(0));
+            newWordB.setCharAt(0, temp);
+
+            words[i] = wordB.toString();
+            words[randomI] = newWordB.toString();
+        }
+        return String.join(" ", words);
     }
 }

@@ -19,22 +19,23 @@ import randomMindustry.random.util.*;
 import static mindustry.Vars.*;
 import static arc.Core.*;
 
-public class SettingsLoader{
-    public static void init(){
+public class SettingsLoader {
+    public static void init() {
         SettingsMenuDialog dialog = ui.settings;
-        
+
         dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
             c.areaTextPref("rm-seed", "0");
             c.pref(new TechSelector());
             c.pref(new RandomButton());
             c.pref(new GenerateButton());
         });
-        
+
         dialog.addCategory("@setting.rmchaos", Icon.effect /* TODO: Make custom icons. */, c -> {
             c.checkPref("rmchaos-region-swap", false);
-             c.checkPref("rmchaos-region-skullify", false);
-             c.checkPref("rmchaos-router", false);
-             c.checkPref("rmchaos-bundle-swap", false);
+            c.checkPref("rmchaos-region-skullify", false);
+            c.checkPref("rmchaos-router", false);
+            c.checkPref("rmchaos-bundle-swap", false);
+            c.checkPref("rmchaos-bundle-letter-swap", false);
             c.checkPref("rmchaos-category-rand", false);
         });
     }
@@ -53,7 +54,7 @@ public class SettingsLoader{
 
                 t.defaults().size(140f, 50f);
 
-                for(Planet planet : new Planet[]{Planets.serpulo, Planets.erekir}){
+                for (Planet planet : new Planet[]{Planets.serpulo, Planets.erekir}) {
                     t.button(planet.localizedName, style, () -> {
                         BlockMapper.setCurrentPlanet(planet);
                     }).group(group).checked((b) -> BlockMapper.getCurrentPlanet() == planet);
@@ -65,31 +66,31 @@ public class SettingsLoader{
             }).left().fill(false).expand(false, false).row();
         }
     }
-    
-    static class RandomButton extends Setting{
-        public RandomButton(){
+
+    static class RandomButton extends Setting {
+        public RandomButton() {
             super("rm-random");
             title = "setting.rm-random.name";
         }
-        
+
         @Override
-        public void add(SettingsTable table){
+        public void add(SettingsTable table) {
             ImageButton button = table.button(Icon.refresh, () -> settings.put("rm-seed", Long.toString(new Rand().nextLong()))).get();
             button.label(() -> bundle.get(title));
             table.row();
-            
+
             addDesc(button);
         }
     }
-    
-    static class GenerateButton extends Setting{
-        public GenerateButton(){
+
+    static class GenerateButton extends Setting {
+        public GenerateButton() {
             super("rm-generate");
             title = "setting.rm-generate.name";
         }
-        
+
         @Override
-        public void add(SettingsTable table){
+        public void add(SettingsTable table) {
             ImageButton button = table.button(Icon.refresh, () -> {
                 String seed = settings.getString("rm-seed");
                 try {
