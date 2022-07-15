@@ -1,8 +1,10 @@
 package randomMindustry.random.mappers;
 
+import arc.Core;
 import arc.struct.*;
 import arc.graphics.g2d.TextureAtlas.*;
 import mindustry.*;
+import mindustry.gen.Icon;
 import randomMindustry.random.util.*;
 
 import static arc.Core.*;
@@ -33,6 +35,10 @@ public class RegionMapper{
                 newRegion.height = region.height;
                 region.set(newRegion);
             });
+            Icon.icons.values().forEach((t) -> {
+                AtlasRegion newRegion = atlas.getRegionMap().get("router");
+                t.set(newRegion);
+            });
         }
 
         if(settings.getBool("rmchaos-region-skullify", false)){
@@ -42,6 +48,11 @@ public class RegionMapper{
                 newRegion.height = region.height;
                 region.set(newRegion);
             });
+            Icon.icons.values().forEach((t) -> {
+                AtlasRegion newRegion = atlas.getRegionMap().get("random-mindustry-skull");
+                t.set(newRegion);
+            });
+            
         }
     }
 }
