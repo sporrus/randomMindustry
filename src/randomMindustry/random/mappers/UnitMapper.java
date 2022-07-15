@@ -35,7 +35,7 @@ public class UnitMapper{
         
         unit.legCount = RandomUtil.getRandomIntMult(2, 10, 2);
         unit.legGroupSize = RandomUtil.getRandomIntMult(2, 10, 2);
-        unit.legLength += RandomUtil.getRand().random(0f, 25f);
+        unit.legLength = RandomUtil.getRand().random(-70f, 70f);
         unit.legSpeed = RandomUtil.getRand().random(0.1f, 3f);
         unit.legStraightness = RandomUtil.getRand().random(1f);
         unit.lockLegBase = RandomUtil.getRand().random(-2f, 2f) > 0;
@@ -59,8 +59,8 @@ public class UnitMapper{
             weapon.xRand = RandomUtil.getRand().random(1f, 10f);
             weapon.shootX = RandomUtil.getRand().random(-20f, 20f);
             weapon.shootY = RandomUtil.getRand().random(-20f, 20f);
-            weapon.x += RandomUtil.getRand().random(-20f, 20f);
-            weapon.y += RandomUtil.getRand().random(-20f, 20f);
+            weapon.x = RandomUtil.getRand().random(-30f, 30f);
+            weapon.y = RandomUtil.getRand().random(-30f, 30f);
             weapon.recoil = RandomUtil.getRand().random(-50f, 50f);
             weapon.rotateSpeed = RandomUtil.getRand().random(1f, 20f);
             weapon.rotationLimit = RandomUtil.getRand().random(45f, 361f);
