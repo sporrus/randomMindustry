@@ -59,9 +59,9 @@ public class UnitMapper{
             weapon.xRand = RandomUtil.getRand().random(1f, 10f);
             weapon.shootX = RandomUtil.getRand().random(-20f, 20f);
             weapon.shootY = RandomUtil.getRand().random(-20f, 20f);
-            weapon.x = RandomUtil.getRand().random(-30f, 30f);
-            weapon.y = RandomUtil.getRand().random(-30f, 30f);
-            weapon.recoil = RandomUtil.getRand().random(-50f, 50f);
+            weapon.x = RandomUtil.getRand().random(-unit.hitSize/2f, unit.hitSize/2f);
+            weapon.y = RandomUtil.getRand().random(-unit.hitSize/2f, unit.hitSize/2f);
+            weapon.recoil = RandomUtil.getRand().random(-25f, 25f);
             weapon.rotateSpeed = RandomUtil.getRand().random(1f, 20f);
             weapon.rotationLimit = RandomUtil.getRand().random(45f, 361f);
             

@@ -1,6 +1,7 @@
 package randomMindustry.random.mappers.blocks;
 
 import arc.struct.*;
+import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
@@ -23,9 +24,9 @@ public class TurretMapper {
         block.shootCone = RandomUtil.getRand().random(1f, 360f);
         block.inaccuracy = RandomUtil.getRand().random(1f, 180f);
         block.xRand = RandomUtil.getRand().random(1f, 10f);
-        block.shootX = RandomUtil.getRand().random(-20f, 20f);
-        block.shootY = RandomUtil.getRand().random(-20f, 20f);
-        block.recoil = RandomUtil.getRand().random(-50f, 50f);
+        block.shootX = RandomUtil.getRand().random(-block.size * tilesize / 2f, block.size * tilesize / 2f);
+        block.shootY = RandomUtil.getRand().random(-block.size * tilesize / 2f, block.size * tilesize / 2f);
+        block.recoil = RandomUtil.getRand().random(-25f, 25f);
         block.rotateSpeed = RandomUtil.getRand().random(1f, 20f);
 
         int pattern = RandomUtil.getRand().random(0, 5);
