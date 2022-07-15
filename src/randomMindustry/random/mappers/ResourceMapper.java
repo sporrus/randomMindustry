@@ -25,14 +25,22 @@ public class ResourceMapper {
         selectedItems.each((item -> {
             item.stats = new Stats();
             item.alwaysUnlocked = true;
-            item.stats.intialized = true;
+            item.hidden = false;
+            item.buildable = true;
             item.explosiveness = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.flammability = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.radioactivity = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.charge = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.cost = RandomUtil.getRand().random(100) / 100f;
-            item.setStats();
+            item.checkStats();
         }));
+        Seq<Item> unselectedItems = Vars.content.items().copy();
+        unselectedItems.removeAll(selectedItems::contains);
+        unselectedItems.each((i) -> {
+            i.alwaysUnlocked = false;
+            i.hidden = true;
+            i.buildable = false;
+        });
         ItemPack all = new ItemPack("all", 0, 0, selectedItems.toArray(Item.class));
 
         itemMap = new Seq<>();
@@ -58,7 +66,11 @@ public class ResourceMapper {
                 all.random(true), all.random(true), all.random(true)
         ));
 
-        Items.erekirOnlyItems.clear().addAll(all.locked);
+        Items.erekirOnlyItems.clear().addAll(unselectedItems);
+        // TODO: this is really bad, make every planet have its own set of items
+        Vars.content.planets().each((p) -> p.hiddenItems.clear().addAll(unselectedItems));
+        Vars.state.rules.hiddenBuildItems.clear();
+        Vars.state.rules.hiddenBuildItems.addAll(unselectedItems);
 
         ItemPack ores = combine(false, getPackByTier(0), getPackByTier(1), getPackByTier(3), getPackByTier(5));
         new Seq<>(new Block[]{Blocks.oreCopper, Blocks.oreLead, Blocks.oreScrap, Blocks.oreCoal, Blocks.sand, Blocks.oreTitanium, Blocks.oreThorium}).each(b -> {
@@ -143,6 +155,7 @@ public class ResourceMapper {
             int count = RandomUtil.getRandomIntMult(Math.max(0, maxItemCount - 100), maxItemCount - itemMult, itemMult) + itemMult;
             Item item = (i == 0 ? highest : all).random(unique);
             if (i == 0) all.locked.remove(item);
+            if (item == null) continue;
             seq.add(new ItemStack(item, count));
         }
         return seq.toArray(ItemStack.class);
