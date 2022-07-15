@@ -5,6 +5,7 @@ import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
+import mindustry.gen.Bullet;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
@@ -75,8 +76,10 @@ public class TurretMapper {
         Seq<Liquid> liquids = content.liquids().select((liquid -> TechUtil.getRoot(liquid).contains(Planets.serpulo)));
         Seq<BulletType> bullets = content.bullets();
         int count = RandomUtil.getRand().random(1, 5);
-        for (int i = 0; i < count; i++)
-            ammo.add(liquids.random(RandomUtil.getRand()), bullets.random(RandomUtil.getRand()));
+        for (int i = 0; i < count; i++) {
+            BulletType bullet = bullets.random(RandomUtil.getRand());
+            ammo.add(liquids.random(RandomUtil.getRand()), bullet);
+        }
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         turret.ammo(ammo.toArray());
@@ -99,8 +102,13 @@ public class TurretMapper {
         Seq<Item> items = ResourceMapper.getSelectedItems().copy();
         Seq<BulletType> bullets = content.bullets();
         int count = RandomUtil.getRand().random(1, 5);
-        for (int i = 0; i < count; i++)
-            ammo.add(items.random(RandomUtil.getRand()), bullets.random(RandomUtil.getRand()));
+        int sum = 0;
+        for (int i = 0; i < count; i++) {
+            BulletType bullet = bullets.random(RandomUtil.getRand());
+            sum += bullet.range;
+            ammo.add(items.random(RandomUtil.getRand()), bullet);
+        }
+        turret.range = sum / (float)count;
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         turret.ammo(ammo.toArray());

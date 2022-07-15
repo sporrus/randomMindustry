@@ -72,6 +72,8 @@ public class BulletMapper {
                 bullet.intervalBullet = RandomUtil.getRand().random(-10f, 2f) < 0f ? null : bulletSeq.random(RandomUtil.getRand());
                 bullet.bulletInterval = RandomUtil.getRand().random(60f, 600f);
             }
+
+            bullet.init();
         });
     }
 }
