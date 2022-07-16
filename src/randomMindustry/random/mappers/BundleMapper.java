@@ -1,7 +1,10 @@
 package randomMindustry.random.mappers;
 
 import arc.struct.*;
+import mindustry.content.Blocks;
+import mindustry.core.UI;
 import mindustry.ctype.*;
+import mindustry.ui.Fonts;
 import randomMindustry.random.util.*;
 
 import static arc.Core.*;
@@ -40,7 +43,16 @@ public class BundleMapper {
         }
 
         if(settings.getBool("rmchaos-router", false)){
-            bundle.debug("router");
+            ObjectMap<String, String> bundleCopy = bundle.getProperties().copy();
+            bundle.getProperties().each((key, val) -> {
+                StringBuilder routerString = new StringBuilder();
+                for (int i = 0; i < val.length(); i++) {
+                    if (val.charAt(i) != ' ') routerString.append(Blocks.router.emoji());
+                    else routerString.append(val.charAt(i));
+                }
+                bundleCopy.put(key, routerString.toString());
+            });
+            bundle.setProperties(bundleCopy);
             content.each(c -> {
                 if(!(c instanceof UnlockableContent uc)) return;
                 uc.localizedName = "router";
