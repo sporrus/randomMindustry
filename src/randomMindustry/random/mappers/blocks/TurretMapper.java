@@ -68,13 +68,13 @@ public class TurretMapper {
 
     public static void modifyPowerTurret(PowerTurret turret) {
         turret.consumePower(RandomUtil.getRand().random(20000) / 1000f);
-        turret.shootType = content.bullets().random(RandomUtil.getRand());
+        turret.shootType = content.bullets().select(b -> !(b instanceof MassDriverBolt)).random(RandomUtil.getRand());
     }
 
     public static void modifyContinuousLiquidTurret(ContinuousLiquidTurret turret) {
         Seq<Object> ammo = new Seq<>();
         Seq<Liquid> liquids = content.liquids().select((liquid -> TechUtil.getRoot(liquid).contains(Planets.serpulo)));
-        Seq<BulletType> bullets = content.bullets();
+        Seq<BulletType> bullets = content.bullets().select(b -> !(b instanceof MassDriverBolt));
         int count = RandomUtil.getRand().random(1, 5);
         for (int i = 0; i < count; i++) {
             BulletType bullet = bullets.random(RandomUtil.getRand());
@@ -89,7 +89,7 @@ public class TurretMapper {
     public static void modifyLiquidTurret(LiquidTurret turret) {
         Seq<Object> ammo = new Seq<>();
         Seq<Liquid> liquids = content.liquids().select((liquid -> TechUtil.getRoot(liquid).contains(Planets.serpulo)));
-        Seq<BulletType> bullets = content.bullets();
+        Seq<BulletType> bullets = content.bullets().select(b -> !(b instanceof MassDriverBolt));
         int count = RandomUtil.getRand().random(1, 5);
         for (int i = 0; i < count; i++)
             ammo.add(liquids.random(RandomUtil.getRand()), bullets.random(RandomUtil.getRand()));
@@ -101,7 +101,7 @@ public class TurretMapper {
     public static void modifyItemTurret(ItemTurret turret) {
         Seq<Object> ammo = new Seq<>();
         Seq<Item> items = ResourceMapper.getSelectedItems().copy();
-        Seq<BulletType> bullets = content.bullets();
+        Seq<BulletType> bullets = content.bullets().select(b -> !(b instanceof MassDriverBolt));
         int count = RandomUtil.getRand().random(1, 5);
         int sum = 0;
         turret.targetAir = turret.targetGround = false;
