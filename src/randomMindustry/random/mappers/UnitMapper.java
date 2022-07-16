@@ -66,7 +66,7 @@ public class UnitMapper{
             weapon.rotateSpeed = RandomUtil.getRand().random(1f, 20f);
             weapon.rotationLimit = RandomUtil.getRand().random(45f, 361f);
             
-            weapon.bullet = content.bullets().random(RandomUtil.getRand());
+            weapon.bullet = content.bullets().select(b -> !(b instanceof MassDriverBolt)).random(RandomUtil.getRand());
             unit.targetAir |= weapon.bullet.collidesAir;
             unit.targetGround |= weapon.bullet.collidesGround;
 
