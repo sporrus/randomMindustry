@@ -89,7 +89,7 @@ public class BulletMapper {
             }
 
             bullet.fragBullet = null;
-            if(RandomUtil.getRand().chance(0.5f)){
+            if(RandomUtil.getRand().chance(0.25f)){
                 bullet.fragBullets = RandomUtil.getRand().random(10);
                 bullet.fragBullet = bulletSeq.random(RandomUtil.getRand());
             }
