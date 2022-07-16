@@ -16,7 +16,20 @@ public class BulletMapper {
         Seq<BulletType> bullets = content.bullets().copy();
         RandomUtil.shuffle(bullets);
         bullets.each(bullet -> {
-            Seq<BulletType> bulletSeq = content.bullets().select(b -> b != bullet && !(b instanceof MassDriverBolt));
+            Seq<BulletType> bulletSeq = content.bullets().select(b -> {
+                boolean inFrag = false;
+                BulletType current = b;
+                Seq<BulletType> went = new Seq<>();
+                while (current.fragBullet != null && !went.contains(current.fragBullet)) {
+                    if (current.fragBullet == b) {
+                        inFrag = true;
+                        break;
+                    }
+                    went.add(current);
+                    current = current.fragBullet;
+                }
+                return b != bullet && !inFrag && !(b instanceof MassDriverBolt);
+            });
 
             bullet.hitEffect = effects.random(RandomUtil.getClientRand());
             bullet.despawnEffect = effects.random(RandomUtil.getClientRand());

@@ -101,6 +101,7 @@ public class BlockMapper {
         Util.removeAllConsumers(block);
         int tier = ResourceMapper.getTierOfItem(item)-1;
         if (tier >= GeneratorMapper.getLowestPowerTier() && RandomUtil.getRand().chance(0.25)) {
+            block.hasPower = true;
             block.consumePower(RandomUtil.getRand().random(20f));
         }
         ItemStack[] itemStacks = ResourceMapper.getRandomItemStacks(tier, 3, 10, 1, true);

@@ -69,6 +69,9 @@ public class TurretMapper {
     public static void modifyPowerTurret(PowerTurret turret) {
         turret.consumePower(RandomUtil.getRand().random(20000) / 1000f);
         turret.shootType = content.bullets().select(b -> !(b instanceof MassDriverBolt)).random(RandomUtil.getRand());
+        turret.targetAir = turret.shootType.collidesAir;
+        turret.targetGround = turret.shootType.collidesGround;
+        turret.range = turret.shootType.range;
     }
 
     public static void modifyContinuousLiquidTurret(ContinuousLiquidTurret turret) {
@@ -76,10 +79,16 @@ public class TurretMapper {
         Seq<Liquid> liquids = content.liquids().select((liquid -> TechUtil.getRoot(liquid).contains(Planets.serpulo)));
         Seq<BulletType> bullets = content.bullets().select(b -> !(b instanceof MassDriverBolt));
         int count = RandomUtil.getRand().random(1, 5);
+        int sum = 0;
+        turret.targetAir = turret.targetGround = false;
         for (int i = 0; i < count; i++) {
             BulletType bullet = bullets.random(RandomUtil.getRand());
+            sum += bullet.range;
+            turret.targetAir |= bullet.collidesAir;
+            turret.targetGround |= bullet.collidesGround;
             ammo.add(liquids.random(RandomUtil.getRand()), bullet);
         }
+        turret.range = sum / (float)count;
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         turret.ammo(ammo.toArray());
@@ -91,8 +100,16 @@ public class TurretMapper {
         Seq<Liquid> liquids = content.liquids().select((liquid -> TechUtil.getRoot(liquid).contains(Planets.serpulo)));
         Seq<BulletType> bullets = content.bullets().select(b -> !(b instanceof MassDriverBolt));
         int count = RandomUtil.getRand().random(1, 5);
-        for (int i = 0; i < count; i++)
-            ammo.add(liquids.random(RandomUtil.getRand()), bullets.random(RandomUtil.getRand()));
+        int sum = 0;
+        turret.targetAir = turret.targetGround = false;
+        for (int i = 0; i < count; i++) {
+            BulletType bullet = bullets.random(RandomUtil.getRand());
+            sum += bullet.range;
+            turret.targetAir |= bullet.collidesAir;
+            turret.targetGround |= bullet.collidesGround;
+            ammo.add(liquids.random(RandomUtil.getRand()), bullet);
+        }
+        turret.range = sum / (float)count;
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         turret.ammo(ammo.toArray());
