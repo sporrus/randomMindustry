@@ -59,19 +59,19 @@ public class BundleMapper {
                 
                 for(int i = 0; i < uc.localizedName.length(); i++){
                     if(uc.localizedName.charAt(i) != ' ') localizedName.append(Blocks.router.emoji());
-                    else localizedName.append(localizedName.charAt(i));
+                    else localizedName.append(uc.localizedName.charAt(i));
                 }
                 uc.localizedName = localizedName.toString();
                 
                 for(int i = 0; i < uc.description.length(); i++){
                     if(uc.description.charAt(i) != ' ') description.append(Blocks.router.emoji());
-                    else description.append(description.charAt(i));
+                    else description.append(uc.description.charAt(i));
                 }
                 uc.description = description.toString();
                 
                 for(int i = 0; i < uc.details.length(); i++){
                     if(uc.details.charAt(i) != ' ') details.append(Blocks.router.emoji());
-                    else details.append(details.charAt(i));
+                    else details.append(uc.details.charAt(i));
                 }
                 uc.details = details.toString();
             });
