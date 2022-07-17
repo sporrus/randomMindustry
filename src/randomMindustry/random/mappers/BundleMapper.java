@@ -55,9 +55,25 @@ public class BundleMapper {
             bundle.setProperties(bundleCopy);
             content.each(c -> {
                 if(!(c instanceof UnlockableContent uc)) return;
-                uc.localizedName = "router";
-                uc.description = "router";
-                uc.details = "router";
+                StringBuilder localizedName = new StringBuilder(), description = new StringBuilder(), details = new StringBuilder();
+                
+                for(int i = 0; i < uc.localizedName.length(); i++){
+                    if(uc.localizedName.charAt(i) != ' ') localizedName.append(Blocks.router.emoji());
+                    else localizedName.append(localizedName.charAt(i));
+                }
+                uc.localizedName = localizedName.toString();
+                
+                for(int i = 0; i < uc.description.length(); i++){
+                    if(uc.description.charAt(i) != ' ') description.append(Blocks.router.emoji());
+                    else description.append(description.charAt(i));
+                }
+                uc.description = description.toString();
+                
+                for(int i = 0; i < uc.details.length(); i++){
+                    if(uc.details.charAt(i) != ' ') details.append(Blocks.router.emoji());
+                    else details.append(details.charAt(i));
+                }
+                uc.details = details.toString();
             });
         }
     }
