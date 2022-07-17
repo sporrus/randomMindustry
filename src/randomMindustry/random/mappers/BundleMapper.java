@@ -63,17 +63,21 @@ public class BundleMapper {
                 }
                 uc.localizedName = localizedName.toString();
                 
-                for(int i = 0; i < uc.description.length(); i++){
-                    if(uc.description.charAt(i) != ' ') description.append(Blocks.router.emoji());
-                    else description.append(uc.description.charAt(i));
+                if(uc.description != null){
+                    for(int i = 0; i < uc.description.length(); i++){
+                        if(uc.description.charAt(i) != ' ') description.append(Blocks.router.emoji());
+                        else description.append(uc.description.charAt(i));
+                    }
+                    uc.description = description.toString();
                 }
-                uc.description = description.toString();
                 
-                for(int i = 0; i < uc.details.length(); i++){
-                    if(uc.details.charAt(i) != ' ') details.append(Blocks.router.emoji());
-                    else details.append(uc.details.charAt(i));
+                if(uc.details != null){
+                    for(int i = 0; i < uc.details.length(); i++){
+                        if(uc.details.charAt(i) != ' ') details.append(Blocks.router.emoji());
+                        else details.append(uc.details.charAt(i));
+                    }
+                    uc.details = details.toString();
                 }
-                uc.details = details.toString();
             });
         }
     }
