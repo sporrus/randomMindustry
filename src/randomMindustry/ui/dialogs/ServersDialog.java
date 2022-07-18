@@ -31,7 +31,7 @@ public class ServersDialog extends BaseDialog{
                 list.button(s.name + "\n" + bundle.get("msg.rm-click-copy"), () -> {
                     app.setClipboardText(s.ip);
                     ui.showInfoFade("@copied");
-                }).row();
+                }).growX().row();
             });
         }).growX();
     }
