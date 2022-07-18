@@ -1,5 +1,6 @@
 package randomMindustry.ui.dialogs;
 
+import arc.struct.*;
 import mindustry.ui.dialogs.*;
 
 import static mindustry.Vars.*;
