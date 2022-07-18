@@ -36,7 +36,7 @@ public class ServersDialog extends BaseDialog{
     private static class RMServer{
         public String ip, name;
         
-        public Server(ip, name){
+        public RMServer(ip, name){
             this.ip = ip;
             this.name = name;
         }
