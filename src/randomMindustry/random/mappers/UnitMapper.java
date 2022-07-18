@@ -69,6 +69,7 @@ public class UnitMapper{
             weapon.bullet = content.bullets().select(b -> !(b instanceof MassDriverBolt)).random(RandomUtil.getRand());
             unit.targetAir |= weapon.bullet.collidesAir;
             unit.targetGround |= weapon.bullet.collidesGround;
+            unit.canHeal |= weapon.bullet.healPercent > 0;
 
             int pattern = RandomUtil.getRand().random(0, 5);
             switch (pattern) {
