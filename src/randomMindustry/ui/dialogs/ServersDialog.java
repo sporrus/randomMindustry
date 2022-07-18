@@ -25,7 +25,7 @@ public class ServersDialog extends BaseDialog{
         
         cont.defaults().width(220f).height(55).pad(5f);
         
-        servers.each(s => {
+        servers.each(s -> {
             cont.button(s.name + "\n" + bundle.get("msg.rm-click-copy"), () -> {
                 app.setClipboardText(s.ip);
                 ui.showInfoFade("@copied");
