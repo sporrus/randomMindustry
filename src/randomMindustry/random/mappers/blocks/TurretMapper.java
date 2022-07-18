@@ -71,6 +71,7 @@ public class TurretMapper {
         turret.shootType = content.bullets().select(b -> !(b instanceof MassDriverBolt)).random(RandomUtil.getRand());
         turret.targetAir = turret.shootType.collidesAir;
         turret.targetGround = turret.shootType.collidesGround;
+        turret.targetHealing = turret.shootType.healPercent > 0;
         turret.range = turret.shootType.range;
     }
 
@@ -86,6 +87,7 @@ public class TurretMapper {
             sum += bullet.range;
             turret.targetAir |= bullet.collidesAir;
             turret.targetGround |= bullet.collidesGround;
+            turret.targetHealing |= bullet.healPercent > 0;
             ammo.add(liquids.random(RandomUtil.getRand()), bullet);
         }
         turret.range = sum / (float)count;
@@ -107,6 +109,7 @@ public class TurretMapper {
             sum += bullet.range;
             turret.targetAir |= bullet.collidesAir;
             turret.targetGround |= bullet.collidesGround;
+            turret.targetHealing |= bullet.healPercent > 0;
             ammo.add(liquids.random(RandomUtil.getRand()), bullet);
         }
         turret.range = sum / (float)count;
@@ -127,6 +130,7 @@ public class TurretMapper {
             sum += bullet.range;
             turret.targetAir |= bullet.collidesAir;
             turret.targetGround |= bullet.collidesGround;
+            turret.targetHealing |= bullet.healPercent > 0;
             ammo.add(items.random(RandomUtil.getRand()), bullet);
         }
         turret.range = sum / (float)count;
