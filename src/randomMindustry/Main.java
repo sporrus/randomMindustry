@@ -24,7 +24,14 @@ public class Main extends Mod {
     }
 
     public static void client() {
-        ui.paused.buttons.button(Icon.effect, Dialogs.menuDialog::show).size(210f, 64f);
+        if(!mobile){
+            ui.paused.cont.defaults().width(220f).height(55).pad(5f);
+            ui.paused.cont.row();
+            ui.paused.cont.button(Icon.effect, Dialogs.menuDialog::show).row();
+        }else{
+            ui.paused.cont.defaults().size(130f).pad(5);
+            ui.paused.cont.buttonRow(Icon.effect, Dialogs.menuDialog::show);
+        }
         SettingsLoader.init();
         load();
         settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
