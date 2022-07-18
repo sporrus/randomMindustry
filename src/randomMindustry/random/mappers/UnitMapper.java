@@ -48,7 +48,7 @@ public class UnitMapper{
         unit.fallEngineEffect = effects.random(RandomUtil.getRand());
         unit.deathExplosionEffect = effects.random(RandomUtil.getRand());
 
-        unit.targetAir = unit.targetGround = false;
+        unit.targetAir = unit.canHeal = unit.targetGround = false;
         if(unit instanceof MissileUnitType) return;
         unit.weapons.each(weapon -> {
             weapon.shootSound = Util.generateSound();
