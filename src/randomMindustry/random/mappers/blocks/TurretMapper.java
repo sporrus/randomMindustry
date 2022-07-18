@@ -58,6 +58,8 @@ public class TurretMapper {
         block.shoot.shots = RandomUtil.getRand().random(1, 10);
         block.shoot.shotDelay = RandomUtil.getRand().random(1f, 60f);
 
+        block.targetAir = block.targetGround = block.targetHealing = false;
+
         if (block instanceof ItemTurret turret) modifyItemTurret(turret);
         else if (block instanceof LiquidTurret turret) modifyLiquidTurret(turret);
         else if (block instanceof ContinuousLiquidTurret turret) modifyContinuousLiquidTurret(turret);
