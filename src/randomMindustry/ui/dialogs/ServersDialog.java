@@ -26,12 +26,14 @@ public class ServersDialog extends BaseDialog{
         
         cont.defaults().width(220f).height(55).pad(5f);
         
-        servers.each(s -> {
-            cont.button(s.name + "\n" + bundle.get("msg.rm-click-copy"), () -> {
-                app.setClipboardText(s.ip);
-                ui.showInfoFade("@copied");
-            }).row();
-        });
+        cont.pane(list -> {
+            servers.each(s -> {
+                list.button(s.name + "\n" + bundle.get("msg.rm-click-copy"), () -> {
+                    app.setClipboardText(s.ip);
+                    ui.showInfoFade("@copied");
+                }).row();
+            });
+        }).growX();
     }
     
     private static class RMServer{
