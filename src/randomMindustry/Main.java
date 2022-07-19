@@ -92,7 +92,7 @@ public class Main extends Mod {
     
     public static void showLever(int number){
         BaseDialog leverDialog = new BaseDialog("");
-        leverDialog.add(number.toString()).row();
+        leverDialog.add("@rm-lever").row();
         TextButton button = leverDialog.button("@rm-lever", () -> {}).size(160f, 40f).get();
         button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear));
         button.clicked(() -> {
