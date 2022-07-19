@@ -33,7 +33,7 @@ public class Main extends Mod {
 
     public static void client() {
         ui.paused.buttons.button("@rm-menu", Icon.effect, Dialogs.menuDialog::show).width(220f).height(55).pad(5f).row();
-        Time.runTask(6f, () -> showLever(1));
+        Time.runTask(6f, () -> Dialogs.leverDialog.show(1));
         SettingsLoader.init();
         load();
         settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
@@ -89,21 +89,5 @@ public class Main extends Mod {
             player.sendMessage("seed is " + RandomUtil.getSeed());
             Call.clientPacketReliable(player.con, "seed", Long.toString(RandomUtil.getSeed()));
         });
-    }
-    
-    public static void showLever(int number){
-        BaseDialog leverDialog = new BaseDialog("");
-        leverDialog.cont.add("@rm-lever").row();
-        TextButton button = leverDialog.cont.button(Integer.toString(number), () -> {}).size(160f, 40f).get();
-        leverDialog.shown(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
-        // leverDialog.onResize(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
-        button.clicked(() -> {
-            button.touchable = Touchable.disabled;
-            button.actions(Actions.moveBy(0f, 50f, 0.25f, Interp.linear));
-            Time.runTask(60f, () -> {
-                leverDialog.hide();
-            });
-        });
-        leverDialog.show();
     }
 }
