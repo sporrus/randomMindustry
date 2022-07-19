@@ -19,6 +19,7 @@ import static mindustry.Vars.*;
 
 public class Main extends Mod {
     public static int phase = 0;
+    public static boolean secretMenuOpen = false;
 
     public Main() {
         Events.on(ClientLoadEvent.class, e -> client());
