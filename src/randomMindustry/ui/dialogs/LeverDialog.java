@@ -1,5 +1,6 @@
 package randomMindustry.ui.dialogs;
 
+import arc.util.*;
 import arc.scene.ui.*;
 import arc.scene.event.*;
 import arc.scene.actions.*;
