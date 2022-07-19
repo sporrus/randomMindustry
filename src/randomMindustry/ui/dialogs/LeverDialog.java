@@ -31,5 +31,7 @@ public class LeverDialog extends BaseDialog{
         
         button.label(() -> Integer.toString(num));
         cont.add(button).size(160f, 40f);
+        
+        show();
     }
 }
