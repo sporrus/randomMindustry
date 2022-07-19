@@ -1,13 +1,17 @@
 package randomMindustry;
 
 import arc.*;
+import arc.math.*;
 import arc.util.*;
+import arc.scene.ui.*;
+import arc.scene.actions.*;
 import mindustry.Vars;
 import mindustry.content.Planets;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.type.*;
+import mindustry.ui.dialogs.*;
 import randomMindustry.random.mappers.*;
 import randomMindustry.random.mappers.blocks.*;
 import randomMindustry.random.util.*;
@@ -18,7 +22,7 @@ import static arc.Core.*;
 import static mindustry.Vars.*;
 
 public class Main extends Mod {
-    public static int phase = 0;
+    public static int phase = 1;
     public static boolean secretMenuOpen = false;
 
     public Main() {
@@ -28,6 +32,7 @@ public class Main extends Mod {
 
     public static void client() {
         ui.paused.buttons.button("@rm-menu", Icon.effect, Dialogs.menuDialog::show).width(220f).height(55).pad(5f).row();
+        Time.runTask(6f, () -> this.showLever(1));
         SettingsLoader.init();
         load();
         settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
@@ -83,5 +88,19 @@ public class Main extends Mod {
             player.sendMessage("seed is " + RandomUtil.getSeed());
             Call.clientPacketReliable(player.con, "seed", Long.toString(RandomUtil.getSeed()));
         });
+    }
+    
+    public static void showLever(int number){
+        BaseDialog leverDialog = new BaseDialog("");
+        leverDialog.add(number).row();
+        TextButton button = leverDialog.button("@rm-lever", () -> {}).size(160f, 40f).get();
+        button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear));
+        button.clicked(() -> {
+            button.actions(Actions.moveBy(0f, 50f, 0.5f, Interp.linear));
+            Time.runTask(60f, () -> {
+                leverDialog.hide();
+            });
+        });
+        leverDialog.show();
     }
 }
