@@ -24,7 +24,7 @@ public class LeverDialog extends BaseDialog{
         onResize(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
     }
     
-    public show(int num){
+    public void show(int num){
         cont.clear();
         
         cont.add("@rm-lever");
