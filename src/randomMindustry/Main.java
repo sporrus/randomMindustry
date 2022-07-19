@@ -33,7 +33,7 @@ public class Main extends Mod {
 
     public static void client() {
         ui.paused.buttons.button("@rm-menu", Icon.effect, Dialogs.menuDialog::show).width(220f).height(55).pad(5f).row();
-        Time.runTask(6f, () -> Dialogs.leverDialog.show(1));
+        ui.database.buttons.button("@rm-book", Icon.book, () -> ui.showInfo("@msg.rm-lever-hunt")).size(210f, 64f);
         SettingsLoader.init();
         load();
         settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
