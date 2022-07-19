@@ -32,7 +32,7 @@ public class Main extends Mod {
 
     public static void client() {
         ui.paused.buttons.button("@rm-menu", Icon.effect, Dialogs.menuDialog::show).width(220f).height(55).pad(5f).row();
-        Time.runTask(6f, () -> this.showLever(1));
+        Time.runTask(6f, () -> showLever(1));
         SettingsLoader.init();
         load();
         settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
@@ -92,7 +92,7 @@ public class Main extends Mod {
     
     public static void showLever(int number){
         BaseDialog leverDialog = new BaseDialog("");
-        leverDialog.add(number).row();
+        leverDialog.add(number.toString()).row();
         TextButton button = leverDialog.button("@rm-lever", () -> {}).size(160f, 40f).get();
         button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear));
         button.clicked(() -> {
