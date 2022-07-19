@@ -47,6 +47,7 @@ public class LeverDialog extends BaseDialog{
                     }
                 }else{
                     ui.showInfo("@msg.rm-sequence-fail");
+                    Main.phase = 1;
                 }
             });
         });
