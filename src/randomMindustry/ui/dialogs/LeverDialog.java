@@ -17,18 +17,17 @@ public class LeverDialog extends BaseDialog{
         
         button.clicked(() -> {
             button.touchable = Touchable.disabled;
-            button.actions(Actions.moveBy(0f, 50f, 0.25f, Interp.linear));
+            button.actions(Actions.moveBy(0f, 50f, 0.125f, Interp.linear));
             Time.runTask(60f, this::hide);
         });
         
-        shown(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
         onResize(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
     }
     
     public void show(int num){
         cont.clear();
         
-        cont.add("@rm-lever");
+        cont.add("@rm-lever").row();
         
         button.label(() -> Integer.toString(num));
         cont.add(button).size(160f, 40f);
