@@ -18,6 +18,8 @@ import static arc.Core.*;
 import static mindustry.Vars.*;
 
 public class Main extends Mod {
+    public static int phase = 0;
+
     public Main() {
         Events.on(ClientLoadEvent.class, e -> client());
         Events.on(ServerLoadEvent.class, e -> server());
