@@ -12,6 +12,7 @@ import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.type.*;
+import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
 import randomMindustry.random.mappers.*;
 import randomMindustry.random.mappers.blocks.*;
@@ -24,7 +25,6 @@ import static mindustry.Vars.*;
 
 public class Main extends Mod {
     public static int phase = 1;
-    public static boolean secretMenuOpen = false;
 
     public Main() {
         Events.on(ClientLoadEvent.class, e -> client());
@@ -33,7 +33,7 @@ public class Main extends Mod {
 
     public static void client() {
         ui.paused.buttons.button("@rm-menu", Icon.effect, Dialogs.menuDialog::show).width(220f).height(55).pad(5f).row();
-        ui.database.buttons.button("@rm-book", Icon.book, () -> ui.showInfo("@msg.rm-lever-hunt")).size(210f, 64f);
+        
         SettingsLoader.init();
         load();
         settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
