@@ -96,7 +96,7 @@ public class Main extends Mod {
         leverDialog.cont.add("@rm-lever").row();
         TextButton button = leverDialog.cont.button(Integer.toString(number), () -> {}).size(160f, 40f).get();
         leverDialog.shown(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
-        leverDialog.onResize(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
+        // leverDialog.onResize(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
         button.clicked(() -> {
             button.touchable = Touchable.disabled;
             button.actions(Actions.moveBy(0f, 50f, 0.25f, Interp.linear));
