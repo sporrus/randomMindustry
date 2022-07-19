@@ -7,6 +7,12 @@
         "version": "v136",
         "description": "uhhhh uhhhh",
         "address": "n4.yeet.ml:6576"
+      },
+      {
+        "name": "gorodmi private server",
+        "version": "v136",
+        "description": "not always on",
+        "address": "gorodmi.duckdns.org"
       }
     ]
   }
