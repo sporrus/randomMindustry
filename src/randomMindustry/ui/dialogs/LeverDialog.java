@@ -5,6 +5,7 @@ import arc.math.*;
 import arc.scene.ui.*;
 import arc.scene.event.*;
 import arc.scene.actions.*;
+import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
 
 public class LeverDialog extends BaseDialog{
@@ -16,11 +17,13 @@ public class LeverDialog extends BaseDialog{
         button = new Button();
         
         button.clicked(() -> {
+            Sounds.rockBreak.play();
             button.touchable = Touchable.disabled;
             button.actions(Actions.moveBy(0f, 50f, 0.125f, Interp.linear));
             Time.runTask(60f, this::hide);
         });
         
+        shown(() -> button.touchable = Touchable.enabled);
         onResize(() -> button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear)));
     }
     
