@@ -1,11 +1,6 @@
 package randomMindustry;
 
 import arc.*;
-import arc.scene.Element;
-import arc.scene.style.Style;
-import arc.scene.ui.TextButton;
-import arc.scene.ui.layout.Table;
-import arc.scene.ui.layout.WidgetGroup;
 import arc.util.*;
 import mindustry.Vars;
 import mindustry.content.Planets;
@@ -13,7 +8,6 @@ import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.type.*;
-import mindustry.ui.Styles;
 import randomMindustry.random.mappers.*;
 import randomMindustry.random.mappers.blocks.*;
 import randomMindustry.random.util.*;
@@ -30,9 +24,7 @@ public class Main extends Mod {
     }
 
     public static void client() {
-        Dialogs.menuDialog.addPauseButton();
-        Dialogs.menuDialog.addMenuButton();
-
+        ui.paused.buttons.button("@rm-menu", Icon.effect, Dialogs.menuDialog::show).width(220f).height(55).pad(5f).row();
         SettingsLoader.init();
         load();
         settings.put("rm-seed", Long.toString(RandomUtil.getSeed()));
