@@ -4,6 +4,7 @@ import arc.*;
 import arc.math.*;
 import arc.util.*;
 import arc.scene.ui.*;
+import arc.scene.event.*;
 import arc.scene.actions.*;
 import mindustry.Vars;
 import mindustry.content.Planets;
@@ -96,6 +97,7 @@ public class Main extends Mod {
         TextButton button = leverDialog.cont.button(Integer.toString(number), () -> {}).size(160f, 40f).get();
         button.actions(Actions.moveBy(0f, -50f, 0.01f, Interp.linear));
         button.clicked(() -> {
+            button.touchable = Touchable.disabled;
             button.actions(Actions.moveBy(0f, 50f, 0.25f, Interp.linear));
             Time.runTask(60f, () -> {
                 leverDialog.hide();
