@@ -34,14 +34,14 @@ public class RMMenuDialog extends BaseDialog{
             cont.button("@rm-item-finder", Icon.zoom, Dialogs.itemFinderDialog::show).row();
             cont.button("@rm-servers", Icon.host, Dialogs.serversDialog::show).row();
             if(settings.getBool("rm-book-collected", false)) cont.button("@rm-book", Icon.book, () -> ui.showInfo("@msg.rm-lever-hunt")).row();
+            if(settings.getBool("rm-secret-menu", false)) cont.button("...?", Icon.info, () -> {}).row();
         }else{
             cont.defaults().size(130f).pad(5);
             cont.buttonRow("@rm-item-finder", Icon.zoom, Dialogs.itemFinderDialog::show);
             cont.buttonRow("@rm-servers", Icon.host, Dialogs.serversDialog::show);
-            if(settings.getBool("rm-book-collected", false)){
-                cont.row();
-                cont.buttonRow("@rm-book", Icon.book, () -> ui.showInfo("@msg.rm-lever-hunt"));
-            }
+            cont.row();
+            if(settings.getBool("rm-book-collected", false)) cont.buttonRow("@rm-book", Icon.book, () -> ui.showInfo("@msg.rm-lever-hunt"));
+            if(settings.getBool("rm-secret-menu", false)) cont.buttonRow("...?", Icon.effect, () -> {});
         }
         
         if(!settings.getBool("rm-book-collected", false)){
