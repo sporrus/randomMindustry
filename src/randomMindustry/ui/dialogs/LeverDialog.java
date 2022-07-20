@@ -29,9 +29,9 @@ public class LeverDialog extends BaseDialog{
         cont.clear();
         
         cont.add("@rm-lever").row();
+        cont.add(Integer.toString(num)).row();
         
-        button.clearListeners();
-        button.label(() -> Integer.toString(num));
+        button.clear();
         cont.add(button).size(160f, 40f);
         button.clicked(() -> {
             Sounds.rockBreak.play();
