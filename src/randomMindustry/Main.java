@@ -91,7 +91,7 @@ public class Main extends Mod {
         });
     }
     
-    private void setupButtons(){
+    private static void setupButtons(){
         ui.database.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(1));
         ui.language.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(2));
         ui.mods.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(3));
