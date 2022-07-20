@@ -20,11 +20,14 @@ public class RMMenuDialog extends BaseDialog{
         shown(this::rebuild);
         onResize(this::rebuild);
         
-        addCloseButton();
+        closeOnBack();
     }
     
     void rebuild(){
         cont.clear();
+        buttons.clear();
+        
+        buttons.button("@back", Icon.left, this::hide).size(210f, 64f);
         
         if(!mobile){
             cont.defaults().width(220f).height(55).pad(5f);
@@ -42,7 +45,7 @@ public class RMMenuDialog extends BaseDialog{
         }
         
         if(!settings.getBool("rm-book-collected", false)){
-            ImageButton book = cont.button(Icon.book, Styles.emptyi, () -> {}).bottom().left().size(40f).pad(5f).get();
+            ImageButton book = buttons.button(Icon.book, Styles.emptyi, () -> {}).bottom().right().size(40f).pad(5f).get();
             book.clicked(() -> {
                 settings.put("rm-book-collected", true);
                 book.actions(Actions.moveBy(0f, -60f, 0.5f, Interp.pow2In));
