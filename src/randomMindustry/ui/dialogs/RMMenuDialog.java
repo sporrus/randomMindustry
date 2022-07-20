@@ -8,6 +8,7 @@ import arc.scene.actions.*;
 import mindustry.gen.*;
 import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
+import randomMindustry.*;
 
 import static mindustry.Vars.*;
 import static arc.Core.*;
@@ -48,6 +49,7 @@ public class RMMenuDialog extends BaseDialog{
             ImageButton book = buttons.button(Icon.book, Styles.emptyi, () -> {}).bottom().right().size(40f).pad(5f).get();
             book.clicked(() -> {
                 settings.put("rm-book-collected", true);
+                Main.setupButtons();
                 book.actions(Actions.moveBy(0f, -60f, 0.5f, Interp.pow2In));
                 Time.runTask(30f, this::rebuild);
             });
