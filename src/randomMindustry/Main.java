@@ -95,7 +95,7 @@ public class Main extends Mod {
         ui.database.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(1));
         ui.language.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(2));
         ui.mods.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(3));
-        ui.about.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(4));
+        ui.join.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(4));
         ui.discord.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(5));
         ui.load.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(6));
         ui.settings.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(7));
