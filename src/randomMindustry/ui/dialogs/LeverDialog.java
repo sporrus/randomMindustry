@@ -40,12 +40,15 @@ public class LeverDialog extends BaseDialog{
                 hide();
                 if(Main.phase == num){
                     if(Main.phase >= 7){
+                        Sounds.corexplode.play();
                         ui.showInfo("@msg.rm-sequence-finish");
                     }else{
+                        Sounds.message.play();
                         ui.showInfo("@msg.rm-sequence-continue");
                         Main.phase++;
                     }
                 }else{
+                    Sounds.explosionbig.play();
                     ui.showInfo("@msg.rm-sequence-fail");
                     Main.phase = 1;
                 }
