@@ -6,4 +6,5 @@ public class Dialogs {
     public static final ItemDisplayDialog itemDialog = new ItemDisplayDialog();
     public static final ServersDialog serversDialog = new ServersDialog();
     public static final LeverDialog leverDialog = new LeverDialog();
+    public static final SecretMenuDialog secretMenuDialog = new SecretMenuDialog();
 }
