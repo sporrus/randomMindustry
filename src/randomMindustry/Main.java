@@ -99,6 +99,5 @@ public class Main extends Mod {
         ui.discord.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(5));
         ui.load.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(6));
         ui.settings.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(7));
-        ui.settings.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(7));
     }
 }
