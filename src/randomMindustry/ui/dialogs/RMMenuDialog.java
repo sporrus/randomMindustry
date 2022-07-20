@@ -42,10 +42,10 @@ public class RMMenuDialog extends BaseDialog{
         }
         
         if(!settings.getBool("rm-book-collected", false)){
-            ImageButton book = button(Icon.book, Styles.emptyi, () -> {}).top().left().size(40f).get();
+            ImageButton book = buttons.button(Icon.book, Styles.emptyi, () -> {}).bottom().left().size(40f).pad(5f).get();
             book.clicked(() -> {
                 settings.put("rm-book-collected", true);
-                book.actions(Actions.moveBy(0f, 50f, 0.5f, Interp.pow2In));
+                book.actions(Actions.moveBy(0f, -50f, 0.5f, Interp.pow2In));
                 Time.runTask(30f, this::rebuild);
             });
         }
