@@ -48,11 +48,10 @@ public class RegionMapper{
                 newRegion.height = region.height;
                 region.set(newRegion);
             });
-            Icon.icons.values().forEach((t) -> {
+            Icon.icons.each((k, v) -> {
                 AtlasRegion newRegion = atlas.getRegionMap().get("random-mindustry-skull");
-                t.set(newRegion);
+                v.set(newRegion);
             });
-            
         }
     }
 }
