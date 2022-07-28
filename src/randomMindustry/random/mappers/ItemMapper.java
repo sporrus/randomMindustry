@@ -1,22 +1,19 @@
 package randomMindustry.random.mappers;
 
 import arc.struct.*;
-import arc.util.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
 import randomMindustry.random.util.*;
-import randomMindustry.util.techTrees.*;
 
-public class ResourceMapper {
+public class ItemMapper {
     private static Seq<Item> selectedItems = new Seq<>();
     private static Seq<ItemPack> itemMap = new Seq<>();
     public static final int itemCount = 16;
     public static final int maxTier = 6;
 
-    // TODO: make randomized items
     public static void init() {
         selectedItems = Vars.content.items().copy();
         RandomUtil.shuffle(selectedItems);
@@ -32,6 +29,7 @@ public class ResourceMapper {
             item.radioactivity = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.charge = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.cost = RandomUtil.getRand().random(100) / 100f;
+            item.localizedName = StringGenerator.generateMaterialName();
             item.checkStats();
         }));
         Seq<Item> unselectedItems = Vars.content.items().copy();
@@ -134,7 +132,7 @@ public class ResourceMapper {
     }
 
     public static ItemStack[] getRandomItemStacks(int maxTier, int maxItemStackCount, int maxItemCount, int itemMult, boolean unique) {
-        maxTier = Math.max(Math.min(maxTier, ResourceMapper.maxTier), 0);
+        maxTier = Math.max(Math.min(maxTier, ItemMapper.maxTier), 0);
         int minTier = Math.max(maxTier - 2, 0);
         ItemPack highest = getPackByTier(maxTier).copy();
         ItemPack all = getPackByTier(minTier).copy();

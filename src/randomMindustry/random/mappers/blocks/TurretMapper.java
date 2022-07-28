@@ -1,11 +1,9 @@
 package randomMindustry.random.mappers.blocks;
 
 import arc.struct.*;
-import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
-import mindustry.gen.Bullet;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
@@ -65,7 +63,7 @@ public class TurretMapper {
         else if (block instanceof ContinuousLiquidTurret turret) modifyContinuousLiquidTurret(turret);
         else if (block instanceof PowerTurret turret) modifyPowerTurret(turret);
 
-        block.requirements = ResourceMapper.getRandomItemStacks(RandomUtil.getRand().random(4) + 1, 4, (int) Math.floor(block.health / 4d), 5, true);
+        block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(4) + 1, 4, (int) Math.floor(block.health / 4d), 5, true);
     }
 
     public static void modifyPowerTurret(PowerTurret turret) {
@@ -122,7 +120,7 @@ public class TurretMapper {
 
     public static void modifyItemTurret(ItemTurret turret) {
         Seq<Object> ammo = new Seq<>();
-        Seq<Item> items = ResourceMapper.getSelectedItems().copy();
+        Seq<Item> items = ItemMapper.getSelectedItems().copy();
         Seq<BulletType> bullets = content.bullets().select(b -> !(b instanceof MassDriverBolt));
         int count = RandomUtil.getRand().random(1, 5);
         int sum = 0;

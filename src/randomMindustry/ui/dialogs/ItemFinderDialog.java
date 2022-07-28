@@ -10,8 +10,6 @@ import mindustry.type.*;
 import mindustry.ui.dialogs.*;
 import randomMindustry.random.mappers.*;
 
-import static mindustry.Vars.*;
-
 public class ItemFinderDialog extends BaseDialog {
     private TextField search = new TextField();
     private Table output = new Table();
@@ -39,9 +37,9 @@ public class ItemFinderDialog extends BaseDialog {
         output.clear();
         var text = search.getText();
 
-        Seq<Item> items = ResourceMapper.getSelectedItems().sort((i1, i2) -> String.CASE_INSENSITIVE_ORDER.compare(i1.name, i2.name)).select(i -> i.localizedName.toLowerCase().contains(text.toLowerCase()));
+        Seq<Item> items = ItemMapper.getSelectedItems().sort((i1, i2) -> String.CASE_INSENSITIVE_ORDER.compare(i1.name, i2.name)).select(i -> i.localizedName.toLowerCase().contains(text.toLowerCase()));
         Seq<Item> locked = new Seq<>();
-        ResourceMapper.getItemMap().each(pack -> locked.addAll(pack.locked));
+        ItemMapper.getItemMap().each(pack -> locked.addAll(pack.locked));
 
         items.each(i -> {
             boolean lock = locked.contains(i);

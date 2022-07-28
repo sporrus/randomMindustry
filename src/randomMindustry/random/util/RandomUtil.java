@@ -11,6 +11,10 @@ public class RandomUtil {
     private static final Rand clientRand = new Rand();
     private static long seed;
 
+    public static <T> T random(T[] arr, Rand rand) {
+        return arr[rand.nextInt(arr.length)];
+    }
+
     public static <T> void shuffle(Seq<T> seq) {
         T[] items = seq.items;
         for (int i = seq.size - 1; i >= 0; i--) {

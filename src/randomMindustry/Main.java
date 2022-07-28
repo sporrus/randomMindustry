@@ -1,19 +1,12 @@
 package randomMindustry;
 
 import arc.*;
-import arc.math.*;
 import arc.util.*;
-import arc.scene.ui.*;
-import arc.scene.event.*;
-import arc.scene.actions.*;
 import mindustry.Vars;
-import mindustry.content.Planets;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.type.*;
-import mindustry.ui.*;
-import mindustry.ui.dialogs.*;
 import randomMindustry.random.mappers.*;
 import randomMindustry.random.mappers.blocks.*;
 import randomMindustry.random.util.*;
@@ -65,13 +58,13 @@ public class Main extends Mod {
         if (!Vars.headless) ui.loadfrag.show("@msg.rm-generating");
         Log.info(bundle.get("msg.rm-log-generating"));
         FxMapper.init();
-        ResourceMapper.init();
+        ItemMapper.init();
         BulletMapper.init();
         UnitMapper.init();
         BlockMapper.init();
         RegionMapper.init();
         BundleMapper.init();
-        for (ResourceMapper.ItemPack pack : ResourceMapper.getItemMap()) {
+        for (ItemMapper.ItemPack pack : ItemMapper.getItemMap()) {
             Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
             for (Item item : pack.all) {
                 if (pack.locked.contains(item)) Log.info("[red]==LOCKED==");
