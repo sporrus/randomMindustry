@@ -11,7 +11,7 @@ public class StringGenerator {
             "y", "z"
     };
     public static final String[] TEMPLATE = new String[]{
-            "cv", "vc", "cvc"
+            "cv", "cvc"
     };
 
     public static String generateSyllable() {
@@ -35,25 +35,28 @@ public class StringGenerator {
 
     public static String generateMaterialName() {
         StringBuilder out = new StringBuilder();
-        out.append(capitalizeFirstLetter(generateWord(1)));
         if (RandomUtil.getClientRand().chance(0.75)) { // normal suffix
+            out.append(capitalizeFirstLetter(generateWord(1)));
             out.append(generateMaterialSuffix());
         } else if (RandomUtil.getClientRand().chance(0.5)) { // type suffix
+            out.append(capitalizeFirstLetter(generateWord(2)));
             out.append(" ").append(generateMaterialSuffixType());
+        } else {
+            out.append(capitalizeFirstLetter(generateWord(2)));
         }
-
         return out.toString();
     }
 
     public static String generateMaterialSuffix() {
         return RandomUtil.random(new String[]{
-                "ite", "ium", "sten",
+                "ite", "ium", "ide"
         }, RandomUtil.getClientRand());
     }
 
     public static String generateMaterialSuffixType() {
         return RandomUtil.random(new String[]{
-                "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst"
+                "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst",
+                "Clust", "Crystal", "Block", "Spore", "Mix"
         }, RandomUtil.getClientRand());
     }
 
