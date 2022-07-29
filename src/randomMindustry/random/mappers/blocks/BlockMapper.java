@@ -20,6 +20,9 @@ import randomMindustry.random.util.*;
 import randomMindustry.util.*;
 import randomMindustry.util.techTrees.*;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import static mindustry.Vars.*;
 import static arc.Core.*;
 
@@ -146,7 +149,14 @@ public class BlockMapper {
     }
 
     public static void modifyWall(Wall block) {
-        block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, block.size * 10, 5, true);
+        block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, block.size * 10, 1, true);
+        Arrays.sort(block.requirements, Comparator.comparingInt(a -> a.amount));
+        ItemStack mainItem = block.requirements[0];
+        String size = "";
+        if (block.size == 2) size = "Large ";
+        else if (block.size == 3) size = "Huge ";
+        else if (block.size == 4) size = "Gigantic ";
+        block.localizedName = size + mainItem.item.localizedName + " Wall";
     }
 
     public static void modifyUnitFactory(UnitFactory block) {
