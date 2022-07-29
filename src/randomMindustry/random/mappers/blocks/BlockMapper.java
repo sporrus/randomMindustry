@@ -150,7 +150,7 @@ public class BlockMapper {
 
     public static void modifyWall(Wall block) {
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, block.size * 10, 1, true);
-        Arrays.sort(block.requirements, (a, b) -> return a.amount - b.amount);
+        Arrays.sort(block.requirements, (a, b) -> { return a.amount - b.amount });
         ItemStack mainItem = block.requirements[0];
         String size = "";
         if (block.size == 2) size = "Large ";
