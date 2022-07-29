@@ -83,7 +83,7 @@ public class StringGenerator {
     
     public static String generateReconstructorName() {
         StringBuilder out = new StringBuilder();
-        out.append(capitalizeFirstLetter(generateWord(2)));
+        out.append(capitalizeFirstLetter(generateWord(1)));
         out.append(generateReconstructorSuffix());
         out.append(" " + RandomUtil.random(new String[]{ "Refabricator", "Reconstructor" }, RandomUtil.getClientRand()));
         
