@@ -35,7 +35,7 @@ public class StringGenerator {
 
     public static String generateMaterialName() {
         StringBuilder out = new StringBuilder();
-        if (RandomUtil.getClientRand().chance(0.75)) { // normal suffix
+        if (RandomUtil.getClientRand().chance(0.5)) { // normal suffix
             out.append(capitalizeFirstLetter(generateWord(1)));
             out.append(generateMaterialSuffix());
         } else if (RandomUtil.getClientRand().chance(0.5)) { // type suffix
