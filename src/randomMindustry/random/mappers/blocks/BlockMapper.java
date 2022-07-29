@@ -111,12 +111,12 @@ public class BlockMapper {
         int tier = ItemMapper.getTierOfItem(item)-1;
         if (tier >= GeneratorMapper.getLowestPowerTier() && RandomUtil.getRand().chance(0.25)) {
             block.hasPower = true;
-            block.consumePower(Mathf.round(RandomUtil.getRand().random(20f), 1/20f));
+            block.consumePower(Mathf.round(RandomUtil.getRand().random(20f), 1/15f));
         }
         ItemStack[] itemStacks = ItemMapper.getRandomItemStacks(tier, 3, 10, 1, true);
         if (tier > -1) block.consumeItems(itemStacks);
         else block.consumeItems();
-        block.craftTime = Mathf.round(RandomUtil.getRand().random(300f), 10f);
+        block.craftTime = Mathf.round(RandomUtil.getRand().random(20f, 300f), 15f);
         block.requirements = ItemMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
 
         if (!headless) {
