@@ -61,21 +61,21 @@ public class BulletMapper {
 
             bullet.damage = RandomUtil.getRand().random(1f, 100f);
             bullet.buildingDamageMultiplier = RandomUtil.getRand().random(0f, 2f);
-            
+
             bullet.homingPower = RandomUtil.getRand().random(0f, 10f);
             bullet.homingRange = RandomUtil.getRand().random(60f, 180f);
 
             bullet.collidesGround = bullet.collidesAir = false;
-            if(RandomUtil.getRand().chance(0.5)){
+            if (RandomUtil.getRand().chance(0.5)) {
                 bullet.collidesAir = true;
                 bullet.collidesGround = true;
-            }else if (RandomUtil.getRand().chance(0.5)){
+            } else if (RandomUtil.getRand().chance(0.5)) {
                 bullet.collidesAir = true;
-            }else{
+            } else {
                 bullet.collidesGround = true;
             }
 
-            if(bullet instanceof BasicBulletType basicBullet){
+            if (bullet instanceof BasicBulletType basicBullet) {
                 basicBullet.width = RandomUtil.getRand().random(4f, 20f);
                 basicBullet.height = RandomUtil.getRand().random(4f, 20f);
                 basicBullet.shrinkX = RandomUtil.getRand().random(-1f, 1f);
@@ -83,26 +83,27 @@ public class BulletMapper {
                 basicBullet.spin = RandomUtil.getRand().random(45f);
             }
 
-            if(RandomUtil.getRand().chance(0.5f)){
+            if (RandomUtil.getRand().chance(0.5f)) {
                 bullet.status = content.statusEffects().random(RandomUtil.getRand());
                 bullet.statusDuration = RandomUtil.getRand().random(600f);
             }
 
             bullet.fragBullet = null;
-            if(RandomUtil.getRand().chance(0.25f)){
-                bullet.fragBullets = RandomUtil.getRand().random(10);
+            if (RandomUtil.getRand().chance(0.25f)) {
+                bullet.fragBullets = RandomUtil.getRand().random(1, 10);
                 bullet.fragBullet = bulletSeq.random(RandomUtil.getRand());
             }
 
             bullet.intervalBullet = null;
-            if(RandomUtil.getRand().chance(0.25f)){
-                bullet.intervalBullets = RandomUtil.getRand().random(5);
+            if (RandomUtil.getRand().chance(0.25f)) {
+                bullet.intervalBullets = RandomUtil.getRand().random(1, 5);
                 bullet.intervalBullet = bulletSeq.random(RandomUtil.getRand());
                 bullet.bulletInterval = RandomUtil.getRand().random(60f, 600f);
             }
-            
-            if(RandomUtil.getRand().chance(0.25f)){
-                bullet.puddles = RandomUtil.getRand().random(10);
+
+            bullet.puddles = 0;
+            if (RandomUtil.getRand().chance(0.25f)) {
+                bullet.puddles = RandomUtil.getRand().random(1, 10);
                 bullet.puddleRange = RandomUtil.getRand().random(1f, 10f);
                 bullet.puddleAmount = RandomUtil.getRand().random(5f, 20f);
                 bullet.puddleLiquid = content.liquids().random(RandomUtil.getRand());
