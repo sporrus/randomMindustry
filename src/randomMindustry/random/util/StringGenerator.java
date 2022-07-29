@@ -49,7 +49,7 @@ public class StringGenerator {
     
     public static String generateTurretName() {
         StringBuilder out = new StringBuilder();
-        out.append(capitalizeFirstLetter(RandomUtil.getClientRand.random(1, 2)));
+        out.append(capitalizeFirstLetter(RandomUtil.getClientRand().random(1, 2)));
         out.append(generateTurretSuffix());
         
         return out.toString();
@@ -59,6 +59,7 @@ public class StringGenerator {
         StringBuilder out = new StringBuilder();
         out.append(capitalizeFirstLetter(generateWord(1)));
         out.append(generateDrillSuffix());
+        out.append(" Drill");
         
         return out.toString();
     }
