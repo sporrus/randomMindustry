@@ -73,6 +73,14 @@ public class StringGenerator {
         return out.toString();
     }
     
+    public static String generateUnitName() {
+        StringBuilder out = new StringBuilder();
+        out.append(capitalizeFirstLetter(generateWord(RandomUtil.getClientRand().random(1, 3))));
+        out.append(generateUnitSuffix());
+        
+        return out.toString();
+    }
+    
     public static String generateDrillSuffix() {
         return RandomUtil.random(new String[]{
                 "pact", "act", "matic", "atic", "chal", "al", "ser", "er",
@@ -92,6 +100,23 @@ public class StringGenerator {
                 "ard", "rd", "ation", "tion", "cleus", "leus",
                 "tadel", "adel", "del", "opolis", "polis", "olis",
                 "cite", "ite", "uin", "crete", "rete" 
+        }, RandomUtil.getClientRand());
+    }
+    
+    public static String generateUnitSuffix() {
+        return RandomUtil.random(new String[]{
+                "ger", "ace", "ress", "pter", "eign",
+                "va", "lsar", "asar", "la", "vus",
+                "ler", "rax", "roct", "yid", "pid",
+                "are", "zon", "ith", "ra", "ipse",
+                "no", "ly", "ga", "ad", "ct",
+                "sso", "ke", "yde", "ei", "ura",
+                "usa", "noe", "erce", "ires", "nax",
+                "pha", "eta", "mma",
+                "ell", "cus", "ept", "ish", "quer",
+                "rui", "roi", "us", "cta", "aris",
+                "ude", "vert", "ate", "ll", "upt",
+                "oke", "cite", "nate"
         }, RandomUtil.getClientRand());
     }
 
