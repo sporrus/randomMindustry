@@ -64,10 +64,19 @@ public class StringGenerator {
         return out.toString();
     }
     
+    public static String generateCoreName() {
+        StringBuilder out = new StringBuilder();
+        out.append("Core: ");
+        out.append(capitalizeFirstLetter(generateWord(RandomUtil.getClientRand().random(1, 2))));
+        out.append(generateCoreSuffix());
+        
+        return out.toString();
+    }
+    
     public static String generateDrillSuffix() {
         return RandomUtil.random(new String[]{
                 "pact", "act", "matic", "atic", "chal", "al", "ser", "er",
-                "ption", "tion", "blast", "last", "ast"
+                "ption", "tion", "blast", "last", "ast", "tary", "pulse"
         }, RandomUtil.getClientRand());
     }
     
@@ -75,6 +84,14 @@ public class StringGenerator {
         return RandomUtil.random(new String[]{
                 "tre", "re", "ter", "cer", "mer", "er", "orch", "rch",
                 "lax", "ment", "ent", "rse", "ite", "te", "se", "le"
+        }, RandomUtil.getClientRand());
+    }
+    
+    public static String generateCoreSuffix() {
+        return RandomUtil.random(new String[]{
+                "ard", "rd", "ation", "tion", "cleus", "leus",
+                "tadel", "adel", "del", "opolis", "polis", "olis",
+                "cite", "ite", "uin", "crete", "rete" 
         }, RandomUtil.getClientRand());
     }
 
