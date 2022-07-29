@@ -75,14 +75,6 @@ public class StringGenerator {
         out.append(" Drill");
         return out.toString();
     }
-    
-    public static String generateReconstructorName() {
-        StringBuilder out = new StringBuilder();
-        out.append(capitalizeFirstLetter(generateWord(1)));
-        out.append(generateReconstructorSuffix());
-        out.append(" " + RandomUtil.random(new String[]{ "Refabricator", "Reconstructor" }, RandomUtil.getClientRand()));
-        return out.toString();
-    }
 
     public static String generateDrillSuffix() {
         return RandomUtil.random(new String[]{
@@ -129,6 +121,30 @@ public class StringGenerator {
                 "ude", "vert", "ate", "ll", "upt",
                 "oke", "cite", "nate"
         }, RandomUtil.getClientRand());
+    }
+    
+    public static String generateUnitFactoryName() {
+        StringBuilder out = new StringBuilder();
+        out.append(capitalizeFirstLetter(generateWord(1)));
+        out.append(generateUnitFactorySuffix());
+        out.append(" " + RandomUtil.random(new String[]{ "Fabricator", "Constructor", "Builder", "Factory" }, RandomUtil.getClientRand()));
+        
+        return out.toString();
+    }
+    
+    public static String generateUnitFactorySuffix() {
+        return RandomUtil.random(new String[]{
+                "ound", "und", "nd", "ir", "val", "al", "ank", "nk", "ip",
+                "ech", "ch", "on"
+        }, RandomUtil.getClientRand());
+    }
+    
+    public static String generateReconstructorName() {
+        StringBuilder out = new StringBuilder();
+        out.append(capitalizeFirstLetter(generateWord(1)));
+        out.append(generateReconstructorSuffix());
+        out.append(" " + RandomUtil.random(new String[]{ "Refabricator", "Reconstructor" }, RandomUtil.getClientRand()));
+        return out.toString();
     }
     
     public static String generateReconstructorSuffix() {
