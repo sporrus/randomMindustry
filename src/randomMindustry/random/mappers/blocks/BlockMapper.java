@@ -168,6 +168,8 @@ public class BlockMapper {
     }
 
     public static void modifyUnitFactory(UnitFactory block) {
+        block.localizedName = StringGenerator.generateUnitFactoryName();
+        
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
 
         Seq<UnitFactory.UnitPlan> plans = block.plans;
