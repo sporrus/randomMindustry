@@ -17,16 +17,18 @@ public class BulletMapper {
         RandomUtil.shuffle(bullets);
         bullets.each(bullet -> {
             Seq<BulletType> bulletSeq = content.bullets().select(b -> {
+                int fragDepth = 0;
                 boolean inFrag = false;
                 BulletType current = b;
                 Seq<BulletType> went = new Seq<>();
-                while (current.fragBullet != null && !went.contains(current.fragBullet)) {
-                    if (current.fragBullet == b) {
+                while (current.fragBullet != null) {
+                    if (current.fragBullet == b || went.contains(current.fragBullet) || fragDepth >= 2) {
                         inFrag = true;
                         break;
                     }
                     went.add(current);
                     current = current.fragBullet;
+                    fragDepth++;
                 }
                 return b != bullet && !inFrag && !(b instanceof MassDriverBolt);
             });
