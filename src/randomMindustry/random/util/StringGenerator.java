@@ -35,49 +35,44 @@ public class StringGenerator {
 
     public static String generateMaterialName() {
         StringBuilder out = new StringBuilder();
-        if (RandomUtil.getClientRand().chance(0.5)) { // normal suffix
-            out.append(capitalizeFirstLetter(generateWord(1)));
-            out.append(generateMaterialSuffix());
-        } else if (RandomUtil.getClientRand().chance(0.5)) { // type suffix
-            out.append(capitalizeFirstLetter(generateWord(2)));
+        out.append(capitalizeFirstLetter(generateWord(1))).append(generateMaterialSuffix());
+        if (RandomUtil.getClientRand().chance(0.5))
             out.append(" ").append(generateMaterialSuffixType());
-        } else {
-            out.append(capitalizeFirstLetter(generateWord(2)));
-        }
         return out.toString();
     }
-    
+
+    public static String generateMaterialSuffix() {
+        return RandomUtil.random(new String[]{
+                "ite", "ium", "ide"
+        }, RandomUtil.getClientRand());
+    }
+
+    public static String generateMaterialSuffixType() {
+        return RandomUtil.random(new String[]{
+                "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst",
+                "Clust", "Crystal", "Block", "Spore", "Mix"
+        }, RandomUtil.getClientRand());
+    }
+
     public static String generateTurretName() {
         StringBuilder out = new StringBuilder();
-        out.append(capitalizeFirstLetter(generateWord(RandomUtil.getClientRand().random(1, 2))));
+        out.append(capitalizeFirstLetter(generateWord(1)));
         out.append(generateTurretSuffix());
-        
         return out.toString();
     }
-    
+
+    public static String generateTurretSuffix() {
+        return RandomUtil.random(new String[]{
+                "tre", "re", "ter", "cer", "mer", "er", "orch", "rch",
+                "lax", "ment", "ent", "rse", "ite", "te", "se", "le"
+        }, RandomUtil.getClientRand());
+    }
+
     public static String generateDrillName() {
         StringBuilder out = new StringBuilder();
         out.append(capitalizeFirstLetter(generateWord(1)));
         out.append(generateDrillSuffix());
         out.append(" Drill");
-        
-        return out.toString();
-    }
-    
-    public static String generateCoreName() {
-        StringBuilder out = new StringBuilder();
-        out.append("Core: ");
-        out.append(capitalizeFirstLetter(generateWord(RandomUtil.getClientRand().random(1, 2))));
-        out.append(generateCoreSuffix());
-        
-        return out.toString();
-    }
-    
-    public static String generateUnitName() {
-        StringBuilder out = new StringBuilder();
-        out.append(capitalizeFirstLetter(generateWord(1)));
-        out.append(generateUnitSuffix());
-        
         return out.toString();
     }
     
@@ -86,32 +81,39 @@ public class StringGenerator {
         out.append(capitalizeFirstLetter(generateWord(1)));
         out.append(generateReconstructorSuffix());
         out.append(" " + RandomUtil.random(new String[]{ "Refabricator", "Reconstructor" }, RandomUtil.getClientRand()));
-        
         return out.toString();
     }
-    
+
     public static String generateDrillSuffix() {
         return RandomUtil.random(new String[]{
                 "pact", "act", "matic", "atic", "chal", "al", "ser", "er",
                 "ption", "tion", "blast", "last", "ast", "tary", "pulse"
         }, RandomUtil.getClientRand());
     }
-    
-    public static String generateTurretSuffix() {
-        return RandomUtil.random(new String[]{
-                "tre", "re", "ter", "cer", "mer", "er", "orch", "rch",
-                "lax", "ment", "ent", "rse", "ite", "te", "se", "le"
-        }, RandomUtil.getClientRand());
+
+    public static String generateCoreName() {
+        StringBuilder out = new StringBuilder();
+        out.append("Core: ");
+        out.append(capitalizeFirstLetter(generateWord(RandomUtil.getClientRand().random(1, 2))));
+        out.append(generateCoreSuffix());
+        return out.toString();
     }
-    
+
     public static String generateCoreSuffix() {
         return RandomUtil.random(new String[]{
                 "ard", "rd", "ation", "tion", "cleus", "leus",
                 "tadel", "adel", "del", "opolis", "polis", "olis",
-                "cite", "ite", "uin", "crete", "rete" 
+                "cite", "ite", "uin", "crete", "rete"
         }, RandomUtil.getClientRand());
     }
-    
+
+    public static String generateUnitName() {
+        StringBuilder out = new StringBuilder();
+        out.append(capitalizeFirstLetter(generateWord(1)));
+        out.append(generateUnitSuffix());
+        return out.toString();
+    }
+
     public static String generateUnitSuffix() {
         return RandomUtil.random(new String[]{
                 "ger", "ace", "ress", "pter", "eign",
@@ -133,19 +135,6 @@ public class StringGenerator {
         return RandomUtil.random(new String[]{
                 "ditive", "cative", "nential", "ential", "tial", "trative",
                 "itive", "ative", "rative", "tive"
-        }, RandomUtil.getClientRand());
-    }
-
-    public static String generateMaterialSuffix() {
-        return RandomUtil.random(new String[]{
-                "ite", "ium", "ide"
-        }, RandomUtil.getClientRand());
-    }
-
-    public static String generateMaterialSuffixType() {
-        return RandomUtil.random(new String[]{
-                "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst",
-                "Clust", "Crystal", "Block", "Spore", "Mix"
         }, RandomUtil.getClientRand());
     }
 
