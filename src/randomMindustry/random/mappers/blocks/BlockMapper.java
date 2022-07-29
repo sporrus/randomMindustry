@@ -87,6 +87,7 @@ public class BlockMapper {
     }
 
     public static void modifyCore(CoreBlock block) {
+        block.localizedName = StringGenerator.generateCoreName();
         block.unitType.weapons.each((w) -> w.bullet.buildingDamageMultiplier = 0.01f);
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(3, ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
     }
