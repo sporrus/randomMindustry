@@ -173,6 +173,7 @@ public class BlockMapper {
     }
 
     public static void modifyReconstructor(Reconstructor block) {
+        block.localizedName = StringGenerator.generateReconstructorName();
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         Util.removeAllConsumers(block);
         block.consumeItems(ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
