@@ -49,10 +49,25 @@ public class StringGenerator {
     
     public static String generateTurretName() {
         StringBuilder out = new StringBuilder();
-        out.append(capitalizeFirstLetter(generateWord(2)));
+        out.append(capitalizeFirstLetter(RandomUtil.getClientRand.random(1, 2)));
         out.append(generateTurretSuffix());
         
         return out.toString();
+    }
+    
+    public static String generateDrillName() {
+        StringBuilder out = new StringBuilder();
+        out.append(capitalizeFirstLetter(generateWord(1)));
+        out.append(generateDrillSuffix());
+        
+        return out.toString();
+    }
+    
+    public static String generateDrillSuffix() {
+        return RandomUtil.random(new String[]{
+                "pact", "act", "matic", "atic", "chal", "al", "ser", "er",
+                "ption", "tion", "blast", "last", "ast"
+        }, RandomUtil.getClientRand());
     }
     
     public static String generateTurretSuffix() {
