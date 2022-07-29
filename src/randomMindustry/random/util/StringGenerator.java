@@ -46,6 +46,21 @@ public class StringGenerator {
         }
         return out.toString();
     }
+    
+    public static String generateTurretName() {
+        StringBuilder out = new StringBuilder();
+        out.append(capitalizeFirstLetter(generateWord(2)));
+        out.append(generateTurretSuffix());
+        
+        return out.toString();
+    }
+    
+    public static String generateTurretSuffix() {
+        return RandomUtil.random(new String[]{
+                "tre", "re", "ter", "cer", "mer", "er", "orch", "rch",
+                "lax", "ment", "ent", "rse", "ite", "te", "se", "le"
+        }, RandomUtil.getClientRand());
+    }
 
     public static String generateMaterialSuffix() {
         return RandomUtil.random(new String[]{
