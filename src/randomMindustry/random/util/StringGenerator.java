@@ -11,7 +11,7 @@ public class StringGenerator {
             "y", "z"
     };
     public static final String[] TEMPLATE = new String[]{
-            "cv", "cvc"
+            "cv", "vc", "cvc"
     };
 
     public static String generateSyllable() {
