@@ -136,6 +136,7 @@ public class BlockMapper {
     }
 
     public static void modifyDrill(Drill block) {
+        block.localizedName = StringGenerator.generateDrillName();
         int localTier = block.tier - 2;
         ItemMapper.ItemPack drillPack = ItemMapper.getPackByTagAndLocalTier("drill", localTier);
         int globalTier = ItemMapper.maxTier;
