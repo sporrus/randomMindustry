@@ -81,6 +81,15 @@ public class StringGenerator {
         return out.toString();
     }
     
+    public static String generateReconstructorName() {
+        StringBuilder out = new StringBuilder();
+        out.append(capitalizeFirstLetter(generateWord(2)));
+        out.append(generateReconstructorSuffix());
+        out.append(" " + RandomUtil.random(new String[]{ "Refabricator", "Reconstructor" }, RandomUtil.getClientRand()));
+        
+        return out.toString();
+    }
+    
     public static String generateDrillSuffix() {
         return RandomUtil.random(new String[]{
                 "pact", "act", "matic", "atic", "chal", "al", "ser", "er",
@@ -117,6 +126,13 @@ public class StringGenerator {
                 "rui", "roi", "us", "cta", "aris",
                 "ude", "vert", "ate", "ll", "upt",
                 "oke", "cite", "nate"
+        }, RandomUtil.getClientRand());
+    }
+    
+    public static String generateReconstructorSuffix() {
+        return RandomUtil.random(new String[]{
+                "ditive", "cative", "nential", "ential", "tial", "trative",
+                "itive", "ative", "rative", "tive"
         }, RandomUtil.getClientRand());
     }
 
