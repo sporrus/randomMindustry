@@ -75,7 +75,7 @@ public class StringGenerator {
     
     public static String generateUnitName() {
         StringBuilder out = new StringBuilder();
-        out.append(capitalizeFirstLetter(generateWord(RandomUtil.getClientRand().random(1, 3))));
+        out.append(capitalizeFirstLetter(generateWord(1)));
         out.append(generateUnitSuffix());
         
         return out.toString();
