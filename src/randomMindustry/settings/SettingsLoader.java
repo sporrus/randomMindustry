@@ -32,6 +32,7 @@ public class SettingsLoader {
         });
 
         dialog.addCategory("@setting.rmchaos", (Drawable) atlas.getDrawable("random-mindustry-dice"), c -> {
+            c.pref(new SettingLabel("[accent]Very chaotic!"));
             c.checkPref("rmchaos-region-swap", false);
             c.checkPref("rmchaos-region-skullify", false);
             c.checkPref("rmchaos-router", false);
@@ -111,6 +112,20 @@ public class SettingsLoader {
             button.label(() -> bundle.get(title));
             table.row();
             addDesc(button);
+        }
+    }
+    
+    static class SettingLabel extends Setting {
+        public SettingLabel(String label) {
+            super("rm-label");
+            title = label;
+        }
+        
+        @Override
+        public void add(SettingsTable table) {
+            Label text = table.add(label);
+            table.row();
+            addDesc(text);
         }
     }
 }
