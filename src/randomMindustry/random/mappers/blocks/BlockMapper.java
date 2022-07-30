@@ -201,7 +201,7 @@ public class BlockMapper {
         
         block.plans.each(plan -> {
             plan.time = (plan.unit.health / 1.25f) * RandomUtil.getRand().random(0.5f, 1.5f);
-            plan.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(3) + 1, 5, (int) Math.floor(plan.unit.health / 2d), 5, true);
+            // TODO: payload stack generator
         });
     }
 }
