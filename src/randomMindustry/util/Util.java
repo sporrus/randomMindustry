@@ -41,6 +41,7 @@ public class Util {
         Seq<Consume> save = new Seq<>(block.consumers);
         save.removeAll(remove);
         block.consumers = new Consume[0];
+        block.consPower = null;
         for (Consume consume : remove) block.removeConsumer(consume);
     }
 

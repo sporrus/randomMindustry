@@ -115,7 +115,10 @@ public class BlockMapper {
         if (tier >= GeneratorMapper.getLowestPowerTier() && RandomUtil.getRand().chance(0.25)) {
             block.hasPower = true;
             block.consumePower(Mathf.round(RandomUtil.getRand().random(20f), 1/15f));
+        } else {
+            block.hasPower = false;
         }
+        block.hasLiquids = false;
         ItemStack[] itemStacks = ItemMapper.getRandomItemStacks(tier, 3, 10, 1, true);
         if (tier > -1) block.consumeItems(itemStacks);
         else block.consumeItems();
