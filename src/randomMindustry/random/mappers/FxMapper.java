@@ -11,6 +11,6 @@ public class FxMapper {
 
     public static void init() {
         effects = Effect.all.select(e -> e.clip <= 50 && e != Fx.dynamicExplosion);
-        effects.each(e -> e.layer = RandomUtil.getRand().random(Layer.min, Layer.max));
+        // effects.each(e -> e.layer = RandomUtil.getRand().random(Layer.min, Layer.max));
     }
 }
