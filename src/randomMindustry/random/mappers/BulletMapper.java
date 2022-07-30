@@ -19,7 +19,14 @@ public class BulletMapper {
         RandomUtil.shuffle(bullets);
         bullets.each(bullet -> {
             Seq<BulletType> bulletSeq = content.bullets().select(b -> {
-                return b != bullet && !(b instanceof MassDriverBolt);
+                int fragDepth = 0;
+                BulletType current = b;
+                while (current.fragBullet != null) {
+                    if (fragDepth >= 3) break;
+                    fragDepth++;
+                    current = current.fragBullet;
+                }
+                return fragDepth <= 3 && b != bullet && !(b instanceof MassDriverBolt);
             });
 
             bullet.hitEffect = effects.random(RandomUtil.getClientRand());
