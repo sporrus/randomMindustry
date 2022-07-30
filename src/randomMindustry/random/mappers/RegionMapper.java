@@ -1,5 +1,6 @@
 package randomMindustry.random.mappers;
 
+import arc.math.*;
 import arc.Core;
 import arc.struct.*;
 import arc.graphics.g2d.TextureAtlas.*;
@@ -51,6 +52,18 @@ public class RegionMapper{
             Icon.icons.each((k, v) -> {
                 AtlasRegion newRegion = atlas.getRegionMap().get("random-mindustry-skull");
                 v.set(newRegion);
+            });
+        }
+        
+        if(settings.getBool("rmchaos-region-scroller", false)){
+            Rand clientRand = RandomUtil.getClientRand();
+            atlas.getRegions().each(region -> {
+                region.setX(clientRand.random(0f, 500f));
+                region.setY(clientRand.random(0f, 500f));
+            });
+            Icon.icons.each((k, v) -> {
+                v.setX(clientRand.random(0f, 500f));
+                v.setY(clientRand.random(0f, 500f));
             });
         }
     }
