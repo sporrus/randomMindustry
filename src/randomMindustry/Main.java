@@ -64,6 +64,7 @@ public class Main extends Mod {
         BlockMapper.init();
         RegionMapper.init();
         BundleMapper.init();
+        Vars.content.sectors().each(sector -> sector.localizedName = StringGenerator.generateSectorName());
         for (ItemMapper.ItemPack pack : ItemMapper.getItemMap()) {
             Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
             for (Item item : pack.all) {
