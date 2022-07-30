@@ -60,6 +60,8 @@ public class RegionMapper{
             atlas.getRegions().each(region -> {
                 region.setX(clientRand.random(0f, 500f));
                 region.setY(clientRand.random(0f, 500f));
+                region.setWidth(clientRand.random(30f, 50f));
+                region.setHeight(clientRand.random(30f, 50f));
             });
             /* Icon.icons.each((k, v) -> {
                 v.setX(clientRand.random(0f, 500f));
