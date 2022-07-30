@@ -4,6 +4,7 @@ import arc.struct.Seq;
 import mindustry.graphics.*;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
+import randomMindustry.random.util.*;
 
 public class FxMapper {
     public static Seq<Effect> effects = new Seq<>();
