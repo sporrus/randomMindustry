@@ -82,6 +82,8 @@ public class BlockMapper {
             modifyUnitFactory(ufactory);
         } else if (block instanceof Reconstructor recons) {
             modifyReconstructor(recons);
+        } else if (block instanceof UnitAssembler assembler) {
+            modifyUnitAssembler(assembler);
         } else if (block instanceof PowerGenerator generator) {
             GeneratorMapper.map(generator);
         } else if (block instanceof CoreBlock core) {
@@ -172,9 +174,7 @@ public class BlockMapper {
         
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
 
-        Seq<UnitFactory.UnitPlan> plans = block.plans;
-
-        plans.each(plan -> {
+        block.plans.each(plan -> {
             plan.time = (plan.unit.health / 1.25f) * RandomUtil.getRand().random(0.5f, 1.5f);
             plan.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(3) + 1, 5, (int) Math.floor(plan.unit.health / 2d), 5, true);
         });
@@ -189,5 +189,19 @@ public class BlockMapper {
         block.constructTime = 0f;
         block.upgrades.each(upgrade -> block.constructTime += ((upgrade[1].health / 0.25f) * RandomUtil.getRand().random(0.5f, 1.5f)));
         block.constructTime /= block.upgrades.size;
+    }
+    
+    public static void modifyUnitAssembler(UnitAssembler block) {
+        // block.localizedName = StringGenerator.generateUnitAssemblerName();
+        
+        block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
+        
+        block.dronesCreated = RandomUtil.getRand().random(1, 8);
+        block.droneConstructTime = (block.droneType.health / 1.25f) * RandomUtil.getRand().random(0.5f, 1.5f);
+        
+        block.plans.each(plan -> {
+            plan.time = (plan.unit.health / 1.25f) * RandomUtil.getRand().random(0.5f, 1.5f);
+            plan.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(3) + 1, 5, (int) Math.floor(plan.unit.health / 2d), 5, true);
+        });
     }
 }
