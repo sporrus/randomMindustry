@@ -10,15 +10,24 @@ public class StringGenerator {
             "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x",
             "y", "z"
     };
+    public static final String[] ODDS = new String[]{
+            "1", "3", "5", "7", "9"
+    };
+    public static final String[] EVENS = new String[]{
+            "0", "2", "4", "6", "8"
+    };
     public static final String[] TEMPLATE = new String[]{
             "cv", "vc", "cvc", "vcv"
+    };
+    public static final String[] TEMPLATENUM = new String[]{
+            "eo", "oe", "eoe", "oeo", "oee", "ooe"
     };
 
     public static String generateSyllable() {
         String template = RandomUtil.random(TEMPLATE, RandomUtil.getClientRand());
         StringBuilder out = new StringBuilder();
         for (int i = 0; i < template.length(); i++) {
-            if (template.charAt(i) == 'c') {
+            if (template.charAt(i) == "c") {
                 out.append(RandomUtil.random(CONSONANTS, RandomUtil.getClientRand()));
             } else {
                 out.append(RandomUtil.random(VOWELS, RandomUtil.getClientRand()));
@@ -31,6 +40,21 @@ public class StringGenerator {
         StringBuilder out = new StringBuilder();
         for (int i = 0; i < size; i++) out.append(generateSyllable());
         return out.toString();
+    }
+    
+    public static String generateNumber(int size) {
+        String template = RandomUtil.random(TEMPLATENUM, RandomUtil.getClientRand());
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < template.length(); j++) {
+                if (template.charAt(i) == "e") {
+                    out.append(RandomUtil.random(EVENS, RandomUtil.getClientRand()));
+                } else {
+                    out.append(RandomUtil.random(ODDS, RandomUtil.getClientRand()));
+                }
+            }
+        }
+        return out.toString(); 
     }
 
     public static String generateMaterialName() {
@@ -128,7 +152,6 @@ public class StringGenerator {
         out.append(capitalizeFirstLetter(generateWord(1)));
         out.append(generateUnitFactorySuffix());
         out.append(" " + RandomUtil.random(new String[]{ "Fabricator", "Constructor", "Builder", "Factory", "Assembler" }, RandomUtil.getClientRand()));
-        
         return out.toString();
     }
     
@@ -151,6 +174,21 @@ public class StringGenerator {
         return RandomUtil.random(new String[]{
                 "ditive", "cative", "nential", "ential", "tial", "trative",
                 "itive", "ative", "rative", "tive"
+        }, RandomUtil.getClientRand());
+    }
+    
+    public static String generateSectorName() {
+        StringBuilder out = new StringBuilder();
+        out.append(capitalizeFirstLetter(generateWord(2)));
+        out.append(" " + generateSectorPlace());
+        if (RandomUtil.getClientRand().chance(0.5f)) out.append(" " + generateNumber(1));
+        return out.toString();
+    }
+    
+    public static String generateSectorPlace() {
+        return RandomUtil.random(new String[]{
+                "Market", "Zero", "Facility", "Craters", "Canyons", "Floors", "Mountains",
+                "Meteor", "Ruins", "Shores", "Bunker"
         }, RandomUtil.getClientRand());
     }
 
