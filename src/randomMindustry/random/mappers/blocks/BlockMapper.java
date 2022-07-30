@@ -186,14 +186,8 @@ public class BlockMapper {
         Util.removeAllConsumers(block);
         block.consumeItems(ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
         
-        float sum = 0f; 
-        int count = 0;
-        
-        block.upgrades.each(upgrade -> {
-            sum += upgrade[1].health / 5f;
-            count++;
-        });
-        
-        block.constructTime = sum / (float)count;
+        block.constructTime = 0f;
+        block.upgrades.each(upgrade -> block.constructTime += upgrade[1].health / 1.25f);
+        block.constructTime /= upgrades.size;
     }
 }
