@@ -16,13 +16,13 @@ public class ItemMapper {
     private static Seq<ItemPack> itemMap = new Seq<>();
     public static final int itemCount = 16;
     public static final int maxTier = 6;
+    public static ObjectMap<Item, Float> hues = new ObjectMap<>();
 
     public static void init() {
         selectedItems = Vars.content.items().copy();
         RandomUtil.shuffle(selectedItems);
         selectedItems.truncate(itemCount);
-
-        ObjectMap<Item, Float> hues = new ObjectMap<>();
+        hues = new ObjectMap<>();
         selectedItems.each((item -> {
             item.stats = new Stats();
             item.alwaysUnlocked = true;
@@ -88,6 +88,8 @@ public class ItemMapper {
                 ob.setup(item);
                 for (int i = 0; i < ob.variantRegions.length; i++)
                     TextureGenerator.changeHue(ob.variantRegions[i], hues.get(item));
+                TextureGenerator.changeHue(ob.fullIcon, hues.get(item));
+                TextureGenerator.changeHue(ob.uiIcon, hues.get(item));
                 ob.init();
             } else {
                 b.itemDrop = item;

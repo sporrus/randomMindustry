@@ -109,6 +109,9 @@ public class BlockMapper {
         if (item == null) item = ItemMapper.getRandomItem(false);
         int count = RandomUtil.getRand().random(1, 10);
         block.outputItems = new ItemStack[]{new ItemStack(item, count)};
+        TextureGenerator.changeHue(block.region, ItemMapper.hues.get(item));
+        TextureGenerator.changeHue(block.fullIcon, ItemMapper.hues.get(item));
+        TextureGenerator.changeHue(block.uiIcon, ItemMapper.hues.get(item));
         Util.removeAllConsumers(block);
         Util.removeBars(block);
         int tier = ItemMapper.getTierOfItem(item)-1;
