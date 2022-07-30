@@ -6,8 +6,10 @@ import arc.graphics.g2d.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.content.*;
+import mindustry.gen.Building;
 import mindustry.gen.Sounds;
 import mindustry.type.*;
+import mindustry.ui.Bar;
 import mindustry.world.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
@@ -15,9 +17,21 @@ import mindustry.world.meta.*;
 import randomMindustry.random.mappers.blocks.BlockMapper;
 import randomMindustry.random.util.RandomUtil;
 
+import java.lang.reflect.Field;
+
 import static mindustry.Vars.content;
 
 public class Util {
+    public static void removeBars(Block block) {
+        try {
+            Field field = Block.class.getDeclaredField("barMap");
+            field.setAccessible(true);
+            ObjectMap<String, Func<Building, Bar>> map = (ObjectMap<String, Func<Building, Bar>>) field.get(block);
+            map.clear();
+        } catch (Exception e) {
+            Log.err("Could not remove bars!", e);
+        }
+    }
     public static void removeAllConsumers(Block block) {
         removeConsumers(block, (consume -> true));
     }
