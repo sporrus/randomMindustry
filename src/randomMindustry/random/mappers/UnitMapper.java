@@ -4,6 +4,7 @@ import arc.struct.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
 import mindustry.content.*;
+import mindustry.graphics.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
@@ -37,7 +38,7 @@ public class UnitMapper{
         
         unit.legCount = RandomUtil.getRandomIntMult(2, 10, 2);
         unit.legGroupSize = RandomUtil.getRandomIntMult(2, 10, 2);
-        unit.legLength = RandomUtil.getRand().random(-70f, 70f);
+        unit.legLength = RandomUtil.getRand().random(-unit.hitSize*1.5f, unit.hitSize*1.5f);
         unit.legSpeed = RandomUtil.getRand().random(0.1f, 3f);
         unit.legStraightness = RandomUtil.getRand().random(1f);
         unit.lockLegBase = RandomUtil.getRand().random(-2f, 2f) > 0;
@@ -50,6 +51,9 @@ public class UnitMapper{
         unit.fallEngineEffect = effects.random(RandomUtil.getRand());
         unit.deathExplosionEffect = effects.random(RandomUtil.getRand());
 
+        unit.engineLayer = RandomUtil.getRand().random(Layer.min, Layer.max);
+        // unit.groundLayer = RandomUtil.getRand().random(Layer.min, Layer.max);
+        
         unit.targetAir = unit.canHeal = unit.targetGround = false;
         if(unit instanceof MissileUnitType) return;
         unit.weapons.each(weapon -> {
@@ -69,9 +73,9 @@ public class UnitMapper{
             weapon.rotationLimit = RandomUtil.getRand().random(45f, 361f);
             
             weapon.bullet = content.bullets().select(b -> !(b instanceof MassDriverBolt)).random(RandomUtil.getRand());
-            unit.targetAir |= weapon.bullet.collidesAir;
-            unit.targetGround |= weapon.bullet.collidesGround;
-            unit.canHeal |= weapon.bullet.healPercent > 0;
+            unit.targetAir = weapon.bullet.collidesAir;
+            unit.targetGround = weapon.bullet.collidesGround;
+            unit.canHeal = weapon.bullet.healPercent > 0;
 
             int pattern = RandomUtil.getRand().random(0, 5);
             switch (pattern) {

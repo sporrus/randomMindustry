@@ -2,6 +2,7 @@ package randomMindustry.random.mappers;
 
 import arc.math.Mathf;
 import arc.struct.*;
+import mindustry.graphics.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
@@ -48,6 +49,7 @@ public class BulletMapper {
             bullet.weaveScale = RandomUtil.getRand().random(0.5f, 20f);
             bullet.weaveMag = RandomUtil.getRand().random(0.5f, 10f);
 
+            bullet.layer = RandomUtil.getRand().random(Layer.min, Layer.max);
             bullet.rangeChange = RandomUtil.getRand().random(0.5f, 80f);
             bullet.scaleLife = RandomUtil.getRand().random(-2f, 2f) < 0f;
             bullet.healPercent = RandomUtil.getRand().chance(0.75f) ? RandomUtil.getRand().random(0f, 100f) : 0;
