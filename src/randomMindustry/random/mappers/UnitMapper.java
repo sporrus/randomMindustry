@@ -36,9 +36,9 @@ public class UnitMapper{
         unit.createWreck = RandomUtil.getRand().random(-2f, 2f) > 0;
         unit.createScorch = RandomUtil.getRand().random(-2f, 2f) > 0;
         
-        unit.legCount = RandomUtil.getRandomIntMult(2, 10, 2);
+        unit.legCount = RandomUtil.getRandomIntMult(2, 20, 2);
         unit.legGroupSize = RandomUtil.getRandomIntMult(2, 10, 2);
-        unit.legLength = RandomUtil.getRand().random(-unit.hitSize*1.5f, unit.hitSize*1.5f);
+        unit.legLength = RandomUtil.getRand().random(-unit.hitSize*2f, unit.hitSize*2f);
         unit.legSpeed = RandomUtil.getRand().random(0.1f, 3f);
         unit.legStraightness = RandomUtil.getRand().random(1f);
         unit.lockLegBase = RandomUtil.getRand().random(-2f, 2f) > 0;
