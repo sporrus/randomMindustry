@@ -176,7 +176,7 @@ public class BlockMapper {
 
         plans.each(plan -> {
             // randomize plan unit?
-            plan.time = RandomUtil.getRand().random(3600f);
+            plan.time = plan.unit.health / 5f);
             plan.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(3) + 1, 5, (int) Math.floor(plan.unit.health / 2d), 5, true);
         });
     }
