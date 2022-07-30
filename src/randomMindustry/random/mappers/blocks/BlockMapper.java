@@ -175,7 +175,7 @@ public class BlockMapper {
         Seq<UnitFactory.UnitPlan> plans = block.plans;
 
         plans.each(plan -> {
-            plan.time = (plan.unit.health / 5f) * RandomUtil.getRand().random(0.5f, 1.5f);
+            plan.time = (plan.unit.health / 2.5f) * RandomUtil.getRand().random(0.5f, 1.5f);
             plan.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(3) + 1, 5, (int) Math.floor(plan.unit.health / 2d), 5, true);
         });
     }
@@ -187,7 +187,7 @@ public class BlockMapper {
         block.consumeItems(ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
         
         block.constructTime = 0f;
-        block.upgrades.each(upgrade -> block.constructTime += (upgrade[1].health / 1.25f));
+        block.upgrades.each(upgrade -> block.constructTime += ((upgrade[1].health / 1.25f) * RandomUtil.getRand().random(0.5f, 1.5f)));
         block.constructTime /= block.upgrades.size;
     }
 }
