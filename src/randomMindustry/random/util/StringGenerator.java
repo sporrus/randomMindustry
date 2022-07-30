@@ -180,9 +180,9 @@ public class StringGenerator {
     public static String generateSectorName() {
         StringBuilder out = new StringBuilder();
         out.append(capitalizeFirstLetter(generateWord(2)));
-        if (RandomUtil.getClientRand().chance(0.5f)) {
+        if (RandomUtil.getClientRand().chance(0.75f)) {
             out.append(" " + generateSectorPlace());
-            if (RandomUtil.getClientRand().chance(0.75f)) out.append(" " + generateNumber(1));
+            if (RandomUtil.getClientRand().chance(0.25f)) out.append(" " + generateNumber(1));
         }
         return out.toString();
     }
@@ -190,7 +190,7 @@ public class StringGenerator {
     public static String generateSectorPlace() {
         return RandomUtil.random(new String[]{
                 "Market", "Zero", "Facility", "Craters", "Canyons", "Floors", "Mountains",
-                "Meteor", "Ruins", "Shores", "Bunker"
+                "Meteor", "Ruins", "Shores", "Bunker", "Flats"
         }, RandomUtil.getClientRand());
     }
 
