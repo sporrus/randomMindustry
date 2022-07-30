@@ -187,7 +187,7 @@ public class BlockMapper {
         block.consumeItems(ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
         
         block.constructTime = 0f;
-        block.upgrades.each(upgrade -> block.constructTime += upgrade[1].health / 1.25f);
-        block.constructTime /= upgrades.size;
+        block.upgrades.each(upgrade -> block.constructTime += (upgrade[1].health / 1.25f));
+        block.constructTime /= block.upgrades.size;
     }
 }
