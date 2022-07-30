@@ -180,7 +180,7 @@ public class StringGenerator {
     public static String generateSectorName() {
         StringBuilder out = new StringBuilder();
         out.append(capitalizeFirstLetter(generateWord(2)));
-        if (RandomUtil.getClientRand().chance(0.5f) {
+        if (RandomUtil.getClientRand().chance(0.5f)) {
             out.append(" " + generateSectorPlace());
             if (RandomUtil.getClientRand().chance(0.75f)) out.append(" " + generateNumber(1));
         }
