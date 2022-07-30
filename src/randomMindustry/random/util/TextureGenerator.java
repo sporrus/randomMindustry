@@ -9,34 +9,28 @@ import java.util.function.BiConsumer;
 
 public class TextureGenerator {
     private static Pixmap pixmap;
-    private static Texture newTexture;
     private static Texture oldTexture;
-
-    public static void createTexture() {
-        newTexture = new Texture(pixmap);
-        newTexture.setFilter(Texture.TextureFilter.linear, Texture.TextureFilter.linear);
-    }
 
     public static void runForPixel(TextureRegion region, BiConsumer<Integer, Integer> consumer) {
         for (int y = 0; y < region.height; y++) {
             for (int x = 0; x < region.width; x++) {
-                consumer.accept(x + region.getX(), y + region.getY());
+                consumer.accept(x, y);
             }
         }
     }
 
-    public static TextureRegion changeHue(TextureRegion region, float hue) {
+    public static void changeHue(TextureRegion region, float hue) {
         if (oldTexture != region.texture) {
             pixmap = region.texture.getTextureData().consumePixmap();
             oldTexture = region.texture;
         }
+        Pixmap newPixmap = new Pixmap(region.width, region.height);
         runForPixel(region, (x, y) -> {
             Color color = new Color();
-            color.rgba8888(pixmap.get(x, y));
+            color.rgba8888(pixmap.get(x + region.getX(), y + region.getY()));
             color.hue(hue);
-            pixmap.set(x, y, color);
+            newPixmap.set(x, y, color);
         });
-        createTexture();
-        return new TextureRegion(newTexture, region.getX(), region.getY(), region.width, region.height);
+        oldTexture.draw(newPixmap, region.getX(), region.getY());
     }
 }

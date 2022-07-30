@@ -1,10 +1,13 @@
 package randomMindustry.random.mappers;
 
+import arc.Core;
+import arc.graphics.g2d.TextureRegion;
 import arc.struct.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
+import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.meta.*;
 import randomMindustry.random.util.*;
 
@@ -19,6 +22,7 @@ public class ItemMapper {
         RandomUtil.shuffle(selectedItems);
         selectedItems.truncate(itemCount);
 
+        ObjectMap<Item, Float> hues = new ObjectMap<>();
         selectedItems.each((item -> {
             item.stats = new Stats();
             item.alwaysUnlocked = true;
@@ -32,8 +36,9 @@ public class ItemMapper {
             item.localizedName = StringGenerator.generateMaterialName();
             float hue = RandomUtil.getClientRand().random(360f);
             item.color.hue(hue);
-            item.fullIcon = TextureGenerator.changeHue(item.fullIcon, hue);
-            item.uiIcon = TextureGenerator.changeHue(item.uiIcon, hue);
+            hues.put(item, hue);
+            TextureGenerator.changeHue(item.fullIcon, hue);
+            TextureGenerator.changeHue(item.uiIcon, hue);
             item.init();
         }));
         Seq<Item> unselectedItems = Vars.content.items().copy();
@@ -79,7 +84,17 @@ public class ItemMapper {
             Item item = ores.random(true);
             item.hardness = (getTierOfItem(item) + 1) / 2 + 1;
             item.lowPriority = b == Blocks.sand;
-            b.itemDrop = item;
+            if (b instanceof OreBlock ob) {
+                ob.setup(item);
+                new Thread(() -> {
+                    for (int i = 0; i < ob.variantRegions.length; i++) {
+                        TextureRegion region = ob.variantRegions[i];
+                        TextureGenerator.changeHue(region, hues.get(item));
+                    }
+                }).start();
+            } else {
+                b.itemDrop = item;
+            }
             unlock(item);
         });
         Blocks.darksand.itemDrop = Blocks.sand.itemDrop;
