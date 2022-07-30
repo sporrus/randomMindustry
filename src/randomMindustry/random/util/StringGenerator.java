@@ -27,7 +27,7 @@ public class StringGenerator {
         String template = RandomUtil.random(TEMPLATE, RandomUtil.getClientRand());
         StringBuilder out = new StringBuilder();
         for (int i = 0; i < template.length(); i++) {
-            if (template.charAt(i) == "c") {
+            if (template.charAt(i) == 'c') {
                 out.append(RandomUtil.random(CONSONANTS, RandomUtil.getClientRand()));
             } else {
                 out.append(RandomUtil.random(VOWELS, RandomUtil.getClientRand()));
@@ -47,7 +47,7 @@ public class StringGenerator {
         StringBuilder out = new StringBuilder();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < template.length(); j++) {
-                if (template.charAt(i) == "e") {
+                if (template.charAt(i) == 'e') {
                     out.append(RandomUtil.random(EVENS, RandomUtil.getClientRand()));
                 } else {
                     out.append(RandomUtil.random(ODDS, RandomUtil.getClientRand()));
@@ -180,8 +180,10 @@ public class StringGenerator {
     public static String generateSectorName() {
         StringBuilder out = new StringBuilder();
         out.append(capitalizeFirstLetter(generateWord(2)));
-        out.append(" " + generateSectorPlace());
-        if (RandomUtil.getClientRand().chance(0.5f)) out.append(" " + generateNumber(1));
+        if (RandomUtil.getClientRand().chance(0.5f) {
+            out.append(" " + generateSectorPlace());
+            if (RandomUtil.getClientRand().chance(0.75f)) out.append(" " + generateNumber(1));
+        }
         return out.toString();
     }
     
