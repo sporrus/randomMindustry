@@ -2,6 +2,7 @@ package randomMindustry.settings;
 
 import arc.math.*;
 import arc.flabel.*;
+import arc.scene.style.Drawable;
 import arc.scene.ui.*;
 import arc.util.Log;
 import mindustry.Vars;
@@ -23,14 +24,14 @@ public class SettingsLoader {
     public static void init() {
         SettingsMenuDialog dialog = ui.settings;
 
-        dialog.addCategory("@setting.rm", Icon.effect /* TODO: Make custom icons. */, c -> {
+        dialog.addCategory("@setting.rm", (Drawable) atlas.getDrawable("random-mindustry-dice"), c -> {
             c.areaTextPref("rm-seed", "0");
             c.pref(new TechSelector());
             c.pref(new RandomButton());
             c.pref(new GenerateButton());
         });
 
-        dialog.addCategory("@setting.rmchaos", Icon.effect /* TODO: Make custom icons. */, c -> {
+        dialog.addCategory("@setting.rmchaos", (Drawable) atlas.getDrawable("random-mindustry-dice"), c -> {
             c.checkPref("rmchaos-region-swap", false);
             c.checkPref("rmchaos-region-skullify", false);
             c.checkPref("rmchaos-router", false);
