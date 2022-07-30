@@ -61,10 +61,10 @@ public class RegionMapper{
                 region.setX(clientRand.random(0f, 500f));
                 region.setY(clientRand.random(0f, 500f));
             });
-            Icon.icons.each((k, v) -> {
+            /* Icon.icons.each((k, v) -> {
                 v.setX(clientRand.random(0f, 500f));
                 v.setY(clientRand.random(0f, 500f));
-            });
+            }); */
         }
     }
 }
