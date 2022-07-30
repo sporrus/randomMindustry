@@ -121,6 +121,9 @@ public class BulletMapper {
     public static float getRange(BulletType b) {
         if(b.rangeOverride > 0) return b.rangeOverride;
         if(b.spawnUnit != null) return b.spawnUnit.lifetime * b.spawnUnit.speed;
-        return b.fragBullet != null ? getRange(b.fragBullet) : 0 + Math.max(Mathf.zero(b.drag) ? b.speed * b.lifetime : b.speed * (1f - Mathf.pow(1f - b.drag, b.lifetime)) / b.drag, b.maxRange);
+        float offset = 0;
+        if (b.fragBullet != null) offset += getRange(b.fragBullet);
+        if (b.intervalBullet != null) offset += getRange(b.intervalBullet);
+        return offset + Math.max(Mathf.zero(b.drag) ? b.speed * b.lifetime : b.speed * (1f - Mathf.pow(1f - b.drag, b.lifetime)) / b.drag, b.maxRange);
     }
 }

@@ -73,7 +73,7 @@ public class TurretMapper {
         turret.targetAir = turret.shootType.collidesAir;
         turret.targetGround = turret.shootType.collidesGround;
         turret.targetHealing = turret.shootType.healPercent > 0;
-        turret.range = turret.shootType.range;
+        turret.range = BulletMapper.getRange(turret.shootType);
     }
 
     public static void modifyContinuousLiquidTurret(ContinuousLiquidTurret turret) {
@@ -85,7 +85,7 @@ public class TurretMapper {
         turret.targetAir = turret.targetGround = false;
         for (int i = 0; i < count; i++) {
             BulletType bullet = bullets.random(RandomUtil.getRand());
-            sum += bullet.range;
+            sum += BulletMapper.getRange(bullet);
             turret.targetAir |= bullet.collidesAir;
             turret.targetGround |= bullet.collidesGround;
             turret.targetHealing |= bullet.healPercent > 0;
@@ -107,7 +107,7 @@ public class TurretMapper {
         turret.targetAir = turret.targetGround = false;
         for (int i = 0; i < count; i++) {
             BulletType bullet = bullets.random(RandomUtil.getRand());
-            sum += bullet.range;
+            sum += BulletMapper.getRange(bullet);
             turret.targetAir |= bullet.collidesAir;
             turret.targetGround |= bullet.collidesGround;
             turret.targetHealing |= bullet.healPercent > 0;
@@ -128,7 +128,7 @@ public class TurretMapper {
         turret.targetAir = turret.targetGround = false;
         for (int i = 0; i < count; i++) {
             BulletType bullet = bullets.random(RandomUtil.getRand());
-            sum += bullet.range;
+            sum += BulletMapper.getRange(bullet);
             turret.targetAir |= bullet.collidesAir;
             turret.targetGround |= bullet.collidesGround;
             turret.targetHealing |= bullet.healPercent > 0;
