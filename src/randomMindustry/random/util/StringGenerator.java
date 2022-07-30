@@ -67,14 +67,14 @@ public class StringGenerator {
 
     public static String generateMaterialSuffix() {
         return RandomUtil.random(new String[]{
-                "ite", "ium", "ide", "ast", "ant"
+                "ite", "ium", "ide", "ast", "ant", "ten"
         }, RandomUtil.getClientRand());
     }
 
     public static String generateMaterialSuffixType() {
         return RandomUtil.random(new String[]{
                 "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst",
-                "Clust", "Crystal", "Block", "Spore", "Mix", "Brew", "Stew"
+                "Clust", "Crystal", "Block", "Sphere", "Spore", "Mix"
         }, RandomUtil.getClientRand());
     }
 
