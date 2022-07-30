@@ -86,12 +86,9 @@ public class ItemMapper {
             item.lowPriority = b == Blocks.sand;
             if (b instanceof OreBlock ob) {
                 ob.setup(item);
-                new Thread(() -> {
-                    for (int i = 0; i < ob.variantRegions.length; i++) {
-                        TextureRegion region = ob.variantRegions[i];
-                        TextureGenerator.changeHue(region, hues.get(item));
-                    }
-                }).start();
+                for (int i = 0; i < ob.variantRegions.length; i++)
+                    TextureGenerator.changeHue(ob.variantRegions[i], hues.get(item));
+                ob.init();
             } else {
                 b.itemDrop = item;
             }
