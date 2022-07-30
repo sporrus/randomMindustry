@@ -127,7 +127,7 @@ public class StringGenerator {
         StringBuilder out = new StringBuilder();
         out.append(capitalizeFirstLetter(generateWord(1)));
         out.append(generateUnitFactorySuffix());
-        out.append(" " + RandomUtil.random(new String[]{ "Fabricator", "Constructor", "Builder", "Factory" }, RandomUtil.getClientRand()));
+        out.append(" " + RandomUtil.random(new String[]{ "Fabricator", "Constructor", "Builder", "Factory", "Assembler" }, RandomUtil.getClientRand()));
         
         return out.toString();
     }
@@ -135,7 +135,7 @@ public class StringGenerator {
     public static String generateUnitFactorySuffix() {
         return RandomUtil.random(new String[]{
                 "ound", "und", "nd", "ir", "val", "al", "ank", "nk", "ip",
-                "ech", "ch", "on"
+                "ech", "ch", "on", "ron", "tron", "ute", "nide", "ide"
         }, RandomUtil.getClientRand());
     }
     
