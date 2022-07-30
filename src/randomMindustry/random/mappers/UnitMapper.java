@@ -51,7 +51,7 @@ public class UnitMapper{
         unit.fallEngineEffect = effects.random(RandomUtil.getRand());
         unit.deathExplosionEffect = effects.random(RandomUtil.getRand());
 
-        unit.engineLayer = RandomUtil.getRand().random(Layer.min, Layer.max);
+        // unit.engineLayer = RandomUtil.getRand().random(Layer.min, Layer.max);
         // unit.groundLayer = RandomUtil.getRand().random(Layer.min, Layer.max);
         
         unit.targetAir = unit.canHeal = unit.targetGround = false;
