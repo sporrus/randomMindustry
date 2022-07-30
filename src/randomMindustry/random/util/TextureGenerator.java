@@ -10,6 +10,7 @@ import java.util.function.BiConsumer;
 public class TextureGenerator {
     private static Pixmap pixmap;
     private static Texture newTexture;
+    private static Texture oldTexture;
 
     public static void createTexture() {
         newTexture = new Texture(pixmap);
@@ -25,7 +26,10 @@ public class TextureGenerator {
     }
 
     public static TextureRegion changeHue(TextureRegion region, float hue) {
-        pixmap = region.texture.getTextureData().consumePixmap();
+        if (oldTexture != region.texture) {
+            pixmap = region.texture.getTextureData().consumePixmap();
+            oldTexture = region.texture;
+        }
         runForPixel(region, (x, y) -> {
             Color color = new Color();
             color.rgba8888(pixmap.get(x, y));
