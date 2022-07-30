@@ -37,7 +37,7 @@ public class SettingsLoader {
             c.checkPref("rmchaos-bundle-swap", false);
             c.checkPref("rmchaos-bundle-letter-swap", false);
             c.checkPref("rmchaos-category-rand", false);
-            c.checkPref("rmchaos-region-tinter", false);
+            c.checkPref("rmchaos-region-scroller", false);
         });
     }
 
