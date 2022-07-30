@@ -192,7 +192,7 @@ public class BlockMapper {
     }
     
     public static void modifyUnitAssembler(UnitAssembler block) {
-        // block.localizedName = StringGenerator.generateUnitAssemblerName();
+        block.localizedName = StringGenerator.generateUnitFactoryName();
         
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         
