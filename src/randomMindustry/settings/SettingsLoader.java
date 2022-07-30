@@ -123,7 +123,7 @@ public class SettingsLoader {
         
         @Override
         public void add(SettingsTable table) {
-            Label text = table.add(label);
+            Label text = table.add(title);
             table.row();
             addDesc(text);
         }
