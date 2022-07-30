@@ -27,10 +27,7 @@ public class GeneratorMapper {
             Seq<Liquid> liquids = content.liquids().select((l) -> TechUtil.getRoot(l).contains(Planets.serpulo));
             if (RandomUtil.getRand().chance(0.25)) {
                 hard = true;
-                cg.hasLiquids = true;
                 cg.consumeLiquid(liquids.random(RandomUtil.getRand()), RandomUtil.getRand().random(0.25f));
-            } else {
-                cg.hasLiquids = false;
             }
             int tier = ItemMapper.getMaxTier();
             Seq<Item> selectedConsumers = new Seq<>();

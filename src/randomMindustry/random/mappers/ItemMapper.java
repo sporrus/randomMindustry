@@ -30,7 +30,11 @@ public class ItemMapper {
             item.charge = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.cost = RandomUtil.getRand().random(100) / 100f;
             item.localizedName = StringGenerator.generateMaterialName();
-            item.checkStats();
+            float hue = RandomUtil.getClientRand().random(360f);
+            item.color.hue(hue);
+            item.fullIcon = TextureGenerator.changeHue(item.fullIcon, hue);
+            item.uiIcon = TextureGenerator.changeHue(item.uiIcon, hue);
+            item.init();
         }));
         Seq<Item> unselectedItems = Vars.content.items().copy();
         unselectedItems.removeAll(selectedItems::contains);
