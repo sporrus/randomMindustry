@@ -10,17 +10,8 @@ public class StringGenerator {
             "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x",
             "y", "z"
     };
-    public static final String[] ODDS = new String[]{
-            "1", "3", "5", "7", "9"
-    };
-    public static final String[] EVENS = new String[]{
-            "0", "2", "4", "6", "8"
-    };
     public static final String[] TEMPLATE = new String[]{
             "cv", "vc", "cvc", "vcv"
-    };
-    public static final String[] TEMPLATENUM = new String[]{
-            "eo", "oe", "eoe", "oeo", "oee", "ooe"
     };
 
     public static String generateSyllable() {
@@ -43,18 +34,7 @@ public class StringGenerator {
     }
     
     public static String generateNumber(int size) {
-        String template = RandomUtil.random(TEMPLATENUM, RandomUtil.getClientRand());
-        StringBuilder out = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < template.length(); j++) {
-                if (template.charAt(i) == 'e') {
-                    out.append(RandomUtil.random(EVENS, RandomUtil.getClientRand()));
-                } else {
-                    out.append(RandomUtil.random(ODDS, RandomUtil.getClientRand()));
-                }
-            }
-        }
-        return out.toString(); 
+        return Integer.toString(RandomUtil.getClientRand().random((int) (Math.pow(10, size - 1)), (int) (Math.pow(10, size) - 1)));
     }
 
     public static String generateMaterialName() {
@@ -182,7 +162,7 @@ public class StringGenerator {
         out.append(capitalizeFirstLetter(generateWord(2)));
         if (RandomUtil.getClientRand().chance(0.75f)) {
             out.append(" " + generateSectorPlace());
-            if (RandomUtil.getClientRand().chance(0.25f)) out.append(" " + generateNumber(1));
+            if (RandomUtil.getClientRand().chance(0.25f)) out.append(" " + generateNumber(3));
         }
         return out.toString();
     }
