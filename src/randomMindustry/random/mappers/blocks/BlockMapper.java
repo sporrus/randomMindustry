@@ -37,8 +37,12 @@ public class BlockMapper {
         else selectedBlocks = content.blocks().select((b) -> TechUtil.getRoot(b).contains(planet));
         Seq<Block> unblocks = content.blocks().copy();
         unblocks.removeAll(selectedBlocks);
-        unblocks.each(b -> {if (b.buildVisibility == BuildVisibility.shown) b.buildVisibility = BuildVisibility.debugOnly;});
-        selectedBlocks.each(b -> {if (b.buildVisibility == BuildVisibility.debugOnly) b.buildVisibility = BuildVisibility.shown;});
+        unblocks.each(b -> {
+            if (b.buildVisibility == BuildVisibility.shown) b.buildVisibility = BuildVisibility.debugOnly;
+        });
+        selectedBlocks.each(b -> {
+            if (b.buildVisibility == BuildVisibility.debugOnly) b.buildVisibility = BuildVisibility.shown;
+        });
         RandomUtil.shuffle(selectedBlocks);
         selectedBlocks.sort((a, b) -> {
             if (a instanceof PowerGenerator) return -1;
@@ -114,10 +118,10 @@ public class BlockMapper {
         TextureGenerator.changeHue(block.uiIcon, ItemMapper.hues.get(item));
         Util.removeAllConsumers(block);
         Util.removeBars(block);
-        int tier = ItemMapper.getTierOfItem(item)-1;
+        int tier = ItemMapper.getTierOfItem(item) - 1;
         if (tier >= GeneratorMapper.getLowestPowerTier() && RandomUtil.getRand().chance(0.25)) {
             block.hasPower = true;
-            block.consumePower(Mathf.round(RandomUtil.getRand().random(20f), 1/15f));
+            block.consumePower(Mathf.round(RandomUtil.getRand().random(20f), 1 / 15f));
         } else {
             block.hasPower = false;
         }
@@ -132,7 +136,8 @@ public class BlockMapper {
             String factory = (tier == -1 ? "creator" : genericCrafterTags.random(RandomUtil.getClientRand()));
 
             StringBuilder from = new StringBuilder();
-            if (itemStacks.length > 0) from.append(itemStacks[0].item.localizedName.toLowerCase()).append("[lightgray]");
+            if (itemStacks.length > 0)
+                from.append(itemStacks[0].item.localizedName.toLowerCase()).append("[lightgray]");
             if (itemStacks.length > 1) {
                 for (int i = 1; i < itemStacks.length - 1; i++) {
                     from.append(", ").append(itemStacks[i].item.localizedName.toLowerCase()).append("[lightgray]");
@@ -167,8 +172,14 @@ public class BlockMapper {
     public static void modifyWall(Wall block) {
         ItemStack[] items = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, block.size * 10, 1, true);
         block.requirements = Arrays.copyOf(items, items.length);
-        Arrays.sort(items, (a, b) -> { return b.amount - a.amount; });
+        Arrays.sort(items, (a, b) -> {
+            return b.amount - a.amount;
+        });
         ItemStack mainItem = items[0];
+        float hue = ItemMapper.hues.get(mainItem.item);
+        TextureGenerator.changeHue(block.region, hue);
+        TextureGenerator.changeHue(block.fullIcon, hue);
+        TextureGenerator.changeHue(block.uiIcon, hue);
         String size = "";
         if (block.size == 2) size = "Large ";
         else if (block.size == 3) size = "Huge ";
@@ -178,7 +189,7 @@ public class BlockMapper {
 
     public static void modifyUnitFactory(UnitFactory block) {
         block.localizedName = StringGenerator.generateUnitFactoryName();
-        
+
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
 
         block.plans.each(plan -> {
@@ -192,20 +203,20 @@ public class BlockMapper {
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         Util.removeAllConsumers(block);
         block.consumeItems(ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
-        
+
         block.constructTime = 0f;
         block.upgrades.each(upgrade -> block.constructTime += ((upgrade[1].health / 0.25f) * RandomUtil.getRand().random(0.5f, 1.5f)));
         block.constructTime /= block.upgrades.size;
     }
-    
+
     public static void modifyUnitAssembler(UnitAssembler block) {
         block.localizedName = StringGenerator.generateUnitFactoryName();
-        
+
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
-        
+
         block.dronesCreated = RandomUtil.getRand().random(1, 8);
         block.droneConstructTime = (block.droneType.health / 1.25f) * RandomUtil.getRand().random(0.5f, 1.5f);
-        
+
         block.plans.each(plan -> {
             plan.time = (plan.unit.health / 1.25f) * RandomUtil.getRand().random(0.5f, 1.5f);
             // TODO: payload stack generator
