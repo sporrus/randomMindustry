@@ -34,12 +34,24 @@ public class RMMenuDialog extends BaseDialog{
             cont.defaults().width(220f).height(55).pad(5f);
             cont.button("@rm-item-finder", Icon.zoom, Dialogs.itemFinderDialog::show).row();
             cont.button("@rm-servers", Icon.host, Dialogs.serversDialog::show).row();
+            cont.button("@rm-action-builds", Icon.hammer, () -> {
+                if(!app.openURI("https://github.com/sporrus/randomMindustry/actions")){
+                    ui.showErrorMessage("@linkfail");
+                    app.setClipboardText("https://github.com/sporrus/randomMindustry/actions");
+                }
+            });
             if(settings.getBool("rm-book-collected", false)) cont.button("@rm-book", Icon.book, () -> ui.showInfo("@msg.rm-lever-hunt")).row();
             if(settings.getBool("rm-secret-menu", false)) cont.button("...?", Icon.eye, Dialogs.secretMenuDialog::show).row();
         }else{
             cont.defaults().size(130f).pad(5);
             cont.buttonRow("@rm-item-finder", Icon.zoom, Dialogs.itemFinderDialog::show);
             cont.buttonRow("@rm-servers", Icon.host, Dialogs.serversDialog::show);
+            cont.buttonRow("@rm-action-builds", Icon.hammer, () -> {
+                if(!app.openURI("https://github.com/sporrus/randomMindustry/actions")){
+                    ui.showErrorMessage("@linkfail");
+                    app.setClipboardText("https://github.com/sporrus/randomMindustry/actions");
+                }
+            });
             cont.row();
             if(settings.getBool("rm-book-collected", false)) cont.buttonRow("@rm-book", Icon.book, () -> ui.showInfo("@msg.rm-lever-hunt"));
             if(settings.getBool("rm-secret-menu", false)) cont.buttonRow("...?", Icon.eye, Dialogs.secretMenuDialog::show);
