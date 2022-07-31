@@ -16,7 +16,7 @@ import static mindustry.Vars.*;
 
 public class TurretMapper {
     public static void map(Turret block) {
-        block.localizedName = StringGenerator.generateTurretName();
+        if(!headless) block.localizedName = StringGenerator.generateTurretName();
         block.shootSound = Util.generateSound();
         block.loopSound = Util.generateSound();
         block.chargeSound = Util.generateSound();
