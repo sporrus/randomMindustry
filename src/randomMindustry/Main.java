@@ -104,6 +104,8 @@ public class Main extends Mod {
     
     public static void setupLoadout(boolean divide, int amount){
         state.teams.active.each(team -> {
+            if(team.core() == null) return;
+            
             ItemModule items = team.core().items;
             items.clear();
             
