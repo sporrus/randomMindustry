@@ -25,7 +25,7 @@ public class UnitMapper{
     public static void modify(UnitType unit){
         Seq<Effect> effects = Effect.all.select(effect -> effect != Fx.dynamicExplosion);
         
-        unit.localizedName = StringGenerator.generateUnitName();
+        if(!headless) unit.localizedName = StringGenerator.generateUnitName();
         
         if(!unit.flying && !unit.naval){
             unit.canBoost = RandomUtil.getRand().random(-2f, 2f) > 0;
