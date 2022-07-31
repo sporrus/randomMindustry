@@ -7,6 +7,7 @@ import mindustry.entities.pattern.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
+import mindustry.world.draw.*;
 import randomMindustry.random.mappers.*;
 import randomMindustry.random.util.*;
 import randomMindustry.util.*;
@@ -76,11 +77,13 @@ public class TurretMapper {
         turret.range = BulletMapper.getRange(turret.shootType);
         
         if(!headless){
+            if(!(turret.drawer instanceof DrawTurret drawer)) return;
+            
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(turret.region, hue);
-            TextureGenerator.changeHue(turret.drawer.preview, hue);
-            TextureGenerator.changeHue(turret.drawer.base, hue);
-            TextureGenerator.changeHue(turret.drawer.top, hue);
+            TextureGenerator.changeHue(drawer.preview, hue);
+            TextureGenerator.changeHue(drawer.base, hue);
+            TextureGenerator.changeHue(drawer.top, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
         }
@@ -107,11 +110,13 @@ public class TurretMapper {
         turret.ammo(ammo.toArray());
         
         if(!headless){
+            if(!(turret.drawer instanceof DrawTurret drawer)) return;
+            
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(turret.region, hue);
-            TextureGenerator.changeHue(turret.drawer.preview, hue);
-            TextureGenerator.changeHue(turret.drawer.base, hue);
-            TextureGenerator.changeHue(turret.drawer.top, hue);
+            TextureGenerator.changeHue(drawer.preview, hue);
+            TextureGenerator.changeHue(drawer.base, hue);
+            TextureGenerator.changeHue(drawer.top, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
         }
@@ -139,11 +144,13 @@ public class TurretMapper {
         turret.ammo(ammo.toArray());
         
         if(!headless){
+            if(!(turret.drawer instanceof DrawTurret drawer)) return;
+            
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(turret.region, hue);
-            TextureGenerator.changeHue(turret.drawer.preview, hue);
-            TextureGenerator.changeHue(turret.drawer.base, hue);
-            TextureGenerator.changeHue(turret.drawer.top, hue);
+            TextureGenerator.changeHue(drawer.preview, hue);
+            TextureGenerator.changeHue(drawer.base, hue);
+            TextureGenerator.changeHue(drawer.top, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
         }
@@ -170,11 +177,13 @@ public class TurretMapper {
         turret.ammo(ammo.toArray());
         
         if(!headless){
+            if(!(turret.drawer instanceof DrawTurret drawer)) return;
+            
             Item item = turret.ammoTypes.keys().toSeq().random(RandomUtil.getClientRand());
             TextureGenerator.changeHue(turret.region, ItemMapper.hues.get(item));
-            TextureGenerator.changeHue(turret.drawer.preview, ItemMapper.hues.get(item));
-            TextureGenerator.changeHue(turret.drawer.base, ItemMapper.hues.get(item));
-            TextureGenerator.changeHue(turret.drawer.top, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(drawer.preview, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(drawer.base, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(drawer.top, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(turret.fullIcon, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(turret.uiIcon, ItemMapper.hues.get(item));
         }
