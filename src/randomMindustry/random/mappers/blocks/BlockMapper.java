@@ -3,6 +3,7 @@ package randomMindustry.random.mappers.blocks;
 import arc.math.Mathf;
 import arc.struct.*;
 import arc.util.Log;
+import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -99,7 +100,7 @@ public class BlockMapper {
     }
 
     public static void modifyCore(CoreBlock block) {
-        block.localizedName = StringGenerator.generateCoreName();
+        if (!headless) block.localizedName = StringGenerator.generateCoreName();
         block.unitType.weapons.each((w) -> w.bullet.buildingDamageMultiplier = 0.01f);
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(3, ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
     }
@@ -113,9 +114,6 @@ public class BlockMapper {
         if (item == null) item = ItemMapper.getRandomItem(false);
         int count = RandomUtil.getRand().random(1, 10);
         block.outputItems = new ItemStack[]{new ItemStack(item, count)};
-        TextureGenerator.changeHue(block.region, ItemMapper.hues.get(item));
-        TextureGenerator.changeHue(block.fullIcon, ItemMapper.hues.get(item));
-        TextureGenerator.changeHue(block.uiIcon, ItemMapper.hues.get(item));
         Util.removeAllConsumers(block);
         Util.removeBars(block);
         int tier = ItemMapper.getTierOfItem(item) - 1;
@@ -133,6 +131,10 @@ public class BlockMapper {
         block.requirements = ItemMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
 
         if (!headless) {
+            TextureGenerator.changeHue(block.region, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(block.fullIcon, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(block.uiIcon, ItemMapper.hues.get(item));
+
             String factory = (tier == -1 ? "creator" : genericCrafterTags.random(RandomUtil.getClientRand()));
 
             StringBuilder from = new StringBuilder();
@@ -160,7 +162,7 @@ public class BlockMapper {
     }
 
     public static void modifyDrill(Drill block) {
-        block.localizedName = StringGenerator.generateDrillName();
+        if (!headless) block.localizedName = StringGenerator.generateDrillName();
         int localTier = block.tier - 2;
         ItemMapper.ItemPack drillPack = ItemMapper.getPackByTagAndLocalTier("drill", localTier);
         int globalTier = ItemMapper.maxTier;
@@ -171,20 +173,22 @@ public class BlockMapper {
 
     public static void modifyWall(Wall block) {
         ItemStack[] items = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, block.size * 10, 1, true);
-        block.requirements = Arrays.copyOf(items, items.length);
-        Arrays.sort(items, (a, b) -> {
-            return b.amount - a.amount;
-        });
-        ItemStack mainItem = items[0];
-        float hue = ItemMapper.hues.get(mainItem.item);
-        TextureGenerator.changeHue(block.region, hue);
-        TextureGenerator.changeHue(block.fullIcon, hue);
-        TextureGenerator.changeHue(block.uiIcon, hue);
-        String size = "";
-        if (block.size == 2) size = "Large ";
-        else if (block.size == 3) size = "Huge ";
-        else if (block.size == 4) size = "Gigantic ";
-        block.localizedName = size + mainItem.item.localizedName + " Wall";
+        if (!headless) {
+            block.requirements = Arrays.copyOf(items, items.length);
+            Arrays.sort(items, (a, b) -> {
+                return b.amount - a.amount;
+            });
+            ItemStack mainItem = items[0];
+            float hue = ItemMapper.hues.get(mainItem.item);
+            TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.fullIcon, hue);
+            TextureGenerator.changeHue(block.uiIcon, hue);
+            String size = "";
+            if (block.size == 2) size = "Large ";
+            else if (block.size == 3) size = "Huge ";
+            else if (block.size == 4) size = "Gigantic ";
+            block.localizedName = size + mainItem.item.localizedName + " Wall";
+        }
     }
 
     public static void modifyUnitFactory(UnitFactory block) {

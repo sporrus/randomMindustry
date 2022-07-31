@@ -33,12 +33,14 @@ public class ItemMapper {
             item.radioactivity = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.charge = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.cost = RandomUtil.getRand().random(100) / 100f;
-            item.localizedName = StringGenerator.generateMaterialName();
-            float hue = RandomUtil.getClientRand().random(360f);
-            item.color.hue(hue);
-            hues.put(item, hue);
-            TextureGenerator.changeHue(item.fullIcon, hue);
-            TextureGenerator.changeHue(item.uiIcon, hue);
+            if (!Vars.headless) {
+                item.localizedName = StringGenerator.generateMaterialName();
+                float hue = RandomUtil.getClientRand().random(360f);
+                item.color.hue(hue);
+                hues.put(item, hue);
+                TextureGenerator.changeHue(item.fullIcon, hue);
+                TextureGenerator.changeHue(item.uiIcon, hue);
+            }
             item.init();
         }));
         Seq<Item> unselectedItems = Vars.content.items().copy();
@@ -86,10 +88,12 @@ public class ItemMapper {
             item.lowPriority = b == Blocks.sand;
             if (b instanceof OreBlock ob) {
                 ob.setup(item);
-                for (int i = 0; i < ob.variantRegions.length; i++)
-                    TextureGenerator.changeHue(ob.variantRegions[i], hues.get(item));
-                TextureGenerator.changeHue(ob.fullIcon, hues.get(item));
-                TextureGenerator.changeHue(ob.uiIcon, hues.get(item));
+                if (!Vars.headless) {
+                    for (int i = 0; i < ob.variantRegions.length; i++)
+                        TextureGenerator.changeHue(ob.variantRegions[i], hues.get(item));
+                    TextureGenerator.changeHue(ob.fullIcon, hues.get(item));
+                    TextureGenerator.changeHue(ob.uiIcon, hues.get(item));
+                }
                 ob.init();
             } else {
                 b.itemDrop = item;
