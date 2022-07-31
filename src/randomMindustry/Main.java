@@ -8,6 +8,7 @@ import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.type.*;
+import mindustry.world.modules.*;
 import randomMindustry.random.mappers.*;
 import randomMindustry.random.mappers.blocks.*;
 import randomMindustry.random.util.*;
@@ -35,6 +36,9 @@ public class Main extends Mod {
             RandomUtil.setSeed(Long.parseLong(str));
             generate();
         });
+        Events.on(WorldLoadEvent.class, worldLoadEvent -> {
+            if(!net.client()) setupLoadout(true, 200);
+        });
     }
 
     public static void server() {
@@ -52,6 +56,7 @@ public class Main extends Mod {
     public static void load() {
         RandomUtil.newSeed();
         Log.info("seed is " + RandomUtil.getSeed());
+        setupLoadout(true, 200);
         generate();
     }
 
@@ -94,5 +99,21 @@ public class Main extends Mod {
         ui.host.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(5));
         ui.load.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(6));
         ui.settings.buttons.button(Icon.info, () -> Dialogs.leverDialog.show(7));
+    }
+    
+    public static void setupLoadout(boolean divide, int amount){
+        state.teams.active.each(team -> {
+            ItemModule items = team.core().items;
+            items.clear();
+            
+            Seq<Item> firstItems = ItemMapper.getPackByTier(0).all;
+            
+            firstItems.each(item -> {
+                if(RandomUtil.getRand().chance(0.5f)) return;
+                
+                if(divide) items.add(item, (int)(amount / firstItems.size));
+                else items.add(item, amount);
+            });
+        });
     }
 }
