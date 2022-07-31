@@ -25,6 +25,9 @@ public class Main extends Mod {
     public Main() {
         Events.on(ClientLoadEvent.class, e -> client());
         Events.on(ServerLoadEvent.class, e -> server());
+        Events.on(WorldLoadEvent.class, e -> {
+            if(!net.client() || headless) setupLoadout(true, 200);
+        });
     }
 
     public static void client() {
@@ -36,9 +39,6 @@ public class Main extends Mod {
         netClient.addPacketHandler("seed", (str) -> {
             RandomUtil.setSeed(Long.parseLong(str));
             generate();
-        });
-        Events.on(WorldLoadEvent.class, worldLoadEvent -> {
-            if(!net.client()) setupLoadout(true, 200);
         });
     }
 
