@@ -74,6 +74,16 @@ public class TurretMapper {
         turret.targetGround = turret.shootType.collidesGround;
         turret.targetHealing = turret.shootType.healPercent > 0;
         turret.range = BulletMapper.getRange(turret.shootType);
+        
+        if(!headless){
+            float hue = RandomUtil.getClientRand().random(360f);
+            TextureGenerator.changeHue(turret.region, hue);
+            TextureGenerator.changeHue(turret.drawer.preview, hue);
+            TextureGenerator.changeHue(turret.drawer.base, hue);
+            TextureGenerator.changeHue(turret.drawer.top, hue);
+            TextureGenerator.changeHue(turret.fullIcon, hue);
+            TextureGenerator.changeHue(turret.uiIcon, hue);
+        }
     }
 
     public static void modifyContinuousLiquidTurret(ContinuousLiquidTurret turret) {
@@ -95,6 +105,16 @@ public class TurretMapper {
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         turret.ammo(ammo.toArray());
+        
+        if(!headless){
+            float hue = RandomUtil.getClientRand().random(360f);
+            TextureGenerator.changeHue(turret.region, hue);
+            TextureGenerator.changeHue(turret.drawer.preview, hue);
+            TextureGenerator.changeHue(turret.drawer.base, hue);
+            TextureGenerator.changeHue(turret.drawer.top, hue);
+            TextureGenerator.changeHue(turret.fullIcon, hue);
+            TextureGenerator.changeHue(turret.uiIcon, hue);
+        }
     }
 
     // TODO: crap i forgor to make v1.5.0 for liquid turrets too bad
@@ -117,6 +137,16 @@ public class TurretMapper {
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         turret.ammo(ammo.toArray());
+        
+        if(!headless){
+            float hue = RandomUtil.getClientRand().random(360f);
+            TextureGenerator.changeHue(turret.region, hue);
+            TextureGenerator.changeHue(turret.drawer.preview, hue);
+            TextureGenerator.changeHue(turret.drawer.base, hue);
+            TextureGenerator.changeHue(turret.drawer.top, hue);
+            TextureGenerator.changeHue(turret.fullIcon, hue);
+            TextureGenerator.changeHue(turret.uiIcon, hue);
+        }
     }
 
     public static void modifyItemTurret(ItemTurret turret) {
@@ -138,5 +168,15 @@ public class TurretMapper {
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         turret.ammo(ammo.toArray());
+        
+        if(!headless){
+            Item item = turret.ammoTypes.keys().toSeq().random(RandomUtil.getClientRand());
+            TextureGenerator.changeHue(turret.region, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(turret.drawer.preview, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(turret.drawer.base, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(turret.drawer.top, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(turret.fullIcon, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(turret.uiIcon, ItemMapper.hues.get(item));
+        }
     }
 }
