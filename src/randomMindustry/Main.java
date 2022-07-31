@@ -1,6 +1,7 @@
 package randomMindustry;
 
 import arc.*;
+import arc.struct.*:
 import arc.scene.style.Drawable;
 import arc.util.*;
 import mindustry.Vars;
