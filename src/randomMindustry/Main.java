@@ -26,7 +26,7 @@ public class Main extends Mod {
         Events.on(ClientLoadEvent.class, e -> client());
         Events.on(ServerLoadEvent.class, e -> server());
         Events.on(WorldLoadEvent.class, e -> {
-            if(!net.client() || headless) setupLoadout(true, 200);
+            if(!net.client() || headless) Time.runTask(6f, () -> setupLoadout(true, 200));
         });
     }
 
