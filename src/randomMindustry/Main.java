@@ -109,7 +109,8 @@ public class Main extends Mod {
             ItemModule items = team.core().items;
             items.clear();
             
-            Seq<Item> firstItems = ItemMapper.getPackByTier(0).all;
+            Seq<Item> firstItems = ItemMapper.getPackByTier(0).all.copy();
+            firstItems.add(ItemMapper.getPackByTier(1).all);
             
             firstItems.each(item -> {
                 if(RandomUtil.getRand().chance(0.5f)) return;
