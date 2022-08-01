@@ -82,7 +82,7 @@ public class UnitMapper{
         unit.weapons.each(weapon -> {
             if(!headless){
                 TextureGenerator.changeHue(weapon.region, hue);
-                weapon.parts(part -> huePart(part, hue));
+                weapon.parts.each(part -> huePart(part, hue));
             }
             
             weapon.shootSound = Util.generateSound();
