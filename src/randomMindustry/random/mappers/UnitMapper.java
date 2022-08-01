@@ -63,12 +63,6 @@ public class UnitMapper{
             weapon.reload = RandomUtil.getRand().random(100f);
             weapon.shootCone = RandomUtil.getRand().random(1f, 360f);
             weapon.inaccuracy = RandomUtil.getRand().random(1f, 180f);
-            weapon.xRand = RandomUtil.getRand().random(1f, 10f);
-            weapon.shootX = RandomUtil.getRand().random(-20f, 20f);
-            weapon.shootY = RandomUtil.getRand().random(-20f, 20f);
-            weapon.x = RandomUtil.getRand().random(-unit.hitSize/2f, unit.hitSize/2f);
-            weapon.y = RandomUtil.getRand().random(-unit.hitSize/2f, unit.hitSize/2f);
-            weapon.recoil = RandomUtil.getRand().random(-25f, 25f);
             weapon.rotateSpeed = RandomUtil.getRand().random(1f, 20f);
             weapon.rotationLimit = RandomUtil.getRand().random(45f, 361f);
             
