@@ -3,6 +3,7 @@ package randomMindustry.random.mappers;
 import arc.*;
 import arc.util.*;
 import arc.struct.*;
+import arc.graphics.*;
 import arc.graphics.g2d.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
