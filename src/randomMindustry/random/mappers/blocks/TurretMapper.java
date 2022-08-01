@@ -92,7 +92,7 @@ public class TurretMapper {
             
             turret.heatColor.hue(hue);
             
-            drawer.parts.each(() -> huePart(part, hue));
+            drawer.parts.each(part -> huePart(part, hue));
         }
     }
 
@@ -129,7 +129,7 @@ public class TurretMapper {
             
             turret.heatColor.hue(hue);
             
-            drawer.parts.each(() -> huePart(part, hue));
+            drawer.parts.each(part -> huePart(part, hue));
         }
     }
 
@@ -167,7 +167,7 @@ public class TurretMapper {
             
             turret.heatColor.hue(hue);
             
-            drawer.parts.each(() -> huePart(part, hue));
+            drawer.parts.each(part -> huePart(part, hue));
         }
     }
 
@@ -204,7 +204,7 @@ public class TurretMapper {
             
             turret.heatColor.hue(ItemMapper.hues.get(item));
             
-            drawer.parts.each(() -> huePart(part, ItemMapper.hues.get(item)));
+            drawer.parts.each(part -> huePart(part, ItemMapper.hues.get(item)));
         }
     }
     
