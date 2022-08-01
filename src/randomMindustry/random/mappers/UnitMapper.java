@@ -1,6 +1,7 @@
 package randomMindustry.random.mappers;
 
 import arc.struct.*;
+import arc.graphics.g2d.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
 import mindustry.content.*;
@@ -8,6 +9,7 @@ import mindustry.graphics.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
+import mindustry.entities.part.*;
 
 import randomMindustry.random.util.*;
 import randomMindustry.util.*;
@@ -25,7 +27,32 @@ public class UnitMapper{
     public static void modify(UnitType unit){
         Seq<Effect> effects = Effect.all.select(effect -> effect != Fx.dynamicExplosion);
         
-        if(!headless) unit.localizedName = StringGenerator.generateUnitName();
+        float hue = RandomUtil.getRand().random(360f);
+        
+        if(!headless){
+            unit.localizedName = StringGenerator.generateUnitName();
+            TextureGenerator.changeHue(unit.fullIcon, hue);
+            TextureGenerator.changeHue(unit.uiIcon, hue);
+            TextureGenerator.changeHue(unit.baseRegion, hue);
+            TextureGenerator.changeHue(unit.legRegion, hue);
+            TextureGenerator.changeHue(unit.region, hue);
+            TextureGenerator.changeHue(unit.previewRegion, hue);
+            TextureGenerator.changeHue(unit.itemCircleRegion, hue);
+            TextureGenerator.changeHue(unit.jointRegion, hue);
+            TextureGenerator.changeHue(unit.footRegion, hue);
+            TextureGenerator.changeHue(unit.baseJointRegion, hue);
+            TextureGenerator.changeHue(unit.treadRegion, hue);
+            for(TextureRegion wregion : unit.wreckRegions) TextureGenerator.changeHue(wregion, hue);
+            for(TextureRegion sregion : unit.segmentRegions) TextureGenerator.changeHue(sregion, hue);
+            if(unit.treadRegions != null){
+                for(TextureRegion[] tregionArr : unit.treadRegions){
+                    if(tregionArr != null){
+                        for(TextureRegion tregion : tregionArr) TextureGenerator.changeHue(tregion, hue);
+                    }
+                }
+            }
+            unit.parts.each(part -> huePart(part, hue));
+        }
         
         if(!unit.flying && !unit.naval){
             unit.canBoost = RandomUtil.getRand().random(-2f, 2f) > 0;
@@ -53,10 +80,15 @@ public class UnitMapper{
 
         // unit.engineLayer = RandomUtil.getRand().random(Layer.min, Layer.max);
         // unit.groundLayer = RandomUtil.getRand().random(Layer.min, Layer.max);
-        
+
         unit.targetAir = unit.canHeal = unit.targetGround = false;
         if(unit instanceof MissileUnitType) return;
         unit.weapons.each(weapon -> {
+            if(!headless){
+                TextureGenerator.changeHue(weapon.region, hue);
+                weapon.parts.each(part -> huePart(part, hue));
+            }
+            
             weapon.shootSound = Util.generateSound();
             weapon.chargeSound = Util.generateSound();
             weapon.noAmmoSound = Util.generateSound();
@@ -106,5 +138,34 @@ public class UnitMapper{
             unit.range = Math.min(unit.range, weapon.range() - 4);
             unit.maxRange = Math.max(unit.maxRange, weapon.range() - 4);
         }
+    }
+    
+    public static void huePart(DrawPart part, float hue){
+        if(part instanceof RegionPart regionpart){
+            TextureGenerator.changeHue(regionpart.heat, hue);
+            
+            for(TextureRegion region : regionpart.regions) TextureGenerator.changeHue(region, hue);
+            
+            if(regionpart.color != null) regionpart.color = regionpart.color.cpy().hue(hue);
+            if(regionpart.colorTo != null) regionpart.colorTo = regionpart.colorTo.cpy().hue(hue);
+            if(regionpart.mixColor != null) regionpart.mixColor = regionpart.mixColor.cpy().hue(hue);
+            if(regionpart.mixColorTo != null) regionpart.mixColorTo = regionpart.mixColorTo.cpy().hue(hue);
+            regionpart.heatColor = regionpart.heatColor.cpy().hue(hue);
+            
+            regionpart.children.each(child -> huePart(child, hue));
+        }
+        if(part instanceof HaloPart halopart){
+            halopart.color = halopart.color.cpy().hue(hue);
+            if(halopart.colorTo != null) halopart.colorTo = halopart.colorTo.cpy().hue(hue);
+        }
+        if(part instanceof ShapePart shapepart){
+            shapepart.color = shapepart.color.cpy().hue(hue);
+            if(shapepart.colorTo != null) shapepart.colorTo = shapepart.colorTo.cpy().hue(hue);
+        }
+        if(part instanceof FlarePart flarepart){
+            flarepart.color1 = flarepart.color1.cpy().hue(hue);
+            flarepart.color2 = flarepart.color2.cpy().hue(hue);
+        }
+        if(part instanceof HoverPart hoverpart) hoverpart.color = hoverpart.color.cpy().hue(hue);
     }
 }
