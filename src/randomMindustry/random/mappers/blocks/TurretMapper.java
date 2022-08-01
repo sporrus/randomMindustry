@@ -1,5 +1,6 @@
 package randomMindustry.random.mappers.blocks;
 
+import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.struct.*;
 import mindustry.content.*;
@@ -86,7 +87,7 @@ public class TurretMapper {
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
             
-            turret.heatColor.hue(hue);
+            turret.heatColor = turret.heatColor.cpy().hue(hue);
             
             drawer.parts.each(part -> huePart(part, hue));
         }
@@ -123,8 +124,8 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.heat, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
-            
-            turret.heatColor.hue(hue);
+
+            turret.heatColor = turret.heatColor.cpy().hue(hue);
             
             drawer.parts.each(part -> huePart(part, hue));
         }
@@ -162,8 +163,8 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.heat, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
-            
-            turret.heatColor.hue(hue);
+
+            turret.heatColor = turret.heatColor.cpy().hue(hue);
             
             drawer.parts.each(part -> huePart(part, hue));
         }
@@ -200,8 +201,8 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.heat, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(turret.fullIcon, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(turret.uiIcon, ItemMapper.hues.get(item));
-            
-            turret.heatColor.hue(ItemMapper.hues.get(item));
+
+            turret.heatColor = turret.heatColor.cpy().hue(ItemMapper.hues.get(item));
             
             drawer.parts.each(part -> huePart(part, ItemMapper.hues.get(item)));
         }
@@ -213,17 +214,17 @@ public class TurretMapper {
             
             for(TextureRegion region : regionpart.regions) TextureGenerator.changeHue(region, hue);
             
-            if(regionpart.color != null) regionpart.color.hue(hue);
-            if(regionpart.colorTo != null) regionpart.colorTo.hue(hue);
-            if(regionpart.mixColor != null) regionpart.mixColor.hue(hue);
-            if(regionpart.mixColorTo != null) regionpart.mixColorTo.hue(hue);
-            regionpart.heatColor.hue(hue);
+            if(regionpart.color != null) regionpart.color = regionpart.color.cpy().hue(hue);
+            if(regionpart.colorTo != null) regionpart.colorTo = regionpart.colorTo.cpy().hue(hue);
+            if(regionpart.mixColor != null) regionpart.mixColor = regionpart.mixColor.cpy().hue(hue);
+            if(regionpart.mixColorTo != null) regionpart.mixColorTo = regionpart.mixColorTo.cpy().hue(hue);
+            regionpart.heatColor = regionpart.heatColor.cpy().hue(hue);
             
             regionpart.children.each(child -> huePart(child, hue));
         }
         if(part instanceof HaloPart halopart){
-            halopart.color.hue(hue);
-            if(halopart.colorTo != null) halopart.colorTo.hue(hue);
+            halopart.color = halopart.color.cpy().hue(hue);
+            if(halopart.colorTo != null) halopart.colorTo = halopart.colorTo.cpy().hue(hue);
         }
     }
 }

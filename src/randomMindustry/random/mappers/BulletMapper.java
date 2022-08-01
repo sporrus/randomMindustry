@@ -84,7 +84,7 @@ public class BulletMapper {
 
             if (RandomUtil.getRand().chance(0.5f)) {
                 bullet.status = content.statusEffects().random(RandomUtil.getRand());
-                bullet.statusDuration = RandomUtil.getRand().random(600f);
+                bullet.statusDuration = RandomUtil.getRand().random(1f, 600f);
             }
 
             bullet.fragBullet = null;
