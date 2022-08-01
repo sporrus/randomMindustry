@@ -4,6 +4,7 @@ import arc.struct.*;
 import arc.graphics.g2d.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
+import mindustry.type.weapons.*;
 import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.entities.*;
@@ -30,28 +31,30 @@ public class UnitMapper{
         float hue = RandomUtil.getRand().random(360f);
         
         if(!headless){
-            unit.localizedName = StringGenerator.generateUnitName();
-            TextureGenerator.changeHue(unit.fullIcon, hue);
-            TextureGenerator.changeHue(unit.uiIcon, hue);
-            TextureGenerator.changeHue(unit.baseRegion, hue);
-            TextureGenerator.changeHue(unit.legRegion, hue);
-            TextureGenerator.changeHue(unit.region, hue);
-            TextureGenerator.changeHue(unit.previewRegion, hue);
-            TextureGenerator.changeHue(unit.itemCircleRegion, hue);
-            TextureGenerator.changeHue(unit.jointRegion, hue);
-            TextureGenerator.changeHue(unit.footRegion, hue);
-            TextureGenerator.changeHue(unit.baseJointRegion, hue);
-            TextureGenerator.changeHue(unit.treadRegion, hue);
-            for(TextureRegion wregion : unit.wreckRegions) TextureGenerator.changeHue(wregion, hue);
-            for(TextureRegion sregion : unit.segmentRegions) TextureGenerator.changeHue(sregion, hue);
-            if(unit.treadRegions != null){
-                for(TextureRegion[] tregionArr : unit.treadRegions){
-                    if(tregionArr != null){
-                        for(TextureRegion tregion : tregionArr) TextureGenerator.changeHue(tregion, hue);
+            if(Core.settings.getBool("rm-name-random")) unit.localizedName = StringGenerator.generateUnitName();
+            if(Core.settings.getBool("rm-sprite-random")){
+                TextureGenerator.changeHue(unit.fullIcon, hue);
+                TextureGenerator.changeHue(unit.uiIcon, hue);
+                TextureGenerator.changeHue(unit.baseRegion, hue);
+                TextureGenerator.changeHue(unit.legRegion, hue);
+                TextureGenerator.changeHue(unit.region, hue);
+                TextureGenerator.changeHue(unit.previewRegion, hue);
+                TextureGenerator.changeHue(unit.itemCircleRegion, hue);
+                TextureGenerator.changeHue(unit.jointRegion, hue);
+                TextureGenerator.changeHue(unit.footRegion, hue);
+                TextureGenerator.changeHue(unit.baseJointRegion, hue);
+                TextureGenerator.changeHue(unit.treadRegion, hue);
+                for(TextureRegion wregion : unit.wreckRegions) TextureGenerator.changeHue(wregion, hue);
+                for(TextureRegion sregion : unit.segmentRegions) TextureGenerator.changeHue(sregion, hue);
+                if(unit.treadRegions != null){
+                    for(TextureRegion[] tregionArr : unit.treadRegions){
+                        if(tregionArr != null){
+                            for(TextureRegion tregion : tregionArr) TextureGenerator.changeHue(tregion, hue);
+                        }
                     }
                 }
+                unit.parts.each(part -> huePart(part, hue));
             }
-            unit.parts.each(part -> huePart(part, hue));
         }
         
         if(!unit.flying && !unit.naval){
@@ -84,9 +87,14 @@ public class UnitMapper{
         unit.targetAir = unit.canHeal = unit.targetGround = false;
         if(unit instanceof MissileUnitType) return;
         unit.weapons.each(weapon -> {
-            if(!headless){
+            if(!headless && Core.settings.getBool("rm-sprite-random")){
                 TextureGenerator.changeHue(weapon.region, hue);
                 weapon.parts.each(part -> huePart(part, hue));
+                if(weapon instanceof RepairBeamWeapon repair){
+                    repair.laserColor = repair.laserColor.cpy().hue(hue);
+                    repair.healColor = repair.healColor.cpy().hue(hue);
+                }
+                if(weapon instanceof PointDefenseWeapon point) point.color = point.color.cpy().hue(hue);
             }
             
             weapon.shootSound = Util.generateSound();
