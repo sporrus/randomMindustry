@@ -124,6 +124,7 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.preview, hue);
             TextureGenerator.changeHue(drawer.base, hue);
             TextureGenerator.changeHue(drawer.top, hue);
+            TextureGenerator.changeHue(drawer.heat, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
             
@@ -162,6 +163,7 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.preview, hue);
             TextureGenerator.changeHue(drawer.base, hue);
             TextureGenerator.changeHue(drawer.top, hue);
+            TextureGenerator.changeHue(drawer.heat, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
             
@@ -199,6 +201,7 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.preview, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(drawer.base, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(drawer.top, ItemMapper.hues.get(item));
+            TextureGenerator.changeHue(drawer.heat, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(turret.fullIcon, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(turret.uiIcon, ItemMapper.hues.get(item));
             
@@ -209,22 +212,22 @@ public class TurretMapper {
     }
     
     public static void huePart(DrawPart part, float hue){
-        if(part instanceof RegionPart part){
-            TextureGenerator.changeHue(part.heat, hue);
+        if(part instanceof RegionPart regionpart){
+            TextureGenerator.changeHue(regionpart.heat, hue);
             
-            for(TextureRegion region : part.regions) TextureGenerator.changeHue(region, hue);
+            for(TextureRegion region : regionpart.regions) TextureGenerator.changeHue(region, hue);
             
-            part.color.hue(hue);
-            part.colorTo.hue(hue);
-            part.mixColor.hue(hue);
-            part.mixColorTo.hue(hue);
-            part.heatColor.hue(hue);
+            regionpart.color.hue(hue);
+            regionpart.colorTo.hue(hue);
+            regionpart.mixColor.hue(hue);
+            regionpart.mixColorTo.hue(hue);
+            regionpart.heatColor.hue(hue);
             
-            part.children.each(child -> huePart(child, hue));
+            regionpart.children.each(child -> huePart(child, hue));
         }
-        if(part instanceof HaloPart part){
-            part.color.hue(hue);
-            part.colorTo.hue(hue);
+        if(part instanceof HaloPart halopart){
+            halopart.color.hue(hue);
+            halopart.colorTo.hue(hue);
         }
     }
 }
