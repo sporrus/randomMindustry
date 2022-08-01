@@ -188,6 +188,15 @@ public class TurretMapper {
             halopart.color = halopart.color.cpy().hue(hue);
             if(halopart.colorTo != null) halopart.colorTo = halopart.colorTo.cpy().hue(hue);
         }
+        if(part instanceof ShapePart shapepart){
+            shapepart.color = shapepart.color.cpy().hue(hue);
+            if(shapepart.colorTo != null) shapepart.colorTo = shapepart.colorTo.cpy().hue(hue);
+        }
+        if(part instanceof FlarePart flarepart){
+            flarepart.color1 = flarepart.color1.cpy().hue(hue);
+            flarepart.color2 = flarepart.color2.cpy().hue(hue);
+        }
+        if(part instanceof HoverPart hoverpart) hoverpart.color = hoverpart.color.cpy().hue(hue);
     }
 
     public static void modifyTurretSprite(Turret turret) {
