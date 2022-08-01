@@ -44,8 +44,12 @@ public class UnitMapper{
             TextureGenerator.changeHue(unit.treadRegion, hue);
             for(TextureRegion wregion : unit.wreckRegions) TextureGenerator.changeHue(wregion, hue);
             for(TextureRegion sregion : unit.segmentRegions) TextureGenerator.changeHue(sregion, hue);
-            for(TextureRegion[] tregionArr : unit.treadRegions){
-                for(TextureRegion tregion : tregionArr) TextureGenerator.changeHue(tregion, hue);
+            if(unit.treadRegions != null){
+                for(TextureRegion[] tregionArr : unit.treadRegions){
+                    if(tregionArr != null){
+                        for(TextureRegion tregion : tregionArr) TextureGenerator.changeHue(tregion, hue);
+                    }
+                }
             }
             unit.parts.each(part -> huePart(part, hue));
         }
