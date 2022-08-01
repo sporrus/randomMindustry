@@ -1,5 +1,6 @@
 package randomMindustry.random.mappers;
 
+import arc.*;
 import arc.struct.*;
 import arc.graphics.g2d.*;
 import mindustry.type.*;
