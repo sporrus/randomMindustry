@@ -36,7 +36,7 @@ public class TextureGenerator {
         runForPixel(region, (x, y) -> {
             Color color = new Color();
             color.rgba8888(pixmap.get(x + region.getX(), y + region.getY()));
-            if (!isGray(color)) color.hue(hue);
+            color.hue(hue);
             newPixmap.set(x, y, color);
         });
         oldTexture.draw(newPixmap, region.getX(), region.getY());
