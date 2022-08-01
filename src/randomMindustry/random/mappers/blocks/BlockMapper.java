@@ -205,7 +205,7 @@ public class BlockMapper {
     }
 
     public static void modifyWall(Wall block) {
-        ItemStack[] items = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, block.size * 10, 1, true);
+        ItemStack[] items = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 2, block.size * 10, 1, true);
         if (!headless) {
             block.requirements = Arrays.copyOf(items, items.length);
             Arrays.sort(items, (a, b) -> {
