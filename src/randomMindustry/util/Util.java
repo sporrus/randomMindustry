@@ -34,7 +34,6 @@ public class Util {
     }
     public static void removeAllConsumers(Block block) {
         removeConsumers(block, (consume -> true));
-        removeBars(block);
     }
 
     public static void removeConsumers(Block block, Boolf<Consume> predicate) {

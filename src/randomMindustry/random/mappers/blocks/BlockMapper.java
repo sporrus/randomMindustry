@@ -116,6 +116,7 @@ public class BlockMapper {
         int count = RandomUtil.getRand().random(1, 10);
         block.outputItems = new ItemStack[]{new ItemStack(item, count)};
         Util.removeAllConsumers(block);
+        Util.removeBars(block);
         int tier = ItemMapper.getTierOfItem(item) - 1;
         if (tier >= GeneratorMapper.getLowestPowerTier() && RandomUtil.getRand().chance(0.25)) {
             block.hasPower = true;
@@ -256,6 +257,7 @@ public class BlockMapper {
         }
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         Util.removeAllConsumers(block);
+        Util.removeBars(block);
         block.consumeItems(ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
         
         block.constructTime = 0f;
