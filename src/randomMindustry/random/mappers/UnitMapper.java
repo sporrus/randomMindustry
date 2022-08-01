@@ -1,6 +1,7 @@
 package randomMindustry.random.mappers;
 
 import arc.*;
+import arc.util.*;
 import arc.struct.*;
 import arc.graphics.g2d.*;
 import mindustry.type.*;
@@ -55,6 +56,7 @@ public class UnitMapper{
                     }
                 }
                 unit.parts.each(part -> huePart(part, hue));
+                unit.engineColor = Tmp.c1.set(Color.red).hue(hue);
             }
         }
         
