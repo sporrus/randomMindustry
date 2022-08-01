@@ -57,7 +57,7 @@ public class UnitMapper{
                     }
                 }
                 unit.parts.each(part -> huePart(part, hue));
-                unit.engineColor = Tmp.c1.set(Color.red).hue(hue);
+                // unit.engineColor = Tmp.c1.set(Color.red).hue(hue);
             }
         }
         
