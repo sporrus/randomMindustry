@@ -2,6 +2,7 @@ package randomMindustry.random.mappers.blocks;
 
 import arc.math.Mathf;
 import arc.struct.*;
+import arc.graphics.g2d.*;
 import arc.util.Log;
 import mindustry.Vars;
 import mindustry.content.*;
@@ -155,6 +156,22 @@ public class BlockMapper {
 
     public static void modifyConveyor(Conveyor block) {
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 3, (int) Math.floor(block.health / 4d), 1, true);
+        if (!headless) {
+            Arrays.sort(block.requirements, (a, b) -> {
+                return b.amount - a.amount;
+            });
+            ItemStack mainItem = block.requirements[0];
+            float hue = ItemMapper.hues.get(mainItem.item);
+            TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.fullIcon, hue);
+            TextureGenerator.changeHue(block.uiIcon, hue);
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 4; j++){
+                    TextureGenerator.changeHue(block.regions[i][j], hue);
+                }
+            }
+            block.localizedName = mainItem.item.localizedName + " Conveyor";
+        }
     }
 
     public static void modifyBlock(Block block) {
@@ -162,7 +179,21 @@ public class BlockMapper {
     }
 
     public static void modifyDrill(Drill block) {
-        if (!headless) block.localizedName = StringGenerator.generateDrillName();
+        if(!headless){
+            block.localizedName = StringGenerator.generateDrillName();
+            float hue = RandomUtil.getClientRand().random(360f);
+            block.heatColor = block.heatColor.cpy().hue(hue);
+            TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.rimRegion, hue);
+            TextureGenerator.changeHue(block.rotatorRegion, hue);
+            TextureGenerator.changeHue(block.topRegion, hue);
+            if(block instanceof BurstDrill burst){
+                TextureGenerator.changeHue(burst.topInvertRegion, hue);
+                burst.arrowColor = burst.arrowColor.cpy().hue(hue);
+                burst.baseArrowColor = burst.baseArrowColor.cpy().hue(hue);
+                burst.glowColor = burst.glowColor.cpy().hue(hue);
+            }
+        }
         int localTier = block.tier - 2;
         ItemMapper.ItemPack drillPack = ItemMapper.getPackByTagAndLocalTier("drill", localTier);
         int globalTier = ItemMapper.maxTier;
@@ -192,7 +223,14 @@ public class BlockMapper {
     }
 
     public static void modifyUnitFactory(UnitFactory block) {
-        if (!headless) block.localizedName = StringGenerator.generateUnitFactoryName();
+        if(!headless){
+            block.localizedName = StringGenerator.generateUnitFactoryName();
+            float hue = RandomUtil.getClientRand().random(360f);
+            TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.topRegion, hue);
+            TextureGenerator.changeHue(block.outRegion, hue);
+            TextureGenerator.changeHue(block.inRegion, hue);
+        }
 
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
 
@@ -203,18 +241,34 @@ public class BlockMapper {
     }
 
     public static void modifyReconstructor(Reconstructor block) {
-        if (!headless) block.localizedName = StringGenerator.generateReconstructorName();
+        if(!headless){
+            block.localizedName = StringGenerator.generateReconstructorName();
+            float hue = RandomUtil.getClientRand().random(360f);
+            TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.topRegion, hue);
+            TextureGenerator.changeHue(block.outRegion, hue);
+            TextureGenerator.changeHue(block.inRegion, hue);
+        }
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         Util.removeAllConsumers(block);
         block.consumeItems(ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true));
-
+        
         block.constructTime = 0f;
         block.upgrades.each(upgrade -> block.constructTime += ((upgrade[1].health / 0.25f) * RandomUtil.getRand().random(0.5f, 1.5f)));
         block.constructTime /= block.upgrades.size;
     }
 
     public static void modifyUnitAssembler(UnitAssembler block) {
-        if (!headless) block.localizedName = StringGenerator.generateUnitFactoryName();
+        if (!headless){
+            block.localizedName = StringGenerator.generateUnitFactoryName();
+            float hue = RandomUtil.getClientRand().random(360f);
+            TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.topRegion, hue);
+            TextureGenerator.changeHue(block.outRegion, hue);
+            TextureGenerator.changeHue(block.inRegion, hue);
+            TextureGenerator.changeHue(block.sideRegion1, hue);
+            TextureGenerator.changeHue(block.sideRegion2, hue);
+        }
 
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
 
