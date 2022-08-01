@@ -21,7 +21,6 @@ import static mindustry.Vars.*;
 
 public class Main extends Mod {
     public static int phase = 1;
-    public static float generateProgress = 0f;
 
     public Main() {
         Events.on(ClientLoadEvent.class, e -> client());
@@ -65,40 +64,28 @@ public class Main extends Mod {
     public static void generate() {
         if(!Vars.headless){
             ui.loadfrag.show("@msg.rm-generating");
-            ui.loadfrag.setProgress(() -> generateProgress);
-            generateProgress = 0f;
+            ui.loadfrag.setProgress(0f);
         }
         Log.info(bundle.get("msg.rm-log-generating"));
-        if(!Vars.headless) generateProgress = 0.1f;
         FxMapper.init();
-        if(!Vars.headless) generateProgress = 0.2f;
         ItemMapper.init();
-        if(!Vars.headless) generateProgress = 0.3f;
         BulletMapper.init();
-        if(!Vars.headless) generateProgress = 0.4f;
         UnitMapper.init();
-        if(!Vars.headless) generateProgress = 0.5f;
         BlockMapper.init();
-        if(!Vars.headless) generateProgress = 0.6f;
         RegionMapper.init();
-        if(!Vars.headless) generateProgress = 0.7f;
         BundleMapper.init();
-        if(!Vars.headless) generateProgress = 0.8f;
-        Time.runTask(RandomUtil.getRand().random(30f, 300f), () -> {
-            Vars.content.sectors().each(sector -> sector.localizedName = StringGenerator.generateSectorName());
-            for (ItemMapper.ItemPack pack : ItemMapper.getItemMap()) {
-                Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
-                for (Item item : pack.all) {
-                    if (pack.locked.contains(item)) Log.info("[red]==LOCKED==");
-                    if (item == null) Log.info("some null item :skull:");
-                    else Log.info(item + item.emoji());
-                }
+        Vars.content.sectors().each(sector -> sector.localizedName = StringGenerator.generateSectorName());
+        for (ItemMapper.ItemPack pack : ItemMapper.getItemMap()) {
+            Log.info("=====" + pack.tag + ":" + pack.tier + "." + pack.localTier);
+            for (Item item : pack.all) {
+                if (pack.locked.contains(item)) Log.info("[red]==LOCKED==");
+                if (item == null) Log.info("some null item :skull:");
+                else Log.info(item + item.emoji());
             }
-            if(!Vars.headless) generateProgress = 0.9f;
-        });
+        }
         Log.info(bundle.get("msg.rm-log-generated"));
         if(!Vars.headless){
-            generateProgress = 1f;
+            ui.loadfrag.setProgress(1f);
             Time.runTask(30f, () -> ui.loadfrag.hide());
         }
     }
