@@ -69,6 +69,9 @@ public class TurretMapper {
 
     public static void modifyPowerTurret(PowerTurret turret) {
         turret.consumePower(RandomUtil.getRand().random(20000) / 1000f);
+        Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
+        Util.removeConsumers(turret, nonOptionalConsumers::contains);
+        Util.removeBars(turret);
         turret.shootType = content.bullets().select(b -> !(b instanceof MassDriverBolt)).random(RandomUtil.getRand());
         turret.targetAir = turret.shootType.collidesAir;
         turret.targetGround = turret.shootType.collidesGround;
@@ -111,6 +114,7 @@ public class TurretMapper {
         turret.range = sum / (float)count;
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
+        Util.removeBars(turret);
         turret.ammo(ammo.toArray());
         
         if(!headless){
@@ -150,6 +154,7 @@ public class TurretMapper {
         turret.range = sum / (float)count;
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
+        Util.removeBars(turret);
         turret.ammo(ammo.toArray());
         
         if(!headless){
@@ -188,6 +193,7 @@ public class TurretMapper {
         turret.range = sum / (float)count;
         Seq<Consume> nonOptionalConsumers = new Seq<>(turret.nonOptionalConsumers);
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
+        Util.removeBars(turret);
         turret.ammo(ammo.toArray());
         
         if(!headless){

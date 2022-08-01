@@ -23,14 +23,14 @@ import static mindustry.Vars.content;
 
 public class Util {
     public static void removeBars(Block block) {
-        /*try {
+        try {
             Field field = Block.class.getDeclaredField("barMap");
             field.setAccessible(true);
             ObjectMap<String, Func<Building, Bar>> map = (ObjectMap<String, Func<Building, Bar>>) field.get(block);
             map.clear();
         } catch (Exception e) {
             Log.err("Could not remove bars!", e);
-        }*/
+        }
     }
     public static void removeAllConsumers(Block block) {
         removeConsumers(block, (consume -> true));
@@ -41,6 +41,8 @@ public class Util {
         Seq<Consume> save = new Seq<>(block.consumers);
         save.removeAll(remove);
         block.consumers = new Consume[0];
+        block.nonOptionalConsumers = new Consume[0];
+        block.optionalConsumers = new Consume[0];
         block.consPower = null;
         for (Consume consume : remove) block.removeConsumer(consume);
     }
