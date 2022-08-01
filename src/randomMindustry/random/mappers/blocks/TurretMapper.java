@@ -217,17 +217,17 @@ public class TurretMapper {
             
             for(TextureRegion region : regionpart.regions) TextureGenerator.changeHue(region, hue);
             
-            regionpart.color.hue(hue);
-            regionpart.colorTo.hue(hue);
-            regionpart.mixColor.hue(hue);
-            regionpart.mixColorTo.hue(hue);
+            if(regionpart.color != null) regionpart.color.hue(hue);
+            if(regionpart.colorTo != null) regionpart.colorTo.hue(hue);
+            if(regionpart.mixColor != null) regionpart.mixColor.hue(hue);
+            if(regionpart.mixColorTo != null) regionpart.mixColorTo.hue(hue);
             regionpart.heatColor.hue(hue);
             
             regionpart.children.each(child -> huePart(child, hue));
         }
         if(part instanceof HaloPart halopart){
             halopart.color.hue(hue);
-            halopart.colorTo.hue(hue);
+            if(halopart.colorTo != null) halopart.colorTo.hue(hue);
         }
     }
 }
