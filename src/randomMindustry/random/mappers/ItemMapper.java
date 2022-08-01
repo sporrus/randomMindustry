@@ -33,8 +33,10 @@ public class ItemMapper {
             item.radioactivity = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.charge = (RandomUtil.getRand().chance(0.5)) ? RandomUtil.getRand().random(4) / 4f : 0;
             item.cost = RandomUtil.getRand().random(100) / 100f;
-            if (!Vars.headless) {
+            if (!Vars.headless && Core.settings.getBool("rm-name-random")) {
                 item.localizedName = StringGenerator.generateMaterialName();
+            }
+            if (!Vars.headless && Core.settings.getBool("rm-sprite-random")) {
                 float hue = RandomUtil.getClientRand().random(360f);
                 item.color.hue(hue);
                 hues.put(item, hue);
@@ -88,7 +90,7 @@ public class ItemMapper {
             item.lowPriority = b == Blocks.sand;
             if (b instanceof OreBlock ob) {
                 ob.setup(item);
-                if (!Vars.headless) {
+                if (!Vars.headless && Core.settings.getBool("rm-sprite-random")) {
                     for (int i = 0; i < ob.variantRegions.length; i++)
                         TextureGenerator.changeHue(ob.variantRegions[i], hues.get(item));
                     TextureGenerator.changeHue(ob.fullIcon, hues.get(item));

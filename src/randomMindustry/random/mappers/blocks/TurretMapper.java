@@ -1,5 +1,6 @@
 package randomMindustry.random.mappers.blocks;
 
+import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.struct.*;
@@ -20,7 +21,7 @@ import static mindustry.Vars.*;
 
 public class TurretMapper {
     public static void map(Turret block) {
-        if(!headless) block.localizedName = StringGenerator.generateTurretName();
+        if(!headless && Core.settings.getBool("rm-name-random")) block.localizedName = StringGenerator.generateTurretName();
         block.shootSound = Util.generateSound();
         block.loopSound = Util.generateSound();
         block.chargeSound = Util.generateSound();
@@ -77,23 +78,8 @@ public class TurretMapper {
         turret.targetGround = turret.shootType.collidesGround;
         turret.targetHealing = turret.shootType.healPercent > 0;
         turret.range = BulletMapper.getRange(turret.shootType);
-        
-        if(!headless){
-            if(!(turret.drawer instanceof DrawTurret drawer)) return;
-            
-            float hue = RandomUtil.getClientRand().random(360f);
-            TextureGenerator.changeHue(turret.region, hue);
-            TextureGenerator.changeHue(drawer.preview, hue);
-            TextureGenerator.changeHue(drawer.base, hue);
-            TextureGenerator.changeHue(drawer.top, hue);
-            TextureGenerator.changeHue(drawer.heat, hue);
-            TextureGenerator.changeHue(turret.fullIcon, hue);
-            TextureGenerator.changeHue(turret.uiIcon, hue);
-            
-            turret.heatColor = turret.heatColor.cpy().hue(hue);
-            
-            drawer.parts.each(part -> huePart(part, hue));
-        }
+
+        modifyTurretSprite(turret);
     }
 
     public static void modifyContinuousLiquidTurret(ContinuousLiquidTurret turret) {
@@ -116,23 +102,8 @@ public class TurretMapper {
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
-        
-        if(!headless){
-            if(!(turret.drawer instanceof DrawTurret drawer)) return;
-            
-            float hue = RandomUtil.getClientRand().random(360f);
-            TextureGenerator.changeHue(turret.region, hue);
-            TextureGenerator.changeHue(drawer.preview, hue);
-            TextureGenerator.changeHue(drawer.base, hue);
-            TextureGenerator.changeHue(drawer.top, hue);
-            TextureGenerator.changeHue(drawer.heat, hue);
-            TextureGenerator.changeHue(turret.fullIcon, hue);
-            TextureGenerator.changeHue(turret.uiIcon, hue);
 
-            turret.heatColor = turret.heatColor.cpy().hue(hue);
-            
-            drawer.parts.each(part -> huePart(part, hue));
-        }
+        modifyTurretSprite(turret);
     }
 
     // TODO: crap i forgor to make v1.5.0 for liquid turrets too bad
@@ -156,23 +127,8 @@ public class TurretMapper {
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
-        
-        if(!headless){
-            if(!(turret.drawer instanceof DrawTurret drawer)) return;
-            
-            float hue = RandomUtil.getClientRand().random(360f);
-            TextureGenerator.changeHue(turret.region, hue);
-            TextureGenerator.changeHue(drawer.preview, hue);
-            TextureGenerator.changeHue(drawer.base, hue);
-            TextureGenerator.changeHue(drawer.top, hue);
-            TextureGenerator.changeHue(drawer.heat, hue);
-            TextureGenerator.changeHue(turret.fullIcon, hue);
-            TextureGenerator.changeHue(turret.uiIcon, hue);
 
-            turret.heatColor = turret.heatColor.cpy().hue(hue);
-            
-            drawer.parts.each(part -> huePart(part, hue));
-        }
+        modifyTurretSprite(turret);
     }
 
     public static void modifyItemTurret(ItemTurret turret) {
@@ -196,7 +152,7 @@ public class TurretMapper {
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
         
-        if(!headless){
+        if(!headless && Core.settings.getBool("rm-sprite-random")){
             if(!(turret.drawer instanceof DrawTurret drawer)) return;
             
             Item item = turret.ammoTypes.keys().toSeq().random(RandomUtil.getClientRand());
@@ -231,6 +187,25 @@ public class TurretMapper {
         if(part instanceof HaloPart halopart){
             halopart.color = halopart.color.cpy().hue(hue);
             if(halopart.colorTo != null) halopart.colorTo = halopart.colorTo.cpy().hue(hue);
+        }
+    }
+
+    public static void modifyTurretSprite(Turret turret) {
+        if(!headless && Core.settings.getBool("rm-sprite-random")){
+            if(!(turret.drawer instanceof DrawTurret drawer)) return;
+
+            float hue = RandomUtil.getClientRand().random(360f);
+            TextureGenerator.changeHue(turret.region, hue);
+            TextureGenerator.changeHue(drawer.preview, hue);
+            TextureGenerator.changeHue(drawer.base, hue);
+            TextureGenerator.changeHue(drawer.top, hue);
+            TextureGenerator.changeHue(drawer.heat, hue);
+            TextureGenerator.changeHue(turret.fullIcon, hue);
+            TextureGenerator.changeHue(turret.uiIcon, hue);
+
+            turret.heatColor = turret.heatColor.cpy().hue(hue);
+
+            drawer.parts.each(part -> huePart(part, hue));
         }
     }
 }

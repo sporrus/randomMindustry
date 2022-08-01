@@ -25,6 +25,8 @@ public class SettingsLoader {
         SettingsMenuDialog dialog = ui.settings;
 
         dialog.addCategory("@setting.rm", (Drawable) atlas.getDrawable("random-mindustry-dice"), c -> {
+            c.checkPref("rm-sprite-random", true);
+            c.checkPref("rm-name-random", true);
             c.areaTextPref("rm-seed", "0");
             c.pref(new TechSelector());
             c.pref(new RandomButton());

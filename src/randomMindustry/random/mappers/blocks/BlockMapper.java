@@ -1,5 +1,6 @@
 package randomMindustry.random.mappers.blocks;
 
+import arc.Core;
 import arc.math.Mathf;
 import arc.struct.*;
 import arc.graphics.g2d.*;
@@ -101,7 +102,7 @@ public class BlockMapper {
     }
 
     public static void modifyCore(CoreBlock block) {
-        if (!headless) block.localizedName = StringGenerator.generateCoreName();
+        if (!headless && settings.getBool("rm-name-random")) block.localizedName = StringGenerator.generateCoreName();
         block.unitType.weapons.each((w) -> w.bullet.buildingDamageMultiplier = 0.01f);
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(3, ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
     }
@@ -131,11 +132,13 @@ public class BlockMapper {
         block.craftTime = Mathf.round(RandomUtil.getRand().random(20f, 300f), 15f);
         block.requirements = ItemMapper.getRandomItemStacks(tier, 5, (int) Math.floor(block.health / 2d), 5, true);
 
-        if (!headless) {
+        if (!headless && settings.getBool("rm-sprite-random")) {
             TextureGenerator.changeHue(block.region, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(block.fullIcon, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(block.uiIcon, ItemMapper.hues.get(item));
+        }
 
+        if (!headless && settings.getBool("rm-name-random")) {
             String factory = (tier == -1 ? "creator" : genericCrafterTags.random(RandomUtil.getClientRand()));
 
             StringBuilder from = new StringBuilder();
@@ -156,20 +159,24 @@ public class BlockMapper {
 
     public static void modifyConveyor(Conveyor block) {
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 3, (int) Math.floor(block.health / 4d), 1, true);
-        if (!headless) {
-            Arrays.sort(block.requirements, (a, b) -> {
-                return b.amount - a.amount;
-            });
-            ItemStack mainItem = block.requirements[0];
+        Arrays.sort(block.requirements, (a, b) -> {
+            return b.amount - a.amount;
+        });
+        ItemStack mainItem = block.requirements[0];
+
+        if (!headless && settings.getBool("rm-sprite-random")) {
             float hue = ItemMapper.hues.get(mainItem.item);
             TextureGenerator.changeHue(block.region, hue);
             TextureGenerator.changeHue(block.fullIcon, hue);
             TextureGenerator.changeHue(block.uiIcon, hue);
-            for(int i = 0; i < 7; i++){
-                for(int j = 0; j < 4; j++){
+            for(int i = 0; i < block.regions.length; i++){
+                for(int j = 0; j < block.regions[i].length; j++){
                     TextureGenerator.changeHue(block.regions[i][j], hue);
                 }
             }
+        }
+
+        if (!headless && settings.getBool("rm-name-random")) {
             block.localizedName = mainItem.item.localizedName + " Conveyor";
         }
     }
@@ -179,8 +186,11 @@ public class BlockMapper {
     }
 
     public static void modifyDrill(Drill block) {
-        if(!headless){
+        if(!headless && settings.getBool("rm-name-random")) {
             block.localizedName = StringGenerator.generateDrillName();
+        }
+
+        if (!headless && settings.getBool("rm-sprite-random")) {
             float hue = RandomUtil.getClientRand().random(360f);
             block.heatColor = block.heatColor.cpy().hue(hue);
             TextureGenerator.changeHue(block.region, hue);
@@ -200,33 +210,38 @@ public class BlockMapper {
         ItemMapper.ItemPack drillPack = ItemMapper.getPackByTagAndLocalTier("drill", localTier);
         int globalTier = ItemMapper.maxTier;
         if (drillPack != null) globalTier = drillPack.tier - 1;
-        Log.info(block.localizedName + " - " + globalTier);
         block.requirements = ItemMapper.getRandomItemStacks(globalTier, 5, (int) Math.floor(block.health / 4d), 5, true);
     }
 
     public static void modifyWall(Wall block) {
         ItemStack[] items = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 2, block.size * 10, 1, true);
-        if (!headless) {
-            block.requirements = Arrays.copyOf(items, items.length);
-            Arrays.sort(items, (a, b) -> {
-                return b.amount - a.amount;
-            });
-            ItemStack mainItem = items[0];
-            float hue = ItemMapper.hues.get(mainItem.item);
-            TextureGenerator.changeHue(block.region, hue);
-            TextureGenerator.changeHue(block.fullIcon, hue);
-            TextureGenerator.changeHue(block.uiIcon, hue);
+        block.requirements = Arrays.copyOf(items, items.length);
+        Arrays.sort(items, (a, b) -> {
+            return b.amount - a.amount;
+        });
+        ItemStack mainItem = items[0];
+        if (!headless && settings.getBool("rm-name-random")) {
             String size = "";
             if (block.size == 2) size = "Large ";
             else if (block.size == 3) size = "Huge ";
             else if (block.size == 4) size = "Gigantic ";
             block.localizedName = size + mainItem.item.localizedName + " Wall";
         }
+
+        if (!headless && settings.getBool("rm-sprite-random")) {
+            float hue = ItemMapper.hues.get(mainItem.item);
+            TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.fullIcon, hue);
+            TextureGenerator.changeHue(block.uiIcon, hue);
+        }
     }
 
     public static void modifyUnitFactory(UnitFactory block) {
-        if(!headless){
+        if(!headless && settings.getBool("rm-name-random")) {
             block.localizedName = StringGenerator.generateUnitFactoryName();
+        }
+
+        if (!headless && settings.getBool("rm-sprite-random")) {
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(block.region, hue);
             TextureGenerator.changeHue(block.fullIcon, hue);
@@ -245,8 +260,10 @@ public class BlockMapper {
     }
 
     public static void modifyReconstructor(Reconstructor block) {
-        if(!headless){
+        if(!headless && settings.getBool("rm-name-random")) {
             block.localizedName = StringGenerator.generateReconstructorName();
+        }
+        if (!headless && settings.getBool("rm-sprite-random")) {
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(block.region, hue);
             TextureGenerator.changeHue(block.fullIcon, hue);
@@ -255,6 +272,7 @@ public class BlockMapper {
             TextureGenerator.changeHue(block.outRegion, hue);
             TextureGenerator.changeHue(block.inRegion, hue);
         }
+
         block.requirements = ItemMapper.getRandomItemStacks(RandomUtil.getRand().random(ItemMapper.maxTier) + 1, 5, (int) Math.floor(block.health / 2d), 5, true);
         Util.removeAllConsumers(block);
         Util.removeBars(block);
@@ -266,8 +284,10 @@ public class BlockMapper {
     }
 
     public static void modifyUnitAssembler(UnitAssembler block) {
-        if (!headless){
+        if (!headless && settings.getBool("rm-name-random")) {
             block.localizedName = StringGenerator.generateUnitFactoryName();
+        }
+        if (!headless && settings.getBool("rm-sprite-random")) {
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(block.region, hue);
             TextureGenerator.changeHue(block.fullIcon, hue);
