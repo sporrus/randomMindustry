@@ -1,9 +1,11 @@
 package randomMindustry.random.mappers.blocks;
 
+import arc.graphics.g2d.*;
 import arc.struct.*;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
+import mindustry.entities.part.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
@@ -84,8 +86,13 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.preview, hue);
             TextureGenerator.changeHue(drawer.base, hue);
             TextureGenerator.changeHue(drawer.top, hue);
+            TextureGenerator.changeHue(drawer.heat, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
+            
+            turret.heatColor.hue(hue);
+            
+            drawer.parts.each(() -> huePart(part, hue));
         }
     }
 
@@ -119,6 +126,10 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.top, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
+            
+            turret.heatColor.hue(hue);
+            
+            drawer.parts.each(() -> huePart(part, hue));
         }
     }
 
@@ -153,6 +164,10 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.top, hue);
             TextureGenerator.changeHue(turret.fullIcon, hue);
             TextureGenerator.changeHue(turret.uiIcon, hue);
+            
+            turret.heatColor.hue(hue);
+            
+            drawer.parts.each(() -> huePart(part, hue));
         }
     }
 
@@ -186,6 +201,30 @@ public class TurretMapper {
             TextureGenerator.changeHue(drawer.top, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(turret.fullIcon, ItemMapper.hues.get(item));
             TextureGenerator.changeHue(turret.uiIcon, ItemMapper.hues.get(item));
+            
+            turret.heatColor.hue(ItemMapper.hues.get(item));
+            
+            drawer.parts.each(() -> huePart(part, ItemMapper.hues.get(item)));
+        }
+    }
+    
+    public static void huePart(DrawPart part, float hue){
+        if(part instanceof RegionPart part){
+            TextureGenerator.changeHue(part.heat, hue);
+            
+            for(TextureRegion region : part.regions) TextureGenerator.changeHue(region, hue);
+            
+            part.color.hue(hue);
+            part.colorTo.hue(hue);
+            part.mixColor.hue(hue);
+            part.mixColorTo.hue(hue);
+            part.heatColor.hue(hue);
+            
+            part.children.each(child -> huePart(child, hue));
+        }
+        if(part instanceof HaloPart part){
+            part.color.hue(hue);
+            part.colorTo.hue(hue);
         }
     }
 }
