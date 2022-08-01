@@ -184,6 +184,8 @@ public class BlockMapper {
             float hue = RandomUtil.getClientRand().random(360f);
             block.heatColor = block.heatColor.cpy().hue(hue);
             TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.fullIcon, hue);
+            TextureGenerator.changeHue(block.uiIcon, hue);
             TextureGenerator.changeHue(block.rimRegion, hue);
             TextureGenerator.changeHue(block.rotatorRegion, hue);
             TextureGenerator.changeHue(block.topRegion, hue);
@@ -227,6 +229,8 @@ public class BlockMapper {
             block.localizedName = StringGenerator.generateUnitFactoryName();
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.fullIcon, hue);
+            TextureGenerator.changeHue(block.uiIcon, hue);
             TextureGenerator.changeHue(block.topRegion, hue);
             TextureGenerator.changeHue(block.outRegion, hue);
             TextureGenerator.changeHue(block.inRegion, hue);
@@ -245,6 +249,8 @@ public class BlockMapper {
             block.localizedName = StringGenerator.generateReconstructorName();
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.fullIcon, hue);
+            TextureGenerator.changeHue(block.uiIcon, hue);
             TextureGenerator.changeHue(block.topRegion, hue);
             TextureGenerator.changeHue(block.outRegion, hue);
             TextureGenerator.changeHue(block.inRegion, hue);
@@ -263,6 +269,8 @@ public class BlockMapper {
             block.localizedName = StringGenerator.generateUnitFactoryName();
             float hue = RandomUtil.getClientRand().random(360f);
             TextureGenerator.changeHue(block.region, hue);
+            TextureGenerator.changeHue(block.fullIcon, hue);
+            TextureGenerator.changeHue(block.uiIcon, hue);
             TextureGenerator.changeHue(block.topRegion, hue);
             TextureGenerator.changeHue(block.outRegion, hue);
             TextureGenerator.changeHue(block.inRegion, hue);
