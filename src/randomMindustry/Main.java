@@ -9,4 +9,15 @@ public class Main extends Mod {
     public Main() {
         Log.info("uh");
     }
+
+    @Override
+    public void init() {
+        TextureManager.newItemTexture();
+        ItemMapper.editContent();
+    }
+
+    @Override
+    public void loadContent() {
+        ItemMapper.generateContent();
+    }
 }
