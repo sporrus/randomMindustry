@@ -1,7 +1,7 @@
 package randomMindustry;
 
-import arc.util.Log;
-import mindustry.mod.Mod;
+import arc.util.*;
+import mindustry.mod.*;
 
 public class Main extends Mod {
     public static int phase = 1;
