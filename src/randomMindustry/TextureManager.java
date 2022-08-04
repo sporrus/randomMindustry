@@ -25,10 +25,6 @@ public class TextureManager {
         newItemTexture();
     }
 
-    public static void updateTexture() {
-        itemTexture.load(new PixmapTextureData(itemTexture.getTextureData().getPixmap(), false, false));
-    }
-
     public static void newItemTexture() {
         itemTexture = new Texture(new PixmapTextureData(new Pixmap(itemWidth * 32, itemHeight * 32), false, false));
         itemTexture.setFilter(Texture.TextureFilter.linear, Texture.TextureFilter.linear);
@@ -55,11 +51,11 @@ public class TextureManager {
     public static TextureRegion allocItem(TextureRegion oldRegion) {
         TextureRegion newRegion = allocItem();
         Pixmap newPixmap = oldRegion.texture.getTextureData().getPixmap().crop(oldRegion.getX(), oldRegion.getY(), oldRegion.width, oldRegion.height);
+        newRegion.texture.draw(newPixmap, newRegion.getX(), newRegion.getY());
         newRegion.texture.getTextureData().getPixmap().draw(newPixmap, newRegion.getX(), newRegion.getY());
         newRegion.setWidth(oldRegion.width);
         newRegion.setHeight(oldRegion.height);
         newPixmap.dispose();
-        updateTexture();
         return newRegion;
     }
 
@@ -71,8 +67,8 @@ public class TextureManager {
             color.hue(hue);
             pixmap.set(x, y, color);
         });
+        region.texture.draw(pixmap, region.getX(), region.getY());
         region.texture.getTextureData().getPixmap().draw(pixmap, region.getX(), region.getY());
-        updateTexture();
         pixmap.dispose();
     }
 }

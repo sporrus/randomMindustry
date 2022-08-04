@@ -8,7 +8,7 @@ import mindustry.type.*;
 
 public class ItemMapper {
     public static final Seq<Item> generatedItems = new Seq<>();
-    public static final int itemCount = 16;
+    public static final int itemCount = 32;
 
     public static void generateContent() {
         for (int i = 0; i < itemCount; i++) {
