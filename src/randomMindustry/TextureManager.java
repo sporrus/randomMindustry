@@ -36,11 +36,9 @@ public class TextureManager {
         Pixmap oldPixmap = oldRegion.texture.getTextureData().getPixmap();
         Pixmap newPixmap = new Pixmap(oldRegion.width, oldRegion.height);
         Color color = new Color();
-        float hue = Mathf.random(360f);
         for (int y = 0; y < oldRegion.height; y++) {
             for (int x = 0; x < oldRegion.width; x++) {
                 color.rgba8888(oldPixmap.get(x + oldRegion.getX(), y + oldRegion.getY()));
-                color.hue(hue);
                 newPixmap.set(x, y, color);
             }
         }
