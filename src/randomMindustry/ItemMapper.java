@@ -40,6 +40,5 @@ public class ItemMapper {
             TextureManager.hueRegion(i.uiIcon, hue);
             i.color = i.color.cpy().hue(hue);
         });
-        PixmapIO.writePng(new Fi("uh.png"), TextureManager.itemTexture.getTextureData().getPixmap());
     }
 }

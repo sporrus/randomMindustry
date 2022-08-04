@@ -12,8 +12,8 @@ import mindustry.game.*;
 public class TextureManager {
     public static Texture itemTexture;
     public static int itemAlloc = 0;
-    public static int itemWidth = 32;
-    public static int itemHeight = 1;
+    public static int itemWidth = 64;
+    public static int itemHeight = 64;
     public static Seq<Texture> textures = new Seq<>();
 
     public static void init() {
