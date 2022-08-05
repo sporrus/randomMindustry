@@ -5,7 +5,7 @@ import arc.struct.*;
 import randomMindustry.*;
 
 public class StringGenerator{
-    private final SyncedRand r;
+    protected SyncedRand r;
 
     public final Seq<String> vowels = Seq.with(
         "i", "e", "u", "a", "ee", "ea", "ie", "ou", "er", "or", "o", "ir", "ur", "ear", "our", "ar",
