@@ -41,7 +41,7 @@ public class Main extends Mod {
                 int arrivalFrame = (int)((Time.globalTime / 5f) % arrivals.size);
                 arrival.set(arrivals.get(arrivalFrame));
                 int rickrollFrame = (int)((Time.globalTime / 5f) % rickrolls.size);
-                rickroll.set(rickroll.get(rickrollFrame));
+                rickroll.set(rickrolls.get(rickrollFrame));
             });
         });
     }
