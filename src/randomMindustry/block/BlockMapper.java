@@ -17,9 +17,10 @@ public class BlockMapper {
     public static final SyncedRand r = new SyncedRand();
     public static final BlockCreator
             wallBlockCreator = new WallBlockCreator(),
-            crafterBlockCreator = new CrafterBlockCreator();
+            crafterBlockCreator = new CrafterBlockCreator(),
+            oreBlockCreator = new OreBlockCreator();
     public static final Seq<BlockCreator> creators = new Seq<>(new BlockCreator[]{
-        wallBlockCreator, crafterBlockCreator
+            wallBlockCreator, crafterBlockCreator, oreBlockCreator
     });
 
     public static void editContent() {
@@ -36,6 +37,8 @@ public class BlockMapper {
     public static void generateContent() {
         for (int i = 0; i < ItemMapper.getCraftItems(); i++)
             generatedBlocks.add(crafterBlockCreator.create("random-crafter-" + i));
+        for (int i = 0; i < ItemMapper.getDrillItems(); i++)
+            generatedBlocks.add(oreBlockCreator.create("random-ore-" + i));
         for (int i = 0; i < 12; i++)
             generatedBlocks.add(wallBlockCreator.create("random-wall-" + i));
     }

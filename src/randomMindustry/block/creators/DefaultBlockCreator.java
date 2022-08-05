@@ -20,11 +20,6 @@ public class DefaultBlockCreator implements BlockCreator {
 
         block.localizedName = "unreal block name";
         block.description = "unreal block description";
-        block.stats = new Stats();
-        float hue = Mathf.random(360f);
-        TextureManager.hueRegion(block.region, hue);
-        TextureManager.hueRegion(block.fullIcon, hue);
-        TextureManager.hueRegion(block.uiIcon, hue);
     }
 
     @Override

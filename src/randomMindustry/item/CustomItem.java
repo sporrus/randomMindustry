@@ -38,6 +38,8 @@ public class CustomItem extends Item {
         localizedName = itemStringGen.generateName();
         description = itemStringGen.generateDescription(this);
         stats.add(RMVars.seed, RMVars.seedValue);
+        ItemData data = new ItemData(this);
+        data.hue = hue;
     }
 
     @Override

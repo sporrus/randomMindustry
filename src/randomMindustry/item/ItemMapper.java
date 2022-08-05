@@ -22,6 +22,7 @@ public class ItemMapper {
                     all.random(true), all.random(true), all.random(true)
             ));
         }
+        getPacksByTier("drill").each(pack -> pack.all.each(i -> i.hardness = pack.localTier));
     }
 
     public static void generateContent() {
@@ -62,6 +63,13 @@ public class ItemMapper {
         Seq<ItemPack> tierPacks = packs.select((p) -> p.globalTier >= 0);
         for (ItemPack pack : tierPacks)
             if (pack.in(item)) return pack.globalTier;
+        return -1;
+    }
+
+    public static int getLocalTier(Item item) {
+        Seq<ItemPack> tierPacks = packs.select((p) -> p.globalTier >= 0);
+        for (ItemPack pack : tierPacks)
+            if (pack.in(item)) return pack.localTier;
         return -1;
     }
 
