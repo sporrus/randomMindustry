@@ -21,8 +21,6 @@ public class CustomItem extends Item {
     }
 
     public void edit() {
-        localizedName = itemStringGen.generateName();
-        description = itemStringGen.generateDescription(this);
         explosiveness = ItemMapper.r.rand.random(1f);
         radioactivity = ItemMapper.r.rand.random(1f);
         flammability = ItemMapper.r.rand.random(1f);
@@ -34,6 +32,8 @@ public class CustomItem extends Item {
         TextureManager.hueRegion(fullIcon, hue);
         TextureManager.hueRegion(uiIcon, hue);
         color = color.cpy().hue(hue);
+        localizedName = itemStringGen.generateName();
+        description = itemStringGen.generateDescription(this);
     }
 
     @Override
