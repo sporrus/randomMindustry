@@ -66,7 +66,6 @@ public class Main extends Mod {
     public void loadContent() {
         ItemMapper.generateContent();
         BlockMapper.generateContent();
-        Vars.state.rules
         random = new Planet("random", Planets.sun, 1f, 3){{
             generator = new SerpuloPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 6);
