@@ -15,7 +15,8 @@ public class CustomItem extends Item {
     }
 
     public void edit() {
-        localizedName = "fake item";
+        localizedName = "unreal item name";
+        description = "unreal item description";
         explosiveness = 100;
         radioactivity = -1;
         flammability = 1;
