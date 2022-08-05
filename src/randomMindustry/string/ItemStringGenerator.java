@@ -9,7 +9,7 @@ public class ItemStringGenerator extends StringGenerator{
         StringBuilder out = new StringBuilder();
         out.append(upperCaseFirst(generateWord(1)));
         out.append(generateSuffix());
-        if(Mathf.chance(0.5f)) out.append(" ").append(generateType());
+        if(r.rand.chance(0.5f)) out.append(" ").append(generateType());
         return out.toString();
     }
 
@@ -19,13 +19,13 @@ public class ItemStringGenerator extends StringGenerator{
     }
     
     private String generateSuffix(){
-        return Seq.with("ite", "ide", "ium").random();
+        return Seq.with("ite", "ide", "ium").random(r.rand);
     }
     
     private String generateType(){
         return Seq.with(
             "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst",
             "Cluster", "Crystal", "Sheet", "Mix"
-        ).random();
+        ).random(r.rand);
     }
 }
