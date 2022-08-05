@@ -2,22 +2,17 @@ package randomMindustry.item;
 
 import arc.func.*;
 import arc.graphics.*;
-import arc.math.*;
 import arc.struct.*;
-import arc.util.*;
-import mindustry.content.*;
 import mindustry.type.*;
-import mindustry.world.blocks.production.*;
 import randomMindustry.*;
 
 public class ItemMapper {
     public static final Seq<CustomItem> generatedItems = new Seq<>();
     public static final Seq<ItemPack> packs = new Seq<>();
     public static final int itemCount = 18;
-    public static final Rand rand = new Rand();
+    public static final SyncedRand r = new SyncedRand();
 
     public static void editContent() {
-        rand.setSeed(SeedManager.getSeed());
         generatedItems.each(CustomItem::edit);
 
         ItemPack all = new ItemPack(0, 0, "all", generatedItems.toArray(Item.class));

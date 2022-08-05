@@ -11,10 +11,10 @@ import randomMindustry.block.*;
 import randomMindustry.texture.*;
 
 public class WallBlockCreator extends DefaultBlockCreator {
-    private final Rand rand;
+    private final SyncedRand r;
 
     public WallBlockCreator() {
-        rand = new Rand(SeedManager.getSeed());
+        r = new SyncedRand();
     }
 
     @Override
@@ -26,15 +26,15 @@ public class WallBlockCreator extends DefaultBlockCreator {
     public Block create(String name) {
         return new Wall(name) {{
             requirements(Category.defense, new ItemStack[]{new ItemStack(Items.copper, 1)});
-            size = rand.random(1, 2);
+            size = r.rand.random(1, 2);
         }};
     }
 
     @Override
     public void edit(Block block) {
-        block.health = Mathf.round(rand.random(100, 2000), 50);
+        block.health = Mathf.round(r.rand.random(100, 2000), 50);
 
-        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof Wall && !BlockMapper.generated(b)).random(rand);
+        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof Wall && !BlockMapper.generated(b)).random(r.rand);
         block.region = TextureManager.alloc(copyBlock.region);
         block.fullIcon = TextureManager.alloc(copyBlock.fullIcon);
         block.uiIcon = TextureManager.alloc(copyBlock.uiIcon);

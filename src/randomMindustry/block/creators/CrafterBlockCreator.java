@@ -1,12 +1,10 @@
 package randomMindustry.block.creators;
 
-import arc.math.*;
 import arc.struct.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
-import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.production.*;
 import randomMindustry.*;
 import randomMindustry.block.*;
@@ -14,10 +12,10 @@ import randomMindustry.item.*;
 import randomMindustry.texture.*;
 
 public class CrafterBlockCreator extends DefaultBlockCreator {
-    private final Rand rand;
+    private final SyncedRand r;
 
     public CrafterBlockCreator() {
-        rand = new Rand(SeedManager.getSeed());
+        r = new SyncedRand();
     }
 
     @Override
@@ -29,36 +27,35 @@ public class CrafterBlockCreator extends DefaultBlockCreator {
     public Block create(String name) {
         return new GenericCrafter(name) {{
             requirements(Category.crafting, new ItemStack[]{new ItemStack(Items.copper, 1)});
-            size = rand.random(1, 2);
+            size = r.rand.random(1, 2);
         }};
     }
 
     @Override
     public void edit(Block block) {
         Item item;
-        ItemPack pack = ItemMapper.getLockedPacksByTier("craft").random(rand);
-        if (pack == null) item = ItemMapper.getPacksByTier("craft").random(rand).random(false);
+        ItemPack pack = ItemMapper.getLockedPacksByTier("craft").random(r.rand);
+        if (pack == null) item = ItemMapper.getPacksByTier("craft").random(r.rand).random(false);
         else item = pack.random(true);
-        ((GenericCrafter) block).outputItems = new ItemStack[]{new ItemStack(item, rand.random(1, 10))};
+        ((GenericCrafter) block).outputItems = new ItemStack[]{new ItemStack(item, r.rand.random(1, 10))};
         int tier = ItemMapper.getTier(item);
-        int itemCount = 1;
-        while (rand.chance(0.5) && itemCount < 5) itemCount++;
+        int itemCount = r.rand.random(1, 3);
         Seq<ItemStack> stacks = new Seq<>();
         ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier - 1));
         packs.lock();
         for (int i = 0; i < itemCount; i++) {
             if (i == 0) {
                 Item it = ItemMapper.getPackByGlobalTier(tier - 1).random(false);
-                stacks.add(new ItemStack(it, rand.random(1, 10)));
+                stacks.add(new ItemStack(it, r.rand.random(1, 10)));
                 packs.lock(it);
             } else {
-                stacks.add(new ItemStack(packs.random(true), rand.random(1, 10)));
+                stacks.add(new ItemStack(packs.random(true), r.rand.random(1, 10)));
             }
         }
-        RandomUtil.shuffle(stacks, rand);
+        RandomUtil.shuffle(stacks, r.rand);
         block.consumeItems(stacks.toArray(ItemStack.class));
 
-        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof GenericCrafter && !BlockMapper.generated(b)).random(rand);
+        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof GenericCrafter && !BlockMapper.generated(b)).random(r.rand);
         block.region = TextureManager.alloc(copyBlock.region);
         block.fullIcon = TextureManager.alloc(copyBlock.fullIcon);
         block.uiIcon = TextureManager.alloc(copyBlock.uiIcon);

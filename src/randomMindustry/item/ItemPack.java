@@ -9,7 +9,7 @@ public class ItemPack {
     public final Seq<Item> all, locked;
     public final String tier;
     public final int localTier, globalTier;
-    public final Rand rand;
+    public final SyncedRand r;
 
     public ItemPack(int localTier, int globalTier, String tier, Item... all) {
         this.all = new Seq<>(all);
@@ -17,7 +17,7 @@ public class ItemPack {
         this.localTier = localTier;
         this.globalTier = globalTier;
         this.tier = tier;
-        this.rand = new Rand(SeedManager.getSeed());
+        this.r = new SyncedRand();
     }
 
     public boolean in(Item item) {
@@ -43,11 +43,11 @@ public class ItemPack {
 
     public Item random(boolean lock) {
         if (lock) {
-            Item item = locked.random(rand);
+            Item item = locked.random(r.rand);
             locked.remove(item);
             return item;
         } else {
-            return all.random(rand);
+            return all.random(r.rand);
         }
     }
 

@@ -1,13 +1,14 @@
 package randomMindustry;
 
 import arc.*;
+import arc.files.*;
+import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.type.*;
-import mindustry.ui.dialogs.*;
 import randomMindustry.block.*;
 import randomMindustry.item.*;
 import randomMindustry.texture.*;
@@ -37,10 +38,10 @@ public class Main extends Mod {
         BlockMapper.editContent();
 
 // debug atlas:
-//        final int[] i = {0};
-//        TextureManager.getAllTextures().each((t) -> {
-//            PixmapIO.writePng(new Fi("atlas" + (i[0]++) + ".png"), t.getTextureData().getPixmap());
-//        });
+        final int[] i = {0};
+        TextureManager.getAllTextures().each((t) -> {
+            PixmapIO.writePng(new Fi("atlas" + (i[0]++) + ".png"), t.getTextureData().getPixmap());
+        });
 
 // debug packs:
         Log.info("DEBUG PACKS:");

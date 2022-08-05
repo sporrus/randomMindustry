@@ -13,6 +13,7 @@ import randomMindustry.texture.*;
 import static randomMindustry.RMVars.*;
 
 public class CustomItem extends Item {
+
     public CustomItem(String name, Color color) {
         super(name, color);
     }
@@ -24,7 +25,7 @@ public class CustomItem extends Item {
         radioactivity = -1;
         flammability = 1;
         Item item = Vars.content.items().select(it -> !(it instanceof CustomItem)).random();
-        float hue = Mathf.random(360f);
+        float hue = ItemMapper.r.rand.random(360f);
         fullIcon = TextureManager.alloc(item.fullIcon);
         uiIcon = TextureManager.alloc(item.uiIcon);
         TextureManager.hueRegion(fullIcon, hue);
