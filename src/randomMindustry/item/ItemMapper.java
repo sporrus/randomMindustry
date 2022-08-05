@@ -4,6 +4,7 @@ import arc.func.*;
 import arc.graphics.*;
 import arc.math.*;
 import arc.struct.*;
+import arc.util.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
@@ -12,20 +13,19 @@ import randomMindustry.*;
 public class ItemMapper {
     public static final Seq<CustomItem> generatedItems = new Seq<>();
     public static final Seq<ItemPack> packs = new Seq<>();
-    public static final int itemCount = 32;
+    public static final int itemCount = 18;
     public static final Rand rand = new Rand();
 
     public static void editContent() {
         rand.setSeed(SeedManager.getSeed());
         generatedItems.each(CustomItem::edit);
 
-        packs.add(new ItemPack(0, 0, "drill",
-                generatedItems.random(rand), generatedItems.random(rand), generatedItems.random(rand)
-        ));
-
-        ((GenericCrafter) Blocks.graphitePress).outputItems = new ItemStack[]{new ItemStack(
-                getPackByGlobalTier(0).random(true), 5
-        )};
+        ItemPack all = new ItemPack(0, 0, "all", generatedItems.toArray(Item.class));
+        for (int i = 0; i < itemCount / 3; i++) {
+            packs.add(new ItemPack(i / 2, i, i % 2 == 0 ? "drill" : "craft",
+                    all.random(true), all.random(true), all.random(true)
+            ));
+        }
     }
 
     public static void generateContent() {
@@ -35,7 +35,24 @@ public class ItemMapper {
         }
     }
 
-    public static Seq<ItemPack> getPacksWithItem(CustomItem item, boolean locked) {
+    public static int getTier(Item item) {
+        Seq<ItemPack> tierPacks = packs.select((p) -> p.globalTier >= 0);
+        for (ItemPack pack : tierPacks)
+            if (pack.in(item)) return pack.globalTier;
+        return -1;
+    }
+
+    public static ItemPack combine(Seq<ItemPack> itemPacks) {
+        return combine(itemPacks.toArray(ItemPack.class));
+    }
+
+    public static ItemPack combine(ItemPack... itemPacks) {
+        ItemPack pack = new ItemPack(-1, -1, "all");
+        for (ItemPack p : itemPacks) pack.addFrom(p);
+        return pack;
+    }
+
+    public static Seq<ItemPack> getPacksWithItem(Item item, boolean locked) {
         return getPacksBy((pack) -> (locked ? pack.locked : pack.all).contains(item));
     }
 
@@ -47,8 +64,16 @@ public class ItemMapper {
         return getPacksBy((pack) -> pack.tier.equalsIgnoreCase(tier));
     }
 
+    public static Seq<ItemPack> getLockedPacksByTier(String tier) {
+        return getPacksByTier(tier).select((pack) -> pack.locked() != 0);
+    }
+
     public static ItemPack getPackByGlobalTier(int globalTier) {
         return getFirstPackBy((pack) -> pack.globalTier == globalTier);
+    }
+
+    public static void lock(Item item) {
+        getPacksWithItem(item, true).select(p -> p.globalTier >= 0).each(p -> p.lock(item));
     }
 
     public static ItemPack getFirstPackBy(Func<ItemPack, Boolean> func) {

@@ -32,6 +32,8 @@ public class WallBlockCreator extends DefaultBlockCreator {
 
     @Override
     public void edit(Block block) {
+        block.health = Mathf.round(rand.random(100, 2000), 50);
+
         Block copyBlock = Vars.content.blocks().select((b) -> b instanceof Wall && !BlockMapper.generated(b)).random(rand);
         block.region = TextureManager.alloc(copyBlock.region);
         block.fullIcon = TextureManager.alloc(copyBlock.fullIcon);

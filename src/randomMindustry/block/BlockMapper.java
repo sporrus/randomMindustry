@@ -16,7 +16,7 @@ public class BlockMapper {
     public static final int blockCount = 32;
     public static final Rand rand = new Rand();
     public static final Seq<BlockCreator> creators = new Seq<>(new BlockCreator[]{
-            new WallBlockCreator()
+            new WallBlockCreator(), new CrafterBlockCreator()
     });
 
     public static void editContent() {

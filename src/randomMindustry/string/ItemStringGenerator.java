@@ -9,8 +9,13 @@ public class ItemStringGenerator extends StringGenerator{
         StringBuilder out = new StringBuilder();
         out.append(upperCaseFirst(generateWord(1)));
         out.append(generateSuffix());
-        if(Mathf.chance(0.5f)) out.append(" " + generateType());
+        if(Mathf.chance(0.5f)) out.append(" ").append(generateType());
         return out.toString();
+    }
+
+    public String generateDescription(Item item){
+        // talk about stats and stuff
+        return "Casual item description.";
     }
     
     private String generateSuffix(){
@@ -22,10 +27,5 @@ public class ItemStringGenerator extends StringGenerator{
             "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst",
             "Cluster", "Crystal", "Sheet", "Mix"
         ).random();
-    }
-    
-    public String generateDescription(Item item){
-        // talk about stats and stuff
-        return "Casual item description.";
     }
 }

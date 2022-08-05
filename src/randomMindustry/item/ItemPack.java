@@ -2,15 +2,16 @@ package randomMindustry.item;
 
 import arc.math.*;
 import arc.struct.*;
+import mindustry.type.*;
 import randomMindustry.*;
 
 public class ItemPack {
-    public final Seq<CustomItem> all, locked;
+    public final Seq<Item> all, locked;
     public final String tier;
     public final int localTier, globalTier;
     public final Rand rand;
 
-    public ItemPack(int localTier, int globalTier, String tier, CustomItem... all) {
+    public ItemPack(int localTier, int globalTier, String tier, Item... all) {
         this.all = new Seq<>(all);
         this.locked = this.all.copy();
         this.localTier = localTier;
@@ -19,8 +20,20 @@ public class ItemPack {
         this.rand = new Rand(SeedManager.getSeed());
     }
 
+    public boolean in(Item item) {
+        return all.contains(item);
+    }
+
+    public boolean locked(Item item) {
+        return in(item) && locked.contains(item);
+    }
+
     public int locked() {
         return locked.size;
+    }
+
+    public void lock(Item item) {
+        locked.remove(item);
     }
 
     public void lock() {
@@ -28,13 +41,23 @@ public class ItemPack {
         locked.addAll(all);
     }
 
-    public CustomItem random(boolean lock) {
+    public Item random(boolean lock) {
         if (lock) {
-            CustomItem item = locked.random(rand);
+            Item item = locked.random(rand);
             locked.remove(item);
             return item;
         } else {
             return all.random(rand);
         }
+    }
+
+    public void addFrom(ItemPack pack) {
+        all.addAll(pack.all);
+        locked.addAll(pack.locked);
+    }
+
+    public void add(Item item, boolean isLocked) {
+        all.add(item);
+        if (isLocked) locked.add(item);
     }
 }

@@ -6,6 +6,7 @@ import arc.struct.*;
 import arc.util.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
+import mindustry.type.*;
 import mindustry.ui.dialogs.*;
 import randomMindustry.block.*;
 import randomMindustry.item.*;
@@ -34,10 +35,21 @@ public class Main extends Mod {
         TextureManager.init();
         ItemMapper.editContent();
         BlockMapper.editContent();
+
+// debug atlas:
 //        final int[] i = {0};
 //        TextureManager.getAllTextures().each((t) -> {
 //            PixmapIO.writePng(new Fi("atlas" + (i[0]++) + ".png"), t.getTextureData().getPixmap());
 //        });
+
+// debug packs:
+        Log.info("DEBUG PACKS:");
+        for (ItemPack pack : ItemMapper.packs) {
+            Log.info(pack.tier + ":" + pack.localTier + " (" + pack.globalTier + ")");
+            for (Item item : pack.all) {
+                Log.info("      " + item.name + (pack.locked(item) ? " LOCKED" : ""));
+            }
+        }
     }
 
     @Override
