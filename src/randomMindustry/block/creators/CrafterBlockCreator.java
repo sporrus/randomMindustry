@@ -28,7 +28,6 @@ public class CrafterBlockCreator extends DefaultBlockCreator {
         return new GenericCrafter(name) {{
             requirements(Category.crafting, new ItemStack[]{new ItemStack(Items.copper, 1)});
             size = 1;
-            stats.add(RMVars.seed, RMVars.seedValue);
         }};
     }
 
@@ -41,6 +40,7 @@ public class CrafterBlockCreator extends DefaultBlockCreator {
         ((GenericCrafter) block).outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
         int tier = ItemMapper.getTier(item);
         block.consumeItems(ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> r.random(1, 10)));
+        block.stats.add(RMVars.seed, RMVars.seedValue);
 
         Block copyBlock = Vars.content.blocks().select((b) -> b instanceof GenericCrafter && !BlockMapper.generated(b)).random(r);
         block.region = TextureManager.alloc(copyBlock.region);

@@ -30,13 +30,13 @@ public class WallBlockCreator extends DefaultBlockCreator {
         return new Wall(name) {{
             requirements(Category.defense, new ItemStack[]{new ItemStack(Items.copper, 1)});
             size = 1;
-            stats.add(RMVars.seed, RMVars.seedValue);
         }};
     }
 
     @Override
     public void edit(Block block) {
         block.health = Mathf.round(r.random(100, 2000), 50);
+        block.stats.add(RMVars.seed, RMVars.seedValue);
 
         Block copyBlock = Vars.content.blocks().select((b) -> b instanceof Wall && !BlockMapper.generated(b)).random(r);
         block.region = TextureManager.alloc(copyBlock.region);
@@ -46,5 +46,7 @@ public class WallBlockCreator extends DefaultBlockCreator {
         super.edit(block);
         block.localizedName = "unreal wall name";
         block.description = "unreal wall description";
+
+        block.requirements = ItemMapper.getItemStacks(r.random(0, ItemMapper.maxTier), r.random(1, 5), () -> Mathf.round(r.random(25, 1000), 5));
     }
 }

@@ -21,7 +21,6 @@ public class CustomItem extends Item {
         super(name, color);
         hidden = false;
         alwaysUnlocked = true;
-        stats.add(RMVars.seed, RMVars.seedValue);
     }
 
     public void edit() {
@@ -38,6 +37,7 @@ public class CustomItem extends Item {
         color = color.cpy().hue(hue);
         localizedName = itemStringGen.generateName();
         description = itemStringGen.generateDescription(this);
+        stats.add(RMVars.seed, RMVars.seedValue);
     }
 
     @Override

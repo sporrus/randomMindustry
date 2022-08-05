@@ -11,6 +11,7 @@ public class ItemMapper {
     public static final Seq<ItemPack> packs = new Seq<>();
     public static final int itemCount = 36;
     public static final SyncedRand r = new SyncedRand();
+    public static final int maxTier = itemCount / 3;
 
     public static void editContent() {
         generatedItems.each(CustomItem::edit);
@@ -42,7 +43,7 @@ public class ItemMapper {
                 stacks.add(new ItemStack(it, itemAmount.get()));
                 packs.lock(it);
             } else {
-                stacks.add(new ItemStack(packs.random(true), r.random(1, 10)));
+                stacks.add(new ItemStack(packs.random(true), itemAmount.get()));
             }
         }
         RandomUtil.shuffle(stacks, r);
