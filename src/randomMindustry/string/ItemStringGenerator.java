@@ -9,7 +9,7 @@ public class ItemStringGenerator extends StringGenerator{
         StringBuilder out = new StringBuilder();
         out.append(upperCaseFirst(generateWord(1)));
         out.append(generateSuffix());
-        if(Mathf.chance(0.5f)) out.append(" ").append(generateType());
+        if(r.rand.chance(0.5f)) out.append(" ").append(generateType());
         return out.toString();
     }
 
@@ -37,6 +37,7 @@ public class ItemStringGenerator extends StringGenerator{
             if(item.flammability >= 0.5f) out.append(" Must be handled with care.");
         }
         if(item.charge > 0) out.append(" This material is " + (item.charge < 0.5f ? "quite" : "very") + " conductive.");
+        return out.toString();
     }
     
     private String generateSuffix(){
