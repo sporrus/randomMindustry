@@ -23,17 +23,25 @@ import randomMindustry.texture.*;
 public class Main extends Mod {
     public static Planet random;
     public static TextureRegion arrival;
+    public static TextureRegion rickroll;
     
     public Main() {
         Events.on(ClientLoadEvent.class, e -> {
             Seq<TextureRegion> arrivals = new Seq<>();
+            Seq<TextureRegion> rickrolls = new Seq<>();
             for(int i = 0; i < 7; i++) {
                 arrivals.add(Core.atlas.find("random-mindustry-arrival" + i));
             }
+            for(int i = 0; i < 6; i++) {
+                rickrolls.add(Core.atlas.find("random-mindustry-rickroll" + i));
+            }
             arrival = arrivals.get(0);
+            rickroll = rickrolls.get(0);
             Events.run(Trigger.update, () -> {
-                int frame = (int)((Time.globalTime / 5f) % arrivals.size);
-                arrival.set(arrivals.get(frame));
+                int arrivalFrame = (int)((Time.globalTime / 5f) % arrivals.size);
+                arrival.set(arrivals.get(arrivalFrame));
+                int rickrollFrame = (int)((Time.globalTime / 5f) % rickrolls.size);
+                rickroll.set(rickroll.get(rickrollFrame));
             });
         });
     }
