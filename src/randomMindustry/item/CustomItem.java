@@ -50,6 +50,6 @@ public class CustomItem extends Item {
             dialog.cont.image(Main.rickroll).row();
             dialog.addCloseButton();
             dialog.show();
-        }).row();
+        }).growX().row();
     }
 }
