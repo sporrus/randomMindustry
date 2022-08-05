@@ -33,6 +33,6 @@ public class CustomItem extends Item {
         Label getReal = t.label(() -> "get real").get();
         t.row();
         
-        getReal.actions(Actions.forever(Actions.rotateBy(1f)));
+        getReal.actions(Actions.forever(Actions.moveBy(-1f, 0f)));
     }
 }
