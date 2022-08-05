@@ -32,10 +32,9 @@ public class CustomItem extends Item {
 
     @Override
     public void displayExtra(Table t) {
-        Label getReal = t.label(() -> "get real").get();
+        Image image = t.image(Main.arrival).get();
         t.row();
-        t.image(Main.arrival).row();
         
-        getReal.actions(Actions.forever(Actions.moveBy(-1f, 0f)));
+        image.actions(Actions.forever(Actions.rotateBy(1f)));
     }
 }
