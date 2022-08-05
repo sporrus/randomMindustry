@@ -24,6 +24,7 @@ public class CustomItem extends Item {
         explosiveness = ItemMapper.r.rand.random(1f);
         radioactivity = ItemMapper.r.rand.random(1f);
         flammability = ItemMapper.r.rand.random(1f);
+        charge = ItemMapper.r.rand.random(1f);
         Item item = Vars.content.items().select(it -> !(it instanceof CustomItem)).random();
         float hue = ItemMapper.r.rand.random(360f);
         fullIcon = TextureManager.alloc(item.fullIcon);
