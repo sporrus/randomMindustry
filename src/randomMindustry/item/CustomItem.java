@@ -2,6 +2,8 @@ package randomMindustry.item;
 
 import arc.graphics.*;
 import arc.math.*;
+import arc.scene.actions.*;
+import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import mindustry.*;
 import mindustry.type.*;
@@ -28,6 +30,9 @@ public class CustomItem extends Item {
 
     @Override
     public void displayExtra(Table t) {
-        t.label(() -> "get real").row();
+        Label getReal = t.label(() -> "get real").get();
+        t.row();
+        
+        getReal.actions(Actions.forever(Actions.rotateBy(1f)));
     }
 }
