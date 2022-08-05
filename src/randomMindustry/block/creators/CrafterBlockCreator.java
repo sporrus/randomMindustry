@@ -1,6 +1,6 @@
 package randomMindustry.block.creators;
 
-import arc.struct.*;
+import arc.math.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
@@ -40,21 +40,7 @@ public class CrafterBlockCreator extends DefaultBlockCreator {
         else item = pack.random(true);
         ((GenericCrafter) block).outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
         int tier = ItemMapper.getTier(item);
-        int itemCount = r.random(1, 3);
-        Seq<ItemStack> stacks = new Seq<>();
-        ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier - 1));
-        packs.lock();
-        for (int i = 0; i < itemCount; i++) {
-            if (i == 0) {
-                Item it = ItemMapper.getPackByGlobalTier(tier - 1).random(false);
-                stacks.add(new ItemStack(it, r.random(1, 10)));
-                packs.lock(it);
-            } else {
-                stacks.add(new ItemStack(packs.random(true), r.random(1, 10)));
-            }
-        }
-        RandomUtil.shuffle(stacks, r);
-        block.consumeItems(stacks.toArray(ItemStack.class));
+        block.consumeItems(ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> r.random(1, 10)));
 
         Block copyBlock = Vars.content.blocks().select((b) -> b instanceof GenericCrafter && !BlockMapper.generated(b)).random(r);
         block.region = TextureManager.alloc(copyBlock.region);
@@ -64,5 +50,7 @@ public class CrafterBlockCreator extends DefaultBlockCreator {
         super.edit(block);
         block.localizedName = "unreal crafter name";
         block.description = "unreal crafter description";
+
+        block.requirements = ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(25, 1000), 5));
     }
 }

@@ -30,6 +30,25 @@ public class ItemMapper {
         }
     }
 
+    public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount) {
+        tier = Math.max(tier, 1);
+        itemCount = Math.max(itemCount, 1);
+        Seq<ItemStack> stacks = new Seq<>();
+        ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier - 1));
+        packs.lock();
+        for (int i = 0; i < itemCount; i++) {
+            if (i == 0) {
+                Item it = ItemMapper.getPackByGlobalTier(tier - 1).random(false);
+                stacks.add(new ItemStack(it, itemAmount.get()));
+                packs.lock(it);
+            } else {
+                stacks.add(new ItemStack(packs.random(true), r.random(1, 10)));
+            }
+        }
+        RandomUtil.shuffle(stacks, r);
+        return stacks.toArray(ItemStack.class);
+    }
+
     public static int getDrillItems() {
         return (int) (Math.ceil(itemCount / 6f) * 3);
     }
