@@ -57,7 +57,7 @@ public class Main extends Mod {
         for (ItemPack pack : ItemMapper.packs) {
             Log.info(pack.tier + ":" + pack.localTier + " (" + pack.globalTier + ")");
             for (Item item : pack.all) {
-                Log.info("      " + item.name + (pack.locked(item) ? " LOCKED" : ""));
+                Log.info("      " + item.name + (pack.locked(item) ? " [red]LOCKED[]" : ""));
             }
         }
     }

@@ -1,11 +1,13 @@
 package randomMindustry.block.creators;
 
 import arc.math.*;
+import arc.scene.ui.layout.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
+import mindustry.world.meta.*;
 import randomMindustry.*;
 import randomMindustry.block.*;
 import randomMindustry.item.*;
@@ -27,15 +29,16 @@ public class WallBlockCreator extends DefaultBlockCreator {
     public Block create(String name) {
         return new Wall(name) {{
             requirements(Category.defense, new ItemStack[]{new ItemStack(Items.copper, 1)});
-            size = r.rand.random(1, 2);
+            size = 1;
+            stats.add(RMVars.seed, RMVars.seedValue);
         }};
     }
 
     @Override
     public void edit(Block block) {
-        block.health = Mathf.round(r.rand.random(100, 2000), 50);
+        block.health = Mathf.round(r.random(100, 2000), 50);
 
-        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof Wall && !BlockMapper.generated(b)).random(r.rand);
+        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof Wall && !BlockMapper.generated(b)).random(r);
         block.region = TextureManager.alloc(copyBlock.region);
         block.fullIcon = TextureManager.alloc(copyBlock.fullIcon);
         block.uiIcon = TextureManager.alloc(copyBlock.uiIcon);

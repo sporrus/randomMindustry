@@ -19,15 +19,16 @@ public class CustomItem extends Item {
         super(name, color);
         hidden = false;
         alwaysUnlocked = true;
+        stats.add(RMVars.seed, RMVars.seedValue);
     }
 
     public void edit() {
-        explosiveness = ItemMapper.r.rand.random(1f);
-        radioactivity = ItemMapper.r.rand.random(1f);
-        flammability = ItemMapper.r.rand.random(1f);
-        charge = ItemMapper.r.rand.random(1f);
-        Item item = Vars.content.items().select(it -> !(it instanceof CustomItem)).random();
-        float hue = ItemMapper.r.rand.random(360f);
+        explosiveness = ItemMapper.r.random(1f);
+        radioactivity = ItemMapper.r.random(1f);
+        flammability = ItemMapper.r.random(1f);
+        charge = ItemMapper.r.random(1f);
+        Item item = Vars.content.items().select(it -> !(it instanceof CustomItem)).random(ItemMapper.r);
+        float hue = ItemMapper.r.random(360f);
         fullIcon = TextureManager.alloc(item.fullIcon);
         uiIcon = TextureManager.alloc(item.uiIcon);
         TextureManager.hueRegion(fullIcon, hue);

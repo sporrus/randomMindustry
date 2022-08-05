@@ -43,11 +43,11 @@ public class ItemPack {
 
     public Item random(boolean lock) {
         if (lock) {
-            Item item = locked.random(r.rand);
+            Item item = locked.random(r);
             locked.remove(item);
             return item;
         } else {
-            return all.random(r.rand);
+            return all.random(r);
         }
     }
 

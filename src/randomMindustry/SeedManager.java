@@ -18,6 +18,6 @@ public class SeedManager {
         rands.add(rand);
     }
     public static void updateRands() {
-        rands.each(r -> r.rand.setSeed(seed));
+        rands.each(r -> r.setSeed(seed));
     }
 }

@@ -25,11 +25,11 @@ public class StringGenerator{
     public final Seq<String> template = Seq.with("cv", "vc", "cvc", "vcv");
     
     public String generateSyllable(){
-        String tmp = template.random(r.rand);
+        String tmp = template.random(r);
         StringBuilder out = new StringBuilder();
         for(int i = 0; i < tmp.length(); i++){
-            if(tmp.charAt(i) == 'c') out.append(consonants.random(r.rand));
-            else out.append(vowels.random(r.rand));
+            if(tmp.charAt(i) == 'c') out.append(consonants.random(r));
+            else out.append(vowels.random(r));
         }
         return out.toString();
     }

@@ -27,35 +27,36 @@ public class CrafterBlockCreator extends DefaultBlockCreator {
     public Block create(String name) {
         return new GenericCrafter(name) {{
             requirements(Category.crafting, new ItemStack[]{new ItemStack(Items.copper, 1)});
-            size = r.rand.random(1, 2);
+            size = 1;
+            stats.add(RMVars.seed, RMVars.seedValue);
         }};
     }
 
     @Override
     public void edit(Block block) {
         Item item;
-        ItemPack pack = ItemMapper.getLockedPacksByTier("craft").random(r.rand);
-        if (pack == null) item = ItemMapper.getPacksByTier("craft").random(r.rand).random(false);
+        ItemPack pack = ItemMapper.getLockedPacksByTier("craft").random(r);
+        if (pack == null) item = ItemMapper.getPacksByTier("craft").random(r).random(false);
         else item = pack.random(true);
-        ((GenericCrafter) block).outputItems = new ItemStack[]{new ItemStack(item, r.rand.random(1, 10))};
+        ((GenericCrafter) block).outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
         int tier = ItemMapper.getTier(item);
-        int itemCount = r.rand.random(1, 3);
+        int itemCount = r.random(1, 3);
         Seq<ItemStack> stacks = new Seq<>();
         ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier - 1));
         packs.lock();
         for (int i = 0; i < itemCount; i++) {
             if (i == 0) {
                 Item it = ItemMapper.getPackByGlobalTier(tier - 1).random(false);
-                stacks.add(new ItemStack(it, r.rand.random(1, 10)));
+                stacks.add(new ItemStack(it, r.random(1, 10)));
                 packs.lock(it);
             } else {
-                stacks.add(new ItemStack(packs.random(true), r.rand.random(1, 10)));
+                stacks.add(new ItemStack(packs.random(true), r.random(1, 10)));
             }
         }
-        RandomUtil.shuffle(stacks, r.rand);
+        RandomUtil.shuffle(stacks, r);
         block.consumeItems(stacks.toArray(ItemStack.class));
 
-        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof GenericCrafter && !BlockMapper.generated(b)).random(r.rand);
+        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof GenericCrafter && !BlockMapper.generated(b)).random(r);
         block.region = TextureManager.alloc(copyBlock.region);
         block.fullIcon = TextureManager.alloc(copyBlock.fullIcon);
         block.uiIcon = TextureManager.alloc(copyBlock.uiIcon);
