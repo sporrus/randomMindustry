@@ -18,7 +18,7 @@ public class StringGenerator{
         "y", "z"
     );
 
-    public StringGenerator() {
+    public StringGenerator(){
         r = new SyncedRand();
     }
     
