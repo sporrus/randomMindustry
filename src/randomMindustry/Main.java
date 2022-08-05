@@ -67,6 +67,7 @@ public class Main extends Mod {
         ItemMapper.generateContent();
         BlockMapper.generateContent();
         random = new Planet("random", Planets.sun, 1f, 3){{
+            localizedName = "Randros";
             generator = new SerpuloPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 6);
             cloudMeshLoader = () -> new MultiMesh(
