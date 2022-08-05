@@ -6,6 +6,7 @@ import arc.scene.actions.*;
 import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import mindustry.*;
+import mindustry.gen.*;
 import mindustry.type.*;
 import randomMindustry.*;
 import randomMindustry.texture.*;
@@ -38,9 +39,7 @@ public class CustomItem extends Item {
 
     @Override
     public void displayExtra(Table t) {
-        Image image = t.image(Main.arrival).get();
-        t.row();
-        
-        image.actions(Actions.forever(Actions.rotateBy(1f)));
+        t.setBackground(Tex.button);
+        t.image(Main.arrival).row();
     }
 }
