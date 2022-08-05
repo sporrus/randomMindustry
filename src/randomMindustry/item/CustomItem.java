@@ -16,6 +16,8 @@ public class CustomItem extends Item {
 
     public CustomItem(String name, Color color) {
         super(name, color);
+        hidden = false;
+        alwaysUnlocked = true;
     }
 
     public void edit() {

@@ -8,6 +8,7 @@ import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
 import randomMindustry.*;
 import randomMindustry.block.*;
+import randomMindustry.item.*;
 import randomMindustry.texture.*;
 
 public class WallBlockCreator extends DefaultBlockCreator {

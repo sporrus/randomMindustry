@@ -9,7 +9,7 @@ import randomMindustry.*;
 public class ItemMapper {
     public static final Seq<CustomItem> generatedItems = new Seq<>();
     public static final Seq<ItemPack> packs = new Seq<>();
-    public static final int itemCount = 18;
+    public static final int itemCount = 36;
     public static final SyncedRand r = new SyncedRand();
 
     public static void editContent() {
@@ -28,6 +28,14 @@ public class ItemMapper {
             CustomItem item = new CustomItem("random-item-" + i, Color.red);
             generatedItems.add(item);
         }
+    }
+
+    public static int getDrillItems() {
+        return (int) (Math.ceil(itemCount / 6f) * 3);
+    }
+
+    public static int getCraftItems() {
+        return itemCount / 6 * 3;
     }
 
     public static int getTier(Item item) {

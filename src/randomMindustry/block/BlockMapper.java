@@ -9,14 +9,17 @@ import mindustry.world.*;
 import mindustry.world.meta.*;
 import randomMindustry.*;
 import randomMindustry.block.creators.*;
+import randomMindustry.item.*;
 import randomMindustry.texture.*;
 
 public class BlockMapper {
     public static final Seq<Block> generatedBlocks = new Seq<>();
-    public static final int blockCount = 32;
     public static final SyncedRand r = new SyncedRand();
+    public static final BlockCreator
+            wallBlockCreator = new WallBlockCreator(),
+            crafterBlockCreator = new CrafterBlockCreator();
     public static final Seq<BlockCreator> creators = new Seq<>(new BlockCreator[]{
-            new WallBlockCreator(), new CrafterBlockCreator()
+        wallBlockCreator, crafterBlockCreator
     });
 
     public static void editContent() {
@@ -31,9 +34,10 @@ public class BlockMapper {
     }
 
     public static void generateContent() {
-        for (int i = 0; i < blockCount; i++) {
-            generatedBlocks.add(creators.random(r.rand).create("random-block-" + i));
-        }
+        for (int i = 0; i < ItemMapper.getCraftItems(); i++)
+            generatedBlocks.add(crafterBlockCreator.create("random-crafter-" + i));
+        for (int i = 0; i < 12; i++)
+            generatedBlocks.add(wallBlockCreator.create("random-wall-" + i));
     }
 
     public static boolean generated(Block block) {
