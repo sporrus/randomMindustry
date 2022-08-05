@@ -31,4 +31,8 @@ public class StringGenerator{
         for(int i = 0; i < size; i++) out.append(generateSyllable());
         return out.toString();
     }
+    
+    public String upperCaseFirst(String string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
+    }
 }
