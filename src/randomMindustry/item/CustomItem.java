@@ -1,5 +1,6 @@
 package randomMindustry.item;
 
+import arc.flabel.*;
 import arc.graphics.*;
 import arc.math.*;
 import arc.scene.actions.*;
@@ -8,6 +9,7 @@ import arc.scene.ui.layout.*;
 import mindustry.*;
 import mindustry.gen.*;
 import mindustry.type.*;
+import mindustry.ui.dialogs.*;
 import randomMindustry.*;
 import randomMindustry.texture.*;
 
@@ -42,5 +44,12 @@ public class CustomItem extends Item {
     public void displayExtra(Table t) {
         t.setBackground(Tex.button);
         t.image(Main.arrival).row();
+        t.button("\"Special\" Stats", () -> {
+            BaseDialog dialog = new BaseDialog("GET RICKROLLED!");
+            dialog.cont.add(new FLabel("{wave}{sick}{wind}GET RICKROLLED!")).row();
+            dialog.cont.image(Main.rickroll).row();
+            dialog.addCloseButton();
+            dialog.show();
+        }).row();
     }
 }
