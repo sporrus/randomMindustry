@@ -7,6 +7,7 @@ import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import mindustry.*;
 import mindustry.type.*;
+import randomMindustry.*;
 import randomMindustry.texture.*;
 
 public class CustomItem extends Item {
@@ -33,6 +34,7 @@ public class CustomItem extends Item {
     public void displayExtra(Table t) {
         Label getReal = t.label(() -> "get real").get();
         t.row();
+        t.image(Main.arrival).row();
         
         getReal.actions(Actions.forever(Actions.moveBy(-1f, 0f)));
     }
