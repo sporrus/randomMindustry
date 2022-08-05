@@ -20,7 +20,7 @@ public class CustomItem extends Item {
     public void edit() {
         localizedName = itemStringGen.generateName();
         description = itemStringGen.generateDescription(this);
-        explosiveness = 100;
+        explosiveness = 1;
         radioactivity = -1;
         flammability = 1;
         Item item = Vars.content.items().select(it -> !(it instanceof CustomItem)).random();
