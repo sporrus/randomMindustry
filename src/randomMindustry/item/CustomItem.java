@@ -21,9 +21,9 @@ public class CustomItem extends Item {
     public void edit() {
         localizedName = itemStringGen.generateName();
         description = itemStringGen.generateDescription(this);
-        explosiveness = Mathf.random(1f);
-        radioactivity = Mathf.random(1f);
-        flammability = Mathf.random(1f);
+        explosiveness = ItemMapper.r.rand.random(1f);
+        radioactivity = ItemMapper.r.rand.random(1f);
+        flammability = ItemMapper.r.rand.random(1f);
         Item item = Vars.content.items().select(it -> !(it instanceof CustomItem)).random();
         float hue = ItemMapper.r.rand.random(360f);
         fullIcon = TextureManager.alloc(item.fullIcon);
