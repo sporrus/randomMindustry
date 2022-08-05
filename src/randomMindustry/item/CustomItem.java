@@ -10,14 +10,16 @@ import mindustry.type.*;
 import randomMindustry.*;
 import randomMindustry.texture.*;
 
+import static randomMindustry.RMVars.*;
+
 public class CustomItem extends Item {
     public CustomItem(String name, Color color) {
         super(name, color);
     }
 
     public void edit() {
-        localizedName = "unreal item name";
-        description = "unreal item description";
+        localizedName = itemStringGen.generateName();
+        description = itemStringGen.generateDescription(this);
         explosiveness = 100;
         radioactivity = -1;
         flammability = 1;
