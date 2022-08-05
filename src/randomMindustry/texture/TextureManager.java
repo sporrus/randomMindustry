@@ -3,8 +3,6 @@ package randomMindustry.texture;
 import arc.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
-import arc.graphics.gl.*;
-import arc.math.*;
 import arc.struct.*;
 import mindustry.game.*;
 
