@@ -22,7 +22,7 @@ public class Main extends Mod {
             }
             arrival = arrivals.get(0);
             Events.run(Trigger.update, () -> {
-                int frame = (int)((Time.globalTike / 5f) % arrivals.size);
+                int frame = (int)((Time.globalTime / 5f) % arrivals.size);
                 arrival.set(arrivals.get(frame));
             });
         });
