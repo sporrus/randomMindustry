@@ -96,7 +96,7 @@ public class Main extends Mod {
                 r.attributes.clear();
                 r.showSpawns = true;
             };
-            atmosphereColor = Color.valueOf("000000");
+            atmosphereColor = Pal.techBlue.cpy();
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.3f;
             startSector = 1;
