@@ -94,9 +94,9 @@ public class Main extends Mod {
                 r.waveTeam = Team.green;
                 r.placeRangeCheck = false;
                 r.attributes.clear();
-                r.showSpawns = false;
+                r.showSpawns = true;
             };
-            atmosphereColor = Color.valueOf("3c1b8f");
+            atmosphereColor = Color.valueOf("000000");
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.3f;
             startSector = 1;
