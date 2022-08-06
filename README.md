@@ -1,5 +1,5 @@
 ![image](https://raw.githubusercontent.com/sporrus/randomMindustry/master/assets/icon.png)
-# RandomMindustry
+# Random Mindustry
 The randomness is limitless... I think...
 
 Join Our [discord](https://discord.gg/ztC6WJUxZK)!
