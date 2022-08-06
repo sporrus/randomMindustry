@@ -1,7 +1,7 @@
 ![image](https://raw.githubusercontent.com/sporrus/randomMindustry/master/assets/icon.png)
-# randomMindustry
-so random, you feel like playing first time
+# RandomMindustry
+The randomness is limitless... I think...
 
-join our [discord](https://discord.gg/ztC6WJUxZK)!
+Join Our [discord](https://discord.gg/ztC6WJUxZK)!
 
 ![image](https://raw.githubusercontent.com/sporrus/randomMindustry/master/assets/sprites/soppa.png)
