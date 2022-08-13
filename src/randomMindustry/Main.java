@@ -29,10 +29,10 @@ public class Main extends Mod {
         Events.on(ClientLoadEvent.class, e -> {
             Seq<TextureRegion> arrivals = new Seq<>();
             Seq<TextureRegion> rickrolls = new Seq<>();
-            for(int i = 0; i < 7; i++) {
+            for(int i = 0; i <= 7; i++) {
                 arrivals.add(Core.atlas.find("random-mindustry-arrival" + i));
             }
-            for(int i = 0; i < 6; i++) {
+            for(int i = 0; i <= 6; i++) {
                 rickrolls.add(Core.atlas.find("random-mindustry-rickroll" + i));
             }
             arrival = arrivals.get(0);
