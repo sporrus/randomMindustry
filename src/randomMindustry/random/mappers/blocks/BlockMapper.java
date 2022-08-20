@@ -125,7 +125,6 @@ public class BlockMapper {
         } else {
             block.hasPower = false;
         }
-        block.hasLiquids = false;
         ItemStack[] itemStacks = ItemMapper.getRandomItemStacks(tier, 3, 10, 1, true);
         if (tier > -1) block.consumeItems(itemStacks);
         else block.consumeItems();
