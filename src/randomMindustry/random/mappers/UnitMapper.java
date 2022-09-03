@@ -20,7 +20,6 @@ import randomMindustry.util.*;
 
 import static mindustry.Vars.*;
 
-// oh god no
 public class UnitMapper{
     public static void init(){
         Seq<UnitType> units = content.units().copy();
@@ -57,7 +56,7 @@ public class UnitMapper{
                     }
                 }
                 unit.parts.each(part -> huePart(part, hue));
-                // unit.engineColor = Tmp.c1.set(Color.red).hue(hue);
+                unit.engineColor = Tmp.c1.set(Color.red.cpy().mul(1.5f)).hue(hue);
             }
         }
         
