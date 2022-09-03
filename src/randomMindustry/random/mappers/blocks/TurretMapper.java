@@ -103,12 +103,13 @@ public class TurretMapper {
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
-        boolean canCharge;
+        boolean canCharge = false;
         float chargeSum = 0f;
-        turret.ammoTypes.each((k, v) -> {
+        for(int c = 0; c < turret.ammoTypes.size; c++){
+            BulletType v = turret.ammoTypes.values().toSeq().get(c);
             canCharge = v.chargeEffect != Fx.none;
             chargeSum += v.chargeEffect.lifetime;
-        });
+        }
         if(RandomUtil.getRand().chance(0.5f) && canCharge) turret.shoot.firstShotDelay = chargeSum / turret.ammoTypes.size;
         modifyTurretSprite(turret);
     }
@@ -134,12 +135,13 @@ public class TurretMapper {
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
-        boolean canCharge;
+        boolean canCharge = false;
         float chargeSum = 0f;
-        turret.ammoTypes.each((k, v) -> {
+        for(int c = 0; c < turret.ammoTypes.size; c++){
+            BulletType v = turret.ammoTypes.values().toSeq().get(c);
             canCharge = v.chargeEffect != Fx.none;
             chargeSum += v.chargeEffect.lifetime;
-        });
+        }
         if(RandomUtil.getRand().chance(0.5f) && canCharge) turret.shoot.firstShotDelay = chargeSum / turret.ammoTypes.size;
         modifyTurretSprite(turret);
     }
@@ -164,12 +166,13 @@ public class TurretMapper {
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
-        boolean canCharge;
+        boolean canCharge = false;
         float chargeSum = 0f;
-        turret.ammoTypes.each((k, v) -> {
+        for(int c = 0; c < turret.ammoTypes.size; c++){
+            BulletType v = turret.ammoTypes.values().toSeq().get(c);
             canCharge = v.chargeEffect != Fx.none;
             chargeSum += v.chargeEffect.lifetime;
-        });
+        }
         if(RandomUtil.getRand().chance(0.5f) && canCharge) turret.shoot.firstShotDelay = chargeSum / turret.ammoTypes.size;
         if(!headless && Core.settings.getBool("rm-sprite-random")){
             if(!(turret.drawer instanceof DrawTurret drawer)) return;
