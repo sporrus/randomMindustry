@@ -56,7 +56,7 @@ public class UnitMapper{
                     }
                 }
                 unit.parts.each(part -> huePart(part, hue));
-                unit.engineColor = Tmp.c1.set(Color.red.cpy().mul(1.5f)).hue(hue);
+                unit.engineColor = Pal.accent.cpy().hue(hue);
             }
         }
         
