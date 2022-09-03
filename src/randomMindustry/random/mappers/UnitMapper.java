@@ -62,7 +62,7 @@ public class UnitMapper{
         
         if(!unit.flying && !unit.naval){
             unit.canBoost = RandomUtil.getRand().chance(0.5f);
-            unit.boostMultiplier = RandomUtil.getRand().random(2f, 10f);
+            unit.boostMultiplier = RandomUtil.getRand().random(2f, 6f);
         }
         
         if(!unit.naval) unit.canDrown = RandomUtil.getRand().chance(0.5f);
