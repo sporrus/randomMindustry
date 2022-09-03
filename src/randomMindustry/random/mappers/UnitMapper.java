@@ -28,7 +28,7 @@ public class UnitMapper{
     }
     
     public static void modify(UnitType unit){
-        Seq<Effect> effects = Effect.all.select(effect -> effect != Fx.dynamicExplosion);
+        Seq<Effect> effects = FxMapper.effects.copy();
         
         float hue = RandomUtil.getRand().random(360f);
         
@@ -61,21 +61,21 @@ public class UnitMapper{
         }
         
         if(!unit.flying && !unit.naval){
-            unit.canBoost = RandomUtil.getRand().random(-2f, 2f) > 0;
-            unit.boostMultiplier = RandomUtil.getRand().random(5f);
+            unit.canBoost = RandomUtil.getRand().chance(0.5f);
+            unit.boostMultiplier = RandomUtil.getRand().random(2f, 10f);
         }
         
-        if(!unit.naval) unit.canDrown = RandomUtil.getRand().random(-2f, 2f) > 0;
-        unit.createWreck = RandomUtil.getRand().random(-2f, 2f) > 0;
-        unit.createScorch = RandomUtil.getRand().random(-2f, 2f) > 0;
+        if(!unit.naval) unit.canDrown = RandomUtil.getRand().chance(0.5f);
+        unit.createWreck = RandomUtil.getRand().chance(0.5f);
+        unit.createScorch = RandomUtil.getRand().chance(0.5f);
         
         unit.legCount = RandomUtil.getRandomIntMult(2, 20, 2);
         unit.legGroupSize = RandomUtil.getRandomIntMult(2, 10, 2);
         unit.legLength = RandomUtil.getRand().random(-unit.hitSize*2f, unit.hitSize*2f);
         unit.legSpeed = RandomUtil.getRand().random(0.1f, 3f);
         unit.legStraightness = RandomUtil.getRand().random(1f);
-        unit.lockLegBase = RandomUtil.getRand().random(-2f, 2f) > 0;
-        unit.legContinuousMove = RandomUtil.getRand().random(-2f, 2f) > 0;
+        unit.lockLegBase = RandomUtil.getRand().chance(0.5f);
+        unit.legContinuousMove = RandomUtil.getRand().chance(0.5f);
         
         unit.deathSound = Util.generateSound();
         unit.mineSound = Util.generateSound();
@@ -114,7 +114,7 @@ public class UnitMapper{
             unit.targetGround = weapon.bullet.collidesGround;
             unit.canHeal = weapon.bullet.healPercent > 0;
 
-            int pattern = RandomUtil.getRand().random(0, 5);
+            int pattern = RandomUtil.getRand().random(0, 6);
             switch (pattern) {
                 case 0 -> weapon.shoot = new ShootPattern();
                 case 1 -> weapon.shoot = new ShootAlternate(RandomUtil.getRand().random(1f, 15f)) {{
@@ -126,7 +126,7 @@ public class UnitMapper{
                     for (int i = 0; i < barrelArray.length; i += 3) {
                         barrelArray[i] = RandomUtil.getRand().random(-10f, 10f);
                         barrelArray[i + 1] = RandomUtil.getRand().random(-10f, 10f);
-                        barrelArray[i + 2] = RandomUtil.getRand().random(0, 360f);
+                        barrelArray[i + 2] = RandomUtil.getRand().random(360f);
                     }
                     barrels = barrelArray;
                 }};
@@ -138,9 +138,11 @@ public class UnitMapper{
                 case 5 -> weapon.shoot = new ShootSpread() {{
                     spread = RandomUtil.getRand().random(1f, 15f);
                 }};
+                case 6 -> weapon.shoot = new ShootSummon(RandomUtil.getRand().random(-10f, 10f), RandomUtil.getRand().random(-10f, 10f), RandomUtil.getRand().random(8f, 24f), RandomUtil.getRand().random(360f));
             }
             weapon.shoot.shots = RandomUtil.getRand().random(1, 10);
             weapon.shoot.shotDelay = RandomUtil.getRand().random(1f, 60f);
+            if(RandomUtil.getRand().chance(0.5f) && weapon.bullet.chargeEffect != Fx.none) weapon.shoot.firstShotDelay = weapon.bullet.chargeEffect.lifetime;
         });
 
         unit.range = Float.MAX_VALUE;
