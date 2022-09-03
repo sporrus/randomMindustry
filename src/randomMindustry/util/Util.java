@@ -1,25 +1,25 @@
 package randomMindustry.util;
 
-import arc.audio.Sound;
+import arc.audio.*;
 import arc.func.*;
 import arc.graphics.g2d.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.content.*;
-import mindustry.gen.Building;
-import mindustry.gen.Sounds;
+import mindustry.gen.*;
 import mindustry.type.*;
-import mindustry.ui.Bar;
+import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
-import randomMindustry.random.mappers.blocks.BlockMapper;
-import randomMindustry.random.util.RandomUtil;
 
-import java.lang.reflect.Field;
+import randomMindustry.random.mappers.blocks.*;
+import randomMindustry.random.util.*;
 
-import static mindustry.Vars.content;
+import java.lang.reflect.*;
+
+import static mindustry.Vars.*;
 
 public class Util {
     public static void removeBars(Block block) {
@@ -95,8 +95,8 @@ public class Util {
     }
 
     public static Sound generateSound() {
-        int id = RandomUtil.getClientRand().random(0, 70);
-        if (id == Sounds.getSoundId(Sounds.swish)) id = 71;
+        int id = RandomUtil.getClientRand().random(0, ((IntMap)Reflect.get(Sounds.class, "idToSound")).size - 1);
+        if (id == Sounds.getSoundId(Sounds.swish)) id = Sounds.getSoundId(Sounds.shootAlt);
         return Sounds.getSound(id);
     }
 }
