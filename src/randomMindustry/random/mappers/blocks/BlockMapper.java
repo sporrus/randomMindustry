@@ -73,7 +73,8 @@ public class BlockMapper {
         if (block.buildVisibility != BuildVisibility.shown) return;
         block.destroyEffect = FxMapper.effects.random(RandomUtil.getRand());
         block.breakEffect = FxMapper.effects.random(RandomUtil.getRand());
-        if(RandomUtil.getRand().chance(0.5f)) block.destroyBullet = content.bullets().random(RandomUtil.getRand());
+        if(RandomUtil.getRand().chance(0.25f)) block.destroyBullet = content.bullets().random(RandomUtil.getRand());
+        else block.destroyBullet = null;
         Util.resetStats(block);
         if (block instanceof HeatProducer heatProducer) {
             modifyHeater(heatProducer);
