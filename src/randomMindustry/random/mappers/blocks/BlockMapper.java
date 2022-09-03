@@ -1,31 +1,30 @@
 package randomMindustry.random.mappers.blocks;
 
-import arc.Core;
-import arc.math.Mathf;
+import arc.*;
+import arc.math.*;
 import arc.struct.*;
 import arc.graphics.g2d.*;
-import arc.util.Log;
-import mindustry.Vars;
+import arc.util.*;
+import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.*;
-import mindustry.world.blocks.heat.HeatProducer;
+import mindustry.world.blocks.heat.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.storage.*;
 import mindustry.world.blocks.units.*;
+import mindustry.world.meta.*;
 
-import mindustry.world.meta.BuildVisibility;
 import randomMindustry.random.mappers.*;
 import randomMindustry.random.util.*;
 import randomMindustry.util.*;
 import randomMindustry.util.techTrees.*;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 import static mindustry.Vars.*;
 import static arc.Core.*;
@@ -72,6 +71,9 @@ public class BlockMapper {
         cats.addAll(Category.all);
         if (settings.getBool("rmchaos-category-rand", false)) block.category = cats.random(RandomUtil.getRand());
         if (block.buildVisibility != BuildVisibility.shown) return;
+        block.destroyEffect = FxMapper.effects.random(RandomUtil.getRand());
+        block.breakEffect = FxMapper.effects.random(RandomUtil.getRand());
+        if(RandomUtil.getRand().chance(0.5f)) block.destroyBullet = content.bullets().random(RandomUtil.getRand());
         Util.resetStats(block);
         if (block instanceof HeatProducer heatProducer) {
             modifyHeater(heatProducer);

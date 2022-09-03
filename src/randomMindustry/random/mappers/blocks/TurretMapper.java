@@ -1,7 +1,7 @@
 package randomMindustry.random.mappers.blocks;
 
-import arc.Core;
-import arc.graphics.Color;
+import arc.*;
+import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.struct.*;
 import mindustry.content.*;
@@ -30,7 +30,7 @@ public class TurretMapper {
         block.inaccuracy = RandomUtil.getRand().random(1f, 180f);
         block.rotateSpeed = RandomUtil.getRand().random(1f, 20f);
 
-        int pattern = RandomUtil.getRand().random(0, 5);
+        int pattern = RandomUtil.getRand().random(0, 6);
         switch (pattern) {
             case 0 -> block.shoot = new ShootPattern();
             case 1 -> block.shoot = new ShootAlternate(RandomUtil.getRand().random(1f, 15f)) {{
@@ -54,6 +54,7 @@ public class TurretMapper {
             case 5 -> block.shoot = new ShootSpread() {{
                 spread = RandomUtil.getRand().random(1f, 15f);
             }};
+            case 6 -> block.shoot = new ShootSummon(RandomUtil.getRand().random(-10f, 10f), RandomUtil.getRand().random(-10f, 10f), RandomUtil.getRand().random(8f, 24f), RandomUtil.getRand().random(360f));
         }
         block.shoot.shots = RandomUtil.getRand().random(1, 10);
         block.shoot.shotDelay = RandomUtil.getRand().random(1f, 60f);
@@ -78,7 +79,7 @@ public class TurretMapper {
         turret.targetGround = turret.shootType.collidesGround;
         turret.targetHealing = turret.shootType.healPercent > 0;
         turret.range = BulletMapper.getRange(turret.shootType);
-
+        if(RandomUtil.getRand().chance(0.5f) && turret.shootType.chargeEffect != Fx.none) turret.shoot.firstShotDelay = turret.shootType.chargeEffect.lifetime;
         modifyTurretSprite(turret);
     }
 
@@ -102,7 +103,13 @@ public class TurretMapper {
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
-
+        boolean canCharge;
+        float chargeSum = 0f;
+        turret.ammoTypes.each((k, v) -> {
+            canCharge = v.chargeEffect != Fx.none;
+            chargeSum += v.chargeEffect.lifetime;
+        });
+        if(RandomUtil.getRand().chance(0.5f) && canCharge) turret.shoot.firstShotDelay = chargeSum / turret.ammoTypes.size;
         modifyTurretSprite(turret);
     }
 
@@ -127,7 +134,13 @@ public class TurretMapper {
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
-
+        boolean canCharge;
+        float chargeSum = 0f;
+        turret.ammoTypes.each((k, v) -> {
+            canCharge = v.chargeEffect != Fx.none;
+            chargeSum += v.chargeEffect.lifetime;
+        });
+        if(RandomUtil.getRand().chance(0.5f) && canCharge) turret.shoot.firstShotDelay = chargeSum / turret.ammoTypes.size;
         modifyTurretSprite(turret);
     }
 
@@ -151,7 +164,13 @@ public class TurretMapper {
         Util.removeConsumers(turret, nonOptionalConsumers::contains);
         Util.removeBars(turret);
         turret.ammo(ammo.toArray());
-        
+        boolean canCharge;
+        float chargeSum = 0f;
+        turret.ammoTypes.each((k, v) -> {
+            canCharge = v.chargeEffect != Fx.none;
+            chargeSum += v.chargeEffect.lifetime;
+        });
+        if(RandomUtil.getRand().chance(0.5f) && canCharge) turret.shoot.firstShotDelay = chargeSum / turret.ammoTypes.size;
         if(!headless && Core.settings.getBool("rm-sprite-random")){
             if(!(turret.drawer instanceof DrawTurret drawer)) return;
             
