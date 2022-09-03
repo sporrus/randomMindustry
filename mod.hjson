@@ -5,6 +5,6 @@ main: randomMindustry.Main
 subtitle: v1.8.0
 description: "randomizes almost everything\njoin our discord! https://discord.gg/ztC6WJUxZK\n\nEPILEPSY WARNING"
 version: 1.8.0
-minGameVersion: 136
+minGameVersion: 138
 java: true
 repo: sporrus/randomMindustry
