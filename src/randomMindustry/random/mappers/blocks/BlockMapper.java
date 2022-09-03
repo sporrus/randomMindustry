@@ -6,6 +6,7 @@ import arc.struct.*;
 import arc.graphics.g2d.*;
 import arc.util.*;
 import mindustry.*;
+import mindustry.entities.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -71,10 +72,16 @@ public class BlockMapper {
         cats.addAll(Category.all);
         if (settings.getBool("rmchaos-category-rand", false)) block.category = cats.random(RandomUtil.getRand());
         if (block.buildVisibility != BuildVisibility.shown) return;
-        block.destroyEffect = FxMapper.effects.random(RandomUtil.getRand());
-        block.breakEffect = FxMapper.effects.random(RandomUtil.getRand());
+        
+        block.destroyEffect = Effect.all.random(RandomUtil.getRand());
+        block.breakEffect = Effect.all.random(RandomUtil.getRand());
         if(RandomUtil.getRand().chance(0.25f)) block.destroyBullet = content.bullets().random(RandomUtil.getRand());
         else block.destroyBullet = null;
+        
+        block.placeSound = Util.generateSound();
+        block.destroySound = Util.generateSound();
+        block.breakSound = Util.generateSound();
+        
         Util.resetStats(block);
         if (block instanceof HeatProducer heatProducer) {
             modifyHeater(heatProducer);
