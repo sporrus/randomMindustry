@@ -39,6 +39,7 @@ public class UnitMapper{
                 TextureGenerator.changeHue(unit.uiIcon, hue);
                 TextureGenerator.changeHue(unit.baseRegion, hue);
                 TextureGenerator.changeHue(unit.legRegion, hue);
+                TextureGenerator.changeHue(unit.legBaseRegion, hue);
                 TextureGenerator.changeHue(unit.region, hue);
                 TextureGenerator.changeHue(unit.previewRegion, hue);
                 TextureGenerator.changeHue(unit.itemCircleRegion, hue);
@@ -71,7 +72,7 @@ public class UnitMapper{
         
         unit.legCount = RandomUtil.getRandomIntMult(2, 20, 2);
         unit.legGroupSize = RandomUtil.getRandomIntMult(2, 10, 2);
-        unit.legLength = RandomUtil.getRand().random(-unit.hitSize*2f, unit.hitSize*2f);
+        unit.legLength = RandomUtil.getRand().random(1f, unit.hitSize*2f);
         unit.legSpeed = RandomUtil.getRand().random(0.1f, 3f);
         unit.legStraightness = RandomUtil.getRand().random(1f);
         unit.lockLegBase = RandomUtil.getRand().chance(0.5f);
