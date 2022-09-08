@@ -1,4 +1,4 @@
-package randomMindustry.block.creators;
+package randomMindustry.mappers.block.creators;
 
 import mindustry.world.*;
 

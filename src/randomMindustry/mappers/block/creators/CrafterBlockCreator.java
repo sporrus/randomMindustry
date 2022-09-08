@@ -1,4 +1,4 @@
-package randomMindustry.block.creators;
+package randomMindustry.mappers.block.creators;
 
 import arc.math.*;
 import mindustry.*;
@@ -7,8 +7,8 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.production.*;
 import randomMindustry.*;
-import randomMindustry.block.*;
-import randomMindustry.item.*;
+import randomMindustry.mappers.block.*;
+import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
 public class CrafterBlockCreator extends DefaultBlockCreator {
@@ -33,7 +33,7 @@ public class CrafterBlockCreator extends DefaultBlockCreator {
 
     @Override
     public void edit(Block block) {
-        Item item;
+        CustomItem item;
         ItemPack pack = ItemMapper.getLockedPacksByTier("craft").random(r);
         if (pack == null) item = ItemMapper.getPacksByTier("craft").random(r).random(false);
         else item = pack.random(true);

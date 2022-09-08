@@ -1,7 +1,6 @@
 package randomMindustry;
 
 import arc.*;
-import arc.files.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.struct.*;
@@ -15,9 +14,10 @@ import mindustry.graphics.g3d.*;
 import mindustry.maps.planet.*;
 import mindustry.mod.*;
 import mindustry.type.*;
-import mindustry.world.meta.*;
-import randomMindustry.block.*;
-import randomMindustry.item.*;
+import randomMindustry.mappers.Mapper;
+import randomMindustry.mappers.Mappers;
+import randomMindustry.mappers.block.*;
+import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
 public class Main extends Mod {
@@ -50,8 +50,8 @@ public class Main extends Mod {
     public void init() {
         SeedManager.generateSeed();
         TextureManager.init();
-        ItemMapper.editContent();
-        BlockMapper.editContent();
+        Mappers.item.editContent();
+        Mappers.block.editContent();
         Vars.content.planets().select(p -> p != random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
 
 // debug atlas:
@@ -64,7 +64,7 @@ public class Main extends Mod {
         Log.info("DEBUG PACKS:");
         for (ItemPack pack : ItemMapper.packs) {
             Log.info(pack.tier + ":" + pack.localTier + " (" + pack.globalTier + ")");
-            for (Item item : pack.all) {
+            for (CustomItem item : pack.all) {
                 Log.info("      " + item.name + (pack.locked(item) ? " [red]LOCKED[]" : ""));
             }
         }
@@ -72,11 +72,11 @@ public class Main extends Mod {
 
     @Override
     public void loadContent() {
-        ItemMapper.generateContent();
-        BlockMapper.generateContent();
+        Mappers.item.generateContent();
+        Mappers.block.generateContent();
         random = new Planet("random", Planets.sun, 1f, 3){{
-            localizedName = "Randros";
-            generator = new SerpuloPlanetGenerator();
+            localizedName = "mega gorodmi super carbide planet that you need uhh uhh sussy vent amogus random";
+            generator = new RandomPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 6);
             cloudMeshLoader = () -> new MultiMesh(
                     new HexSkyMesh(this, 11, 0.15f, 0.13f, 5, new Color().set(Pal.spore).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),

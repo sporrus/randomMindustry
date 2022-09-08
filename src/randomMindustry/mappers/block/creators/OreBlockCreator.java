@@ -1,16 +1,13 @@
-package randomMindustry.block.creators;
+package randomMindustry.mappers.block.creators;
 
-import arc.graphics.g2d.*;
-import arc.math.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
-import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.environment.*;
 import randomMindustry.*;
-import randomMindustry.block.*;
-import randomMindustry.item.*;
+import randomMindustry.mappers.block.*;
+import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
 public class OreBlockCreator extends DefaultBlockCreator {
@@ -41,17 +38,17 @@ public class OreBlockCreator extends DefaultBlockCreator {
         block.fullIcon = TextureManager.alloc(copyBlock.fullIcon);
         block.uiIcon = TextureManager.alloc(copyBlock.uiIcon);
         block.variantRegions = copyBlock.variantRegions;
-        for (int i = 0; i < block.variantRegions.length; i++)
-            block.variantRegions[i] = TextureManager.alloc(block.variantRegions[i]);
+//        for (int i = 0; i < block.variantRegions.length; i++)
+//            block.variantRegions[i] = TextureManager.alloc(block.variantRegions[i]);
         block.size = block.region.width / 32;
         super.edit(block);
-        Item item = ItemMapper.getLockedPacksByTier("drill").random(r).random(true);
+        CustomItem item = ItemMapper.getLockedPacksByTier("drill").random(r).random(true);
         ((OreBlock) block).setup(item);
-        float hue = ItemData.get(item).hue;
+        float hue = item.hue;
         TextureManager.hueRegion(block.region, hue);
         TextureManager.hueRegion(block.fullIcon, hue);
         TextureManager.hueRegion(block.uiIcon, hue);
-        for (TextureRegion region : block.variantRegions)
-            TextureManager.hueRegion(region, hue);
+//        for (TextureRegion region : block.variantRegions)
+//            TextureManager.hueRegion(region, hue);
     }
 }

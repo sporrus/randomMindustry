@@ -1,11 +1,8 @@
-package randomMindustry.block.creators;
+package randomMindustry.mappers.block.creators;
 
-import arc.math.*;
 import mindustry.type.*;
 import mindustry.world.*;
-import mindustry.world.meta.*;
-import randomMindustry.item.*;
-import randomMindustry.texture.*;
+import randomMindustry.mappers.item.*;
 
 public class DefaultBlockCreator implements BlockCreator {
     @Override

@@ -1,16 +1,14 @@
-package randomMindustry.block.creators;
+package randomMindustry.mappers.block.creators;
 
 import arc.math.*;
-import arc.scene.ui.layout.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
-import mindustry.world.meta.*;
 import randomMindustry.*;
-import randomMindustry.block.*;
-import randomMindustry.item.*;
+import randomMindustry.mappers.block.*;
+import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
 public class WallBlockCreator extends DefaultBlockCreator {

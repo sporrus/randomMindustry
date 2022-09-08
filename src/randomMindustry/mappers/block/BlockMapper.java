@@ -1,18 +1,13 @@
-package randomMindustry.block;
+package randomMindustry.mappers.block;
 
-import arc.math.*;
 import arc.struct.*;
-import mindustry.*;
-import mindustry.content.*;
-import mindustry.type.*;
 import mindustry.world.*;
-import mindustry.world.meta.*;
 import randomMindustry.*;
-import randomMindustry.block.creators.*;
-import randomMindustry.item.*;
-import randomMindustry.texture.*;
+import randomMindustry.mappers.Mapper;
+import randomMindustry.mappers.block.creators.*;
+import randomMindustry.mappers.item.*;
 
-public class BlockMapper {
+public class BlockMapper implements Mapper {
     public static final Seq<Block> generatedBlocks = new Seq<>();
     public static final SyncedRand r = new SyncedRand();
     public static final BlockCreator
@@ -23,7 +18,8 @@ public class BlockMapper {
             wallBlockCreator, crafterBlockCreator, oreBlockCreator
     });
 
-    public static void editContent() {
+    @Override
+    public void editContent() {
         generatedBlocks.each((b) -> {
             for (BlockCreator creator : creators) {
                 if (!creator.has(b)) continue;
@@ -34,7 +30,8 @@ public class BlockMapper {
         });
     }
 
-    public static void generateContent() {
+    @Override
+    public void generateContent() {
         for (int i = 0; i < ItemMapper.getCraftItems(); i++)
             generatedBlocks.add(crafterBlockCreator.create("random-crafter-" + i));
         for (int i = 0; i < ItemMapper.getDrillItems(); i++)
