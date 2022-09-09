@@ -39,9 +39,9 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                     {Blocks.deepwater, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.bluemat, Blocks.basalt, Blocks.hotrock, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
                     {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.bluemat, Blocks.redmat, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
                     {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.redmat, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice},
-                    {Blocks.deepWater, Blocks.darksandWater, Blocks.darksand, Blocks.redmat, Blocks.redmat, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
+                    {Blocks.deepwater, Blocks.darksandWater, Blocks.darksand, Blocks.redmat, Blocks.redmat, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
                     {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.redmat, Blocks.bluemat, Blocks.redmat, Blocks.iceSnow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
-                    {Blocks.darkwater, Blocks.darksand, Blocks.snow, Blocks.ice, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice}
+                    {Blocks.darksandWater, Blocks.darksand, Blocks.snow, Blocks.ice, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice}
             };
 
     ObjectMap<Block, Block> dec = ObjectMap.of(
