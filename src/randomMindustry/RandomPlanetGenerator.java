@@ -65,13 +65,6 @@ public class RandomPlanetGenerator extends PlanetGenerator{
 
     @Override
     public void generateSector(Sector sector){
-
-        //these always have bases
-        if(sector.id == 154 || sector.id == 0){
-            sector.generateEnemyBase = true;
-            return;
-        }
-
         Ptile tile = sector.tile;
 
         boolean any = false;
