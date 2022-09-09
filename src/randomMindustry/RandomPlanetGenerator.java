@@ -29,31 +29,31 @@ public class RandomPlanetGenerator extends PlanetGenerator{
 
     Block[][] arr =
             {
-                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.darksandTaintedWater, Blocks.stone, Blocks.stone},
-                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.darksandTaintedWater, Blocks.stone, Blocks.stone, Blocks.stone},
-                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.sand, Blocks.salt, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.darksandTaintedWater, Blocks.stone, Blocks.stone, Blocks.stone},
+                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.darksandWater, Blocks.stone, Blocks.stone},
+                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.darksandWater, Blocks.stone, Blocks.stone, Blocks.stone},
+                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.sand, Blocks.salt, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.darksandWater, Blocks.stone, Blocks.stone, Blocks.stone},
                     {Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.salt, Blocks.salt, Blocks.salt, Blocks.sand, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.snow, Blocks.iceSnow, Blocks.ice},
                     {Blocks.deepwater, Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.salt, Blocks.sand, Blocks.sand, Blocks.basalt, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice},
-                    {Blocks.deepwater, Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.moss, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.snow, Blocks.ice},
-                    {Blocks.deepwater, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.moss, Blocks.moss, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice},
-                    {Blocks.deepTaintedWater, Blocks.darksandTaintedWater, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.moss, Blocks.basalt, Blocks.hotrock, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
-                    {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.moss, Blocks.sporeMoss, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
-                    {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.sporeMoss, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice},
-                    {Blocks.deepTaintedWater, Blocks.darksandTaintedWater, Blocks.darksand, Blocks.sporeMoss, Blocks.sporeMoss, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
-                    {Blocks.taintedWater, Blocks.darksandTaintedWater, Blocks.darksand, Blocks.sporeMoss, Blocks.moss, Blocks.sporeMoss, Blocks.iceSnow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
-                    {Blocks.darksandWater, Blocks.darksand, Blocks.snow, Blocks.ice, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice}
+                    {Blocks.deepwater, Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.bluemat, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.snow, Blocks.ice},
+                    {Blocks.deepwater, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.bluemat, Blocks.bluemat, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice},
+                    {Blocks.deepwater, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.bluemat, Blocks.basalt, Blocks.hotrock, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
+                    {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.bluemat, Blocks.redmat, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
+                    {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.redmat, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice},
+                    {Blocks.deepWater, Blocks.darksandWater, Blocks.darksand, Blocks.redmat, Blocks.redmat, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
+                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.redmat, Blocks.bluemat, Blocks.redmat, Blocks.iceSnow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
+                    {Blocks.darkwater, Blocks.darksand, Blocks.snow, Blocks.ice, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice}
             };
 
     ObjectMap<Block, Block> dec = ObjectMap.of(
-            Blocks.sporeMoss, Blocks.sporeCluster,
-            Blocks.moss, Blocks.sporeCluster,
-            Blocks.taintedWater, Blocks.water,
-            Blocks.darksandTaintedWater, Blocks.darksandWater
+            Blocks.carbonStone, Blocks.carbonBoulder,
+            Blocks.yellowCoral, Blocks.purbush,
+            Blocks.redmat, Blocks.water,
+            Blocks.darksandWater, Blocks.darksandWater
     );
 
     ObjectMap<Block, Block> tars = ObjectMap.of(
-            Blocks.sporeMoss, Blocks.shale,
-            Blocks.moss, Blocks.shale
+            Blocks.redmat, Blocks.shale,
+            Blocks.bluemat, Blocks.shale
     );
 
     float water = 2f / arr[0].length;
@@ -205,7 +205,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                                 if(Mathf.within(x, y, rad - 1) && !other.floor().isLiquid){
                                     Floor floor = other.floor();
                                     //TODO does not respect tainted floors
-                                    other.setFloor((Floor)(floor == Blocks.sand || floor == Blocks.salt ? Blocks.sandWater : Blocks.darksandTaintedWater));
+                                    other.setFloor((Floor)(floor == Blocks.sand || floor == Blocks.salt ? Blocks.sandWater : Blocks.darksandWater));
                                 }
                             }
                         }
@@ -347,7 +347,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                 //ignore pre-existing liquids
                 if(!(floor == Blocks.ice || floor == Blocks.iceSnow || floor == Blocks.snow || floor.asFloor().isLiquid)){
                     floor = spore ?
-                            (deep ? Blocks.taintedWater : Blocks.darksandTaintedWater) :
+                            (deep ? Blocks.water : Blocks.darksandWater) :
                             (deep ? Blocks.water :
                                     (floor == Blocks.sand || floor == Blocks.salt ? Blocks.sandWater : Blocks.darksandWater));
                 }
@@ -374,7 +374,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                     }
                 }
 
-                floor = floor == Blocks.darksandTaintedWater ? Blocks.taintedWater : Blocks.water;
+                floor = floor == Blocks.darksandWater ? Blocks.water : Blocks.water;
             }
         });
 
@@ -399,7 +399,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                         }
                     }
 
-                    floor = floor == Blocks.water ? Blocks.deepwater : Blocks.taintedWater;
+                    floor = floor == Blocks.water ? Blocks.deepwater : Blocks.water;
                 }
             });
         }
@@ -460,9 +460,9 @@ public class RandomPlanetGenerator extends PlanetGenerator{
 
         pass((x, y) -> {
             //random moss
-            if(floor == Blocks.sporeMoss){
+            if(floor == Blocks.redmat){
                 if(Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.02){
-                    floor = Blocks.moss;
+                    floor = Blocks.bluemat;
                 }
             }
 
@@ -495,7 +495,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                 float noise = noise(x + 782, y, 5, 0.75f, 260f, 1f);
                 if(noise > 0.67f && !roomseq.contains(e -> Mathf.within(x, y, e.x, e.y, 14))){
                     if(noise > 0.72f){
-                        floor = noise > 0.78f ? Blocks.taintedWater : (floor == Blocks.sand ? Blocks.sandWater : Blocks.darksandTaintedWater);
+                        floor = noise > 0.78f ? Blocks.water : (floor == Blocks.sand ? Blocks.sandWater : Blocks.darksandWater);
                     }else{
                         floor = (floor == Blocks.sand ? floor : Blocks.darksand);
                     }
@@ -515,7 +515,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                     }
                 }
                 if(any && ((block == Blocks.snowWall || block == Blocks.iceWall) || (all && block == Blocks.air && floor == Blocks.snow && rand.chance(0.03)))){
-                    block = rand.chance(0.5) ? Blocks.whiteTree : Blocks.whiteTreeDead;
+                    block = rand.chance(0.5) ? Blocks.vibrantCrystalCluster : Blocks.crystalCluster;
                 }
             }
 
