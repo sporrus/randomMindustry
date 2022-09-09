@@ -10,7 +10,7 @@ import randomMindustry.mappers.Mapper;
 public class ItemMapper implements Mapper {
     public static final Seq<CustomItem> generatedItems = new Seq<>();
     public static final Seq<ItemPack> packs = new Seq<>();
-    public static final int itemCount = 36;
+    public static final int itemCount = 1000;
     public static final SyncedRand r = new SyncedRand();
     public static final int maxTier = itemCount / 3;
 
