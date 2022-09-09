@@ -102,7 +102,7 @@ public class Main extends Mod {
             startSector = 1;
             alwaysUnlocked = true;
             landCloudColor = Team.crux.color.cpy().a(0.5f);
-            hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
+            hiddenItems.addAll(Vars.content.items().select(i -> i != Items.copper && i != Items.lead)).removeAll(ItemMapper.generatedItems);
         }};
     }
 }
