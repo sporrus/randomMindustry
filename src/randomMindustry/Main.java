@@ -74,8 +74,8 @@ public class Main extends Mod {
     public void loadContent() {
         Mappers.item.generateContent();
         Mappers.block.generateContent();
-        random = new Planet("random", Planets.sun, 1f, 3){{
-            localizedName = "mega gorodmi super carbide planet that you need uhh uhh sussy vent amogus random";
+        random = new Planet("rm-random", Planets.sun, 1f, 3){{
+            localizedName = "Random";
             generator = new RandomPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 6);
             cloudMeshLoader = () -> new MultiMesh(
@@ -102,7 +102,8 @@ public class Main extends Mod {
             startSector = 1;
             alwaysUnlocked = true;
             landCloudColor = Team.crux.color.cpy().a(0.5f);
-            hiddenItems.addAll(Vars.content.items().select(i -> i != Items.copper && i != Items.lead)).removeAll(ItemMapper.generatedItems);
+            hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
         }};
+        RandomTechTree.load();
     }
 }

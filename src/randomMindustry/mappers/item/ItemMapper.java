@@ -15,6 +15,14 @@ public class ItemMapper implements Mapper {
     public static final int maxTier = itemCount / 3;
 
     public void editContent() {
+        generatedItems.each(CustomItem::edit);
+    }
+
+    public void generateContent() {
+        for (int i = 0; i < itemCount; i++) {
+            CustomItem item = new CustomItem("random-item-" + i);
+            generatedItems.add(item);
+        }
         ItemPack all = new ItemPack(0, 0, "all", generatedItems.toArray(CustomItem.class));
         for (int i = 0; i < itemCount / 3; i++) {
             packs.add(new ItemPack(i / 2, i, i % 2 == 0 ? "drill" : "craft",
@@ -22,15 +30,6 @@ public class ItemMapper implements Mapper {
             ));
         }
         getPacksByTier("drill").each(pack -> pack.all.each(i -> i.hardness = pack.localTier));
-        generatedItems.each(CustomItem::edit);
-
-    }
-
-    public void generateContent() {
-        for (int i = 0; i < itemCount; i++) {
-            CustomItem item = new CustomItem("random-item-" + i, Color.red);
-            generatedItems.add(item);
-        }
     }
 
     public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount) {

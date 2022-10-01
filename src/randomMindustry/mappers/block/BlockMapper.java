@@ -21,10 +21,10 @@ public class BlockMapper implements Mapper {
 
     @Override
     public void generateContent() {
-        for (int i = 0; i < ItemMapper.getCraftItems(); i++)
-            generatedBlocks.add(new RandomCrafter("random-crafter-" + i));
         for (int i = 0; i < ItemMapper.getDrillItems(); i++)
             generatedBlocks.add(new RandomOre("random-ore-" + i));
+        for (int i = 0; i < ItemMapper.getCraftItems(); i++)
+            generatedBlocks.add(new RandomCrafter("random-crafter-" + i));
         for (int i = 0; i < 12; i++)
             generatedBlocks.add(new RandomWall("random-wall-" + i));
     }
