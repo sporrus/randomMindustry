@@ -22,7 +22,7 @@ public class StringGenerator{
         r = new SyncedRand();
     }
     
-    public final Seq<String> template = Seq.with("cv", "vc", "cvc", "vcv");
+    public final Seq<String> template = Seq.with("cv", "vc", "cvc", "vcv", "cvv", "vvc");
     
     public String generateSyllable(){
         String tmp = template.random(r);
