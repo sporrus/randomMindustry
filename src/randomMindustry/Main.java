@@ -22,36 +22,17 @@ import randomMindustry.texture.*;
 
 public class Main extends Mod {
     public static Planet random;
-    public static TextureRegion arrival;
-    public static TextureRegion rickroll;
     
     public Main() {
-        Events.on(ClientLoadEvent.class, e -> {
-            Seq<TextureRegion> arrivals = new Seq<>();
-            Seq<TextureRegion> rickrolls = new Seq<>();
-            for(int i = 0; i <= 7; i++) {
-                arrivals.add(Core.atlas.find("random-mindustry-arrival" + i));
-            }
-            for(int i = 0; i <= 6; i++) {
-                rickrolls.add(Core.atlas.find("random-mindustry-rickroll" + i));
-            }
-            arrival = arrivals.get(0);
-            rickroll = rickrolls.get(0);
-            Events.run(Trigger.update, () -> {
-                int arrivalFrame = (int)((Time.globalTime / 5f) % arrivals.size);
-                arrival.set(arrivals.get(arrivalFrame));
-                int rickrollFrame = (int)((Time.globalTime / 5f) % rickrolls.size);
-                rickroll.set(rickrolls.get(rickrollFrame));
-            });
-        });
+
     }
 
     @Override
     public void init() {
         SeedManager.generateSeed();
         TextureManager.init();
-        Mappers.item.editContent();
-        Mappers.block.editContent();
+//        Mappers.item.editContent();
+//        Mappers.block.editContent();
         Vars.content.planets().select(p -> p != random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
 
 // debug atlas:

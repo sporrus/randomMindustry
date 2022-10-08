@@ -14,7 +14,6 @@ public class BlockMapper implements Mapper {
     public static final Seq<RandomBlock> generatedBlocks = new Seq<>();
     public static final SyncedRand r = new SyncedRand();
 
-    @Override
     public void editContent() {
         generatedBlocks.each(RandomBlock::edit);
     }

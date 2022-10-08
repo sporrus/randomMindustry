@@ -14,10 +14,6 @@ public class ItemMapper implements Mapper {
     public static final SyncedRand r = new SyncedRand();
     public static final int maxTier = itemCount / 3;
 
-    public void editContent() {
-        generatedItems.each(CustomItem::edit);
-    }
-
     public void generateContent() {
         for (int i = 0; i < itemCount; i++) {
             CustomItem item = new CustomItem("random-item-" + i);

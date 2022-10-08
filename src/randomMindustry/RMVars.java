@@ -10,4 +10,5 @@ public class RMVars{
             seedStat = new Stat("rm-seed", rmStats),
             tierStat = new Stat("rm-tier", rmStats);
     public static StatValue seedStatValue = t -> t.add(Long.toString(SeedManager.getSeed()));
+    public static int itemSprites = 20;
 }

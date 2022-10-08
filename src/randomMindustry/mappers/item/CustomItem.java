@@ -1,9 +1,13 @@
 package randomMindustry.mappers.item;
 
+import arc.Core;
 import arc.graphics.Color;
+import arc.graphics.g2d.TextureRegion;
 import arc.scene.ui.layout.Table;
+import arc.util.Log;
 import mindustry.Vars;
 import mindustry.gen.Tex;
+import mindustry.graphics.MultiPacker;
 import mindustry.type.Item;
 import randomMindustry.RMVars;
 import randomMindustry.texture.TextureManager;
@@ -12,8 +16,7 @@ import static randomMindustry.RMVars.itemStringGen;
 import static randomMindustry.mappers.item.ItemMapper.r;
 
 public class CustomItem extends Item {
-    public float hue = 0;
-    public ItemPack tier;
+    public float hue;
 
     public CustomItem(String name) {
         super(name, Color.red.cpy().saturation(0.75f));
@@ -29,16 +32,18 @@ public class CustomItem extends Item {
         color = color.cpy().hue(hue);
 
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
-        stats.add(RMVars.tierStat, t -> t.add(tier.tier + " " + tier.globalTier + " (" + tier.localTier + ")"));
+        stats.add(RMVars.tierStat, t -> {
+            ItemPack tier = ItemMapper.getPack(this);
+            t.add(tier.tier + " " + tier.globalTier + " (" + tier.localTier + ")");
+        });
     }
 
-    public void edit() {
-        Item item = Vars.content.items().select(it -> !(it instanceof CustomItem)).random(r);
-        fullIcon = TextureManager.alloc(item.fullIcon);
-        uiIcon = TextureManager.alloc(item.uiIcon);
+    @Override
+    public void loadIcon() {
+        int sprite = r.random(0, RMVars.itemSprites);
+        TextureRegion region = Core.atlas.find("random-mindustry-item" + sprite);
+        Log.info(Core.atlas.find("random-mindustry-item0"));
+        fullIcon = uiIcon = TextureManager.alloc(region);
         TextureManager.hueRegion(fullIcon, hue);
-        TextureManager.hueRegion(uiIcon, hue);
-
-        tier = ItemMapper.getPack(this);
     }
 }
