@@ -32,8 +32,14 @@ public class TexturePage {
     }
 
     public TextureRegion alloc(TextureRegion oldRegion) {
+        return alloc(oldRegion, oldRegion.width, oldRegion.height);
+    }
+
+    public TextureRegion alloc(TextureRegion oldRegion, int newWidth, int newHeight) {
         TextureRegion newRegion = alloc();
         Pixmap newPixmap = oldRegion.texture.getTextureData().getPixmap().crop(oldRegion.getX(), oldRegion.getY(), oldRegion.width, oldRegion.height);
+        if (oldRegion.width != newWidth || oldRegion.height != newHeight)
+            newPixmap.draw(newPixmap, 0, 0, newWidth, newHeight);
         newRegion.texture.draw(newPixmap, newRegion.getX(), newRegion.getY());
         newRegion.texture.getTextureData().getPixmap().draw(newPixmap, newRegion.getX(), newRegion.getY());
         newRegion.setWidth(oldRegion.width);

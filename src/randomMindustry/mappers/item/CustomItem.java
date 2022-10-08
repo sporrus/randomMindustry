@@ -42,7 +42,6 @@ public class CustomItem extends Item {
     public void loadIcon() {
         int sprite = r.random(0, RMVars.itemSprites);
         TextureRegion region = Core.atlas.find("random-mindustry-item" + sprite);
-        Log.info(Core.atlas.find("random-mindustry-item0"));
         fullIcon = uiIcon = TextureManager.alloc(region);
         TextureManager.hueRegion(fullIcon, hue);
     }

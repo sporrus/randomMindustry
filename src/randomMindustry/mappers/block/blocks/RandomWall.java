@@ -21,7 +21,6 @@ public class RandomWall extends Wall implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
-    @Override
     public void edit() {
         Block copyBlock = Vars.content.blocks().select((b) -> b instanceof Wall && !BlockMapper.generated(b)).random(r);
         this.region = TextureManager.alloc(copyBlock.region);

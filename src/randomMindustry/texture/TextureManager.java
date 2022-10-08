@@ -20,8 +20,12 @@ public class TextureManager {
         return pages.get(size);
     }
 
+    public static TextureRegion alloc(TextureRegion oldRegion, int newWidth, int newHeight) {
+        return getOrCreatePage((int) Math.ceil(newWidth / 32f) * 32).alloc(oldRegion, newWidth, newHeight);
+    }
+
     public static TextureRegion alloc(TextureRegion oldRegion) {
-        return getOrCreatePage((int) Math.ceil(oldRegion.width / 32f) * 32).alloc(oldRegion);
+        return alloc(oldRegion, oldRegion.width, oldRegion.height);
     }
 
     public static Seq<Texture> getAllTextures() {

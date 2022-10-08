@@ -14,10 +14,6 @@ public class BlockMapper implements Mapper {
     public static final Seq<RandomBlock> generatedBlocks = new Seq<>();
     public static final SyncedRand r = new SyncedRand();
 
-    public void editContent() {
-        generatedBlocks.each(RandomBlock::edit);
-    }
-
     @Override
     public void generateContent() {
         for (int i = 0; i < ItemMapper.getDrillItems(); i++)

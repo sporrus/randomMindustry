@@ -21,7 +21,6 @@ public class RandomOre extends OreBlock implements RandomBlock {
         all.add(this);
     }
 
-    @Override
     public void edit() {
         Block copyBlock = Vars.content.blocks().select((b) -> b instanceof OreBlock && !BlockMapper.generated(b)).random(r);
         float hue = ((CustomItem) itemDrop).hue;
