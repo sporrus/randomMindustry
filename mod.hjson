@@ -2,7 +2,7 @@ displayName: Random Mindustry
 name: random-mindustry
 author: gorodmi & Mythril
 main: randomMindustry.Main
-subtitle: v1.8.0
+subtitle: v1.8.1
 description: "Randomizes almost everything!\nJoin our discord! https://discord.gg/ztC6WJUxZK\n\nEPILEPSY WARNING"
 version: 1.8.0
 minGameVersion: 139
