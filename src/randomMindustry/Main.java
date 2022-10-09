@@ -30,8 +30,6 @@ public class Main extends Mod {
     @Override
     public void init() {
         TextureManager.init();
-//        Mappers.item.editContent();
-//        Mappers.block.editContent();
         Vars.content.planets().select(p -> p != random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
 
 // debug atlas:

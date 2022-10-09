@@ -16,6 +16,8 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
 
     public RandomCrafter(String name) {
         super(name);
+        size = r.random(1, 4);
+        health = Mathf.round(r.random(50, 100) * size, 50);
 
         ItemPack pack = ItemMapper.getLockedPacksByTier("craft").random(r);
         if (pack == null) item = ItemMapper.getPacksByTier("craft").random(r).random(false);
@@ -26,8 +28,6 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         requirements(Category.crafting, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(25, 1000), 5)));
         consumeItems(ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> r.random(1, 10)));
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
-
-        size = r.random(1, 4);
 
         localizedName = "unreal crafter name";
         description = "unreal crafter description";

@@ -20,21 +20,4 @@ public class RandomOre extends OreBlock implements RandomBlock {
         super(name, ItemMapper.getLockedPacksByTier("drill").random(r).random(true));
         all.add(this);
     }
-
-    public void edit() {
-        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof OreBlock && !BlockMapper.generated(b)).random(r);
-        float hue = ((CustomItem) itemDrop).hue;
-        this.region = TextureManager.alloc(copyBlock.region);
-        this.fullIcon = TextureManager.alloc(copyBlock.fullIcon);
-        this.uiIcon = TextureManager.alloc(copyBlock.uiIcon);
-        this.variantRegions = copyBlock.variantRegions;
-        this.size = this.region.width / 32;
-//        for (int i = 0; i < this.variantRegions.length; i++)
-//            this.variantRegions[i] = TextureManager.alloc(this.variantRegions[i]);
-//        for (TextureRegion region : this.variantRegions)
-//            TextureManager.hueRegion(region, hue);
-        TextureManager.hueRegion(this.region, hue);
-        TextureManager.hueRegion(this.fullIcon, hue);
-        TextureManager.hueRegion(this.uiIcon, hue);
-    }
 }

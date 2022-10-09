@@ -16,18 +16,13 @@ import static randomMindustry.mappers.block.BlockMapper.r;
 public class RandomWall extends Wall implements RandomBlock {
     public RandomWall(String name) {
         super(name);
-        health = Mathf.round(r.random(100, 2000), 50);
-        requirements(Category.crafting, ItemMapper.getItemStacks(r.random(0, ItemMapper.maxTier), r.random(1, 5), () -> Mathf.round(r.random(25, 1000), 5)));
-        stats.add(RMVars.seedStat, RMVars.seedStatValue);
-    }
+        size = r.random(1, 4);
+        health = Mathf.round(r.random(500, 1000) * size, 50);
 
-    public void edit() {
-        Block copyBlock = Vars.content.blocks().select((b) -> b instanceof Wall && !BlockMapper.generated(b)).random(r);
-        this.region = TextureManager.alloc(copyBlock.region);
-        this.fullIcon = TextureManager.alloc(copyBlock.fullIcon);
-        this.uiIcon = TextureManager.alloc(copyBlock.uiIcon);
-        this.size = this.region.width / 32;
-        this.localizedName = "unreal wall name";
-        this.description = "unreal wall description";
+        requirements(Category.defense, ItemMapper.getItemStacks(r.random(0, ItemMapper.maxTier), r.random(1, 5), () -> Mathf.round(r.random(25, 1000), 5)));
+        stats.add(RMVars.seedStat, RMVars.seedStatValue);
+
+        localizedName = "unreal wall name";
+        description = "unreal wall description";
     }
 }

@@ -23,8 +23,4 @@ public class BlockMapper implements Mapper {
         for (int i = 0; i < 12; i++)
             generatedBlocks.add(new RandomWall("random-wall-" + i));
     }
-
-    public static boolean generated(Block block) {
-        return block instanceof RandomBlock;
-    }
 }
