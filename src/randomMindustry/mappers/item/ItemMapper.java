@@ -30,9 +30,9 @@ public class ItemMapper implements Mapper {
 
     public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount) {
         tier = Math.max(tier, 1);
-        itemCount = Math.max(itemCount, 1);
         Seq<ItemStack> stacks = new Seq<>();
         ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier - 1));
+        itemCount = Math.min(Math.max(itemCount, 1), packs.all.size);
         packs.unlock();
         for (int i = 0; i < itemCount; i++) {
             if (i == 0) {
