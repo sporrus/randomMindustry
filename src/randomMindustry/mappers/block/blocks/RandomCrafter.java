@@ -1,21 +1,13 @@
 package randomMindustry.mappers.block.blocks;
 
-import arc.Core;
 import arc.math.Mathf;
-import mindustry.Vars;
-import mindustry.gen.Tex;
-import mindustry.graphics.MultiPacker;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
-import mindustry.world.Block;
-import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.production.GenericCrafter;
 import randomMindustry.RMVars;
-import randomMindustry.mappers.block.BlockMapper;
 import randomMindustry.mappers.item.CustomItem;
 import randomMindustry.mappers.item.ItemMapper;
 import randomMindustry.mappers.item.ItemPack;
-import randomMindustry.texture.TextureManager;
 
 import static randomMindustry.mappers.block.BlockMapper.r;
 

@@ -1,7 +1,6 @@
 package randomMindustry.mappers.item;
 
 import arc.struct.*;
-import mindustry.type.*;
 import randomMindustry.*;
 
 public class ItemPack {
@@ -31,11 +30,11 @@ public class ItemPack {
         return locked.size;
     }
 
-    public void lock(CustomItem item) {
+    public void unlock(CustomItem item) {
         locked.remove(item);
     }
 
-    public void lock() {
+    public void unlock() {
         locked.clear();
         locked.addAll(all);
     }

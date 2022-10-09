@@ -29,7 +29,6 @@ public class Main extends Mod {
 
     @Override
     public void init() {
-        SeedManager.generateSeed();
         TextureManager.init();
 //        Mappers.item.editContent();
 //        Mappers.block.editContent();
@@ -42,17 +41,18 @@ public class Main extends Mod {
 //        });
 
 // debug packs:
-        Log.info("DEBUG PACKS:");
-        for (ItemPack pack : ItemMapper.packs) {
-            Log.info(pack.tier + ":" + pack.localTier + " (" + pack.globalTier + ")");
-            for (CustomItem item : pack.all) {
-                Log.info("      " + item.name + (pack.locked(item) ? " [red]LOCKED[]" : ""));
-            }
-        }
+//        Log.info("DEBUG PACKS:");
+//        for (ItemPack pack : ItemMapper.packs) {
+//            Log.info(pack.tier + ":" + pack.localTier + " (" + pack.globalTier + ")");
+//            for (CustomItem item : pack.all) {
+//                Log.info("      " + item.name + (pack.locked(item) ? " [red]LOCKED[]" : ""));
+//            }
+//        }
     }
 
     @Override
     public void loadContent() {
+        SeedManager.generateSeed();
         Mappers.item.generateContent();
         Mappers.block.generateContent();
         random = new Planet("rm-random", Planets.sun, 1f, 3){{

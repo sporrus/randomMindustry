@@ -1,8 +1,8 @@
 package randomMindustry.mappers.item;
 
 import arc.func.*;
-import arc.graphics.*;
 import arc.struct.*;
+import arc.util.Log;
 import mindustry.type.*;
 import randomMindustry.*;
 import randomMindustry.mappers.Mapper;
@@ -19,7 +19,7 @@ public class ItemMapper implements Mapper {
             CustomItem item = new CustomItem("random-item-" + i);
             generatedItems.add(item);
         }
-        ItemPack all = new ItemPack(0, 0, "all", generatedItems.toArray(CustomItem.class));
+        ItemPack all = new ItemPack(0, -1, "all", generatedItems.toArray(CustomItem.class));
         for (int i = 0; i < itemCount / 3; i++) {
             packs.add(new ItemPack(i / 2, i, i % 2 == 0 ? "drill" : "craft",
                     all.random(true), all.random(true), all.random(true)
@@ -33,12 +33,12 @@ public class ItemMapper implements Mapper {
         itemCount = Math.max(itemCount, 1);
         Seq<ItemStack> stacks = new Seq<>();
         ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier - 1));
-        packs.lock();
+        packs.unlock();
         for (int i = 0; i < itemCount; i++) {
             if (i == 0) {
                 CustomItem it = ItemMapper.getPackByGlobalTier(tier - 1).random(false);
                 stacks.add(new ItemStack(it, itemAmount.get()));
-                packs.lock(it);
+                packs.unlock(it);
             } else {
                 stacks.add(new ItemStack(packs.random(true), itemAmount.get()));
             }
@@ -105,7 +105,7 @@ public class ItemMapper implements Mapper {
     }
 
     public static void lock(CustomItem item) {
-        getPacksWithItem(item, true).select(p -> p.globalTier >= 0).each(p -> p.lock(item));
+        getPacksWithItem(item, true).select(p -> p.globalTier >= 0).each(p -> p.unlock(item));
     }
 
     public static ItemPack getFirstPackBy(Func<ItemPack, Boolean> func) {
