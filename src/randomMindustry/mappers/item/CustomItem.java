@@ -3,11 +3,6 @@ package randomMindustry.mappers.item;
 import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.TextureRegion;
-import arc.scene.ui.layout.Table;
-import arc.util.Log;
-import mindustry.Vars;
-import mindustry.gen.Tex;
-import mindustry.graphics.MultiPacker;
 import mindustry.type.Item;
 import randomMindustry.RMVars;
 import randomMindustry.texture.TextureManager;
@@ -16,10 +11,8 @@ import static randomMindustry.RMVars.itemStringGen;
 import static randomMindustry.mappers.item.ItemMapper.r;
 
 public class CustomItem extends Item {
-    public float hue;
-
     public CustomItem(String name) {
-        super(name, Color.red.cpy().saturation(0.75f));
+        super(name, new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f)));
 
         explosiveness = r.random(1f);
         radioactivity = r.random(1f);
@@ -28,8 +21,6 @@ public class CustomItem extends Item {
 
         localizedName = itemStringGen.generateName();
         description = itemStringGen.generateDescription(this);
-        hue = r.random(360f);
-        color = color.cpy().hue(hue);
 
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
         stats.add(RMVars.tierStat, t -> {
@@ -40,9 +31,12 @@ public class CustomItem extends Item {
 
     @Override
     public void loadIcon() {
-        int sprite = r.random(0, RMVars.itemSprites);
-        TextureRegion region = Core.atlas.find("random-mindustry-item" + sprite);
+        TextureRegion region = new TextureRegion(Core.atlas.find("random-mindustry-items"));
+        int sprite = r.random(0, RMVars.itemSprites - 1);
+        int x = (sprite % RMVars.itemSpriteX) * 32;
+        int y = (sprite / RMVars.itemSpriteX) * 32;
+        region.set(x + region.getX(), y + region.getY(), 32, 32);
         fullIcon = uiIcon = TextureManager.alloc(region);
-        TextureManager.hueRegion(fullIcon, hue);
+        TextureManager.recolorRegion(fullIcon, color);
     }
 }
