@@ -11,7 +11,9 @@ import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.consumers.Consume;
 import mindustry.world.consumers.ConsumeItems;
+import randomMindustry.mappers.block.BlockMapper;
 import randomMindustry.mappers.block.blocks.RandomCrafter;
+import randomMindustry.mappers.block.blocks.RandomDrill;
 import randomMindustry.mappers.item.CustomItem;
 import randomMindustry.mappers.item.ItemMapper;
 
@@ -36,13 +38,24 @@ public class RandomTechTree {
     }
 
     public static CustomItem depends(CustomItem item) {
+        if (item.hardness == 1) return null;
         CustomItem[] depend = {null};
-        Vars.content.blocks().each(b -> {
-            if (!(b instanceof RandomCrafter r)) return;
-            if (!new Seq<>(r.outputItems).contains(i -> i.item == item)) return;
-            Seq<ItemStack> consume = getInputs(r).sort(Comparator.comparingInt(a -> a.amount));
-            if (consume.size < 1) return;
-            depend[0] = (CustomItem) consume.get(0).item;
+        int[] amount = {0};
+        int[] lastTier = {Integer.MAX_VALUE};
+        BlockMapper.generatedBlocks.each(b -> {
+            if (b instanceof RandomCrafter r) {
+                if (!new Seq<>(r.outputItems).contains(i -> i.item == item)) return;
+                ItemStack consume = getInputs(r).sort(Comparator.comparingInt(a -> -a.amount)).get(0);
+                if (amount[0] > consume.amount) return;
+                depend[0] = (CustomItem) consume.item;
+                amount[0] = consume.amount;
+            } else if (b instanceof RandomDrill r) {
+                if (r.tier < item.hardness - 1) return;
+                if (r.tier > lastTier[0]) return;
+                Item i = new Seq<>(r.requirements).sort(Comparator.comparingInt(a -> -a.amount)).get(0).item;
+                depend[0] = (CustomItem) i;
+                lastTier[0] = r.tier;
+            }
         });
         return depend[0];
     }

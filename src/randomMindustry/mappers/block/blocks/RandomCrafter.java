@@ -25,7 +25,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
 
         int tier = ItemMapper.getTier(item);
-        requirements(Category.crafting, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(25, 250) * size, 5)));
+        requirements(Category.crafting, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
         consumeItems(ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> r.random(1, 10)));
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 

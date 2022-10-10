@@ -16,12 +16,18 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import randomMindustry.mappers.block.blocks.RandomOre;
+import randomMindustry.mappers.item.CustomItem;
+import randomMindustry.mappers.item.ItemMapper;
 
 import static mindustry.Vars.*;
 
 public class RandomPlanetGenerator extends PlanetGenerator{
     //alternate, less direct generation (wip)
     public static boolean alt = false;
+
+    public RandomPlanetGenerator() {
+        rand = new SyncedRand();
+    }
 
     BaseGenerator basegen = new BaseGenerator();
     float scl = 5f;
@@ -405,8 +411,19 @@ public class RandomPlanetGenerator extends PlanetGenerator{
             });
         }
 
-        Seq<RandomOre> ores = RandomOre.all;
+        Seq<RandomOre> ores = new Seq<>();
         float poles = Math.abs(sector.tile.v.y);
+        float nmag = 0.25f;
+        float scl = 1f;
+        float addscl = 1.3f;
+
+        int oreSize = RandomOre.all.size;
+        RandomOre.all.each(r -> {
+            int tier = ItemMapper.getPack((CustomItem) r.itemDrop).localTier;
+            if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x + tier, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 1f / oreSize * tier * addscl){
+                ores.add(r);
+            }
+        });
 
         FloatSeq frequencies = new FloatSeq();
         for(int i = 0; i < ores.size; i++){

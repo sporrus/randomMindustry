@@ -15,12 +15,13 @@ public class BlockMapper implements Mapper {
     public void generateContent() {
         for (int i = 0; i < ItemMapper.getDrillItems(); i++)
             generatedBlocks.add(new RandomOre("random-ore-" + i));
-        for (int i = 0; i < ItemMapper.maxTier / 2; i++) {
+        for (int i = 0; i < ItemMapper.maxTier / 2; i++)
             generatedBlocks.add(new RandomDrill("random-drill-" + i));
-        }
         for (int i = 0; i < ItemMapper.getCraftItems(); i++)
             generatedBlocks.add(new RandomCrafter("random-crafter-" + i));
         for (int i = 0; i < 12; i++)
             generatedBlocks.add(new RandomWall("random-wall-" + i));
+        for (int i = 0; i < 6; i++)
+            generatedBlocks.add(new RandomConveyor("random-conveyor-" + i));
     }
 }

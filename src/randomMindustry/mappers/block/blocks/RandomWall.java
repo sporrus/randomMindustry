@@ -14,7 +14,7 @@ public class RandomWall extends Wall implements RandomBlock {
         size = r.random(1, 4);
         health = Mathf.round(r.random(500, 1000) * size, 50);
 
-        requirements(Category.defense, ItemMapper.getItemStacks(r.random(0, ItemMapper.maxTier), r.random(1, 5), () -> Mathf.round(r.random(25, 1000), 5)));
+        requirements(Category.defense, ItemMapper.getItemStacks(r.random(0, ItemMapper.maxTier), r.random(1, 5), () -> Mathf.round(r.random(5, 50) * size, 5)));
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
         localizedName = "unreal wall name";
