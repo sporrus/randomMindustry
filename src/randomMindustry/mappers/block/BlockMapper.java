@@ -4,10 +4,7 @@ import arc.struct.Seq;
 import mindustry.world.Block;
 import randomMindustry.SyncedRand;
 import randomMindustry.mappers.Mapper;
-import randomMindustry.mappers.block.blocks.RandomBlock;
-import randomMindustry.mappers.block.blocks.RandomCrafter;
-import randomMindustry.mappers.block.blocks.RandomOre;
-import randomMindustry.mappers.block.blocks.RandomWall;
+import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.ItemMapper;
 
 public class BlockMapper implements Mapper {
@@ -18,6 +15,9 @@ public class BlockMapper implements Mapper {
     public void generateContent() {
         for (int i = 0; i < ItemMapper.getDrillItems(); i++)
             generatedBlocks.add(new RandomOre("random-ore-" + i));
+        for (int i = 0; i < ItemMapper.maxTier / 2; i++) {
+            generatedBlocks.add(new RandomDrill("random-drill-" + i));
+        }
         for (int i = 0; i < ItemMapper.getCraftItems(); i++)
             generatedBlocks.add(new RandomCrafter("random-crafter-" + i));
         for (int i = 0; i < 12; i++)

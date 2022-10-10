@@ -11,7 +11,7 @@ import randomMindustry.mappers.Mapper;
 public class ItemMapper implements Mapper {
     public static final Seq<CustomItem> generatedItems = new Seq<>();
     public static final Seq<ItemPack> packs = new Seq<>();
-    public static final int itemCount = 90;
+    public static final int itemCount = 36;
     public static final SyncedRand r = new SyncedRand();
     public static final int maxTier = itemCount / 3;
 
@@ -26,7 +26,7 @@ public class ItemMapper implements Mapper {
                     all.random(true), all.random(true), all.random(true)
             ));
         }
-        getPacksByTier("drill").each(pack -> pack.all.each(i -> i.hardness = pack.localTier));
+        getPacksByTier("drill").each(pack -> pack.all.each(i -> i.hardness = pack.localTier + 1));
     }
 
     public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount) {
