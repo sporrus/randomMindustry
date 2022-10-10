@@ -1,12 +1,11 @@
 package randomMindustry;
 
 import arc.struct.Seq;
-import mindustry.content.Blocks;
 import mindustry.content.Items;
 import randomMindustry.mappers.item.CustomItem;
-import randomMindustry.mappers.item.ItemMapper;
 
-import static mindustry.content.TechTree.*;
+import static mindustry.content.TechTree.node;
+import static mindustry.content.TechTree.nodeRoot;
 
 public class RandomTechTree {
     public static void load() {

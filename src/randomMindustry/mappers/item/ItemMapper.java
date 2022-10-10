@@ -1,10 +1,11 @@
 package randomMindustry.mappers.item;
 
-import arc.func.*;
-import arc.struct.*;
-import arc.util.Log;
-import mindustry.type.*;
-import randomMindustry.*;
+import arc.func.Func;
+import arc.func.Prov;
+import arc.struct.Seq;
+import mindustry.type.ItemStack;
+import randomMindustry.RandomUtil;
+import randomMindustry.SyncedRand;
 import randomMindustry.mappers.Mapper;
 
 public class ItemMapper implements Mapper {

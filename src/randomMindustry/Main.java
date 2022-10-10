@@ -1,25 +1,17 @@
 package randomMindustry;
 
-import arc.*;
-import arc.files.Fi;
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.struct.*;
-import arc.util.*;
-import mindustry.*;
-import mindustry.content.*;
-import mindustry.game.*;
-import mindustry.game.EventType.*;
-import mindustry.graphics.*;
-import mindustry.graphics.g3d.*;
-import mindustry.maps.planet.*;
-import mindustry.mod.*;
-import mindustry.type.*;
-import randomMindustry.mappers.Mapper;
+import arc.graphics.Color;
+import mindustry.Vars;
+import mindustry.content.Planets;
+import mindustry.game.Team;
+import mindustry.graphics.g3d.HexMesh;
+import mindustry.graphics.g3d.HexSkyMesh;
+import mindustry.graphics.g3d.MultiMesh;
+import mindustry.mod.Mod;
+import mindustry.type.Planet;
 import randomMindustry.mappers.Mappers;
-import randomMindustry.mappers.block.*;
-import randomMindustry.mappers.item.*;
-import randomMindustry.texture.*;
+import randomMindustry.mappers.item.ItemMapper;
+import randomMindustry.texture.TextureManager;
 
 public class Main extends Mod {
     public static Planet random;

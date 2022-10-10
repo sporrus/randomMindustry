@@ -1,20 +1,8 @@
 package randomMindustry.mappers.item;
 
-import arc.Core;
-import arc.files.Fi;
 import arc.graphics.Color;
 import arc.graphics.Pixmap;
-import arc.graphics.PixmapIO;
 import arc.graphics.g2d.PixmapRegion;
-import arc.graphics.g2d.TextureAtlas;
-import arc.graphics.g2d.TextureRegion;
-import arc.struct.Seq;
-import arc.util.Log;
-import arc.util.Time;
-import mindustry.Vars;
-import mindustry.content.Items;
-import mindustry.core.ContentLoader;
-import mindustry.gen.Groups;
 import mindustry.graphics.MultiPacker;
 import mindustry.type.Item;
 import randomMindustry.RMVars;

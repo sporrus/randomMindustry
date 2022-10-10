@@ -1,8 +1,7 @@
 package randomMindustry.string;
 
-import arc.math.*;
-import arc.struct.*;
-import randomMindustry.*;
+import arc.struct.Seq;
+import randomMindustry.SyncedRand;
 
 public class StringGenerator{
     protected SyncedRand r;

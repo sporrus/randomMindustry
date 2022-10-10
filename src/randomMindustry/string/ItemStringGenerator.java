@@ -1,8 +1,6 @@
 package randomMindustry.string;
 
-import arc.math.*;
-import arc.struct.*;
-import mindustry.type.*;
+import arc.struct.Seq;
 import randomMindustry.mappers.item.CustomItem;
 
 public class ItemStringGenerator extends StringGenerator{

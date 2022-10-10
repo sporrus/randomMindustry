@@ -1,15 +1,10 @@
 package randomMindustry.mappers.block.blocks;
 
 import arc.math.Mathf;
-import mindustry.Vars;
 import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
 import randomMindustry.RMVars;
-import randomMindustry.mappers.block.BlockMapper;
 import randomMindustry.mappers.item.ItemMapper;
-import randomMindustry.texture.TextureManager;
 
 import static randomMindustry.mappers.block.BlockMapper.r;
 
