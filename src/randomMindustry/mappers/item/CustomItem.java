@@ -54,7 +54,6 @@ public class CustomItem extends Item {
         Pixmap pixmap = region.crop(x, y, 32, 32);
         TextureManager.recolorRegion(pixmap, color);
         fullIcon = uiIcon = TextureManager.alloc(pixmap);
-        Log.info(fullIcon);
     }
 
     @Override
