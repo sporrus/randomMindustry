@@ -23,23 +23,24 @@ public class ItemStringGenerator extends StringGenerator{
     }
     
     private String generateSuffix(){
-        return Seq.with("ite", "ide", "ium").random(r);
+        return Seq.with("ite", "ide", "ium", "ate"/*, "unch"*/).random(r);
     }
     
     private String generateType(){
         return Seq.with(
             "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst",
-            "Cluster", "Crystal", "Sheet", "Mix"
+            "Cluster", "Crystal", "Sheet", "Mix", "Lattice", "Compound",
+            "Plating", "Sheet"
         ).random(r);
     }
 
     private String fraction(float frac) {
         return switch ((int) (frac * 6)) {
-            case 0 -> "Not";
-            case 1 -> "A bit";
-            case 2 -> "Kinda";
-            case 3 -> "Quite";
-            case 4 -> "Very";
+            case 0 -> "Not"; //skip instead
+            case 1 -> "Slightly";
+            case 2 -> "Sizeably";
+            case 3 -> "Moderately";
+            case 4 -> "Highly";
             case 5 -> "Extremely";
             default -> "Dangerously";
         };
