@@ -25,12 +25,12 @@ public class TextureManager {
         return pages.get(size);
     }
 
-    public static TextureRegion alloc(TextureRegion oldRegion, int newWidth, int newHeight) {
-        return getOrCreatePage((int) Math.ceil(newWidth / 32f) * 32).alloc(oldRegion, newWidth, newHeight);
+    public static TextureRegion alloc(Pixmap newPixmap, int newWidth, int newHeight) {
+        return getOrCreatePage((int) Math.ceil(newWidth / 32f) * 32).alloc(newPixmap, newWidth, newHeight);
     }
 
-    public static TextureRegion alloc(TextureRegion oldRegion) {
-        return alloc(oldRegion, oldRegion.width, oldRegion.height);
+    public static TextureRegion alloc(Pixmap newPixmap) {
+        return alloc(newPixmap, newPixmap.width, newPixmap.height);
     }
 
     public static Seq<Texture> getAllTextures() {
@@ -39,8 +39,7 @@ public class TextureManager {
         return seq;
     }
 
-    public static void recolorRegion(TextureRegion region, Color newColor) {
-        Pixmap pixmap = region.texture.getTextureData().getPixmap().crop(region.getX(), region.getY(), region.width, region.height);
+    public static void recolorRegion(Pixmap pixmap, Color newColor) {
         Color newDark = new Color(newColor.r * teamDark.r / teamMid.r, newColor.g * teamDark.g / teamMid.g, newColor.b * teamDark.b / teamMid.b);
         Color newLight = new Color(newColor.r * teamLight.r / teamMid.r, newColor.g * teamLight.g / teamMid.g, newColor.b * teamLight.b / teamMid.b);
         Color color = new Color();
@@ -51,7 +50,5 @@ public class TextureManager {
             else if (color.equals(teamLight)) color.set(newLight);
             pixmap.set(x, y, color);
         });
-        region.texture.draw(r.chance(0.5) ? pixmap.flipX() : pixmap, region.getX(), region.getY());
-        pixmap.dispose();
     }
 }

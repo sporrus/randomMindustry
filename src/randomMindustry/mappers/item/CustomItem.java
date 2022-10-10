@@ -1,8 +1,21 @@
 package randomMindustry.mappers.item;
 
 import arc.Core;
+import arc.files.Fi;
 import arc.graphics.Color;
+import arc.graphics.Pixmap;
+import arc.graphics.PixmapIO;
+import arc.graphics.g2d.PixmapRegion;
+import arc.graphics.g2d.TextureAtlas;
 import arc.graphics.g2d.TextureRegion;
+import arc.struct.Seq;
+import arc.util.Log;
+import arc.util.Time;
+import mindustry.Vars;
+import mindustry.content.Items;
+import mindustry.core.ContentLoader;
+import mindustry.gen.Groups;
+import mindustry.graphics.MultiPacker;
 import mindustry.type.Item;
 import randomMindustry.RMVars;
 import randomMindustry.texture.TextureManager;
@@ -18,6 +31,7 @@ public class CustomItem extends Item {
         radioactivity = r.random(1f);
         flammability = r.random(1f);
         charge = r.random(1f);
+        cost = r.random(0.25f, 2f);
 
         localizedName = itemStringGen.generateName();
         description = itemStringGen.generateDescription(this);
@@ -27,16 +41,22 @@ public class CustomItem extends Item {
             ItemPack tier = ItemMapper.getPack(this);
             t.add(tier.tier + " " + tier.globalTier + " (" + tier.localTier + ")");
         });
+
+        generateIcons = true;
     }
 
     @Override
-    public void loadIcon() {
-        TextureRegion region = new TextureRegion(Core.atlas.find("random-mindustry-items"));
+    public void createIcons(MultiPacker packer) {
+        PixmapRegion region = packer.get("random-mindustry-items");
         int sprite = r.random(0, RMVars.itemSprites - 1);
         int x = (sprite % RMVars.itemSpriteX) * 32;
         int y = (sprite / RMVars.itemSpriteX) * 32;
-        region.set(x + region.getX(), y + region.getY(), 32, 32);
-        fullIcon = uiIcon = TextureManager.alloc(region);
-        TextureManager.recolorRegion(fullIcon, color);
+        Pixmap pixmap = region.crop(x, y, 32, 32);
+        TextureManager.recolorRegion(pixmap, color);
+        fullIcon = uiIcon = TextureManager.alloc(pixmap);
+        Log.info(fullIcon);
     }
+
+    @Override
+    public void loadIcon() {}
 }

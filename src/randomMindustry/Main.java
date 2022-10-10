@@ -1,6 +1,7 @@
 package randomMindustry;
 
 import arc.*;
+import arc.files.Fi;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.struct.*;
@@ -33,10 +34,10 @@ public class Main extends Mod {
         Vars.content.planets().select(p -> p != random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
 
 // debug atlas:
-//        final int[] i = {0};
-//        TextureManager.getAllTextures().each((t) -> {
-//            PixmapIO.writePng(new Fi("atlas" + (i[0]++) + ".png"), t.getTextureData().getPixmap());
-//        });
+        final int[] i = {0};
+        TextureManager.getAllTextures().each((t) -> {
+            PixmapIO.writePng(new Fi("atlas" + (i[0]++) + ".png"), t.getTextureData().getPixmap());
+        });
 
 // debug packs:
 //        Log.info("DEBUG PACKS:");
