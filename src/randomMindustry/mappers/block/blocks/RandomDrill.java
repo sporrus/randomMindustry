@@ -14,7 +14,7 @@ public class RandomDrill extends Drill implements RandomBlock {
     public RandomDrill(String name) {
         super(name);
         size = 2;
-        health = Mathf.round(r.random(5, 50) * size, 50);
+        health = Mathf.round(r.random(5, 50) * size, 5);
 
         this.tier = hardness++;
         int tier = this.tier * 2;
