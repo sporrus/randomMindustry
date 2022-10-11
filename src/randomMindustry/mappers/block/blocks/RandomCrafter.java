@@ -12,6 +12,7 @@ import randomMindustry.mappers.item.ItemPack;
 import static randomMindustry.mappers.block.BlockMapper.r;
 
 public class RandomCrafter extends GenericCrafter implements RandomBlock {
+    public static int lastTier = 0;
     public CustomItem item;
 
     public RandomCrafter(String name) {
@@ -19,14 +20,13 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         size = r.random(1, 4);
         health = Mathf.round(r.random(5, 50) * size, 50);
 
-        ItemPack pack = ItemMapper.getLockedPacksByTier("craft").random(r);
-        if (pack == null) item = ItemMapper.getPacksByTier("craft").random(r).random(false);
-        else item = pack.random(true);
+        int tier = (lastTier++ / 3);
+        ItemPack pack = ItemMapper.getLockedPacksByTier("craft").find(p -> p.localTier == tier);
+        item = pack.next(true);
         outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
 
-        int tier = ItemMapper.getTier(item);
-        requirements(Category.crafting, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
-        consumeItems(ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> r.random(1, 10)));
+        requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
+        consumeItems(ItemMapper.getItemStacks(tier * 2, r.random(1, 3), () -> r.random(1, 10)));
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
         localizedName = "unreal crafter name";

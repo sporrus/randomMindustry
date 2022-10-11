@@ -11,7 +11,7 @@ import randomMindustry.mappers.Mapper;
 public class ItemMapper implements Mapper {
     public static final Seq<CustomItem> generatedItems = new Seq<>();
     public static final Seq<ItemPack> packs = new Seq<>();
-    public static final int itemCount = 36;
+    public static final int itemCount = 90;
     public static final SyncedRand r = new SyncedRand();
     public static final int maxTier = itemCount / 3;
 
@@ -23,21 +23,21 @@ public class ItemMapper implements Mapper {
         ItemPack all = new ItemPack(0, -1, "all", generatedItems.toArray(CustomItem.class));
         for (int i = 0; i < itemCount / 3; i++) {
             packs.add(new ItemPack(i / 2, i, i % 2 == 0 ? "drill" : "craft",
-                    all.random(true), all.random(true), all.random(true)
+                    all.next(true), all.next(true), all.next(true)
             ));
         }
         getPacksByTier("drill").each(pack -> pack.all.each(i -> i.hardness = pack.localTier + 1));
     }
 
     public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount) {
-        tier = Math.max(tier, 1);
+        tier = Math.max(tier, 0);
         Seq<ItemStack> stacks = new Seq<>();
-        ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier - 1));
+        ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier));
         itemCount = Math.min(Math.max(itemCount, 1), packs.all.size);
         packs.unlock();
         for (int i = 0; i < itemCount; i++) {
             if (i == 0) {
-                CustomItem it = ItemMapper.getPackByGlobalTier(tier - 1).random(false);
+                CustomItem it = ItemMapper.getPackByGlobalTier(tier).random(false);
                 stacks.add(new ItemStack(it, itemAmount.get()));
                 packs.unlock(it);
             } else {

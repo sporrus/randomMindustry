@@ -49,6 +49,16 @@ public class ItemPack {
         }
     }
 
+    public CustomItem next(boolean lock) {
+        if (lock && locked.size > 0) {
+            CustomItem item = locked.get(0);
+            locked.remove(item);
+            return item;
+        } else if (all.size > 0) {
+            return all.get(0);
+        } else return null;
+    }
+
     public void addFrom(ItemPack pack) {
         all.addAll(pack.all);
         locked.addAll(pack.locked);
