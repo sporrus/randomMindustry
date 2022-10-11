@@ -18,7 +18,7 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
         health = Mathf.round(r.random(1, 5) * tier, 5);
         fadeIn = moveArrows = false
 
-        requirements(Category.production, ItemMapper.getItemStacks(tier - 1, r.random(1, 2), () -> r.random(1, 5)));
+        requirements(Category.production, ItemMapper.getItemStacks(tier - 1, 2, () -> r.random(6, 10)));
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
         range = 0.03f * (tier * ItemMapper.maxTier / 12f);
