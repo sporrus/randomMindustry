@@ -35,17 +35,17 @@ public class RandomTechTree {
         CustomItem[] depend = {null};
         int[] amount = {0};
         int[] lastTier = {Integer.MAX_VALUE};
-        BlockMapper.generatedBlocks.each(b -> {
-            if (b instanceof RandomCrafter r) {
+        BlockMapper.generatedBlocks.each(block -> {
+            if (block instanceof RandomCrafter r) {
                 if (!new Seq<>(r.outputItems).contains(i -> i.item == item)) return;
-                ItemStack consume = getInputs(r).sort(Comparator.comparingInt(a -> -a.amount)).get(0);
+                ItemStack consume = getInputs(r).sort((a, b) -> b.amount - a.amount).get(0);
                 if (amount[0] > consume.amount) return;
                 depend[0] = (CustomItem) consume.item;
                 amount[0] = consume.amount;
-            } else if (b instanceof RandomDrill r) {
+            } else if (block instanceof RandomDrill r) {
                 if (r.tier < item.hardness - 1) return;
                 if (r.tier > lastTier[0]) return;
-                Item i = new Seq<>(r.requirements).sort(Comparator.comparingInt(a -> -a.amount)).get(0).item;
+                Item i = new Seq<>(r.requirements).sort((a, b) -> b.amount - a.amount).get(0).item;
                 depend[0] = (CustomItem) i;
                 lastTier[0] = r.tier;
             }
