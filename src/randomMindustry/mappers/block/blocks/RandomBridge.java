@@ -16,7 +16,7 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
         super(name);
         size = 1;
         health = Mathf.round(r.random(1, 5) * tier, 5);
-        fadeIn = moveArrows = false
+        fadeIn = moveArrows = false;
 
         requirements(Category.production, ItemMapper.getItemStacks(tier - 1, 2, () -> r.random(6, 10)));
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
@@ -24,7 +24,7 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
         range = 0.03f * (tier * ItemMapper.maxTier / 12f);
         
         if (tier >= 2) {
-           fadeIn = moveArrows = true
+           fadeIn = moveArrows = true;
         }
 
         localizedName = "unreal item bridge name";
