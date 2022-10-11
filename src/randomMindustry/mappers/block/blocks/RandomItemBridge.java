@@ -10,6 +10,7 @@ import static randomMindustry.mappers.block.BlockMapper.r;
 
 public class RandomItemBridge extends ItemBridge implements RandomBlock {
     public static int lastTier = 1;
+    public int range;
     int tier = lastTier++;
 
     public RandomItemBridge(String name) {
