@@ -13,7 +13,7 @@ public class RandomOre extends OreBlock implements RandomBlock {
                 .selectTierType(ItemTierType.drill)
                 .selectLocalTier((lastTier++) / 3)
                 .selectLocked(true)
-                .removeNext());
+                .lockNext(false));
         all.add(this);
     }
 }

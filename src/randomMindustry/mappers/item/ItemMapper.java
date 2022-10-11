@@ -8,7 +8,7 @@ import randomMindustry.mappers.*;
 
 public class ItemMapper implements Mapper {
     public static final CustomItemSeq generatedItems = new CustomItemSeq();
-    public static final int itemCount = 90;
+    public static final int itemCount = 36;
     public static final SyncedRand r = new SyncedRand();
     public static final int maxTier = itemCount / 3;
 
@@ -25,13 +25,9 @@ public class ItemMapper implements Mapper {
         CustomItemSeq items = generatedItems.selectGlobalTierRange(0, tier);
         itemCount = Math.min(Math.max(itemCount, 1), items.size);
         for (int i = 0; i < itemCount; i++) {
-            if (i == 0) {
-                CustomItem it = generatedItems.selectGlobalTier(tier).random(r);
-                stacks.add(new ItemStack(it, itemAmount.get()));
-                items.remove(it);
-            } else {
-                stacks.add(new ItemStack(items.removeRandom(r), itemAmount.get()));
-            }
+            CustomItem it = i == 0 ? generatedItems.selectGlobalTier(tier).random(r) : items.random(r);
+            stacks.add(new ItemStack(it, itemAmount.get()));
+            items.remove(it);
         }
         RandomUtil.shuffle(stacks, r);
         return stacks.toArray(ItemStack.class);

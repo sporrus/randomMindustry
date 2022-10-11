@@ -1,6 +1,7 @@
 package randomMindustry.mappers.block.blocks;
 
 import arc.math.*;
+import arc.util.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
 import randomMindustry.*;
@@ -17,12 +18,12 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         size = r.random(1, 4);
         health = Mathf.round(r.random(5, 50) * size, 5);
 
-        int tier = (lastTier++ / 3);
+        int tier = lastTier++ / 3;
         CustomItemSeq items = ItemMapper.generatedItems
                 .selectTierType(ItemTierType.craft)
                 .selectLocalTier(tier)
                 .selectLocked(true);
-        item = items.removeNext();
+        item = items.lockNext(false);
         outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
 
         requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));

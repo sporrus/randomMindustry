@@ -22,7 +22,7 @@ public class CustomItem extends Item {
 
         globalTier = (lastGlobalTier++) / 3;
         localTier = globalTier / 2;
-        tierType = globalTier % 2 == 0 ? ItemTierType.craft : ItemTierType.drill;
+        tierType = globalTier % 2 == 0 ? ItemTierType.drill : ItemTierType.craft;
         locked = true;
 
         hardness = localTier + 1;

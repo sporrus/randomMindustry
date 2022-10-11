@@ -32,7 +32,7 @@ public class CustomItemSeq extends Seq<CustomItem> {
     }
 
     public CustomItemSeq selectLocked(boolean locked) {
-        return select(i -> i.locked = true);
+        return select(i -> i.locked == locked);
     }
 
     public CustomItemSeq select(Boolf<CustomItem> predicate){
@@ -43,9 +43,10 @@ public class CustomItemSeq extends Seq<CustomItem> {
         return new CustomItemSeq(this);
     }
 
-    public CustomItem removeRandom(Rand r) {
+    public CustomItem lockRandom(Rand r, boolean lock) {
         CustomItem item = random(r);
-        remove(item);
+        item.locked = lock;
+        if (!lock) remove(item);
         return item;
     }
 
@@ -53,9 +54,10 @@ public class CustomItemSeq extends Seq<CustomItem> {
         return size > 0 ? get(0) : null;
     }
 
-    public CustomItem removeNext() {
-        CustomItem item = next();
-        remove(item);
-        return item;
+    public CustomItem lockNext(boolean lock) {
+        CustomItem next = next();
+        next.locked = lock;
+        if (!lock) remove(next);
+        return next;
     }
 }

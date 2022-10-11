@@ -20,7 +20,7 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         requirements(Category.production, ItemMapper.getItemStacks(tier - 1, r.random(1, 2), () -> r.random(1, 5)));
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
-        speed = 0.03f * (tier * ItemMapper.maxTier / 12f);
+        speed = 0.03f * (tier * 12f / ItemMapper.maxTier);
         displayedSpeed = speed * 136;
 
         localizedName = "unreal conveyor name";

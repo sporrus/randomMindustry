@@ -1,5 +1,6 @@
 package randomMindustry.mappers.block;
 
+import arc.math.*;
 import arc.struct.*;
 import randomMindustry.*;
 import randomMindustry.mappers.*;
@@ -14,13 +15,13 @@ public class BlockMapper implements Mapper {
     public void generateContent() {
         for (int i = 0; i < ItemMapper.generatedItems.selectTierType(ItemTierType.drill).size; i++)
             generatedBlocks.add(new RandomOre("random-ore-" + i));
-        for (int i = 0; i < ItemMapper.maxTier / 2; i++)
+        for (int i = 0; i < Mathf.ceil(ItemMapper.maxTier / 2f); i++)
             generatedBlocks.add(new RandomDrill("random-drill-" + i));
         for (int i = 0; i < ItemMapper.generatedItems.selectTierType(ItemTierType.craft).size; i++)
             generatedBlocks.add(new RandomCrafter("random-crafter-" + i));
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < ItemMapper.itemCount; i++)
             generatedBlocks.add(new RandomWall("random-wall-" + i));
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomConveyor("random-conveyor-" + i));
     }
 }

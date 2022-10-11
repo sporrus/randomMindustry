@@ -17,7 +17,7 @@ public class RandomDrill extends Drill implements RandomBlock {
         health = Mathf.round(r.random(5, 50) * size, 5);
 
         this.tier = hardness++;
-        int tier = this.tier * 2;
+        int tier = (this.tier - 1) * 2;
         requirements(Category.production, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(5, 50) * size, 5)));
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
