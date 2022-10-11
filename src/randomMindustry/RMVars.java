@@ -10,7 +10,12 @@ public class RMVars{
             seedStat = new Stat("rm-seed", rmStats),
             tierStat = new Stat("rm-tier", rmStats);
     public static StatValue seedStatValue = t -> t.add(Long.toString(SeedManager.getSeed()));
+
     public static int itemSpriteX = 8;
     public static int itemSpriteY = 3;
     public static int itemSprites = itemSpriteX * itemSpriteY;
+
+    public static int crafterSpriteX = 8;
+    public static int crafterSpriteY = 1;
+    public static int crafterSprites = crafterSpriteX * crafterSpriteY;
 }
