@@ -1,12 +1,12 @@
 package randomMindustry.mappers.block.blocks;
 
-import arc.math.Mathf;
-import mindustry.type.Category;
-import mindustry.world.blocks.distribution.Conveyor;
-import randomMindustry.RMVars;
-import randomMindustry.mappers.item.ItemMapper;
+import arc.math.*;
+import mindustry.type.*;
+import mindustry.world.blocks.distribution.*;
+import randomMindustry.*;
+import randomMindustry.mappers.item.*;
 
-import static randomMindustry.mappers.block.BlockMapper.r;
+import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomConveyor extends Conveyor implements RandomBlock {
     public static int lastTier = 1;

@@ -15,9 +15,8 @@ import mindustry.maps.generators.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
-import randomMindustry.mappers.block.blocks.RandomOre;
-import randomMindustry.mappers.item.CustomItem;
-import randomMindustry.mappers.item.ItemMapper;
+import randomMindustry.mappers.block.blocks.*;
+import randomMindustry.mappers.item.*;
 
 import static mindustry.Vars.*;
 
@@ -419,7 +418,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
 
         int oreSize = RandomOre.all.size;
         RandomOre.all.each(r -> {
-            int tier = ItemMapper.getPack((CustomItem) r.itemDrop).localTier;
+            int tier = ((CustomItem) r.itemDrop).localTier;
             if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x + tier, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 1f / oreSize * tier * addscl){
                 ores.add(r);
             }

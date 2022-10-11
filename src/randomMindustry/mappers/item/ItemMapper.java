@@ -1,16 +1,13 @@
 package randomMindustry.mappers.item;
 
-import arc.func.Func;
-import arc.func.Prov;
-import arc.struct.Seq;
-import mindustry.type.ItemStack;
-import randomMindustry.RandomUtil;
-import randomMindustry.SyncedRand;
-import randomMindustry.mappers.Mapper;
+import arc.func.*;
+import arc.struct.*;
+import mindustry.type.*;
+import randomMindustry.*;
+import randomMindustry.mappers.*;
 
 public class ItemMapper implements Mapper {
-    public static final Seq<CustomItem> generatedItems = new Seq<>();
-    public static final Seq<ItemPack> packs = new Seq<>();
+    public static final CustomItemSeq generatedItems = new CustomItemSeq();
     public static final int itemCount = 90;
     public static final SyncedRand r = new SyncedRand();
     public static final int maxTier = itemCount / 3;
@@ -20,105 +17,23 @@ public class ItemMapper implements Mapper {
             CustomItem item = new CustomItem("random-item-" + i);
             generatedItems.add(item);
         }
-        ItemPack all = new ItemPack(0, -1, "all", generatedItems.toArray(CustomItem.class));
-        for (int i = 0; i < itemCount / 3; i++) {
-            packs.add(new ItemPack(i / 2, i, i % 2 == 0 ? "drill" : "craft",
-                    all.next(true), all.next(true), all.next(true)
-            ));
-        }
-        getPacksByTier("drill").each(pack -> pack.all.each(i -> i.hardness = pack.localTier + 1));
     }
 
     public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount) {
         tier = Math.max(tier, 0);
         Seq<ItemStack> stacks = new Seq<>();
-        ItemPack packs = ItemMapper.combine(ItemMapper.getPacksInGlobalTierRange(0, tier));
-        itemCount = Math.min(Math.max(itemCount, 1), packs.all.size);
-        packs.unlock();
+        CustomItemSeq items = generatedItems.selectGlobalTierRange(0, tier);
+        itemCount = Math.min(Math.max(itemCount, 1), items.size);
         for (int i = 0; i < itemCount; i++) {
             if (i == 0) {
-                CustomItem it = ItemMapper.getPackByGlobalTier(tier).random(false);
+                CustomItem it = generatedItems.selectGlobalTier(tier).random(r);
                 stacks.add(new ItemStack(it, itemAmount.get()));
-                packs.unlock(it);
+                items.remove(it);
             } else {
-                stacks.add(new ItemStack(packs.random(true), itemAmount.get()));
+                stacks.add(new ItemStack(items.removeRandom(r), itemAmount.get()));
             }
         }
         RandomUtil.shuffle(stacks, r);
         return stacks.toArray(ItemStack.class);
-    }
-
-    public static int getDrillItems() {
-        return (int) (Math.ceil(itemCount / 6f) * 3);
-    }
-
-    public static int getCraftItems() {
-        return itemCount / 6 * 3;
-    }
-
-    public static ItemPack getPack(CustomItem item) {
-        Seq<ItemPack> tierPacks = packs.select((p) -> p.globalTier >= 0);
-        for (ItemPack pack : tierPacks)
-            if (pack.in(item)) return pack;
-        return null;
-    }
-
-    public static int getTier(CustomItem item) {
-        ItemPack pack = getPack(item);
-        return pack == null ? -1 : pack.globalTier;
-    }
-
-    public static int getLocalTier(CustomItem item) {
-        Seq<ItemPack> tierPacks = packs.select((p) -> p.globalTier >= 0);
-        for (ItemPack pack : tierPacks)
-            if (pack.in(item)) return pack.localTier;
-        return -1;
-    }
-
-    public static ItemPack combine(Seq<ItemPack> itemPacks) {
-        return combine(itemPacks.toArray(ItemPack.class));
-    }
-
-    public static ItemPack combine(ItemPack... itemPacks) {
-        ItemPack pack = new ItemPack(-1, -1, "all");
-        for (ItemPack p : itemPacks) pack.addFrom(p);
-        return pack;
-    }
-
-    public static Seq<ItemPack> getPacksWithItem(CustomItem item, boolean locked) {
-        return getPacksBy((pack) -> (locked ? pack.locked : pack.all).contains(item));
-    }
-
-    public static Seq<ItemPack> getPacksInGlobalTierRange(int min, int max) {
-        return getPacksBy((pack) -> pack.globalTier >= min && pack.globalTier <= max);
-    }
-
-    public static Seq<ItemPack> getPacksByTier(String tier) {
-        return getPacksBy((pack) -> pack.tier.equalsIgnoreCase(tier));
-    }
-
-    public static Seq<ItemPack> getLockedPacksByTier(String tier) {
-        return getPacksByTier(tier).select((pack) -> pack.locked() != 0);
-    }
-
-    public static ItemPack getPackByGlobalTier(int globalTier) {
-        return getFirstPackBy((pack) -> pack.globalTier == globalTier);
-    }
-
-    public static void lock(CustomItem item) {
-        getPacksWithItem(item, true).select(p -> p.globalTier >= 0).each(p -> p.unlock(item));
-    }
-
-    public static ItemPack getFirstPackBy(Func<ItemPack, Boolean> func) {
-        for (ItemPack pack : packs)
-            if (func.get(pack)) return pack;
-        return null;
-    }
-
-    public static Seq<ItemPack> getPacksBy(Func<ItemPack, Boolean> func) {
-        Seq<ItemPack> itemPacks = new Seq<>();
-        for (ItemPack pack : packs)
-            if (func.get(pack)) itemPacks.add(pack);
-        return itemPacks;
     }
 }

@@ -1,7 +1,7 @@
 package randomMindustry.mappers;
 
-import randomMindustry.mappers.block.BlockMapper;
-import randomMindustry.mappers.item.ItemMapper;
+import randomMindustry.mappers.block.*;
+import randomMindustry.mappers.item.*;
 
 public class Mappers {
     public static Mapper

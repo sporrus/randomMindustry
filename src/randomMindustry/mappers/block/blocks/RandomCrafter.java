@@ -1,15 +1,12 @@
 package randomMindustry.mappers.block.blocks;
 
-import arc.math.Mathf;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.world.blocks.production.GenericCrafter;
-import randomMindustry.RMVars;
-import randomMindustry.mappers.item.CustomItem;
-import randomMindustry.mappers.item.ItemMapper;
-import randomMindustry.mappers.item.ItemPack;
+import arc.math.*;
+import mindustry.type.*;
+import mindustry.world.blocks.production.*;
+import randomMindustry.*;
+import randomMindustry.mappers.item.*;
 
-import static randomMindustry.mappers.block.BlockMapper.r;
+import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomCrafter extends GenericCrafter implements RandomBlock {
     public static int lastTier = 0;
@@ -21,8 +18,11 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         health = Mathf.round(r.random(5, 50) * size, 50);
 
         int tier = (lastTier++ / 3);
-        ItemPack pack = ItemMapper.getLockedPacksByTier("craft").find(p -> p.localTier == tier);
-        item = pack.next(true);
+        CustomItemSeq items = ItemMapper.generatedItems
+                .selectTierType(ItemTierType.craft)
+                .selectLocalTier(tier)
+                .selectLocked(true);
+        item = items.removeNext();
         outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
 
         requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));

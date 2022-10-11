@@ -1,12 +1,12 @@
 package randomMindustry.mappers.block.blocks;
 
-import arc.math.Mathf;
-import mindustry.type.Category;
-import mindustry.world.blocks.defense.Wall;
-import randomMindustry.RMVars;
-import randomMindustry.mappers.item.ItemMapper;
+import arc.math.*;
+import mindustry.type.*;
+import mindustry.world.blocks.defense.*;
+import randomMindustry.*;
+import randomMindustry.mappers.item.*;
 
-import static randomMindustry.mappers.block.BlockMapper.r;
+import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomWall extends Wall implements RandomBlock {
     public RandomWall(String name) {

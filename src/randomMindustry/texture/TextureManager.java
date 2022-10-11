@@ -5,7 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.struct.*;
 import mindustry.game.*;
-import randomMindustry.SyncedRand;
+import randomMindustry.*;
 
 public class TextureManager {
     private static SyncedRand r = new SyncedRand();

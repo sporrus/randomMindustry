@@ -1,30 +1,23 @@
 package randomMindustry;
 
-import arc.struct.Seq;
-import arc.util.Log;
-import mindustry.Vars;
-import mindustry.content.Items;
-import mindustry.content.TechTree;
-import mindustry.game.Objectives;
-import mindustry.type.Item;
-import mindustry.type.ItemStack;
-import mindustry.world.Block;
-import mindustry.world.consumers.Consume;
-import mindustry.world.consumers.ConsumeItems;
-import randomMindustry.mappers.block.BlockMapper;
-import randomMindustry.mappers.block.blocks.RandomCrafter;
-import randomMindustry.mappers.block.blocks.RandomDrill;
-import randomMindustry.mappers.item.CustomItem;
-import randomMindustry.mappers.item.ItemMapper;
+import arc.struct.*;
+import mindustry.content.*;
+import mindustry.game.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.consumers.*;
+import randomMindustry.mappers.block.*;
+import randomMindustry.mappers.block.blocks.*;
+import randomMindustry.mappers.item.*;
 
-import java.util.Comparator;
+import java.util.*;
 
-import static mindustry.content.TechTree.nodeRoot;
+import static mindustry.content.TechTree.*;
 
 public class RandomTechTree {
     public static void load() {
         Main.random.techTree = nodeRoot("rm-random", Items.carbide, () -> {
-            Seq<CustomItem> items = ItemMapper.combine(ItemMapper.packs).all;
+            CustomItemSeq items = ItemMapper.generatedItems.copy();
             items.each(item -> {
                 CustomItem depend = depends(item);
                 item.techNode = new TechTree.TechNode(
