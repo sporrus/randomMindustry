@@ -21,4 +21,3 @@ public class RandomWall extends Wall implements RandomBlock {
         description = "unreal wall description";
     }
 }
-0
