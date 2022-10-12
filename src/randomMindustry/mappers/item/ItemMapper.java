@@ -4,15 +4,14 @@ import arc.func.*;
 import arc.struct.*;
 import mindustry.type.*;
 import randomMindustry.*;
-import randomMindustry.mappers.*;
 
-public class ItemMapper implements Mapper {
+public class ItemMapper {
     public static final CustomItemSeq generatedItems = new CustomItemSeq();
     public static final int itemCount = 36;
     public static final SyncedRand r = new SyncedRand();
     public static final int maxTier = itemCount / 3;
 
-    public void generateContent() {
+    public static void generateContent() {
         for (int i = 0; i < itemCount; i++) {
             CustomItem item = new CustomItem("random-item-" + i);
             generatedItems.add(item);

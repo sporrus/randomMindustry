@@ -8,6 +8,7 @@ import mindustry.graphics.g3d.*;
 import mindustry.mod.*;
 import mindustry.type.*;
 import randomMindustry.mappers.*;
+import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
@@ -42,8 +43,8 @@ public class Main extends Mod {
     @Override
     public void loadContent() {
         SeedManager.generateSeed();
-        Mappers.item.generateContent();
-        Mappers.block.generateContent();
+        ItemMapper.generateContent();
+        BlockMapper.generateContent();
         random = new Planet("rm-random", Planets.sun, 1f, 3){{
             localizedName = "Random";
             generator = new RandomPlanetGenerator();

@@ -10,7 +10,7 @@ import randomMindustry.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
-import static randomMindustry.mappers.item.ItemMapper.*;
+import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomCrafter extends GenericCrafter implements RandomBlock {
     public static int lastTier = 0;
