@@ -74,6 +74,7 @@ public class Main extends Mod {
             alwaysUnlocked = true;
             landCloudColor = Team.crux.color.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
+            unlockedOnLand.add(Items.carbide);
         }};
         RandomTechTree.load();
     }
