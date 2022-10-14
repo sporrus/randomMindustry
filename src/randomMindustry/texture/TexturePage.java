@@ -43,7 +43,6 @@ public class TexturePage {
         newRegion.texture.getTextureData().getPixmap().draw(newPixmap, newRegion.getX(), newRegion.getY());
         newRegion.setWidth(newPixmap.width);
         newRegion.setHeight(newPixmap.height);
-        newPixmap.dispose();
         return newRegion;
     }
 
