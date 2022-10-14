@@ -2,6 +2,7 @@ package randomMindustry;
 
 import mindustry.world.meta.*;
 import randomMindustry.string.*;
+import randomMindustry.texture.*;
 
 public class RMVars{
     public static ItemStringGenerator itemStringGen = new ItemStringGenerator();
@@ -15,7 +16,5 @@ public class RMVars{
     public static int itemSpriteY = 3;
     public static int itemSprites = itemSpriteX * itemSpriteY;
 
-    public static int crafterSpriteX = 8;
-    public static int crafterSpriteY = 1;
-    public static int crafterSprites = crafterSpriteX * crafterSpriteY;
+    public static TextureGrid crafterSprites = new TextureGrid("random-mindustry-crafters", 64,11,1, 96,1,1);
 }

@@ -1,7 +1,6 @@
 package randomMindustry.mappers.block.blocks;
 
 import arc.graphics.*;
-import arc.graphics.g2d.*;
 import arc.math.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
@@ -10,6 +9,7 @@ import randomMindustry.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
+import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomCrafter extends GenericCrafter implements RandomBlock {
@@ -18,7 +18,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
 
     public RandomCrafter(String name) {
         super(name);
-        size = 2;
+        size = r.random(2, 3);
         health = Mathf.round(r.random(5, 50) * size, 5);
 
         int tier = lastTier++ / 3;
@@ -48,11 +48,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
 
     @Override
     public void createIcons(MultiPacker packer) {
-        PixmapRegion region = packer.get("random-mindustry-crafters");
-        int sprite = r.random(0, RMVars.crafterSprites - 1);
-        int x = (sprite % RMVars.crafterSpriteX) * 64;
-        int y = (sprite / RMVars.crafterSpriteX) * 64;
-        Pixmap pixmap = region.crop(x, y, 64, 64);
+        Pixmap pixmap = crafterSprites.random(packer, size * 32, r);
         TextureManager.recolorRegion(pixmap, item.color);
         this.region = fullIcon = uiIcon = TextureManager.alloc(pixmap);
     }
