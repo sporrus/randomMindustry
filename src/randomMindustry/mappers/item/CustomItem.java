@@ -26,10 +26,10 @@ public class CustomItem extends Item {
         locked = true;
 
         hardness = localTier + 1;
-        explosiveness = r.random(1f);
-        radioactivity = r.random(1f);
-        flammability = r.random(1f);
-        charge = r.random(1f);
+        explosiveness = r.random(100) / 100f;
+        radioactivity = r.random(100) / 100f;
+        flammability = r.random(100) / 100f;
+        charge = r.random(100) / 100f;
         cost = r.random(0.25f, 1f);
 
         localizedName = itemStringGen.generateName();
