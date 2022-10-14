@@ -1,6 +1,7 @@
 package randomMindustry.random;
 
 import arc.struct.*;
+import arc.util.*;
 import mindustry.content.*;
 import mindustry.game.*;
 import mindustry.type.*;
@@ -21,6 +22,7 @@ public class RandomTechTree {
             CustomItemSeq items = ItemMapper.generatedItems.copy();
             items.each(item -> {
                 CustomItem depend = depends(item);
+                Log.info(item + " " + depend);
                 item.techNode = new TechTree.TechNode(
                         depend == null ? TechTree.context() : depend.techNode,
                         item,
@@ -30,28 +32,24 @@ public class RandomTechTree {
             });
         });
     }
-
+    
     public static CustomItem depends(CustomItem item) {
-        if (item.hardness == 1) return null;
-        CustomItem[] depend = {null};
-        int[] amount = {0};
-        int[] lastTier = {Integer.MAX_VALUE};
-        BlockMapper.generatedBlocks.each(block -> {
-            if (block instanceof RandomCrafter r) {
-                if (!new Seq<>(r.outputItems).contains(i -> i.item == item)) return;
-                ItemStack consume = getInputs(r).sort((a, b) -> b.amount - a.amount).get(0);
-                if (amount[0] > consume.amount) return;
-                depend[0] = (CustomItem) consume.item;
-                amount[0] = consume.amount;
-            } else if (block instanceof RandomDrill r) {
-                if (r.tier < item.hardness - 1) return;
-                if (r.tier > lastTier[0]) return;
-                Item i = new Seq<>(r.requirements).sort((a, b) -> b.amount - a.amount).get(0).item;
-                depend[0] = (CustomItem) i;
-                lastTier[0] = r.tier;
-            }
-        });
-        return depend[0];
+        if (item.tierType == ItemTierType.drill) {
+            if (item.hardness == 1) return null;
+            RandomDrill drill = (RandomDrill) BlockMapper.generatedBlocks
+                    .select(b -> b instanceof RandomDrill)
+                    .select(d -> ((RandomDrill) d).tier >= item.hardness)
+                    .sort((a, b) -> ((RandomDrill) a).tier - ((RandomDrill) b).tier)
+                    .get(0);
+            return (CustomItem) Seq.with(drill.requirements).sort((a, b) -> b.amount - a.amount).get(0).item;
+        } else if (item.tierType == ItemTierType.craft) {
+            RandomCrafter crafter = (RandomCrafter) BlockMapper.generatedBlocks
+                    .select(b -> b instanceof RandomCrafter)
+                    .select(c -> Seq.with(((RandomCrafter) c).outputItems).contains(i -> i.item == item))
+                    .get(0);
+            return (CustomItem) getInputs(crafter).sort((a, b) -> b.amount - a.amount).get(0).item;
+        }
+        return null;
     }
 
     public static Seq<ItemStack> getInputs(Block block) {
