@@ -1,4 +1,4 @@
-package randomMindustry;
+package randomMindustry.random;
 
 import arc.struct.Seq;
 

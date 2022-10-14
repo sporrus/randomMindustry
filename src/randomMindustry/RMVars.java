@@ -1,6 +1,8 @@
 package randomMindustry;
 
+import arc.struct.*;
 import mindustry.world.meta.*;
+import randomMindustry.random.*;
 import randomMindustry.string.*;
 import randomMindustry.texture.*;
 
@@ -16,5 +18,9 @@ public class RMVars{
     public static int itemSpriteY = 3;
     public static int itemSprites = itemSpriteX * itemSpriteY;
 
-    public static TextureGrid crafterSprites = new TextureGrid("random-mindustry-crafters", 64,11,1, 96,1,1);
+    public static ObjectMap<Integer, TextureGrid> crafterSprites = ObjectMap.of(
+            2, new TextureGrid("random-mindustry-crafters2"),
+            3, new TextureGrid("random-mindustry-crafters3")
+    );
+    public static TextureGrid oreSprites = new TextureGrid("random-mindustry-ores");
 }

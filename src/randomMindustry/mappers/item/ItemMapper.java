@@ -3,7 +3,7 @@ package randomMindustry.mappers.item;
 import arc.func.*;
 import arc.struct.*;
 import mindustry.type.*;
-import randomMindustry.*;
+import randomMindustry.random.*;
 
 public class ItemMapper {
     public static final CustomItemSeq generatedItems = new CustomItemSeq();

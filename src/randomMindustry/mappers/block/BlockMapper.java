@@ -2,9 +2,9 @@ package randomMindustry.mappers.block;
 
 import arc.math.*;
 import arc.struct.*;
-import randomMindustry.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
+import randomMindustry.random.*;
 
 public class BlockMapper {
     public static final Seq<RandomBlock> generatedBlocks = new Seq<>();

@@ -1,4 +1,4 @@
-package randomMindustry;
+package randomMindustry.random;
 
 import arc.struct.*;
 import mindustry.content.*;
@@ -6,6 +6,7 @@ import mindustry.game.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.consumers.*;
+import randomMindustry.*;
 import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;

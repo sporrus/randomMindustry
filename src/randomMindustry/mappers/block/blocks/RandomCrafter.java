@@ -48,7 +48,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
 
     @Override
     public void createIcons(MultiPacker packer) {
-        Pixmap pixmap = crafterSprites.random(packer, size * 32, r);
+        Pixmap pixmap = crafterSprites.get(size).random(packer, size * 32, r);
         TextureManager.recolorRegion(pixmap, item.color);
         this.region = fullIcon = uiIcon = TextureManager.alloc(pixmap);
     }

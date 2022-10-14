@@ -7,9 +7,9 @@ import mindustry.game.*;
 import mindustry.graphics.g3d.*;
 import mindustry.mod.*;
 import mindustry.type.*;
-import randomMindustry.mappers.*;
 import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.item.*;
+import randomMindustry.random.*;
 import randomMindustry.texture.*;
 
 public class Main extends Mod {
