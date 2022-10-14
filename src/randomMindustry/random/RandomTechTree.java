@@ -21,7 +21,6 @@ public class RandomTechTree {
         Main.random.techTree = nodeRoot("rm-random", Items.carbide, () -> {
             ItemMapper.generatedItems.each(item -> {
                 CustomItem depend = depends(item);
-                Log.info(item + " " + depend);
                 item.techNode = new TechNode(
                         depend == null ? TechTree.context() : depend.techNode,
                         item,
@@ -31,7 +30,7 @@ public class RandomTechTree {
             });
         });
     }
-    
+
     public static CustomItem depends(CustomItem item) {
         if (item.tierType == ItemTierType.drill) {
             if (item.hardness == 1) return null;
