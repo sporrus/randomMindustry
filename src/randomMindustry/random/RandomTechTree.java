@@ -19,11 +19,10 @@ import static mindustry.content.TechTree.*;
 public class RandomTechTree {
     public static void load() {
         Main.random.techTree = nodeRoot("rm-random", Items.carbide, () -> {
-            CustomItemSeq items = ItemMapper.generatedItems.copy();
-            items.each(item -> {
+            ItemMapper.generatedItems.each(item -> {
                 CustomItem depend = depends(item);
                 Log.info(item + " " + depend);
-                item.techNode = new TechTree.TechNode(
+                item.techNode = new TechNode(
                         depend == null ? TechTree.context() : depend.techNode,
                         item,
                         item.researchRequirements()
