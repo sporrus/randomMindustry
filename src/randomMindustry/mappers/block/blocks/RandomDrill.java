@@ -30,7 +30,7 @@ public class RandomDrill extends Drill implements RandomBlock {
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
-        localizedName = mainItem + " drill";
+        localizedName = mainItem + " Drill";
     }
 
     @Override
