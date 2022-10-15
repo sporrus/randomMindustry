@@ -41,5 +41,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
         limitRange();
+        
+        localizedName = "Tristan the Turret"
     }
 }
