@@ -20,7 +20,7 @@ public class TexturePage {
 
     public void newTexture() {
         texture = new Texture(new PixmapTextureData(new Pixmap(size * count, size * count), false, false));
-//        texture.setFilter(Texture.TextureFilter.linear, Texture.TextureFilter.linear);
+        texture.setFilter(Texture.TextureFilter.linear, Texture.TextureFilter.linear);
         textures.add(texture);
     }
 
