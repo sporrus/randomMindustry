@@ -19,7 +19,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         health = Mathf.round(r.random(5, 50) * size * tier, 5);
 
         reload = r.random(0.5f, 50f);
-        range = r.random(16f, 800f * tier / 12f);
+        range = r.random(64f, 800f * tier / 20f);
         rotateSpeed = r.random(0.5f, 5f);
         inaccuracy = r.random(1f, 90f / tier * 10f / reload);
 

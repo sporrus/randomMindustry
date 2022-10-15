@@ -30,7 +30,7 @@ public class CustomItem extends Item {
         radioactivity = r.random(100) / 100f;
         flammability = r.random(100) / 100f;
         charge = r.random(100) / 100f;
-        cost = r.random(0.25f, 1f);
+        cost = r.random(0.25f, 0.75f);
 
         localizedName = itemStringGen.generateName();
         description = itemStringGen.generateDescription(this);

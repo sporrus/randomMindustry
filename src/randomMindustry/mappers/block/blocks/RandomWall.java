@@ -39,15 +39,18 @@ public class RandomWall extends Wall implements RandomBlock {
     @Override
     public void load() {
         super.load();
+        if (!pixmapLoaded) return;
         region = fullIcon = uiIcon = pixmapRegion;
     }
 
     private TextureRegion pixmapRegion;
+    private boolean pixmapLoaded = false;
     @Override
     public void createIcons(MultiPacker packer) {
         super.createIcons(packer);
         Pixmap pixmap = wallSprites.get(size).random(packer, size * 32, r);
         TextureManager.recolorRegion(pixmap, mainItem.color);
         pixmapRegion = TextureManager.alloc(pixmap);
+        pixmapLoaded = true;
     }
 }

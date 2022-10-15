@@ -39,11 +39,13 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
     @Override
     public void load() {
         super.load();
+        if (!pixmapLoaded) return;
         regions = pixmapRegions;
-        if (regions != null) fullIcon = uiIcon = regions[0][0];
+        fullIcon = uiIcon = regions[0][0];
     }
 
     private TextureRegion[][] pixmapRegions;
+    private boolean pixmapLoaded = false;
     @Override
     public void createIcons(MultiPacker packer) {
         PixmapRegion region = packer.get("random-mindustry-conveyors");
@@ -55,5 +57,6 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
                 pixmapRegions[i][j] = TextureManager.alloc(frame);
             }
         }
+        pixmapLoaded = true;
     }
 }

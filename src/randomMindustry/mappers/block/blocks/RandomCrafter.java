@@ -56,15 +56,18 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
     @Override
     public void load() {
         super.load();
+        if (!pixmapLoaded) return;
         region = fullIcon = uiIcon = pixmapRegion;
     }
 
     private TextureRegion pixmapRegion;
+    private boolean pixmapLoaded = false;
     @Override
     public void createIcons(MultiPacker packer) {
         Pixmap pixmap = crafterSprites.get(size).random(packer, size * 32, r);
         TextureManager.recolorRegion(pixmap, item.color);
         pixmapRegion = TextureManager.alloc(pixmap);
+        pixmapLoaded = true;
     }
 
     public enum RandomCrafterType {

@@ -45,6 +45,7 @@ public class RandomDrill extends Drill implements RandomBlock {
     @Override
     public void load() {
         super.load();
+        if (!pixmapLoaded) return;
         region = pixmapRegion;
         topRegion = pixmapTopRegion;
         rotatorRegion = pixmapRotatorRegion;
@@ -57,6 +58,7 @@ public class RandomDrill extends Drill implements RandomBlock {
     private TextureRegion pixmapRotatorRegion;
     private TextureRegion pixmapItemRegion;
     private TextureRegion pixmapIcon;
+    private boolean pixmapLoaded = false;
     @Override
     public void createIcons(MultiPacker packer) {
         Pixmap sprite = drillSprites.random(packer, 192, 64, r);
@@ -72,5 +74,6 @@ public class RandomDrill extends Drill implements RandomBlock {
         pixmapRotatorRegion = TextureManager.alloc(rotatorRegion);
         pixmapItemRegion = TextureManager.alloc(packer.get("drill-item-2").crop());
         pixmapIcon = TextureManager.alloc(icon);
+        pixmapLoaded = true;
     }
 }
