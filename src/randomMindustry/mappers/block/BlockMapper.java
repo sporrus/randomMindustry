@@ -17,15 +17,12 @@ public class BlockMapper {
             generatedBlocks.add(new RandomDrill("random-drill-" + i));
         for (int i = 0; i < ItemMapper.generatedItems.selectTierType(ItemTierType.craft).size; i++)
             generatedBlocks.add(new RandomCrafter("random-crafter-" + i));
-        for (int i = 0; i < ItemMapper.maxTier; i++)
+        for (int i = 0; i < ItemMapper.maxTier; i++) {
             generatedBlocks.add(new RandomItemTurret("random-item-turret-" + i));
-        for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomWall("random-wall-" + i));
-        for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomConveyor("random-conveyor-" + i));
-        for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomRouter("random-router-" + i));
-        for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomItemBridge("random-item-bridge-" + i));
+        }
     }
 }

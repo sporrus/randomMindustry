@@ -16,7 +16,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
     public RandomItemTurret(String name) {
         super(name);
         size = (int) Math.max(1, Math.min(4, tier / 3f));
-        health = Mathf.round(r.random(5, 50) * size * tier, 5);
+        health = Mathf.round(r.random(100, 500) * size * tier, 5);
 
         reload = r.random(0.5f, 50f);
         range = r.random(64f, 800f * tier / 20f);

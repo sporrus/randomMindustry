@@ -39,6 +39,8 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         consumeItems(itemStacks);
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
+        squareSprite = false;
+
         type = RandomCrafterType.random(r);
         localizedName = Core.bundle.format("crafter.rm-name." + type, item.localizedName);
         String output = itemStacks[0].item.localizedName;

@@ -12,6 +12,7 @@ import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
 import static randomMindustry.mappers.block.BlockMapper.*;
+import static randomMindustry.RMVars.*;
 
 public class RandomRouter extends Router implements RandomBlock {
     public static int lastTier = 1;
@@ -28,6 +29,7 @@ public class RandomRouter extends Router implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
         speed = 5.5f * tier;
+        squareSprite = false;
 
         localizedName = mainItem.localizedName + " Router";
     }
@@ -35,19 +37,20 @@ public class RandomRouter extends Router implements RandomBlock {
     @Override
     public void loadIcon() {}
 
-    /* @Override
+    @Override
     public void load() {
         super.load();
         if (!pixmapLoaded) return;
-        regions = pixmapRegions;
-        fullIcon = uiIcon = regions[0][0];
-    } */
+        region = fullIcon = uiIcon = pixmapRegion;
+    }
 
-    /* private TextureRegion[][] pixmapRegions;
-    private boolean pixmapLoaded = false; */
-    
+    private TextureRegion pixmapRegion;
+    private boolean pixmapLoaded = false;
     @Override
     public void createIcons(MultiPacker packer) {
-        // gorodmi how do i
+        Pixmap pixmap = routerSprites.random(packer, 32, 32, r);
+        TextureManager.recolorRegion(pixmap, mainItem.color);
+        pixmapRegion = TextureManager.alloc(pixmap);
+        pixmapLoaded = true;
     }
 }

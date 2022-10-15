@@ -28,4 +28,5 @@ public class RMVars{
     );
     public static TextureGrid oreSprites = new TextureGrid("random-mindustry-ores");
     public static TextureGrid drillSprites = new TextureGrid("random-mindustry-drills");
+    public static TextureGrid routerSprites = new TextureGrid("random-mindustry-routers");
 }

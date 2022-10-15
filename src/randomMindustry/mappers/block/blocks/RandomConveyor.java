@@ -27,6 +27,8 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
+        squareSprite = false;
+
         speed = 0.03f * tier;
         displayedSpeed = speed * 136;
 

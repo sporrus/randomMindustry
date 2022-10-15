@@ -30,6 +30,8 @@ public class RandomWall extends Wall implements RandomBlock {
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
+        squareSprite = false;
+
         localizedName = mainItem.localizedName + " Wall";
     }
 
