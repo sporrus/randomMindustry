@@ -24,6 +24,8 @@ public class BlockMapper {
         for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomConveyor("random-conveyor-" + i));
         for (int i = 0; i < ItemMapper.maxTier; i++)
+            generatedBlocks.add(new RandomRouter("random-router-" + i));
+        for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomItemBridge("random-item-bridge-" + i));
     }
 }
