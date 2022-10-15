@@ -26,7 +26,7 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
         itemCapacity = 10 * tier;
         range = tier + 2;
 
-        localizedName = mainItem.localizedName + " bridge";
+        localizedName = mainItem.localizedName + " Bridge";
     }
 
 
