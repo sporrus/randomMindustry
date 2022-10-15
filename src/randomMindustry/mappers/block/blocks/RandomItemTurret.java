@@ -42,6 +42,6 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
 
         limitRange();
         
-        localizedName = "Tristan the Turret"
+        localizedName = "Tristan the Turret";
     }
 }
