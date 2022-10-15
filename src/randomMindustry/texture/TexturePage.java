@@ -54,11 +54,15 @@ public class TexturePage {
         return new TextureRegion(texture, x * size, y * size, size, size);
     }
 
+    public void reload() {
+        dispose();
+        newTexture();
+    }
+
     public void dispose() {
-        for (Texture texture : textures) {
-            texture.getTextureData().consumePixmap().dispose();
-            texture.dispose();
-        }
+        for (Texture texture : textures) texture.dispose();
         textures.clear();
+        texture = null;
+        alloc = 0;
     }
 }

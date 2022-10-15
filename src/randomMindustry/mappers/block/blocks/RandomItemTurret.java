@@ -5,6 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
+import arc.util.*;
 import mindustry.entities.bullet.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
@@ -18,12 +19,26 @@ import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomItemTurret extends ItemTurret implements RandomBlock {
-    public static int lastTier = 0;
+    public final int id;
     public Item mainItem;
-    public int tier = ++lastTier;
+    public int tier;
 
-    public RandomItemTurret(String name) {
-        super(name);
+    public RandomItemTurret(String name, int id) {
+        super(name + id);
+        this.id = id;
+        generate();
+        stats.add(RMVars.seedStat, RMVars.seedStatValue);
+        squareSprite = false;
+    }
+
+    public void reload() {
+        generate();
+        reloadIcons();
+    }
+
+    public void generate() {
+        tier = id + 1;
+
         size = (int) Math.max(1, Math.min(4, tier / 3f));
         health = Mathf.round(r.random(100, 200) * size * tier, 5);
 
@@ -48,33 +63,45 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
 
         requirements(Category.turret, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
-        stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
         limitRange();
-        
+
         localizedName = mainItem.localizedName + " Turret";
     }
 
     @Override
     public void load() {
         super.load();
-        if (!pixmapLoaded) return;
+        if (pixmapLoaded) applyIcons();
+    }
+
+    // TODO: this is bad
+    public void applyIcons() {
         region = ((DrawTurret) drawer).preview = pixmapTurret;
-        fullIcon = uiIcon = pixmapIcon;
+        TextureRegion baseRegion = ((DrawTurret) drawer).base;
+        Pixmap base = baseRegion.texture.getTextureData().getPixmap()
+                .crop(baseRegion.getX(), baseRegion.getY(), baseRegion.width, baseRegion.height);
+        base.draw(region.texture.getTextureData().getPixmap()
+                .crop(region.getX(), region.getY(), region.width, region.height), true);
+        fullIcon = uiIcon = TextureManager.alloc(base);
     }
 
     private boolean pixmapLoaded = false;
     private TextureRegion pixmapTurret;
-    private TextureRegion pixmapIcon;
+    public void createSprites(Pixmap from) {
+        TextureManager.recolorRegion(from, mainItem.color);
+        from = Pixmaps.outline(new PixmapRegion(from), outlineColor, outlineRadius);
+        pixmapTurret = TextureManager.alloc(from);
+        pixmapLoaded = true;
+    }
+
     @Override
     public void createIcons(MultiPacker packer) {
-        Pixmap pixmap = itemTurretSprites.get(size).random(packer, size * 32, r);
-        TextureManager.recolorRegion(pixmap, mainItem.color);
-        pixmap = Pixmaps.outline(new PixmapRegion(pixmap), outlineColor, outlineRadius);
-        Pixmap icon = packer.get("block-" + size).crop();
-        icon.draw(pixmap, true);
-        pixmapTurret = TextureManager.alloc(pixmap);
-        pixmapIcon = TextureManager.alloc(icon);
-        pixmapLoaded = true;
+        createSprites(itemTurretSprites.get(size).random(packer, size * 32, r));
+    }
+
+    public void reloadIcons() {
+        createSprites(itemTurretSprites.get(size).random(size * 32, r));
+        applyIcons();
     }
 }

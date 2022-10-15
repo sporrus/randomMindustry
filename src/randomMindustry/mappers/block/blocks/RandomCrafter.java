@@ -16,16 +16,30 @@ import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomCrafter extends GenericCrafter implements RandomBlock {
-    public static int lastTier = 0;
+    public final int id;
     public CustomItem item;
     public RandomCrafterType type;
 
-    public RandomCrafter(String name) {
-        super(name);
+    public RandomCrafter(String name, int id) {
+        super(name + id);
+        this.id = id;
+        generate();
+        stats.add(RMVars.seedStat, RMVars.seedStatValue);
+        squareSprite = false;
+    }
+
+    @Override
+    public void reload() {
+        generate();
+        reloadIcons();
+    }
+
+    public void generate() {
+        int tier = id / 3;
+
         size = r.random(2, 3);
         health = Mathf.round(r.random(5, 50) * size, 5);
 
-        int tier = lastTier++ / 3;
         CustomItemSeq items = ItemMapper.generatedItems
                 .selectTierType(ItemTierType.craft)
                 .selectLocalTier(tier)
@@ -36,9 +50,6 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
         ItemStack[] itemStacks = ItemMapper.getItemStacks(tier * 2, r.random(1, 3), () -> r.random(1, 10));
         consumeItems(itemStacks);
-        stats.add(RMVars.seedStat, RMVars.seedStatValue);
-
-        squareSprite = false;
 
         type = RandomCrafterType.random(r);
         localizedName = Core.bundle.format("crafter.rm-name." + type, item.localizedName);
@@ -57,18 +68,29 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
     @Override
     public void load() {
         super.load();
-        if (!pixmapLoaded) return;
+        if (pixmapLoaded) applyIcons();
+    }
+
+    public void applyIcons() {
         region = fullIcon = uiIcon = pixmapRegion;
     }
 
     private TextureRegion pixmapRegion;
     private boolean pixmapLoaded = false;
+    public void createSprites(Pixmap from) {
+        TextureManager.recolorRegion(from, item.color);
+        pixmapRegion = TextureManager.alloc(from);
+        pixmapLoaded = true;
+    }
+
     @Override
     public void createIcons(MultiPacker packer) {
-        Pixmap pixmap = crafterSprites.get(size).random(packer, size * 32, r);
-        TextureManager.recolorRegion(pixmap, item.color);
-        pixmapRegion = TextureManager.alloc(pixmap);
-        pixmapLoaded = true;
+        createSprites(crafterSprites.get(size).random(packer, size * 32, r));
+    }
+
+    public void reloadIcons() {
+        createSprites(crafterSprites.get(size).random(size * 32, r));
+        applyIcons();
     }
 
     public enum RandomCrafterType {

@@ -11,6 +11,7 @@ import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.random.*;
 import randomMindustry.texture.*;
+import randomMindustry.ui.*;
 
 public class Main extends Mod {
     public static Planet random;
@@ -21,9 +22,9 @@ public class Main extends Mod {
 
     @Override
     public void init() {
+        Settings.load();
         TextureManager.init();
         Vars.content.planets().select(p -> p != random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
-
 // debug atlas:
 //        final int[] i = {0};
 //        TextureManager.getAllTextures().each((t) -> {
@@ -38,6 +39,13 @@ public class Main extends Mod {
 //                Log.info("      " + item.name + (pack.locked(item) ? " [red]LOCKED[]" : ""));
 //            }
 //        }
+    }
+
+    public static void reload() {
+        TextureManager.reload();
+        SeedManager.generateSeed();
+        ItemMapper.reloadContent();
+        BlockMapper.reloadContent();
     }
 
     @Override

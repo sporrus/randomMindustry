@@ -11,16 +11,27 @@ import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.item.ItemMapper.*;
 
 public class CustomItem extends Item {
-    public static int lastGlobalTier = 0;
+    public final int id;
     public ItemTierType tierType;
     public int globalTier;
     public int localTier;
     public boolean locked;
 
-    public CustomItem(String name) {
-        super(name, new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f)));
+    public CustomItem(String name, int id) {
+        super(name + id, Color.red);
+        this.id = id;
+        generate();
+    }
 
-        globalTier = (lastGlobalTier++) / 3;
+    public void reload() {
+        generate();
+        reloadIcons();
+    }
+
+    public void generate() {
+        color = new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f));
+
+        globalTier = id / 3;
         localTier = globalTier / 2;
         tierType = globalTier % 2 == 0 ? ItemTierType.drill : ItemTierType.craft;
         locked = true;
@@ -38,21 +49,36 @@ public class CustomItem extends Item {
 
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
         stats.add(RMVars.tierStat, t -> t.add(tierType + " " + globalTier + " (" + localTier + ")"));
-
-        generateIcons = true;
-    }
-
-    @Override
-    public void createIcons(MultiPacker packer) {
-        PixmapRegion region = packer.get("random-mindustry-items");
-        int sprite = r.random(0, RMVars.itemSprites - 1);
-        int x = (sprite % RMVars.itemSpriteX) * 32;
-        int y = (sprite / RMVars.itemSpriteX) * 32;
-        Pixmap pixmap = region.crop(x, y, 32, 32);
-        TextureManager.recolorRegion(pixmap, color);
-        fullIcon = uiIcon = TextureManager.alloc(pixmap);
     }
 
     @Override
     public void loadIcon() {}
+
+    @Override
+    public void load() {
+        super.load();
+        if (pixmapLoaded) applyIcons();
+    }
+
+    private boolean pixmapLoaded = false;
+    private TextureRegion pixmapIcon;
+    public void createSprites(Pixmap from) {
+        TextureManager.recolorRegion(from, color);
+        pixmapIcon = TextureManager.alloc(from);
+        pixmapLoaded = true;
+    }
+
+    public void applyIcons() {
+        fullIcon = uiIcon = pixmapIcon;
+    }
+
+    @Override
+    public void createIcons(MultiPacker packer) {
+        createSprites(itemSprites.random(packer, 32, r));
+    }
+
+    public void reloadIcons() {
+        createSprites(itemSprites.random(32, r));
+        applyIcons();
+    }
 }

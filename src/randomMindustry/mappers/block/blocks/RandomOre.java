@@ -2,6 +2,7 @@ package randomMindustry.mappers.block.blocks;
 
 import arc.graphics.*;
 import arc.struct.*;
+import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.world.blocks.environment.*;
 import randomMindustry.mappers.item.*;
@@ -13,18 +14,30 @@ import static randomMindustry.RMVars.*;
 
 public class RandomOre extends OreBlock implements RandomBlock {
     public static final Seq<RandomOre> all = new Seq<>();
-    public static int lastTier = 0;
+    public final int id;
 
-    public RandomOre(String name) {
-        super(name, ItemMapper.generatedItems
+    public RandomOre(String name, int id) {
+        super(name + id, Items.copper);
+        all.add(this);
+        this.id = id;
+        generate();
+    }
+
+    @Override
+    public void reload() {
+        generate();
+    }
+
+    public void generate() {
+        setup(ItemMapper.generatedItems
                 .selectTierType(ItemTierType.drill)
-                .selectLocalTier((lastTier++) / 3)
+                .selectLocalTier(id / 3)
                 .selectLocked(true)
                 .lockNext(false));
-        all.add(this);
         variants = 3;
     }
 
+    // TODO: make this reload
     @Override
     public void createIcons(MultiPacker packer) {
         Pixmap ore = oreSprites.random(packer, 96, 32, r);
@@ -41,4 +54,6 @@ public class RandomOre extends OreBlock implements RandomBlock {
             packer.add(MultiPacker.PageType.environment, name + (i + 1), pixmap);
         }
     }
+
+
 }

@@ -1,12 +1,10 @@
 package randomMindustry.texture;
 
+import arc.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
-import arc.struct.*;
-import arc.util.*;
 import mindustry.graphics.*;
-import randomMindustry.*;
 
 public class TextureGrid {
     public String packerName;
@@ -15,12 +13,16 @@ public class TextureGrid {
         this.packerName = packerName;
     }
 
-    public PixmapRegion get(MultiPacker packer) {
-        return packer.get(packerName);
+    public Pixmap getPacker(MultiPacker packer) {
+        return packer.get(packerName).crop();
     }
 
-    public Pixmap random(MultiPacker packer, int width, int height, Rand r) {
-        PixmapRegion region = get(packer);
+    public Pixmap get() {
+        TextureRegion region = Core.atlas.find(packerName);
+        return region.texture.getTextureData().getPixmap().crop(region.getX(), region.getY(), region.width, region.height);
+    }
+
+    public Pixmap random(Pixmap region, int width, int height, Rand r) {
         int xSize = region.width / width;
         int ySize = region.height / height;
         int sprite = r.random(0, xSize * ySize - 1);
@@ -31,5 +33,17 @@ public class TextureGrid {
 
     public Pixmap random(MultiPacker packer, int size, Rand r) {
         return random(packer, size, size, r);
+    }
+
+    public Pixmap random(MultiPacker packer, int width, int height, Rand r) {
+        return random(getPacker(packer), width, height, r);
+    }
+
+    public Pixmap random(int size, Rand r) {
+        return random(size, size, r);
+    }
+
+    public Pixmap random(int width, int height, Rand r) {
+        return random(get(), width, height, r);
     }
 }

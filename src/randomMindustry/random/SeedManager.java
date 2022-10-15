@@ -8,7 +8,10 @@ public class SeedManager {
     private static final Seq<SyncedRand> rands = new Seq<>();
 
     public static void generateSeed() {
-        seed = new Rand().nextLong();
+        setSeed(new Rand().nextLong());
+    }
+    public static void setSeed(long seed) {
+        SeedManager.seed = seed;
         updateRands();
     }
     public static long getSeed() {

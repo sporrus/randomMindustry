@@ -56,6 +56,7 @@ public class CustomItemSeq extends Seq<CustomItem> {
 
     public CustomItem lockNext(boolean lock) {
         CustomItem next = next();
+        if (next == null) return null;
         next.locked = lock;
         if (!lock) remove(next);
         return next;

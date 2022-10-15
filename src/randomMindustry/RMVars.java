@@ -14,10 +14,7 @@ public class RMVars{
             tierStat = new Stat("rm-tier", rmStats);
     public static StatValue seedStatValue = t -> t.add(Long.toString(SeedManager.getSeed()));
 
-    public static int itemSpriteX = 8;
-    public static int itemSpriteY = 3;
-    public static int itemSprites = itemSpriteX * itemSpriteY;
-
+    public static TextureGrid itemSprites = new TextureGrid("random-mindustry-items");
     public static ObjectMap<Integer, TextureGrid> crafterSprites = ObjectMap.of(
             2, new TextureGrid("random-mindustry-crafters2"),
             3, new TextureGrid("random-mindustry-crafters3")

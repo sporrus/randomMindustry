@@ -13,9 +13,13 @@ public class ItemMapper {
 
     public static void generateContent() {
         for (int i = 0; i < itemCount; i++) {
-            CustomItem item = new CustomItem("random-item-" + i);
+            CustomItem item = new CustomItem("random-item-", i);
             generatedItems.add(item);
         }
+    }
+
+    public static void reloadContent() {
+        generatedItems.each(CustomItem::reload);
     }
 
     public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount) {

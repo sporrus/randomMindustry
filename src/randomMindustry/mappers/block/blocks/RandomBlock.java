@@ -1,3 +1,5 @@
 package randomMindustry.mappers.block.blocks;
 
-public interface RandomBlock {}
+public interface RandomBlock {
+    void reload();
+}

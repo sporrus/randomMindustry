@@ -15,23 +15,35 @@ import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomItemBridge extends ItemBridge implements RandomBlock {
-    public static int lastTier = 1;
+    public final int id;
     public Item mainItem;
-    public int tier = lastTier++;
+    public int tier;
 
-    public RandomItemBridge(String name) {
-        super(name);
+    public RandomItemBridge(String name, int id) {
+        super(name + id);
+        this.id = id;
+        generate();
+        stats.add(RMVars.seedStat, RMVars.seedStatValue);
+        squareSprite = false;
+    }
+
+    @Override
+    public void reload() {
+        generate();
+        reloadIcons();
+    }
+
+    public void generate() {
+        tier = id + 1;
+
         size = 1;
         health = Mathf.round(r.random(1, 10) * tier, 1);
 
         requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 2), () -> r.random(1, 10)));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
-        stats.add(RMVars.seedStat, RMVars.seedStatValue);
 
         itemCapacity = 10 * tier;
         range = tier + 2;
-
-        squareSprite = false;
 
         localizedName = mainItem.localizedName + " Bridge";
     }
@@ -39,7 +51,10 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
     @Override
     public void load() {
         super.load();
-        if (!pixmapLoaded) return;
+        if (pixmapLoaded) applyIcons();
+    }
+
+    public void applyIcons() {
         region = fullIcon = uiIcon = pixmapRegion;
         endRegion = pixmapEnd;
         bridgeRegion = pixmapBridge;
@@ -51,14 +66,22 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
     private TextureRegion pixmapEnd;
     private TextureRegion pixmapBridge;
     private TextureRegion pixmapArrow;
+    public void createSprites(Pixmap from) {
+        TextureManager.recolorRegion(from, mainItem.color);
+        pixmapRegion = TextureManager.alloc(from.crop(0, 0, 32, 32));
+        pixmapEnd = TextureManager.alloc(from.crop(32, 0, 32, 32));
+        pixmapBridge = TextureManager.alloc(from.crop(64, 0, 32, 32));
+        pixmapArrow = TextureManager.alloc(from.crop(96, 0, 32, 32));
+        pixmapLoaded = true;
+    }
+
     @Override
     public void createIcons(MultiPacker packer) {
-        Pixmap pixmap = bridgeSprites.random(packer, 128, 32, r);
-        TextureManager.recolorRegion(pixmap, mainItem.color);
-        pixmapRegion = TextureManager.alloc(pixmap.crop(0, 0, 32, 32));
-        pixmapEnd = TextureManager.alloc(pixmap.crop(32, 0, 32, 32));
-        pixmapBridge = TextureManager.alloc(pixmap.crop(64, 0, 32, 32));
-        pixmapArrow = TextureManager.alloc(pixmap.crop(96, 0, 32, 32));
-        pixmapLoaded = true;
+        createSprites(bridgeSprites.random(packer, 128, 32, r));
+    }
+
+    public void reloadIcons() {
+        createSprites(bridgeSprites.random(128, 32, r));
+        applyIcons();
     }
 }

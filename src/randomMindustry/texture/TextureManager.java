@@ -15,8 +15,7 @@ public class TextureManager {
     public static final ObjectMap<Integer, TexturePage> pages = new ObjectMap<>();
 
     public static void init() {
-        Events.on(EventType.DisposeEvent.class, (e) ->
-                pages.values().toSeq().each(TexturePage::dispose));
+        Events.on(EventType.DisposeEvent.class, (e) -> pages.forEach(entry -> entry.value.dispose()));
     }
 
     public static TexturePage getOrCreatePage(int size) {
@@ -31,6 +30,10 @@ public class TextureManager {
 
     public static TextureRegion alloc(Pixmap newPixmap) {
         return alloc(newPixmap, newPixmap.width, newPixmap.height);
+    }
+
+    public static void reload() {
+        pages.forEach(e -> e.value.reload());
     }
 
     public static Seq<Texture> getAllTextures() {
