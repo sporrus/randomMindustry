@@ -5,17 +5,15 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
-import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
-import mindustry.world.*;
 import mindustry.world.blocks.distribution.*;
 import randomMindustry.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
-import static randomMindustry.mappers.block.BlockMapper.*;
 import static randomMindustry.RMVars.*;
+import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomRouter extends DuctRouter implements RandomBlock {
     public static int lastTier = 1;
@@ -45,7 +43,7 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
         super.load();
         if (!pixmapLoaded) return;
         region = fullIcon = uiIcon = pixmapRegion;
-        topRegion = Core.atlas.find("empty");
+        topRegion = Core.atlas.find("duct-router-top");
     }
 
     private TextureRegion pixmapRegion;
