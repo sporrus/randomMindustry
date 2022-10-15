@@ -34,6 +34,7 @@ public class CustomItem extends Item {
 
         localizedName = itemStringGen.generateName();
         description = itemStringGen.generateDescription(this);
+        details = "An otherworldly material... Who knows what this could make?";
 
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
         stats.add(RMVars.tierStat, t -> t.add(tierType + " " + globalTier + " (" + localTier + ")"));
