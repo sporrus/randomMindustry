@@ -37,7 +37,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         for (int i = 0; i < itemCount; i++) {
             CustomItem item = seq.random(r);
             seq.remove(item);
-            float damage = r.random(1f, 10f) * tier * reload / 10;
+            float damage = r.random(1f, 10f) + tier * reload;
             float speed = r.random(1f, 10f);
             ammoTypes.put(item, new BasicBulletType(speed, damage){{
                 width = r.random(5f, 10f);
