@@ -6,3 +6,4 @@ Join Our [discord](https://discord.gg/ztC6WJUxZK)!
 
 # Contributors
 BlueWolf3682 - item sprites
+kapzduke - sprites
