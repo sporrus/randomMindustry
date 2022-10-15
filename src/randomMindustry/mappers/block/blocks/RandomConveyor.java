@@ -30,7 +30,7 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         speed = 0.03f * tier;
         displayedSpeed = speed * 136;
 
-        localizedName = mainItem.localizedName + " conveyor";
+        localizedName = mainItem.localizedName + " Conveyor";
     }
 
     @Override
