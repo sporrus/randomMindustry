@@ -5,6 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
+import mindustry.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
@@ -53,7 +54,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
 
         craftTime = r.random(30f, 120f);
 
-        requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
+        requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 50) * size, 5)));
         ItemStack[] itemStacks = ItemMapper.getItemStacks(tier * 2, r.random(1, 3), () -> r.random(1, 10));
         consumeItems(itemStacks);
         outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};

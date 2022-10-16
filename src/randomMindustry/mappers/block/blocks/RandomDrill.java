@@ -46,9 +46,9 @@ public class RandomDrill extends Drill implements RandomBlock {
 
         drillTime = 600f / this.tier;
         int tier = (this.tier - 1) * 2;
-        requirements(Category.production, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(5, 50) * size, 5)));
+        requirements(Category.production, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(6, 12) * size, 2)));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
-        researchCostMultiplier = 0.03f;
+//        researchCostMultiplier = 0.03f;
         localizedName = mainItem.localizedName + " Drill";
     }
 

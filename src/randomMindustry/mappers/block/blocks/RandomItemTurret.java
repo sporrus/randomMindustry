@@ -59,21 +59,35 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         for (int i = 0; i < itemCount; i++) {
             CustomItem item = seq.random(r);
             seq.remove(item);
-            float damage = r.random(1f, 10f) + tier * reload;
+            float damage = tier * reload + r.random(-tier / 2f, tier / 2f);
             float speed = r.random(1f, 10f);
             ammoTypes.put(item, new BasicBulletType(speed, damage){{
                 width = r.random(5f, 10f);
                 height = r.random(width, width + 10);
-                lifetime = range / speed;
-                if(tier > 2) homingPower = r.random(0.025f, 0.2f);
+                if(r.chance(0.35)) homingPower = r.random(0.025f, 0.2f);
+                if(r.chance(0.35)) {
+                    splashDamage = damage * r.random(0.5f, 2f);
+                    splashDamageRadius = r.random(8f, 40f);
+                }
+                if(r.chance(0.35)) {
+                    lightning = r.random(1, 3);
+                    lightningLength = r.random(2, 7);
+                    lightningDamage = damage * r.random(0.25f, 0.5f);
+                    lightningColor = item.color;
+                }
+                if (r.chance(0.35)) {
+                    healPercent = r.random(0.1f, 0.3f);
+                    healColor = item.color;
+                    targetHealing = collidesTeam = true;
+                }
                 backColor = item.color;
                 frontColor = hitColor = item.color.cpy().mul(1.5f);
             }});
         }
-
-        requirements(Category.turret, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
-        mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         limitRange();
+
+        requirements(Category.turret, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(10, 50) * size, 5)));
+        mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         localizedName = mainItem.localizedName + " " + Seq.with("Turret", "Tower", "Gun", "Catapult").random();
     }
 
