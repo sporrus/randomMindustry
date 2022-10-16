@@ -78,7 +78,7 @@ public class Main extends Mod {
 
     @Override
     public void loadContent() {
-        SeedManager.setSeed(Core.settings.getLong("rm-seed"));
+        SeedManager.setSeed(Long.parseLong(Core.settings.getString("rm-seed")));
         ItemMapper.generateContent();
         BlockMapper.generateContent();
         random = new Planet("rm-random", Planets.sun, 1f, 3){{
