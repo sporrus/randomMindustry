@@ -50,11 +50,15 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
                 .selectLocalTier(tier)
                 .selectLocked(true);
         item = items.lockNext(false);
-        outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
+
+        craftTime = r.random(30f, 120f);
 
         requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
         ItemStack[] itemStacks = ItemMapper.getItemStacks(tier * 2, r.random(1, 3), () -> r.random(1, 10));
         consumeItems(itemStacks);
+        outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
+        int maxItems = Math.max(Seq.with(itemStacks).sort((a, b) -> b.amount - a.amount).get(0).amount, outputItems[0].amount);
+        itemCapacity = maxItems * 2;
 
         type = RandomCrafterType.random(r);
         localizedName = Core.bundle.format("crafter.rm-name." + type, item.localizedName);
