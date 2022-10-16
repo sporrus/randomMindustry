@@ -21,6 +21,7 @@ public class CustomItem extends Item {
         super(name + id, Color.red);
         this.id = id;
         generate();
+        if (id < 3) alwaysUnlocked = true;
     }
 
     @Override

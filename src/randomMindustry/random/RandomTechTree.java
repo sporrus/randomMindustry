@@ -14,11 +14,12 @@ import randomMindustry.mappers.item.*;
 import static mindustry.content.TechTree.*;
 
 public class RandomTechTree {
-    private static RandomDrill lastDrill;
-    private static RandomCrafter lastCraft;
-    private static RandomConveyor lastConv;
-    private static RandomItemTurret lastItur;
-    private static RandomWall lastWall;
+    private static final Seq<RandomDrill> lastDrill = new Seq<>();
+    private static final Seq<RandomCrafter> lastCraft = new Seq<>();
+    private static final Seq<RandomConveyor> lastConv = new Seq<>();
+    private static final Seq<RandomItemTurret> lastItur = new Seq<>();
+    private static final Seq<RandomWall> lastWall = new Seq<>();
+    private static SyncedRand r = new SyncedRand();
     
     public static void load() {
         Main.random.techTree = nodeRoot("rm-random", Items.carbide, () -> {
@@ -41,51 +42,56 @@ public class RandomTechTree {
             blocks.each(block -> {
                 if (block instanceof RandomDrill drill) {
                     drill.techNode = new TechNode(
-                            lastDrill == null ? TechTree.context() : lastDrill.techNode,
+                            lastDrill.size == 0 ? TechTree.context() : lastDrill.random(r).techNode,
                             drill,
                             drill.researchRequirements()
                     );
-                    lastDrill = drill;
+                    if (r.chance(0.5) && lastCraft.size > 0) lastCraft.remove(0);
+                    lastDrill.add(drill);
                 } else if (block instanceof RandomCrafter craft) {
                     craft.techNode = new TechNode(
-                            lastCraft == null ? firstDrill.techNode : lastCraft.techNode,
+                            lastCraft.size == 0 ? firstDrill.techNode : lastCraft.random(r).techNode,
                             craft,
                             craft.researchRequirements()
                     );
-                    lastCraft = craft;
+                    if (r.chance(0.5) && lastCraft.size > 0) lastCraft.remove(0);
+                    lastCraft.add(craft);
                 } else if (block instanceof RandomConveyor conv) {
                     conv.techNode = new TechNode(
-                            lastConv == null ? TechTree.context() : lastConv.techNode,
+                            lastConv.size == 0 ? TechTree.context() : lastConv.random(r).techNode,
                             conv,
-                            conv.requirements // intended
+                            conv.researchRequirements() // intended
                     );
-                    lastConv = conv;
+                    if (r.chance(0.5) && lastConv.size > 0) lastConv.remove(0);
+                    lastConv.add(conv);
                 } else if (block instanceof RandomRouter rout) {
                     rout.techNode = new TechNode(
                             ((RandomConveyor)convSeq.get(rout.id)).techNode,
                             rout,
-                            rout.requirements // also intended
+                            rout.researchRequirements() // also intended
                     );
                 } else if (block instanceof RandomItemBridge ibrid) {
                     ibrid.techNode = new TechNode(
                             ((RandomRouter)routSeq.get(ibrid.id)).techNode,
                             ibrid,
-                            ibrid.requirements // also also intended
+                            ibrid.researchRequirements() // also also intended
                     );
                 } else if (block instanceof RandomItemTurret itur) {
                     itur.techNode = new TechNode(
-                            lastItur == null ? TechTree.context() : lastItur.techNode,
+                            lastItur.size == 0 ? TechTree.context() : lastItur.random(r).techNode,
                             itur,
                             itur.researchRequirements()
                     );
-                    lastItur = itur;
+                    if (r.chance(0.5) && lastItur.size > 0) lastItur.remove(0);
+                    lastItur.add(itur);
                 } else if (block instanceof RandomWall wall) {
                     wall.techNode = new TechNode(
-                            lastWall == null ? ((RandomItemTurret)iturSeq.get(0)).techNode : lastWall.techNode,
+                            lastWall.size == 0 ? ((RandomItemTurret)iturSeq.get(0)).techNode : lastWall.random(r).techNode,
                             wall,
                             wall.researchRequirements()
                     );
-                    lastWall = wall;
+                    if (r.chance(0.5) && lastWall.size > 0) lastWall.remove(0);
+                    lastWall.add(wall);
                 }
             });
         });

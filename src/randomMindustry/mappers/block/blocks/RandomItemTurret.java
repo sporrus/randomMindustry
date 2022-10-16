@@ -28,6 +28,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         this.id = id;
         generate();
         squareSprite = false;
+        if (id == 0) alwaysUnlocked = true;
     }
 
     @Override

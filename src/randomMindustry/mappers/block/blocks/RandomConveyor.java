@@ -24,6 +24,7 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         this.id = id;
         generate();
         squareSprite = false;
+        if (id == 0) alwaysUnlocked = true;
     }
 
     @Override
