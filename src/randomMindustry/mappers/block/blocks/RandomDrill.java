@@ -27,6 +27,11 @@ public class RandomDrill extends Drill implements RandomBlock {
     }
 
     @Override
+    public int getTier() {
+        return id + 1;
+    }
+
+    @Override
     public void setStats() {
         super.setStats();
         stats.add(RMVars.seedStat, RMVars.seedStatValue);

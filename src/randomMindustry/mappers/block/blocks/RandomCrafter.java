@@ -29,6 +29,11 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
     }
 
     @Override
+    public int getTier() {
+        return id / 3;
+    }
+
+    @Override
     public void setStats() {
         super.setStats();
         stats.add(RMVars.seedStat, RMVars.seedStatValue);

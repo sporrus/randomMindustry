@@ -28,6 +28,11 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
     }
 
     @Override
+    public int getTier() {
+        return tier;
+    }
+
+    @Override
     public void setStats() {
         super.setStats();
         stats.add(RMVars.seedStat, RMVars.seedStatValue);

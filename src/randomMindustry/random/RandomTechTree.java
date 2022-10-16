@@ -1,7 +1,6 @@
 package randomMindustry.random;
 
 import arc.struct.*;
-import arc.util.*;
 import mindustry.content.*;
 import mindustry.game.*;
 import mindustry.type.*;
@@ -11,8 +10,6 @@ import randomMindustry.*;
 import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
-
-import java.util.*;
 
 import static mindustry.content.TechTree.*;
 
@@ -34,80 +31,62 @@ public class RandomTechTree {
                 );
                 item.techNode.objectives.add(new Objectives.Produce(item));
             });
-            
-            Seq<RandomBlock> drillSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomDrill).sort((a, b) -> ((RandomDrill)a).tier - ((RandomDrill)b).tier);
-            drillSeq.each(block -> {
-                RandomDrill drill = (RandomDrill)block;
-                drill.techNode = new TechNode(
-                    lastDrill == null ? TechTree.context() : lastDrill.techNode,
-                    drill,
-                    drill.researchRequirements()
-                );
-                lastDrill = drill;
-            });
-            
-            Seq<RandomBlock> craftSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomCrafter).sort((a, b) -> ((RandomCrafter)a).id - ((RandomCrafter)b).id);
-            craftSeq.each(block -> {
-                RandomCrafter craft = (RandomCrafter)block;
-                craft.techNode = new TechNode(
-                    lastCraft == null ? ((RandomDrill)drillSeq.get(0)).techNode : lastCraft.techNode,
-                    craft,
-                    craft.researchRequirements()
-                );
-                lastCraft = craft;
-            });
-            
-            Seq<RandomBlock> convSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomConveyor).sort((a, b) -> ((RandomConveyor)a).tier - ((RandomConveyor)b).tier);
-            convSeq.each(block -> {
-                RandomConveyor conv = (RandomConveyor)block;
-                conv.techNode = new TechNode(
-                    lastConv == null ? TechTree.context() : lastConv.techNode,
-                    conv,
-                    conv.requirements // intended
-                );
-                lastConv = conv;
-            });
-            
-            Seq<RandomBlock> routSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomRouter).sort((a, b) -> ((RandomRouter)a).tier - ((RandomRouter)b).tier);
-            routSeq.each(block -> {
-                RandomRouter rout = (RandomRouter)block;
-                rout.techNode = new TechNode(
-                    ((RandomConveyor)convSeq.get(rout.id)).techNode,
-                    rout,
-                    rout.requirements // also intended
-                );
-            });
-            
-            Seq<RandomBlock> ibridSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomItemBridge).sort((a, b) -> ((RandomItemBridge)a).tier - ((RandomItemBridge)b).tier);
-            ibridSeq.each(block -> {
-                RandomItemBridge ibrid = (RandomItemBridge)block;
-                ibrid.techNode = new TechNode(
-                    ((RandomRouter)routSeq.get(ibrid.id)).techNode,
-                    ibrid,
-                    ibrid.requirements // also also intended
-                );
-            });
-            
-            Seq<RandomBlock> iturSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomItemTurret).sort((a, b) -> ((RandomItemTurret)a).tier - ((RandomItemTurret)b).tier);
-            iturSeq.each(block -> {
-                RandomItemTurret itur = (RandomItemTurret)block;
-                itur.techNode = new TechNode(
-                    lastItur == null ? TechTree.context() : lastItur.techNode,
-                    itur,
-                    itur.researchRequirements()
-                );
-                lastItur = itur;
-            });
-            
-            Seq<RandomBlock> wallSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomWall).sort((a, b) -> ((RandomWall)a).tier - ((RandomWall)b).tier);
-            wallSeq.each(block -> {
-                RandomWall wall = (RandomWall)block;
-                wall.techNode = new TechNode(
-                    lastWall == null ? ((RandomItemTurret)iturSeq.get(0)).techNode : lastWall.techNode,
-                    wall,
-                    wall.researchRequirements()
-                );
-                lastWall = wall;
+
+            // TODO: this should be moved into RandomBlock classes (prob getTechParent method)
+            Seq<RandomBlock> blocks = BlockMapper.generatedBlocks.sort((a, b) -> a.getTier() - b.getTier());
+            RandomDrill firstDrill = (RandomDrill) blocks.select(b -> b instanceof RandomDrill).get(0);
+            Seq<RandomBlock> convSeq = blocks.select(b -> b instanceof RandomConveyor);
+            Seq<RandomBlock> routSeq = blocks.select(b -> b instanceof RandomRouter);
+            Seq<RandomBlock> iturSeq = blocks.select(b -> b instanceof RandomItemTurret);
+            blocks.each(block -> {
+                if (block instanceof RandomDrill drill) {
+                    drill.techNode = new TechNode(
+                            lastDrill == null ? TechTree.context() : lastDrill.techNode,
+                            drill,
+                            drill.researchRequirements()
+                    );
+                    lastDrill = drill;
+                } else if (block instanceof RandomCrafter craft) {
+                    craft.techNode = new TechNode(
+                            lastCraft == null ? firstDrill.techNode : lastCraft.techNode,
+                            craft,
+                            craft.researchRequirements()
+                    );
+                    lastCraft = craft;
+                } else if (block instanceof RandomConveyor conv) {
+                    conv.techNode = new TechNode(
+                            lastConv == null ? TechTree.context() : lastConv.techNode,
+                            conv,
+                            conv.requirements // intended
+                    );
+                    lastConv = conv;
+                } else if (block instanceof RandomRouter rout) {
+                    rout.techNode = new TechNode(
+                            ((RandomConveyor)convSeq.get(rout.id)).techNode,
+                            rout,
+                            rout.requirements // also intended
+                    );
+                } else if (block instanceof RandomItemBridge ibrid) {
+                    ibrid.techNode = new TechNode(
+                            ((RandomRouter)routSeq.get(ibrid.id)).techNode,
+                            ibrid,
+                            ibrid.requirements // also also intended
+                    );
+                } else if (block instanceof RandomItemTurret itur) {
+                    itur.techNode = new TechNode(
+                            lastItur == null ? TechTree.context() : lastItur.techNode,
+                            itur,
+                            itur.researchRequirements()
+                    );
+                    lastItur = itur;
+                } else if (block instanceof RandomWall wall) {
+                    wall.techNode = new TechNode(
+                            lastWall == null ? ((RandomItemTurret)iturSeq.get(0)).techNode : lastWall.techNode,
+                            wall,
+                            wall.researchRequirements()
+                    );
+                    lastWall = wall;
+                }
             });
         });
     }

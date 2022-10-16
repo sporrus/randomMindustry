@@ -24,6 +24,11 @@ public class RandomOre extends OreBlock implements RandomBlock {
     }
 
     @Override
+    public int getTier() {
+        return id / 3;
+    }
+
+    @Override
     public void reload() {
         generate();
     }

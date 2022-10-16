@@ -31,6 +31,11 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
     }
 
     @Override
+    public int getTier() {
+        return tier;
+    }
+
+    @Override
     public void setStats() {
         super.setStats();
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
@@ -49,7 +54,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         health = Mathf.round(r.random(100, 200) * size * tier, 5);
 
         reload = r.random(1f, 30f);
-        range = r.random(64f, 800f * tier / 20f);
+        range = r.random(80f, 800f * tier / 20f);
         rotateSpeed = r.random(0.5f, 5f);
         inaccuracy = r.random(1f, 90f / tier * 10f / reload);
 
@@ -59,7 +64,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         for (int i = 0; i < itemCount; i++) {
             CustomItem item = seq.random(r);
             seq.remove(item);
-            float damage = tier * reload + r.random(-tier / 2f, tier / 2f);
+            float damage = tier * reload + r.random(-tier, tier) / 4f;
             float speed = r.random(1f, 10f);
             ammoTypes.put(item, new BasicBulletType(speed, damage){{
                 width = r.random(5f, 10f);

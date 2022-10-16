@@ -27,6 +27,11 @@ public class RandomWall extends Wall implements RandomBlock {
     }
 
     @Override
+    public int getTier() {
+        return tier;
+    }
+
+    @Override
     public void setStats() {
         super.setStats();
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
