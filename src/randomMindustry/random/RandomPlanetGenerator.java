@@ -629,7 +629,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
 
             state.rules.attackMode = sector.info.attack = true;
         }else{
-            state.rules.winWave = sector.info.winWave = 10 + 5 * (int)Math.max(difficulty * 10, 1);
+            state.rules.winWave = sector.info.winWave = sector.id == 1 ? 10 : 10 + 5 * (int)Math.max(difficulty * 10, 1);
         }
 
         float waveTimeDec = 0.4f;
