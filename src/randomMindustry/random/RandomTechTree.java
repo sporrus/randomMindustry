@@ -59,7 +59,7 @@ public class RandomTechTree {
             routSeq.each(block -> {
                 RandomRouter rout = (RandomRouter)block;
                 rout.techNode = new TechNode(
-                    convSeq.get(rout.id).techNode, // lastRout == null ? convSeq.get(0).techNode : lastRout.techNode,
+                    ((RandomConveyor)convSeq.get(rout.id)).techNode, // lastRout == null ? convSeq.get(0).techNode : lastRout.techNode,
                     rout,
                     rout.requirements // also intended
                 );
