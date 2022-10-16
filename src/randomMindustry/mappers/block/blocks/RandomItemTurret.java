@@ -39,12 +39,30 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
             seq.remove(item);
             float damage = r.random(1f, 10f) + tier * reload;
             float speed = r.random(1f, 10f);
-            ammoTypes.put(item, new BasicBulletType(speed, damage){{
-                width = r.random(5f, 10f);
-                height = r.random(width, width + 10);
-                lifetime = range / speed;
-                if(tier > 1) homingPower = r.random(0.025f, 0.2f);
-            }});
+            
+            BulletType outputBullet;
+            
+            if(r.chance(0.7f) || tier <= 2){
+                outputBullet = new BasicBulletType(speed, damage){{
+                    width = r.random(5f, 10f);
+                    height = r.random(width, width + 10);
+                    lifetime = range / speed;
+                    if(tier > 2) homingPower = r.random(0.025f, 0.2f);
+                    
+                    frontColor = item.color;
+                    backColor = item.color.cpy().mul(1.5f);
+                }};
+            }else if(r.chance(0.45f) || tier <= 6){
+                outputBullet = new LaserBulletType(damage){{
+                    width = r.random(8f, 15f + (tier * 2f));
+                    length = range + r.random(-2.5f, 2.5f);
+                    pierce = pierceBuilding = true;
+                    pierceCap = r.random(2, 8);
+                    
+                    colors = {item.color.cpy().mul(1f, 1f, 1f, 0.4f), item.color, item.color.cpy().mul(1.5f)};
+                }};
+            }
+            ammoTypes.put(item, outputBullet);
         }
 
         requirements(Category.turret, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
