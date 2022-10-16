@@ -17,6 +17,8 @@ import java.util.*;
 import static mindustry.content.TechTree.*;
 
 public class RandomTechTree {
+    private static RandomDrill lastDrill;
+    
     public static void load() {
         Main.random.techTree = nodeRoot("rm-random", Items.carbide, () -> {
             ItemMapper.generatedItems.each(item -> {
@@ -27,6 +29,16 @@ public class RandomTechTree {
                         item.researchRequirements()
                 );
                 item.techNode.objectives.add(new Objectives.Produce(item));
+            });
+            
+            Seq<RandomDrill> drillSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomDrill).sort((a, b) -> a.tier - b.tier);
+            drillSeq.each(drill -> {
+                drill.techNode = new TechNode(
+                    lastDrill == null ? TechTree.context() : lastDrill.techNode,
+                    drill,
+                    drill.researchRequirements()
+                );
+                lastDrill = drill;
             });
         });
     }
