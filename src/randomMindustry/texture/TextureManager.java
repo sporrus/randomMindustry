@@ -33,7 +33,7 @@ public class TextureManager {
     }
 
     public static void reload() {
-        pages.forEach(e -> e.value.reload());
+        pages.each(e -> e.value.reload());
     }
 
     public static Seq<Texture> getAllTextures() {
