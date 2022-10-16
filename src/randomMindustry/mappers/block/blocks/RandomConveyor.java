@@ -24,6 +24,11 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         this.id = id;
         generate();
         squareSprite = false;
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 

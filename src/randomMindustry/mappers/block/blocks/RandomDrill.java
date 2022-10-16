@@ -23,8 +23,13 @@ public class RandomDrill extends Drill implements RandomBlock {
         super(name + id);
         this.id = id;
         generate();
-        stats.add(RMVars.seedStat, RMVars.seedStatValue);
         squareSprite = false;
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
+        stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
     @Override
@@ -43,7 +48,7 @@ public class RandomDrill extends Drill implements RandomBlock {
         int tier = (this.tier - 1) * 2;
         requirements(Category.production, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(5, 50) * size, 5)));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
-
+        researchCostMultiplier = 0.03f;
         localizedName = mainItem.localizedName + " Drill";
     }
 

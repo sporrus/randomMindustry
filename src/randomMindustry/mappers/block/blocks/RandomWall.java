@@ -23,8 +23,13 @@ public class RandomWall extends Wall implements RandomBlock {
         super(name + id);
         this.id = id;
         generate();
-        stats.add(RMVars.seedStat, RMVars.seedStatValue);
         squareSprite = false;
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
+        stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
     public void reload() {
