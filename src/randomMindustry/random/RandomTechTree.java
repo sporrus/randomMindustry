@@ -31,8 +31,9 @@ public class RandomTechTree {
                 item.techNode.objectives.add(new Objectives.Produce(item));
             });
             
-            Seq<RandomDrill> drillSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomDrill).sort((a, b) -> a.tier - b.tier);
-            drillSeq.each(drill -> {
+            Seq<RandomBlock> drillSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomDrill).sort((a, b) -> ((RandomDrill)a).tier - ((RandomDrill)b).tier);
+            drillSeq.each(block -> {
+                RandomDrill drill = (RandomDrill)block;
                 drill.techNode = new TechNode(
                     lastDrill == null ? TechTree.context() : lastDrill.techNode,
                     drill,
