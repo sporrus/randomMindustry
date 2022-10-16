@@ -43,6 +43,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
                 width = r.random(5f, 10f);
                 height = r.random(width, width + 10);
                 lifetime = range / speed;
+                if(tier > 1) homingPower = r.random(0.025f, 0.2f);
             }});
         }
 
