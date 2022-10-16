@@ -18,6 +18,8 @@ import static mindustry.content.TechTree.*;
 
 public class RandomTechTree {
     private static RandomDrill lastDrill;
+    private static RandomConveyor lastConv;
+    // private static RandomRouter lastRout;
     
     public static void load() {
         Main.random.techTree = nodeRoot("rm-random", Items.carbide, () -> {
@@ -40,6 +42,28 @@ public class RandomTechTree {
                     drill.researchRequirements()
                 );
                 lastDrill = drill;
+            });
+            
+            Seq<RandomBlock> convSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomConveyor).sort((a, b) -> ((RandomConveyor)a).tier - ((RandomConveyor)b).tier);
+            convSeq.each(block -> {
+                RandomConveyor conv = (RandomConveyor)block;
+                conv.techNode = new TechNode(
+                    lastConv == null ? TechTree.context() : lastConv.techNode,
+                    conv,
+                    conv.requirements // intended
+                );
+                lastConv = conv;
+            });
+            
+            Seq<RandomBlock> routSeq = BlockMapper.generatedBlocks.select(block -> block instanceof RandomRouter).sort((a, b) -> ((RandomRouter)a).tier - ((RandomRouter)b).tier);
+            routSeq.each(block -> {
+                RandomRouter rout = (RandomRouter)block;
+                rout.techNode = new TechNode(
+                    convSeq.get(rout.id).techNode, // lastRout == null ? convSeq.get(0).techNode : lastRout.techNode,
+                    rout,
+                    rout.requirements // also intended
+                );
+                // lastRout = rout;
             });
         });
     }
