@@ -1,6 +1,8 @@
 package randomMindustry;
 
+import arc.*;
 import arc.graphics.*;
+import arc.util.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.game.*;
@@ -11,7 +13,7 @@ import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.random.*;
 import randomMindustry.texture.*;
-import randomMindustry.ui.*;
+import randomMindustry.ui.Settings;
 
 public class Main extends Mod {
     public static Planet random;
@@ -25,6 +27,33 @@ public class Main extends Mod {
         Settings.load();
         TextureManager.init();
         Vars.content.planets().select(p -> p != random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
+
+//        Events.on(EventType.SaveLoadEvent.class, e -> {
+//            if (Vars.state.isCampaign()) {
+//                long seed = Core.settings.getLong("rm-campaign-seed");
+//                if (Core.settings.get("rm-campaign-seed", null) == null) {
+//                    seed = SeedManager.getSeed();
+//                } else if (seed != SeedManager.getSeed()) {
+//                    Log.info("loaded campaign " + seed);
+//                    SeedManager.setSeed(seed);
+//                    reload();
+//                }
+//                Log.info("saved campaign " + seed);
+//                Core.settings.put("rm-campaign-seed", seed);
+//            } else {
+//                long seed = Vars.state.rules.tags.getLong("rm-seed");
+//                if (Vars.state.rules.tags.get("rm-seed", (String)null) == null) {
+//                    seed = SeedManager.getSeed();
+//                } else if (seed != SeedManager.getSeed()) {
+//                    Log.info("loaded " + seed);
+//                    SeedManager.setSeed(seed);
+//                    reload();
+//                }
+//                Log.info("saved " + seed);
+//                Vars.state.rules.tags.put("rm-seed", String.valueOf(seed));
+//            }
+//        });
+
 // debug atlas:
 //        final int[] i = {0};
 //        TextureManager.getAllTextures().each((t) -> {
@@ -43,7 +72,6 @@ public class Main extends Mod {
 
     public static void reload() {
         TextureManager.reload();
-        SeedManager.generateSeed();
         ItemMapper.reloadContent();
         BlockMapper.reloadContent();
     }

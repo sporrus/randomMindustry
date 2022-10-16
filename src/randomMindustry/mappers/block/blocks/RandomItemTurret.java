@@ -53,6 +53,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         rotateSpeed = r.random(0.5f, 5f);
         inaccuracy = r.random(1f, 90f / tier * 10f / reload);
 
+        ammoTypes.clear();
         int itemCount = r.random(1, 3);
         CustomItemSeq seq = ItemMapper.generatedItems.selectGlobalTierRange(tier - 2, tier - 1);
         for (int i = 0; i < itemCount; i++) {
@@ -60,38 +61,18 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
             seq.remove(item);
             float damage = r.random(1f, 10f) + tier * reload;
             float speed = r.random(1f, 10f);
-            
-            BulletType outputBullet;
-            
-            if(r.chance(0.7f) || tier <= 2){
-                outputBullet = new BasicBulletType(speed, damage){{
-                    width = r.random(5f, 10f);
-                    height = r.random(width, width + 10);
-                    lifetime = range / speed;
-                    if(tier > 2) homingPower = r.random(0.025f, 0.2f);
-                    
-                    backColor = item.color;
-                    frontColor = hitColor = item.color.cpy().mul(1.5f);
-                }};
-            }else{
-                outputBullet = new LaserBulletType(damage){{
-                    width = r.random(8f, 15f + (tier * 2f));
-                    length = range + r.random(-1.5f, 1.5f);
-                    pierce = pierceBuilding = true;
-                    pierceCap = r.random(2, 8);
-                    lifetime = 60f;
-                    
-                    hitColor = item.color.cpy().mul(1.5f);
-                    colors = new Color[]{item.color.cpy().mul(1f, 1f, 1f, 0.4f), item.color, item.color.cpy().mul(1.5f)};
-                }};
-            }
-            
-            ammoTypes.put(item, outputBullet);
+            ammoTypes.put(item, new BasicBulletType(speed, damage){{
+                width = r.random(5f, 10f);
+                height = r.random(width, width + 10);
+                lifetime = range / speed;
+                if(tier > 2) homingPower = r.random(0.025f, 0.2f);
+                backColor = item.color;
+                frontColor = hitColor = item.color.cpy().mul(1.5f);
+            }});
         }
 
         requirements(Category.turret, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(10, 100) * size, 5)));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
-
         limitRange();
         localizedName = mainItem.localizedName + " " + Seq.with("Turret", "Tower", "Gun", "Catapult").random();
     }
@@ -111,6 +92,8 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         base.draw(region.texture.getTextureData().getPixmap()
                 .crop(region.getX(), region.getY(), region.width, region.height), true);
         fullIcon = uiIcon = TextureManager.alloc(base);
+
+        ammoTypes.forEach(e -> e.value.load());
     }
 
     private boolean pixmapLoaded = false;
