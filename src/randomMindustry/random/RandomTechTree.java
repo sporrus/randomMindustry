@@ -35,7 +35,6 @@ public class RandomTechTree {
 
             // TODO: this should be moved into RandomBlock classes (prob getTechParent method)
             Seq<RandomBlock> blocks = BlockMapper.generatedBlocks.sort((a, b) -> a.getTier() - b.getTier());
-            RandomDrill firstDrill = (RandomDrill) blocks.select(b -> b instanceof RandomDrill).get(0);
             Seq<RandomBlock> convSeq = blocks.select(b -> b instanceof RandomConveyor);
             Seq<RandomBlock> routSeq = blocks.select(b -> b instanceof RandomRouter);
             Seq<RandomBlock> iturSeq = blocks.select(b -> b instanceof RandomItemTurret);
@@ -50,7 +49,7 @@ public class RandomTechTree {
                     lastDrill.add(drill);
                 } else if (block instanceof RandomCrafter craft) {
                     craft.techNode = new TechNode(
-                            lastCraft.size == 0 ? firstDrill.techNode : lastCraft.random(r).techNode,
+                            lastCraft.size == 0 ? TechTree.context() : lastCraft.random(r).techNode,
                             craft,
                             craft.researchRequirements()
                     );
