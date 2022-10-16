@@ -52,7 +52,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
 
         limitRange();
         
-        localizedName = mainItem.localizedName + " Turret";
+        localizedName = mainItem.localizedName + " " + Seq.with("Turret", "Tower", "Gun", "Catapult").random();
     }
 
     @Override
