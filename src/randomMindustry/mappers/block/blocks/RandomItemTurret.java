@@ -93,7 +93,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
                 .crop(region.getX(), region.getY(), region.width, region.height), true);
         fullIcon = uiIcon = TextureManager.alloc(base);
 
-        ammoTypes.forEach(e -> e.value.load());
+        ammoTypes.each(e -> e.value.load());
     }
 
     private boolean pixmapLoaded = false;
