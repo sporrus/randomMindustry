@@ -68,7 +68,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
             float damage = tier * reload + r.random(-tier, tier) / 4f;
             float speed = r.random(1f, 10f);
             ammoTypes.put(item, new BasicBulletType(speed, damage){{
-                width = r.random(5f, 10f);
+                width = r.random(10f, 15f);
                 height = r.random(width, width + 10);
                 if(r.chance(0.35)) homingPower = r.random(0.025f, 0.2f);
                 if(r.chance(0.35)) {
