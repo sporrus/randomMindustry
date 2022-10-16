@@ -30,10 +30,7 @@ public class RandomDrill extends Drill implements RandomBlock {
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
         
-        researchCostMultiplier = 0.25f;
-        
-        // first tier
-        if(this.tier == 2) alwaysUnlocked = true;
+        researchCostMultiplier = 0.03f;
         
         squareSprite = false;
         
