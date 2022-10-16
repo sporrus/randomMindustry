@@ -52,16 +52,17 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
                     frontColor = item.color;
                     backColor = item.color.cpy().mul(1.5f);
                 }};
-            }else if(r.chance(0.45f) || tier <= 6){
+            }else{
                 outputBullet = new LaserBulletType(damage){{
                     width = r.random(8f, 15f + (tier * 2f));
                     length = range + r.random(-2.5f, 2.5f);
                     pierce = pierceBuilding = true;
                     pierceCap = r.random(2, 8);
                     
-                    colors = {item.color.cpy().mul(1f, 1f, 1f, 0.4f), item.color, item.color.cpy().mul(1.5f)};
+                    colors = new Color[]{item.color.cpy().mul(1f, 1f, 1f, 0.4f), item.color, item.color.cpy().mul(1.5f)};
                 }};
             }
+            
             ammoTypes.put(item, outputBullet);
         }
 
