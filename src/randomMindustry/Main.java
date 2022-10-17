@@ -113,7 +113,7 @@ public class Main extends Mod {
             atmosphereRadOut = 0.3f;
             startSector = 1;
             alwaysUnlocked = true;
-            defaultCore = BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore && ((RandomCore)b).getTier() == 1);
+            defaultCore = (RandomCore)BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.getTier() == 1);
             landCloudColor = Team.crux.color.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
             unlockedOnLand.add(Items.carbide);
