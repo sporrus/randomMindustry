@@ -22,7 +22,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     public RandomCore(String name, int id){
         super(name + id);
         this.id = id;
-        size = id + 1;
+        size = id + 3;
         generate();
     }
     
