@@ -92,7 +92,7 @@ public class RandomTechTree {
                     if (r.chance(0.5) && lastWall.size > 0) lastWall.remove(0);
                     lastWall.add(wall);
                 } else if (block instanceof RandomCore core) {
-                    RandomBlock lastCore = generatedBlocks.find(findGaming -> findGaming instanceof RandomCore && findGaming.getTier() == core.getTier() - 1);
+                    RandomBlock lastCore = BlockMapper.generatedBlocks.find(findGaming -> findGaming instanceof RandomCore && findGaming.getTier() == core.getTier() - 1);
                     core.techNode = new TechNode(
                             lastCore == null ? TechTree.context() : ((RandomCore)lastCore).techNode,
                             core,
