@@ -11,9 +11,11 @@ public class BlockMapper {
     public static final SyncedRand r = new SyncedRand();
 
     public static void generateContent() {
+        for (int i = 0; i < ItemMapper.maxTier; i++)
+            generatedBlocks.add(new RandomConveyor("random-conveyor-", i));
         for (int i = 0; i < ItemMapper.generatedItems.selectTierType(ItemTierType.drill).size; i++)
             generatedBlocks.add(new RandomOre("random-ore-", i));
-        // don't know why im using ItemMapper.maxTier
+//         don't know why im using ItemMapper.maxTier
         for(int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomSeaBush("random-plant-", i));
         for (int i = 0; i < Mathf.ceil(ItemMapper.maxTier / 2f); i++)
@@ -25,8 +27,6 @@ public class BlockMapper {
         for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomWall("random-wall-", i));
         for (int i = 0; i < ItemMapper.maxTier; i++)
-            generatedBlocks.add(new RandomConveyor("random-conveyor-", i));
-        for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomRouter("random-router-", i));
         for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomItemBridge("random-item-bridge-", i));
@@ -35,6 +35,7 @@ public class BlockMapper {
     }
 
     public static void reloadContent() {
-        generatedBlocks.each(RandomBlock::reload);
+        generatedBlocks.each(RandomBlock::generate);
+        generatedBlocks.each(RandomBlock::reloadIcons);
     }
 }

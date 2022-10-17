@@ -5,6 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
+import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.distribution.*;
@@ -24,7 +25,17 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
         super(name + id);
         this.id = id;
         generate();
-        squareSprite = false;
+    }
+
+    @Override
+    public TechTree.TechNode generateNode() {
+        RandomConveyor conv = (RandomConveyor) generatedBlocks.select(b -> b instanceof RandomConveyor).find(b -> ((RandomConveyor)b).id == id);
+        techNode = new TechTree.TechNode(
+                conv.techNode,
+                this,
+                researchRequirements() // also also intended
+        );
+        return techNode;
     }
 
     @Override
@@ -38,19 +49,13 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
-    @Override
-    public void reload() {
-        generate();
-        reloadIcons();
-    }
-
     public void generate() {
         tier = id + 1;
 
         size = 1;
         health = Mathf.round(r.random(3, 8) * tier, 1);
 
-        requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> r.random(1, 3)));
+        requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> r.random(1, 3), r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
 
         speed = 16f / tier;

@@ -24,13 +24,13 @@ public class RandomOre extends OreBlock implements RandomBlock {
     }
 
     @Override
-    public int getTier() {
-        return id / 3;
+    public TechTree.TechNode generateNode() {
+        return null;
     }
 
     @Override
-    public void reload() {
-        generate();
+    public int getTier() {
+        return id / 3;
     }
 
     public void generate() {
@@ -60,5 +60,9 @@ public class RandomOre extends OreBlock implements RandomBlock {
         }
     }
 
-
+    // i love syncing (replace this as soon as possible)
+    @Override
+    public void reloadIcons() {
+        Pixmap ore = oreSprites.random(96, 32, r);
+    }
 }

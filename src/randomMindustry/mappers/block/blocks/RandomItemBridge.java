@@ -4,10 +4,12 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
+import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.distribution.*;
 import randomMindustry.*;
+import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
@@ -23,7 +25,17 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
         super(name + id);
         this.id = id;
         generate();
-        squareSprite = false;
+    }
+
+    @Override
+    public TechTree.TechNode generateNode() {
+        RandomRouter router = (RandomRouter) generatedBlocks.select(b -> b instanceof RandomRouter).find(b -> ((RandomRouter)b).id == id);
+        techNode = new TechTree.TechNode(
+                router.techNode,
+                this,
+                researchRequirements() // also also intended
+        );
+        return techNode;
     }
 
     @Override
@@ -37,19 +49,13 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
-    @Override
-    public void reload() {
-        generate();
-        reloadIcons();
-    }
-
     public void generate() {
         tier = id + 1;
 
         size = 1;
         health = Mathf.round(r.random(1, 10) * tier, 1);
 
-        requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 2), () -> r.random(1, 10)));
+        requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 2), () -> r.random(1, 10), r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
 
         itemCapacity = 10 * tier;

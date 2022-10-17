@@ -5,6 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
+import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.distribution.*;
@@ -15,6 +16,7 @@ import randomMindustry.texture.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomConveyor extends Conveyor implements RandomBlock {
+    public static final Seq<RandomConveyor> last = new Seq<>();
     public final int id;
     public Item mainItem;
     public int tier;
@@ -23,8 +25,18 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         super(name + id);
         this.id = id;
         generate();
-        squareSprite = false;
-        if (id == 0) alwaysUnlocked = true;
+    }
+
+    @Override
+    public TechTree.TechNode generateNode() {
+        techNode = new TechTree.TechNode(
+                last.size == 0 ? TechTree.context() : last.random(r).techNode,
+                this,
+                researchRequirements()
+        );
+        if (r.chance(0.5) && last.size > 0) last.remove(0);
+        last.add(this);
+        return techNode;
     }
 
     @Override
@@ -38,19 +50,17 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
-    @Override
-    public void reload() {
-        generate();
-        reloadIcons();
-    }
-
     public void generate() {
+        if (id == 0) {
+            alwaysUnlocked = true;
+            last.clear();
+        }
         tier = id + 1;
 
         size = 1;
         health = Mathf.round(r.random(1, 5) * tier, 1);
 
-        requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 2), () -> 1));
+        requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 2), () -> 1, r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
 
         speed = 0.03f * tier;

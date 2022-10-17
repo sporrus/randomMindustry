@@ -31,11 +31,6 @@ public class CustomItem extends Item {
         stats.add(RMVars.tierStat, t -> t.add(tierType + " " + globalTier + " (" + localTier + ")"));
     }
 
-    public void reload() {
-        generate();
-        reloadIcons();
-    }
-
     public void generate() {
         color = new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f));
 

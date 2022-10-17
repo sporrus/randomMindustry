@@ -5,6 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
+import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
@@ -16,6 +17,7 @@ import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomDrill extends Drill implements RandomBlock {
+    public static final Seq<RandomDrill> last = new Seq<>();
     public final int id;
     public Item mainItem;
 
@@ -23,8 +25,18 @@ public class RandomDrill extends Drill implements RandomBlock {
         super(name + id);
         this.id = id;
         generate();
-        squareSprite = false;
-        if (id == 0) alwaysUnlocked = true;
+    }
+
+    @Override
+    public TechTree.TechNode generateNode() {
+        techNode = new TechTree.TechNode(
+                last.size == 0 ? TechTree.context() : last.random(r).techNode,
+                this,
+                researchRequirements()
+        );
+        if (r.chance(0.5) && last.size > 0) last.remove(0);
+        last.add(this);
+        return techNode;
     }
 
     @Override
@@ -38,13 +50,11 @@ public class RandomDrill extends Drill implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
-    @Override
-    public void reload() {
-        generate();
-        reloadIcons();
-    }
-
     public void generate() {
+        if (id == 0) {
+            alwaysUnlocked = true;
+            last.clear();
+        }
         this.tier = id + 1;
 
         size = 2;
@@ -52,7 +62,7 @@ public class RandomDrill extends Drill implements RandomBlock {
 
         drillTime = 600f / this.tier;
         int tier = (this.tier - 1) * 2;
-        requirements(Category.production, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(6, 12) * size, 2)));
+        requirements(Category.production, ItemMapper.getItemStacks(tier - 1, r.random(1, 5), () -> Mathf.round(r.random(6, 12) * size, 2), r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         localizedName = mainItem.localizedName + " Drill";
     }

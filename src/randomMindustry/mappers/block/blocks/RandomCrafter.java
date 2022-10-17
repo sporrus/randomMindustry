@@ -5,7 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
-import mindustry.*;
+import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
@@ -17,6 +17,7 @@ import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomCrafter extends GenericCrafter implements RandomBlock {
+    public static final Seq<RandomCrafter> last = new Seq<>();
     public final int id;
     public CustomItem item;
     public RandomCrafterType type;
@@ -25,7 +26,18 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         super(name + id);
         this.id = id;
         generate();
-        squareSprite = false;
+    }
+
+    @Override
+    public TechTree.TechNode generateNode() {
+        techNode = new TechTree.TechNode(
+                last.size == 0 ? TechTree.context() : last.random(r).techNode,
+                this,
+                researchRequirements()
+        );
+        if (r.chance(0.5) && last.size > 0) last.remove(0);
+        last.add(this);
+        return techNode;
     }
 
     @Override
@@ -39,13 +51,10 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
-    @Override
-    public void reload() {
-        generate();
-        reloadIcons();
-    }
-
     public void generate() {
+        if (id == 0) {
+            last.clear();
+        }
         int tier = id / 3;
 
         size = r.random(2, 3);
@@ -59,8 +68,8 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
 
         craftTime = r.random(30f, 120f);
 
-        requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 50) * size, 5)));
-        ItemStack[] itemStacks = ItemMapper.getItemStacks(tier * 2, r.random(1, 3), () -> r.random(1, 10));
+        requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 50) * size, 5), r));
+        ItemStack[] itemStacks = ItemMapper.getItemStacks(tier * 2, r.random(1, 3), () -> r.random(1, 10), r);
         consumeItems(itemStacks);
         outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
         int maxItems = Math.max(Seq.with(itemStacks).sort((a, b) -> b.amount - a.amount).get(0).amount, outputItems[0].amount);

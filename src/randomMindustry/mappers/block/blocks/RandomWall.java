@@ -4,6 +4,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
+import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.*;
@@ -15,6 +16,7 @@ import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomWall extends Wall implements RandomBlock {
+    public static final Seq<RandomWall> last = new Seq<>();
     public final int id;
     public Item mainItem;
     public int tier;
@@ -23,7 +25,19 @@ public class RandomWall extends Wall implements RandomBlock {
         super(name + id);
         this.id = id;
         generate();
-        squareSprite = false;
+    }
+
+    @Override
+    public TechTree.TechNode generateNode() {
+        RandomItemTurret itur = (RandomItemTurret) generatedBlocks.select(b -> b instanceof RandomItemTurret).find(b -> ((RandomItemTurret)b).id == 0);
+        techNode = new TechTree.TechNode(
+                last.size == 0 ? itur.techNode : last.random(r).techNode,
+                this,
+                researchRequirements()
+        );
+        if (r.chance(0.5) && last.size > 0) last.remove(0);
+        last.add(this);
+        return techNode;
     }
 
     @Override
@@ -37,18 +51,16 @@ public class RandomWall extends Wall implements RandomBlock {
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
 
-    public void reload() {
-        generate();
-        reloadIcons();
-    }
-
     public void generate() {
+        if (id == 0) {
+            last.clear();
+        }
         tier = id + 1;
 
         size = r.random(1, 2);
         health = Mathf.round(r.random(100, 500) * size * tier, 5);
 
-        requirements(Category.defense, ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> 6 * size * size));
+        requirements(Category.defense, ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> 6 * size * size, r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
 
         localizedName = mainItem.localizedName + " Wall";

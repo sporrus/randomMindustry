@@ -11,6 +11,7 @@ import static randomMindustry.mappers.block.BlockMapper.r;
 
 public class RandomCore extends CoreBlock implements RandomBlock{
     public final int id;
+    public static RandomCore last = null;
     public static final int maxTier = 4;
     public static final ObjectMap<Integer, Seq<UnitType>> types = ObjectMap.of(
         1, Seq.with(UnitTypes.alpha, UnitTypes.beta),
@@ -22,10 +23,19 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     public RandomCore(String name, int id){
         super(name + id);
         this.id = id;
-        size = id + 3;
         generate();
     }
-    
+
+    @Override
+    public TechTree.TechNode generateNode() {
+        techNode = new TechTree.TechNode(
+                last == null ? TechTree.context() : last.techNode,
+                this,
+                researchRequirements()
+        );
+        return techNode;
+    }
+
     @Override
     public int getTier(){
         return id + 1;
@@ -37,20 +47,23 @@ public class RandomCore extends CoreBlock implements RandomBlock{
         stats.add(RMVars.seedStat, RMVars.seedStatValue);
     }
     
-    @Override
-    public void reload(){
-        generate();
-    }
-    
     public void generate(){
-        if(id == 0){
+        if (id == 0) {
             isFirstTier = alwaysUnlocked = true;
+            last = null;
         }
-        requirements(Category.effect, ItemMapper.getItemStacks(id, r.random(3, 5) + id, () -> (1000 + (getTier() * 200)) + r.random(80, 300)));
+        size = id + 3;
+        requirements(Category.effect, ItemMapper.getItemStacks(id, r.random(3, 5) + id, () -> (1000 + (getTier() * 200)) + r.random(80, 300), r));
         unitType = types.get(getTier()).random(r);
         health = (2000 + (getTier() * 1500)) + r.random(150, 550);
         armor = id * 2;
         itemCapacity = (2500 * getTier()) + r.random(150, 550);
         unitCapModifier = 15 * getTier();
+    }
+
+    // TODO: sprites
+    @Override
+    public void reloadIcons() {
+
     }
 }

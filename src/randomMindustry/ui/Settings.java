@@ -2,16 +2,12 @@ package randomMindustry.ui;
 
 import arc.*;
 import arc.scene.ui.*;
-import arc.util.*;
 import mindustry.*;
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
-import mindustry.ui.dialogs.SettingsMenuDialog.*;
 import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable.*;
 import randomMindustry.*;
 import randomMindustry.random.*;
-
-import java.text.*;
 
 public class Settings {
     public static void load() {
@@ -32,7 +28,7 @@ public class Settings {
                             Vars.ui.showException("Cannot parse seed " + seed, e);
                         }
                     }).growX().expandX().get();
-                    button.label(() -> Core.bundle.get(title)).align(Align.right);
+                    button.label(() -> Core.bundle.get(title));
                     table.row();
                     addDesc(button);
                 }

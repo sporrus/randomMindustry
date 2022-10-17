@@ -8,14 +8,13 @@ import mindustry.game.*;
 import randomMindustry.random.*;
 
 public class TextureManager {
-    private static SyncedRand r = new SyncedRand();
     public static Color teamDark = Color.valueOf("9e8080ff");
     public static Color teamMid = Color.valueOf("dbc5c5ff");
     public static Color teamLight = Color.valueOf("ffffffff");
     public static final ObjectMap<Integer, TexturePage> pages = new ObjectMap<>();
 
     public static void init() {
-        Events.on(EventType.DisposeEvent.class, (e) -> pages.forEach(entry -> entry.value.dispose()));
+        Events.on(EventType.DisposeEvent.class, (e) -> pages.each((k, v) -> v.dispose()));
     }
 
     public static TexturePage getOrCreatePage(int size) {

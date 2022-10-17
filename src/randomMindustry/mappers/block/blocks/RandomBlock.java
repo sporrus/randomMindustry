@@ -1,6 +1,10 @@
 package randomMindustry.mappers.block.blocks;
 
+import mindustry.content.*;
+
 public interface RandomBlock {
-    void reload();
+    void generate();
+    void reloadIcons();
     int getTier();
+    TechTree.TechNode generateNode();
 }

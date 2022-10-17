@@ -1,6 +1,7 @@
 package randomMindustry.mappers.item;
 
 import arc.func.*;
+import arc.math.*;
 import arc.struct.*;
 import mindustry.type.*;
 import randomMindustry.random.*;
@@ -19,10 +20,11 @@ public class ItemMapper {
     }
 
     public static void reloadContent() {
-        generatedItems.each(CustomItem::reload);
+        generatedItems.each(CustomItem::generate);
+        generatedItems.each(CustomItem::reloadIcons);
     }
 
-    public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount) {
+    public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount, Rand r) {
         tier = Math.max(tier, 0);
         Seq<ItemStack> stacks = new Seq<>();
         CustomItemSeq items = generatedItems.selectGlobalTierRange(0, tier);
