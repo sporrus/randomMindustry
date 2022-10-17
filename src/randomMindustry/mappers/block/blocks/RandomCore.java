@@ -5,6 +5,7 @@ import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.blocks.storage.*;
 import randomMindustry.*;
+import randomMindustry.mappers.item.*;
 
 import static randomMindustry.mappers.block.BlockMapper.r;
 
@@ -21,9 +22,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     public RandomCore(String name, int id){
         super(name + id);
         this.id = id;
-        if(id == 0){
-            isFirstTier = alwaysUnlocked = true;
-        }
+        size = id + 1;
         generate();
     }
     
@@ -44,7 +43,10 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     }
     
     public void generate(){
-        size = 3 + id;
+        if(id == 0){
+            isFirstTier = alwaysUnlocked = true;
+        }
+        requirements(Category.effect, ItemMapper.getItemStacks(id, r.random(3, 5) + id, () -> (1000 + (getTier() * 200)) + r.random(80, 300)));
         unitType = types.get(getTier()).random(r);
         health = (2000 + (getTier() * 1500)) + r.random(150, 550);
         armor = id * 2;
