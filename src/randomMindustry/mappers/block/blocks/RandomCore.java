@@ -2,6 +2,7 @@ package randomMindustry.mappers.block.blocks;
 
 import arc.graphics.*;
 import arc.graphics.g2d.*;
+import arc.math.*;
 import arc.struct.*;
 import mindustry.content.*;
 import mindustry.graphics.*;
@@ -59,7 +60,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
             last = null;
         }
         size = id + 3;
-        requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5) + id, () -> (1000 + (getTier() * 200)) + r.random(80, 300), r));
+        requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5) + id, () -> Mathf.round(r.random(300, 1000) * size, 100), r));
         unitType = types.get(getTier(), Seq.with(UnitTypes.oct)).random(r);
         health = (2000 + (getTier() * 1500)) + r.random(150, 550);
         armor = id * 2;
