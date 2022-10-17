@@ -33,4 +33,5 @@ public class RMVars{
     public static TextureGrid drillSprites = new TextureGrid("random-mindustry-drills");
     public static TextureGrid routerSprites = new TextureGrid("random-mindustry-routers");
     public static TextureGrid bridgeSprites = new TextureGrid("random-mindustry-bridges");
+    public static TextureGrid plantSprites = new TextureGrid("random-mindustry-plants");
 }
