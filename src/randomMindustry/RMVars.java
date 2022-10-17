@@ -17,7 +17,8 @@ public class RMVars{
     public static TextureGrid itemSprites = new TextureGrid("random-mindustry-items");
     public static ObjectMap<Integer, TextureGrid> crafterSprites = ObjectMap.of(
             2, new TextureGrid("random-mindustry-crafters2"),
-            3, new TextureGrid("random-mindustry-crafters3")
+            3, new TextureGrid("random-mindustry-crafters3"),
+            4, new TextureGrid("random-mindustry-crafters4")
     );
     public static ObjectMap<Integer, TextureGrid> wallSprites = ObjectMap.of(
             1, new TextureGrid("random-mindustry-walls1"),

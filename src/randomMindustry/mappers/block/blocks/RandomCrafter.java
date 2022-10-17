@@ -57,7 +57,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         }
         int tier = id / 3;
 
-        size = r.random(2, 3);
+        size = r.random(2, 4);
         health = Mathf.round(r.random(5, 50) * size, 5);
 
         CustomItemSeq items = ItemMapper.generatedItems
@@ -69,9 +69,9 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         craftTime = r.random(30f, 120f);
 
         requirements(Category.crafting, ItemMapper.getItemStacks(tier * 2, r.random(1, 5), () -> Mathf.round(r.random(10, 50) * size, 5), r));
-        ItemStack[] itemStacks = ItemMapper.getItemStacks(tier * 2, r.random(1, 3), () -> r.random(1, 10), r);
+        ItemStack[] itemStacks = ItemMapper.getItemStacks(tier * 2, r.random(1, 3), () -> r.random(1, 5 * size), r);
         consumeItems(itemStacks);
-        outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 10))};
+        outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 5 * size))};
         int maxItems = Math.max(Seq.with(itemStacks).sort((a, b) -> b.amount - a.amount).get(0).amount, outputItems[0].amount);
         itemCapacity = maxItems * 2;
 
