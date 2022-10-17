@@ -30,6 +30,8 @@ public class BlockMapper {
             generatedBlocks.add(new RandomRouter("random-router-", i));
         for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomItemBridge("random-item-bridge-", i));
+        for(int i = 0; i < RandomCore.maxTier; i++)
+            generatedBlocks.add(new RandomCore("random-core-", i));
     }
 
     public static void reloadContent() {
