@@ -31,7 +31,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
     RandomBaseGenerator basegen = new RandomBaseGenerator();
     float scl = 5f;
     float waterOffset = 0.07f;
-    boolean genLakes = false;
+    boolean genLakes = true;
 
     Block[][] arr =
             {
