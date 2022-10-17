@@ -46,9 +46,9 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     public void generate(){
         size = 3 + id;
         unitType = types.get(getTier()).random(r);
-        health = (2000f + (getTier() * 1500)) + r.random(150, 550);
+        health = (2000 + (getTier() * 1500)) + r.random(150, 550);
         armor = id * 2;
-        itemCapacity = (2500f * getTier()) + r.random(150, 550);
+        itemCapacity = (2500 * getTier()) + r.random(150, 550);
         unitCapModifier = 15 * getTier();
     }
 }
