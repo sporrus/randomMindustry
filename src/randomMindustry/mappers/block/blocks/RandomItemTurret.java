@@ -92,7 +92,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
                     lightningColor = item.color;
                 }
                 if (r.chance(0.35)) {
-                    healPercent = r.random(0.1f, 0.3f);
+                    healAmount = damage * r.random(0.1f, 0.9f);
                     healColor = item.color;
                     targetHealing = collidesTeam = true;
                 }
