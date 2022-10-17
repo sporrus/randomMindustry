@@ -18,6 +18,7 @@ import mindustry.world.blocks.payloads.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.meta.*;
+import randomMindustry.mappers.block.blocks.*;
 
 import static mindustry.Vars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
@@ -32,7 +33,7 @@ public class RandomBaseGenerator{
     
     public static Block getDifficultyWall(int size, float difficulty){
         Seq<RandomWall> wallSeq = new Seq<>();
-        generatedBlocks.select(b -> b instanceof RandomWall && b.size == size && !b.insulated && b.buildVisibility == BuildVisibility.shown && !(b instanceof Door) && !(Structs.contains(b.requirements, i -> state.rules.hiddenBuildItems.contains(i.item)))).each(b -> wallSeq.add((RandomWall)b));
+        generatedBlocks.select(b -> b instanceof RandomWall && ((Block)b).size == size && !((Block)b).insulated && ((Block)b).buildVisibility == BuildVisibility.shown && !(b instanceof Door) && !(Structs.contains(((Block)b).requirements, i -> state.rules.hiddenBuildItems.contains(i.item)))).each(b -> wallSeq.add((RandomWall)b));
         wallSeq.sort((a, b) -> a.tier - b.tier);
         return wallSeq.getFrac(difficulty * 0.91f);
     }
