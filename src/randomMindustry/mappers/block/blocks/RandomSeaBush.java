@@ -55,7 +55,7 @@ public class RandomSeaBush extends SeaBush implements RandomBlock{
     }
     
     public void applyIcons(){
-        region = fullIcon = uiIcon = pixmapRegion;
+        region = fullIcon = uiIcon = botRegion = pixmapRegion;
         centerRegion = pixmapCenter;
     }
     
