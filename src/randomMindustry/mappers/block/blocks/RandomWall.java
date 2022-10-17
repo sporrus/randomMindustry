@@ -62,7 +62,7 @@ public class RandomWall extends Wall implements RandomBlock {
 
         requirements(Category.defense, ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> 6 * size * size, r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
-
+        researchCostMultiplier = 0.2f;
         localizedName = mainItem.localizedName + " Wall";
     }
 

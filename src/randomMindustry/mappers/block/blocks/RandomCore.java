@@ -66,6 +66,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
         armor = id * 2;
         itemCapacity = (2500 * getTier()) + r.random(150, 550);
         unitCapModifier = 15 * getTier();
+        researchCostMultiplier = 0.1f;
     }
 
     @Override

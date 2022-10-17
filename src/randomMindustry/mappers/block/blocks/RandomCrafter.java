@@ -74,6 +74,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         outputItems = new ItemStack[]{new ItemStack(item, r.random(1, 5 * size))};
         int maxItems = Math.max(Seq.with(itemStacks).sort((a, b) -> b.amount - a.amount).get(0).amount, outputItems[0].amount);
         itemCapacity = maxItems * 2;
+        researchCostMultiplier = 0.2f;
 
         type = RandomCrafterType.random(r);
         localizedName = Core.bundle.format("crafter.rm-name." + type, item.localizedName);
