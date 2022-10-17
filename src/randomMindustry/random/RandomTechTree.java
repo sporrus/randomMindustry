@@ -15,7 +15,7 @@ import static mindustry.content.TechTree.*;
 
 public class RandomTechTree {
     public static void load() {
-        Main.random.techTree = nodeRoot("rm-random", Items.carbide, () -> {
+        Main.random.techTree = nodeRoot("rm-random", (RandomCore)BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0), () -> {
             ItemMapper.generatedItems.each(item -> {
                 CustomItem depend = depends(item);
                 item.techNode = new TechNode(
