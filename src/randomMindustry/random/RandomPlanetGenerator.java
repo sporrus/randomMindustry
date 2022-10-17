@@ -28,7 +28,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
         rand = new SyncedRand();
     }
 
-    BaseGenerator basegen = new BaseGenerator();
+    RandomBaseGenerator basegen = new RandomBaseGenerator();
     float scl = 5f;
     float waterOffset = 0.07f;
     boolean genLakes = false;
