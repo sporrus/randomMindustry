@@ -9,7 +9,7 @@ import randomMindustry.texture.*;
 import static randomMindustry.mappers.block.BlockMapper.r;
 import static randomMindustry.RMVars.*;
 
-// lets pretend these are plants that are underwater
+// lets pretend these are plants that are not underwater
 public class RandomSeaBush extends SeaBush implements RandomBlock{
     public final int id;
     
