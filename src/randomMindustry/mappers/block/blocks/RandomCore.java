@@ -18,11 +18,11 @@ import static randomMindustry.mappers.block.BlockMapper.r;
 public class RandomCore extends CoreBlock implements RandomBlock{
     public final int id;
     public static RandomCore last = null;
-    public static final ObjectMap<Integer, Seq<UnitType>> types = ObjectMap.of(
-        1, Seq.with(UnitTypes.alpha, UnitTypes.beta),
-        2, Seq.with(UnitTypes.poly, UnitTypes.gamma),
-        3, Seq.with(UnitTypes.mega),
-        4, Seq.with(UnitTypes.oct)
+    public static final ObjectMap<Integer, UnitType> types = ObjectMap.of(
+        0, UnitTypes.alpha,
+        1, UnitTypes.beta,
+        2, UnitTypes.gamma,
+        3, UnitTypes.mega
     );
     
     public RandomCore(String name, int id){
@@ -61,7 +61,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
         }
         size = id + 3;
         requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5) + id, () -> Mathf.round(r.random(300, 1000) * size, 100), r));
-        unitType = types.get(getTier(), Seq.with(UnitTypes.oct)).random(r);
+        unitType = types.get(id, UnitTypes.oct);
         health = (2000 + (getTier() * 1500)) + r.random(150, 550);
         armor = id * 2;
         itemCapacity = (2500 * getTier()) + r.random(150, 550);
