@@ -62,7 +62,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
         size = id + 3;
         requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5) + id, () -> Mathf.round(r.random(300, 1000) * size, 100), r));
         unitType = types.get(id, UnitTypes.oct);
-        health = (2000 + (getTier() * 1500)) + r.random(150, 550);
+        health = Mathf.round(r.random(1000, 3000) * size, 100);
         armor = id * 2;
         itemCapacity = (2500 * getTier()) + r.random(150, 550);
         unitCapModifier = 15 * getTier();
