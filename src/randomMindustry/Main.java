@@ -10,6 +10,7 @@ import mindustry.graphics.g3d.*;
 import mindustry.mod.*;
 import mindustry.type.*;
 import randomMindustry.mappers.block.*;
+import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.random.*;
 import randomMindustry.texture.*;
@@ -112,6 +113,7 @@ public class Main extends Mod {
             atmosphereRadOut = 0.3f;
             startSector = 1;
             alwaysUnlocked = true;
+            defaultCore = BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.getTier() == 1);
             landCloudColor = Team.crux.color.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
             unlockedOnLand.add(Items.carbide);
