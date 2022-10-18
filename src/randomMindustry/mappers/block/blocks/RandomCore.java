@@ -83,20 +83,24 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     }
 
     private TextureRegion pixmapRegion;
+    private TextureRegion pixmapTeam;
     private boolean pixmapLoaded = false;
     public void createSprites(Pixmap from) {
-        TextureManager.recolorRegion(from, Color.gold);
-        pixmapRegion = TextureManager.alloc(from);
+        Pixmap region = from.crop(0, 0);
+        Pixmap team = from.crop(96, 96);
+        TextureManager.recolorRegion(region, new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f)));
+        pixmapRegion = TextureManager.alloc(region);
+        pixmapTeam = TextureManager.alloc(team);
         pixmapLoaded = true;
     }
 
     @Override
     public void createIcons(MultiPacker packer) {
-        createSprites(wallSprites.get(2).random(packer, 64, r));
+        createSprites(coreSprites.get(3).random(packer, 192, 96, r));
     }
 
     public void reloadIcons() {
-        createSprites(wallSprites.get(2).random(64, r));
+        createSprites(coreSprites.get(3).random(192, 96, r));
         applyIcons();
     }
 }
