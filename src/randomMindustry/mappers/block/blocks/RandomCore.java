@@ -80,14 +80,15 @@ public class RandomCore extends CoreBlock implements RandomBlock{
 
     public void applyIcons() {
         region = fullIcon = uiIcon = pixmapRegion;
+        teamRegion = pixmapTeam;
     }
 
     private TextureRegion pixmapRegion;
     private TextureRegion pixmapTeam;
     private boolean pixmapLoaded = false;
     public void createSprites(Pixmap from) {
-        Pixmap region = from.crop(0, 0);
-        Pixmap team = from.crop(96, 96);
+        Pixmap region = from.crop(0, 0, 96, 96);
+        Pixmap team = from.crop(96, 96, 96, 96);
         TextureManager.recolorRegion(region, new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f)));
         pixmapRegion = TextureManager.alloc(region);
         pixmapTeam = TextureManager.alloc(team);
