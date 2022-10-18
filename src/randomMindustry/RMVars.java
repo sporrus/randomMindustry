@@ -31,7 +31,7 @@ public class RMVars{
             4, new TextureGrid("random-mindustry-item-turrets4")
     );
     public static ObjectMap<Integer, TextureGrid> coreSprites = ObjectMap.of(
-            1, new TextureGrid("random-mindustry-cores1")
+            3, new TextureGrid("random-mindustry-cores3")
     );
     public static TextureGrid oreSprites = new TextureGrid("random-mindustry-ores");
     public static TextureGrid drillSprites = new TextureGrid("random-mindustry-drills");
