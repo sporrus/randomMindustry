@@ -32,7 +32,7 @@ public class CustomItem extends Item {
     }
 
     public void generate() {
-        color = new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f));
+        color = new Color(cr.random(0.3f, 1f), cr.random(0.3f, 1f), cr.random(0.3f, 1f));
 
         globalTier = id / 3;
         localTier = globalTier / 2;
@@ -74,11 +74,11 @@ public class CustomItem extends Item {
 
     @Override
     public void createIcons(MultiPacker packer) {
-        createSprites(itemSprites.random(packer, 32, r));
+        createSprites(itemSprites.random(packer, 32, cr));
     }
 
     public void reloadIcons() {
-        createSprites(itemSprites.random(32, r));
+        createSprites(itemSprites.random(32, cr));
         applyIcons();
     }
 }

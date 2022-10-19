@@ -94,11 +94,11 @@ public class RandomItemBridge extends BufferedItemBridge implements RandomBlock 
 
     @Override
     public void createIcons(MultiPacker packer) {
-        createSprites(bridgeSprites.random(packer, 128, 32, r));
+        createSprites(bridgeSprites.random(packer, 128, 32, cr));
     }
 
     public void reloadIcons() {
-        createSprites(bridgeSprites.random(128, 32, r));
+        createSprites(bridgeSprites.random(128, 32, cr));
         applyIcons();
     }
 }

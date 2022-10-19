@@ -89,11 +89,11 @@ public class RandomWall extends Wall implements RandomBlock {
 
     @Override
     public void createIcons(MultiPacker packer) {
-        createSprites(wallSprites.get(size).random(packer, size * 32, r));
+        createSprites(wallSprites.get(size).random(packer, size * 32, cr));
     }
 
     public void reloadIcons() {
-        createSprites(wallSprites.get(size).random(size * 32, r));
+        createSprites(wallSprites.get(size).random(size * 32, cr));
         applyIcons();
     }
 }

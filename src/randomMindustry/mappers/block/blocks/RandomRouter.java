@@ -87,11 +87,11 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
 
     @Override
     public void createIcons(MultiPacker packer) {
-        createSprites(routerSprites.random(packer, 32, r));
+        createSprites(routerSprites.random(packer, 32, cr));
     }
 
     public void reloadIcons() {
-        createSprites(routerSprites.random(32, r));
+        createSprites(routerSprites.random(32, cr));
         applyIcons();
     }
 }

@@ -9,7 +9,7 @@ import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
 import static mindustry.Vars.*;
-import static randomMindustry.mappers.block.BlockMapper.r;
+import static randomMindustry.mappers.block.BlockMapper.*;
 import static randomMindustry.RMVars.*;
 
 public class RandomOre extends OreBlock implements RandomBlock {
@@ -45,7 +45,7 @@ public class RandomOre extends OreBlock implements RandomBlock {
     // TODO: make this reload
     @Override
     public void createIcons(MultiPacker packer) {
-        Pixmap ore = oreSprites.random(packer, 96, 32, r);
+        Pixmap ore = oreSprites.random(packer, 96, 32, cr);
         for (int i = 0; i < variants; i++) {
             Pixmap pixmap = ore.crop(i * 32, 0, 32, 32);
             Pixmap shadow = pixmap.crop(0, 0, 32, 32);
@@ -63,6 +63,6 @@ public class RandomOre extends OreBlock implements RandomBlock {
     // i love syncing (replace this as soon as possible)
     @Override
     public void reloadIcons() {
-        Pixmap ore = oreSprites.random(96, 32, r);
+        Pixmap ore = oreSprites.random(96, 32, cr);
     }
 }

@@ -2,6 +2,7 @@ package randomMindustry.mappers.block;
 
 import arc.math.*;
 import arc.struct.*;
+import mindustry.*;
 import mindustry.world.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
@@ -10,6 +11,7 @@ import randomMindustry.random.*;
 public class BlockMapper {
     public static final Seq<RandomBlock> generatedBlocks = new Seq<>();
     public static final SyncedRand r = new SyncedRand();
+    public static final SyncedRand cr = new SyncedRand();
 
     public static void generateContent() {
         for (int i = 0; i < ItemMapper.maxTier; i++)
@@ -37,7 +39,7 @@ public class BlockMapper {
 
     public static void reloadContent() {
         generatedBlocks.each(RandomBlock::generate);
-        generatedBlocks.each(RandomBlock::reloadIcons);
+        if (!Vars.headless) generatedBlocks.each(RandomBlock::reloadIcons);
         generatedBlocks.each(b -> ((Block)b).init());
     }
 }

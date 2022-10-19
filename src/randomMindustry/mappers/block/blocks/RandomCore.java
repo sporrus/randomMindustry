@@ -15,7 +15,7 @@ import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
 
 import static randomMindustry.RMVars.*;
-import static randomMindustry.mappers.block.BlockMapper.r;
+import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomCore extends CoreBlock implements RandomBlock{
     public final int id;
@@ -26,6 +26,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
         2, UnitTypes.gamma,
         3, UnitTypes.mega
     );
+    public Item mainItem;
     
     public RandomCore(String name, int id){
         super(name + id);
@@ -66,6 +67,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
         itemCapacity = Mathf.round(r.random(1000, 3000) * size, 100);
         RandomCore lastBlock = (RandomCore) BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore && ((RandomCore)b).id == this.id - 1);
         requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5), () -> Math.min(Mathf.round(r.random(300, 1000) * size, (lastBlock == null ? this : lastBlock).itemCapacity), 100), r));
+        mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         unitType = types.get(id, UnitTypes.oct);
         health = Mathf.round(r.random(1000, 3000) * size, 100);
         armor = id * 2;
@@ -93,7 +95,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     public void createSprites(Pixmap from) {
         Pixmap region = from.crop(0, 0, 96, 96);
         Pixmap team = from.crop(96, 96, 96, 96);
-        TextureManager.recolorRegion(region, new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f)));
+        TextureManager.recolorRegion(region, mainItem.color);
         pixmapRegion = TextureManager.alloc(region);
         pixmapTeam = TextureManager.alloc(team);
         pixmapLoaded = true;
@@ -101,11 +103,11 @@ public class RandomCore extends CoreBlock implements RandomBlock{
 
     @Override
     public void createIcons(MultiPacker packer) {
-        createSprites(coreSprites.get(3).random(packer, 192, 96, r));
+        createSprites(coreSprites.get(3).random(packer, 192, 96, cr));
     }
 
     public void reloadIcons() {
-        createSprites(coreSprites.get(3).random(192, 96, r));
+        createSprites(coreSprites.get(3).random(192, 96, cr));
         applyIcons();
     }
 }

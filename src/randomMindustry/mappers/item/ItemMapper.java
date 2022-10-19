@@ -3,6 +3,7 @@ package randomMindustry.mappers.item;
 import arc.func.*;
 import arc.math.*;
 import arc.struct.*;
+import mindustry.*;
 import mindustry.type.*;
 import randomMindustry.random.*;
 
@@ -10,6 +11,7 @@ public class ItemMapper {
     public static final CustomItemSeq generatedItems = new CustomItemSeq();
     public static final int itemCount = 36;
     public static final SyncedRand r = new SyncedRand();
+    public static final SyncedRand cr = new SyncedRand();
     public static final int maxTier = itemCount / 3;
 
     public static void generateContent() {
@@ -21,7 +23,7 @@ public class ItemMapper {
 
     public static void reloadContent() {
         generatedItems.each(CustomItem::generate);
-        generatedItems.each(CustomItem::reloadIcons);
+        if (!Vars.headless) generatedItems.each(CustomItem::reloadIcons);
         generatedItems.each(CustomItem::init);
     }
 

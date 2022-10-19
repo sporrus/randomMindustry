@@ -7,7 +7,7 @@ import mindustry.graphics.*;
 import mindustry.world.blocks.environment.*;
 import randomMindustry.texture.*;
 
-import static randomMindustry.mappers.block.BlockMapper.r;
+import static randomMindustry.mappers.block.BlockMapper.*;
 import static randomMindustry.RMVars.*;
 
 // lets pretend these are plants that are not underwater
@@ -44,7 +44,7 @@ public class RandomSeaBush extends SeaBush implements RandomBlock{
         sclMax = r.random(50f, 100f);
         origin = r.random(0.01f, 0.03f);
         spread = r.random(40f);
-        color = new Color(r.random(0.3f, 1f), r.random(0.3f, 1f), r.random(0.3f, 1f));
+        color = new Color(cr.random(0.3f, 1f), cr.random(0.3f, 1f), cr.random(0.3f, 1f));
     }
     
     @Override
@@ -70,11 +70,11 @@ public class RandomSeaBush extends SeaBush implements RandomBlock{
     
     @Override
     public void createIcons(MultiPacker packer){
-        createSprites(plantSprites.random(packer, 106, 52, r));
+        createSprites(plantSprites.random(packer, 106, 52, cr));
     }
     
     public void reloadIcons(){
-        createSprites(plantSprites.random(106, 52, r));
+        createSprites(plantSprites.random(106, 52, cr));
         applyIcons();
     }
 }

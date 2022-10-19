@@ -6,6 +6,7 @@ import arc.util.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.game.*;
+import mindustry.gen.*;
 import mindustry.graphics.g3d.*;
 import mindustry.mod.*;
 import mindustry.type.*;
@@ -25,11 +26,31 @@ public class Main extends Mod {
 
     @Override
     public void init() {
-        Settings.load();
-        TextureManager.init();
         Vars.content.planets().select(p -> p != random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
+        if (!Vars.headless) {
+            Settings.load();
+            TextureManager.init();
+            Vars.netClient.addPacketHandler("seed", s -> {
+                try {
+                    SeedManager.setSeed(Long.parseLong(s));
+                    reload();
+                } catch (NumberFormatException e) {
+                    Log.err("error parsing seed packet", e);
+                }
+            });
+        } else {
+            Events.on(EventType.PlayerJoin.class, e -> {
+                Call.clientPacketReliable(e.player.con, "seed", String.valueOf(SeedManager.getSeed()));
+            });
+            Events.on(EventType.WorldLoadEvent.class, e -> {
+                SeedManager.generateSeed();
+                reload();
+                Call.clientPacketReliable("seed", String.valueOf(SeedManager.getSeed()));
+                Call.infoPopup("selected seed:" + SeedManager.getSeed(), 60, Align.left, 0, 0, 0, 0);
+            });
+        }
 
-//        Events.on(EventType.SaveLoadEvent.class, e -> {
+//        Events.on(EventType.SaveLoadEvent.class, e -> Core.app.post(() -> {
 //            if (Vars.state.isCampaign()) {
 //                long seed = Core.settings.getLong("rm-campaign-seed");
 //                if (Core.settings.get("rm-campaign-seed", null) == null) {
@@ -53,8 +74,7 @@ public class Main extends Mod {
 //                Log.info("saved " + seed);
 //                Vars.state.rules.tags.put("rm-seed", String.valueOf(seed));
 //            }
-//        });
-
+//        }));
 // debug atlas:
 //        final int[] i = {0};
 //        TextureManager.getAllTextures().each((t) -> {
@@ -71,8 +91,14 @@ public class Main extends Mod {
 //        }
     }
 
+    @Override
+    public void registerClientCommands(CommandHandler h) {
+        h.<Player>register("seed", "syncs seeds", (args, player) ->
+                Call.clientPacketReliable(player.con, "seed", String.valueOf(SeedManager.getSeed())));
+    }
+
     public static void reload() {
-        TextureManager.reload();
+        if (!Vars.headless) TextureManager.reload();
         ItemMapper.reloadContent();
         BlockMapper.reloadContent();
     }

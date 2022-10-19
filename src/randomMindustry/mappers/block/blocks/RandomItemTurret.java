@@ -11,6 +11,7 @@ import mindustry.entities.bullet.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.consumers.*;
 import mindustry.world.draw.*;
 import randomMindustry.*;
 import randomMindustry.mappers.item.*;
@@ -68,6 +69,11 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         range = r.random(112f, Math.max(800f * tier / 20f, 160f));
         rotateSpeed = r.random(0.5f, 5f);
         inaccuracy = r.random(1f, 90f / tier * 10f / reload);
+
+        // cancer
+        Consume[] consumes = consumers.clone();
+        consumers = new Consume[0];
+        for (Consume consume : consumes) removeConsumer(consume);
 
         ammoTypes.clear();
         int itemCount = r.random(1, 3);
@@ -137,11 +143,11 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
 
     @Override
     public void createIcons(MultiPacker packer) {
-        createSprites(itemTurretSprites.get(size).random(packer, size * 32, r));
+        createSprites(itemTurretSprites.get(size).random(packer, size * 32, cr));
     }
 
     public void reloadIcons() {
-        createSprites(itemTurretSprites.get(size).random(size * 32, r));
+        createSprites(itemTurretSprites.get(size).random(size * 32, cr));
         applyIcons();
     }
 }

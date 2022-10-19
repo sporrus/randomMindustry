@@ -112,11 +112,11 @@ public class RandomDrill extends Drill implements RandomBlock {
 
     @Override
     public void createIcons(MultiPacker packer) {
-        createSprites(drillSprites.random(packer, 192, 64, r));
+        createSprites(drillSprites.random(packer, 192, 64, cr));
     }
 
     public void reloadIcons() {
-        createSprites(drillSprites.random(192, 64, r));
+        createSprites(drillSprites.random(192, 64, cr));
         applyIcons();
     }
 }
