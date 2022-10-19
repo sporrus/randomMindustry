@@ -93,7 +93,7 @@ public class Main extends Mod {
         fakesun = new Planet("rm-fakesun", Planets.sun, 4f){{
             bloom = true;
             accessible = false;
-            orbitRadius = 5000f;
+            orbitRadius = 500f;
             
             meshLoader = () -> new SunMesh(
                 this, 4,
