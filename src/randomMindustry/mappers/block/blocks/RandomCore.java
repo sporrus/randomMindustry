@@ -61,11 +61,11 @@ public class RandomCore extends CoreBlock implements RandomBlock{
             isFirstTier = alwaysUnlocked = true;
             last = null;
         }
-        size = id + 3;
-        itemCapacity = Mathf.round((2000 * getTier()) + r.random(150, 550), 10);
-        // not using last because its only used after blocks and other content have loaded
-        RandomBlock lastBlock = BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore && ((RandomCore)b).id == this.id - 1);
-        requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5), () -> ((int)Math.min(Mathf.round(r.random(300, 1000) * size, 100), (lastBlock == null ? itemCapacity : ((Block)lastBlock).itemCapacity) - Mathf.round(r.random(100, 300), 10))), r));
+
+        size = Math.min(id + 3, 16);
+        itemCapacity = Mathf.round(r.random(1000, 3000) * size, 100);
+        RandomCore lastBlock = (RandomCore) BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore && ((RandomCore)b).id == this.id - 1);
+        requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5), () -> Math.min(Mathf.round(r.random(300, 1000) * size, (lastBlock == null ? this : lastBlock).itemCapacity), 100), r));
         unitType = types.get(id, UnitTypes.oct);
         health = Mathf.round(r.random(1000, 3000) * size, 100);
         armor = id * 2;

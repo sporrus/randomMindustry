@@ -40,26 +40,26 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                     {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.sand, Blocks.salt, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.darksandWater, Blocks.stone, Blocks.stone, Blocks.stone},
                     {Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.salt, Blocks.salt, Blocks.salt, Blocks.sand, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.snow, Blocks.iceSnow, Blocks.ice},
                     {Blocks.deepwater, Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.salt, Blocks.sand, Blocks.sand, Blocks.basalt, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice},
-                    {Blocks.deepwater, Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.bluemat, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.snow, Blocks.ice},
-                    {Blocks.deepwater, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.bluemat, Blocks.bluemat, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice},
-                    {Blocks.deepwater, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.bluemat, Blocks.basalt, Blocks.hotrock, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
-                    {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.bluemat, Blocks.redmat, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
-                    {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.redmat, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice},
-                    {Blocks.deepwater, Blocks.darksandWater, Blocks.darksand, Blocks.redmat, Blocks.redmat, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
-                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.redmat, Blocks.bluemat, Blocks.redmat, Blocks.iceSnow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
+                    {Blocks.deepwater, Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.redStone, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.snow, Blocks.ice},
+                    {Blocks.deepwater, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.redStone, Blocks.redStone, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice},
+                    {Blocks.deepwater, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.redStone, Blocks.basalt, Blocks.hotrock, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
+                    {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.redStone, Blocks.denseRedStone, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
+                    {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.denseRedStone, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice},
+                    {Blocks.deepwater, Blocks.darksandWater, Blocks.darksand, Blocks.denseRedStone, Blocks.denseRedStone, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
+                    {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.denseRedStone, Blocks.redStone, Blocks.denseRedStone, Blocks.iceSnow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
                     {Blocks.darksandWater, Blocks.darksand, Blocks.snow, Blocks.ice, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice}
             };
 
     ObjectMap<Block, Block> dec = ObjectMap.of(
-            Blocks.carbonStone, Blocks.carbonBoulder,
-            Blocks.yellowCoral, Blocks.purbush,
-            Blocks.redmat, Blocks.water,
-            Blocks.darksandWater, Blocks.darksandWater
+            Blocks.redStone, Blocks.redStoneBoulder,
+            Blocks.denseRedStone, Blocks.redStoneBoulder
+//            Blocks.denseRedStone, Blocks.water,
+//            Blocks.darksandWater, Blocks.darksandWater
     );
 
     ObjectMap<Block, Block> tars = ObjectMap.of(
-            Blocks.redmat, Blocks.shale,
-            Blocks.bluemat, Blocks.shale
+            Blocks.redStone, Blocks.shale,
+            Blocks.denseRedStone, Blocks.shale
     );
 
     float water = 2f / arr[0].length;
@@ -458,9 +458,9 @@ public class RandomPlanetGenerator extends PlanetGenerator{
 
         pass((x, y) -> {
             //random moss
-            if(floor == Blocks.redmat){
+            if(floor == Blocks.denseRedStone){
                 if(Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.02){
-                    floor = Blocks.bluemat;
+                    floor = Blocks.redStone;
                 }
             }
 

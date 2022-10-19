@@ -4,24 +4,18 @@ import arc.struct.*;
 import randomMindustry.random.*;
 
 public class StringGenerator{
-    protected SyncedRand r;
+    protected SyncedRand r = new SyncedRand();
 
     public final Seq<String> vowels = Seq.with(
-        "i", "e", "u", "a", "ee", "ea", "ie", "ou", "er", "or", "o", "ir", "ur", "ear", "our", "ar",
-        "al", "au", "ae", "oar", "oo", "ui", "ew", "a", "eigh", "ow", "oa", "oi", "oy", "eer",
-        "ere", "are", "air", "oor"
+        "i", "e", "u", "a", "o"
     );
     
     public final Seq<String> consonants = Seq.with(
         "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x",
         "y", "z"
     );
-
-    public StringGenerator(){
-        r = new SyncedRand();
-    }
     
-    public final Seq<String> template = Seq.with("cv", "vc", "cvc", "vcv", "cvv", "vvc");
+    public final Seq<String> template = Seq.with("cvc");
     
     public String generateSyllable(){
         String tmp = template.random(r);

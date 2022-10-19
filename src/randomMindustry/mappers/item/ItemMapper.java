@@ -22,6 +22,7 @@ public class ItemMapper {
     public static void reloadContent() {
         generatedItems.each(CustomItem::generate);
         generatedItems.each(CustomItem::reloadIcons);
+        generatedItems.each(CustomItem::init);
     }
 
     public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount, Rand r) {

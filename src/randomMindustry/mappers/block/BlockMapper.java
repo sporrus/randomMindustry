@@ -2,6 +2,7 @@ package randomMindustry.mappers.block;
 
 import arc.math.*;
 import arc.struct.*;
+import mindustry.world.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.random.*;
@@ -37,5 +38,6 @@ public class BlockMapper {
     public static void reloadContent() {
         generatedBlocks.each(RandomBlock::generate);
         generatedBlocks.each(RandomBlock::reloadIcons);
+        generatedBlocks.each(b -> ((Block)b).init());
     }
 }

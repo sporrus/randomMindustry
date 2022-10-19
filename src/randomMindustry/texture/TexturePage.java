@@ -1,5 +1,6 @@
 package randomMindustry.texture;
 
+import arc.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.graphics.gl.*;
@@ -20,7 +21,8 @@ public class TexturePage {
 
     public void newTexture() {
         texture = new Texture(new PixmapTextureData(new Pixmap(size * count, size * count), false, false));
-//        texture.setFilter(Texture.TextureFilter.linear, Texture.TextureFilter.linear);
+        if (Core.settings.getBool("linear"))
+            texture.setFilter(Texture.TextureFilter.linear, Texture.TextureFilter.linear);
         textures.add(texture);
     }
 
