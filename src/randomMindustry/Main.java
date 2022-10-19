@@ -14,12 +14,12 @@ import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.random.*;
 import randomMindustry.texture.*;
-import randomMindustry.ui.*;
+import randomMindustry.ui.Settings;
 
 import static randomMindustry.mappers.block.BlockMapper.r;
 
 public class Main extends Mod {
-    public static Planet random;
+    public static Planet random, fakesun;
     
     public Main() {
 
@@ -93,6 +93,7 @@ public class Main extends Mod {
         fakesun = new Planet("rm-fakesun", Planets.sun, 4f){{
             bloom = true;
             accessible = false;
+            orbitRadius = 5000f;
             
             meshLoader = () -> new SunMesh(
                 this, 4,
@@ -107,7 +108,7 @@ public class Main extends Mod {
             );
         }};
         
-        random = new Planet("rm-random", Planets.sun, 1f, 3){{
+        random = new Planet("rm-random", fakesun, 1f, 3){{
             localizedName = "Random";
             generator = new RandomPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 6);
