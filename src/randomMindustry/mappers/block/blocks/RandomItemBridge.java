@@ -16,7 +16,7 @@ import randomMindustry.texture.*;
 import static randomMindustry.RMVars.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
-public class RandomItemBridge extends ItemBridge implements RandomBlock {
+public class RandomItemBridge extends BufferedItemBridge implements RandomBlock {
     public final int id;
     public Item mainItem;
     public int tier;
@@ -60,6 +60,7 @@ public class RandomItemBridge extends ItemBridge implements RandomBlock {
 
         itemCapacity = 10 * tier;
         range = tier + 2;
+        speed = 16f / tier;
 
         localizedName = mainItem.localizedName + " Bridge";
     }
