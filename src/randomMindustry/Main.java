@@ -14,7 +14,9 @@ import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.random.*;
 import randomMindustry.texture.*;
-import randomMindustry.ui.Settings;
+import randomMindustry.ui.*;
+
+import static randomMindustry.mappers.block.BlockMapper.r;
 
 public class Main extends Mod {
     public static Planet random;
@@ -87,6 +89,24 @@ public class Main extends Mod {
         ItemMapper.generateContent();
         BlockMapper.generateContent();
         RandomLoadouts.load();
+        
+        fakesun = new Planet("rm-fakesun", Planets.sun, 4f){{
+            bloom = true;
+            accessible = false;
+            
+            meshLoader = () -> new SunMesh(
+                this, 4,
+                5, 0.3, 1.7, 1.2, 1,
+                1.1f,
+                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
+                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
+                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
+                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
+                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
+                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f))
+            );
+        }};
+        
         random = new Planet("rm-random", Planets.sun, 1f, 3){{
             localizedName = "Random";
             generator = new RandomPlanetGenerator();
@@ -118,6 +138,7 @@ public class Main extends Mod {
             landCloudColor = Team.crux.color.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
         }};
+        
         RandomTechTree.load();
     }
 }
