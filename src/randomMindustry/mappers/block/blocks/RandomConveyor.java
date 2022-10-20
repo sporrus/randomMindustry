@@ -60,7 +60,7 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
 
         stats = new Stats();
         size = 1;
-        health = Mathf.round(r.random(1, 5) * tier, 1);
+        health = Mathf.round(r.random(25, 75) * tier, 1);
 
         requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 2), () -> 1, r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;

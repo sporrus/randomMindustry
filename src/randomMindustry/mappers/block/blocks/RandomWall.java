@@ -60,7 +60,7 @@ public class RandomWall extends Wall implements RandomBlock {
 
         stats = new Stats();
         size = r.random(1, 2);
-        health = Mathf.round(r.random(100, 500) * size * tier, 5);
+        health = Mathf.round(r.random(150, 450) * size * tier, 5);
 
         requirements(Category.defense, ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> 6 * size * size, r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;

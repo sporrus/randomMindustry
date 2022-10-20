@@ -60,7 +60,7 @@ public class RandomDrill extends Drill implements RandomBlock {
 
         stats = new Stats();
         size = 2;
-        health = Mathf.round(r.random(5, 50) * size, 5);
+        health = Mathf.round(r.random(70, 100) * this.tier * size, 5);
 
         drillTime = 600f / this.tier;
         int tier = (this.tier - 1) * 2;

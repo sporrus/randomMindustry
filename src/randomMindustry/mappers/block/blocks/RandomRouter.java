@@ -55,7 +55,7 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
 
         stats = new Stats();
         size = 1;
-        health = Mathf.round(r.random(3, 8) * tier, 1);
+        health = Mathf.round(r.random(30, 50) * tier, 1);
 
         requirements(Category.distribution, ItemMapper.getItemStacks(tier - 1, r.random(1, 3), () -> r.random(1, 3), r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
