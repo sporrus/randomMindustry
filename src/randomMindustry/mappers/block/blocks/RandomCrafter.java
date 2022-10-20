@@ -62,7 +62,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
 
         stats = new Stats();
         size = r.random(2, 4);
-        health = Mathf.round(r.random(20, 100) * size * tier, 5);
+        health = Mathf.round(r.random(20, 100) * size * (tier + 1), 5);
 
         CustomItemSeq items = ItemMapper.generatedItems
                 .selectTierType(ItemTierType.craft)
