@@ -13,6 +13,7 @@ import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
 import mindustry.world.draw.*;
+import mindustry.world.meta.*;
 import randomMindustry.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
@@ -62,6 +63,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         }
         tier = id + 1;
 
+        stats = new Stats();
         size = (int) Math.max(1, Math.min(4, tier / 3f));
         health = Mathf.round(r.random(100, 200) * size * tier, 5);
 

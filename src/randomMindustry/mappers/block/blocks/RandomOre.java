@@ -1,6 +1,7 @@
 package randomMindustry.mappers.block.blocks;
 
 import arc.graphics.*;
+import arc.graphics.g2d.*;
 import arc.struct.*;
 import mindustry.content.*;
 import mindustry.graphics.*;
@@ -48,21 +49,31 @@ public class RandomOre extends OreBlock implements RandomBlock {
         Pixmap ore = oreSprites.random(packer, 96, 32, cr);
         for (int i = 0; i < variants; i++) {
             Pixmap pixmap = ore.crop(i * 32, 0, 32, 32);
-            Pixmap shadow = pixmap.crop(0, 0, 32, 32);
             TextureManager.recolorRegion(pixmap, itemDrop.color);
-            int offset = pixmap.width / tilesize - 1;
-            int shadowColor = Color.rgba8888(0, 0, 0, 0.3f);
-            for(int x = 0; x < pixmap.width; x++)
-                for(int y = offset; y < pixmap.height; y++)
-                    if(shadow.getA(x, y) == 0 && shadow.getA(x, y - offset) != 0)
-                        pixmap.set(x, y, shadowColor);
+            shadow(pixmap);
             packer.add(MultiPacker.PageType.environment, name + (i + 1), pixmap);
         }
     }
 
-    // i love syncing (replace this as soon as possible)
     @Override
     public void reloadIcons() {
         Pixmap ore = oreSprites.random(96, 32, cr);
+        for (int i = 0; i < variants; i++) {
+            Pixmap pixmap = ore.crop(i * 32, 0, 32, 32);
+            TextureManager.recolorRegion(pixmap, itemDrop.color);
+            shadow(pixmap);
+            TextureRegion region = variantRegions[i];
+            region.texture.draw(pixmap, region.getX(), region.getY());
+        }
+    }
+
+    public void shadow(Pixmap pixmap) {
+        Pixmap shadow = pixmap.crop(0, 0, pixmap.width, pixmap.height);
+        int offset = pixmap.width / tilesize - 1;
+        int shadowColor = Color.rgba8888(0, 0, 0, 0.3f);
+        for(int x = 0; x < pixmap.width; x++)
+            for(int y = offset; y < pixmap.height; y++)
+                if(shadow.getA(x, y) == 0 && shadow.getA(x, y - offset) != 0)
+                    pixmap.set(x, y, shadowColor);
     }
 }

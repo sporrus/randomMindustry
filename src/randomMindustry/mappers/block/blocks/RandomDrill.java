@@ -9,6 +9,7 @@ import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
+import mindustry.world.meta.*;
 import randomMindustry.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
@@ -57,6 +58,7 @@ public class RandomDrill extends Drill implements RandomBlock {
         }
         this.tier = id + 1;
 
+        stats = new Stats();
         size = 2;
         health = Mathf.round(r.random(5, 50) * size, 5);
 

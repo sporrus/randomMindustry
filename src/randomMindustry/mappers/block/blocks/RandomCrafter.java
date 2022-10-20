@@ -11,6 +11,7 @@ import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
+import mindustry.world.meta.*;
 import randomMindustry.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
@@ -59,6 +60,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
         }
         int tier = id / 3;
 
+        stats = new Stats();
         size = r.random(2, 4);
         health = Mathf.round(r.random(20, 100) * size, 5);
 

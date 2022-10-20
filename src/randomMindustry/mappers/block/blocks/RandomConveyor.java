@@ -9,6 +9,7 @@ import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.distribution.*;
+import mindustry.world.meta.*;
 import randomMindustry.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
@@ -57,6 +58,7 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         }
         tier = id + 1;
 
+        stats = new Stats();
         size = 1;
         health = Mathf.round(r.random(1, 5) * tier, 1);
 

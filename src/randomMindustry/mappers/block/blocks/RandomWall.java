@@ -8,6 +8,7 @@ import mindustry.content.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.*;
+import mindustry.world.meta.*;
 import randomMindustry.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.texture.*;
@@ -57,6 +58,7 @@ public class RandomWall extends Wall implements RandomBlock {
         }
         tier = id + 1;
 
+        stats = new Stats();
         size = r.random(1, 2);
         health = Mathf.round(r.random(100, 500) * size * tier, 5);
 
