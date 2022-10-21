@@ -1,6 +1,7 @@
 package randomMindustry.mappers.bullet.types;
 
 public interface RandomBullet{
-    void gen();
     int tier();
+    int tier2();
+    void gen();
 }
