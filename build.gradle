@@ -32,7 +32,7 @@ allprojects{
 dependencies{
     compileOnly "com.github.anuken.arc:arc-core:v139"
     compileOnly "com.github.anuken.arc:flabel:v139"
-    compileOnly "com.github.anuken.mindustryjitpack:core:v139"
+    compileOnly "com.github.anuken.mindustry:core:v139"
     annotationProcessor "com.github.anuken:jabel:0.9.0"
 }
 
