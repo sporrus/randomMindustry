@@ -9,6 +9,7 @@ import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.storage.*;
+import mindustry.world.meta.*;
 import randomMindustry.*;
 import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.item.*;
@@ -63,13 +64,14 @@ public class RandomCore extends CoreBlock implements RandomBlock{
             last = null;
         }
 
+        stats = new Stats();
         size = Math.min(id + 3, 16);
         itemCapacity = Mathf.round(r.random(1000, 3000) * size, 100);
         RandomCore lastBlock = (RandomCore) BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore && ((RandomCore)b).id == this.id - 1);
-        requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5), () -> Math.min(Mathf.round(r.random(300, 1000) * size, (lastBlock == null ? this : lastBlock).itemCapacity), 100), r));
+        requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5), () -> Mathf.round(Math.min(r.random(300, 1000) * size, (lastBlock == null ? this : lastBlock).itemCapacity), 100), r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
         unitType = types.get(id, UnitTypes.oct);
-        health = Mathf.round(r.random(1000, 3000) * size, 100);
+        health = Mathf.round(r.random(300, 1000) * size * getTier(), 100);
         armor = id * 2;
         unitCapModifier = 15 * getTier();
         researchCostMultiplier = 0.1f;
