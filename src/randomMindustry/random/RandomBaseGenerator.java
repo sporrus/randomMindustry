@@ -34,7 +34,7 @@ public class RandomBaseGenerator{
     public static Block getDifficultyWall(int size, float difficulty){
         Seq<RandomWall> wallSeq = new Seq<>();
         generatedBlocks.select(b -> b instanceof RandomWall && ((Block)b).size == size && !((Block)b).insulated && ((Block)b).buildVisibility == BuildVisibility.shown && !(b instanceof Door) && !(Structs.contains(((Block)b).requirements, i -> state.rules.hiddenBuildItems.contains(i.item)))).each(b -> wallSeq.add((RandomWall)b));
-        wallSeq.sort((a, b) -> a.tier - b.tier);
+        wallSeq.sort((a, b) -> a.getTier() - b.getTier());
         return wallSeq.getFrac(difficulty * 0.91f);
     }
 

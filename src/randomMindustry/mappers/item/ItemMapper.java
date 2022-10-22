@@ -28,9 +28,9 @@ public class ItemMapper {
     }
 
     public static ItemStack[] getItemStacks(int tier, int itemCount, Prov<Integer> itemAmount, Rand r) {
-        tier = Math.max(tier, 0);
+        tier = Math.max(tier, 1);
         Seq<ItemStack> stacks = new Seq<>();
-        CustomItemSeq items = generatedItems.selectGlobalTierRange(0, tier);
+        CustomItemSeq items = generatedItems.selectGlobalTierRange(1, tier);
         itemCount = Math.min(Math.max(itemCount, 1), items.size);
         for (int i = 0; i < itemCount; i++) {
             CustomItem it = i == 0 ? generatedItems.selectGlobalTier(tier).random(r) : items.random(r);

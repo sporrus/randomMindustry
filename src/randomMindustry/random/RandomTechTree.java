@@ -15,7 +15,7 @@ import static mindustry.content.TechTree.*;
 
 public class RandomTechTree {
     public static void load() {
-        Main.random.techTree = nodeRoot("rm-random", (RandomCore)BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0), () -> {
+        RandomPlanets.random.techTree = nodeRoot("rm-random", (RandomCore)BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0), () -> {
             ItemMapper.generatedItems.each(item -> {
                 CustomItem depend = depends(item);
                 item.techNode = new TechNode(
@@ -32,7 +32,7 @@ public class RandomTechTree {
 
     // TODO: move to CustomItem
     public static CustomItem depends(CustomItem item) {
-        if (item.tierType == ItemTierType.drill) {
+        if (item.tierType == CustomItem.TierType.drill) {
             if (item.hardness == 1) return null;
             RandomDrill drill = (RandomDrill) BlockMapper.generatedBlocks
                     .select(b -> b instanceof RandomDrill)
@@ -40,7 +40,7 @@ public class RandomTechTree {
                     .sort((a, b) -> ((RandomDrill) a).tier - ((RandomDrill) b).tier)
                     .get(0);
             return (CustomItem) Seq.with(drill.requirements).sort((a, b) -> b.amount - a.amount).get(0).item;
-        } else if (item.tierType == ItemTierType.craft) {
+        } else if (item.tierType == CustomItem.TierType.craft) {
             RandomCrafter crafter = (RandomCrafter) BlockMapper.generatedBlocks
                     .select(b -> b instanceof RandomCrafter)
                     .select(c -> Seq.with(((RandomCrafter) c).outputItems).contains(i -> i.item == item))

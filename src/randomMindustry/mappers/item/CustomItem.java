@@ -12,7 +12,7 @@ import static randomMindustry.mappers.item.ItemMapper.*;
 
 public class CustomItem extends Item {
     public final int id;
-    public ItemTierType tierType;
+    public TierType tierType;
     public int globalTier;
     public int localTier;
     public boolean locked;
@@ -36,8 +36,9 @@ public class CustomItem extends Item {
 
         globalTier = id / 3;
         localTier = globalTier / 2;
-        tierType = globalTier % 2 == 0 ? ItemTierType.drill : ItemTierType.craft;
+        tierType = globalTier % 2 == 0 ? TierType.drill : TierType.craft;
         locked = true;
+        globalTier += 1;
 
         hardness = localTier + 1;
         explosiveness = r.random(100) / 100f;
@@ -80,5 +81,9 @@ public class CustomItem extends Item {
     public void reloadIcons() {
         createSprites(itemSprites.random(32, cr));
         applyIcons();
+    }
+
+    public enum TierType {
+        craft, drill
     }
 }

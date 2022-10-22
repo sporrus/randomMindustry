@@ -27,7 +27,7 @@ public class CustomItemSeq extends Seq<CustomItem> {
         return select(i -> i.localTier == localTier);
     }
 
-    public CustomItemSeq selectTierType(ItemTierType tierType) {
+    public CustomItemSeq selectTierType(CustomItem.TierType tierType) {
         return select(i -> i.tierType == tierType);
     }
 

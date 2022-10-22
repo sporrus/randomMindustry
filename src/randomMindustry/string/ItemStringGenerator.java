@@ -6,7 +6,7 @@ import randomMindustry.mappers.item.*;
 public class ItemStringGenerator extends StringGenerator{
     public String generateName(){
         StringBuilder out = new StringBuilder();
-        out.append(upperCaseFirst(generateWord(1)));
+        out.append(upperCaseFirst(generateWord(r.random(1, 2))));
         out.append(generateSuffix());
         if (r.chance(0.5)) out.append(" ").append(generateType());
         return out.toString();
@@ -28,9 +28,9 @@ public class ItemStringGenerator extends StringGenerator{
     
     private String generateType(){
         return Seq.with(
-            "Alloy", "Fabric", "Compound", "Matter", "Pod", "Cyst",
-            "Cluster", "Crystal", "Sheet", "Mix", "Lattice", "Compound",
-            "Plating", "Sheet"
+                "Alloy", "Fabric", "Matter", "Pod", "Cyst", "Cluster",
+                "Crystal", "Sheet", "Mix", "Lattice", "Compound", "Plating",
+                "Sheet", "Ingot", "Berry", "Metal", "Foil", "Block"
         ).random(r);
     }
 

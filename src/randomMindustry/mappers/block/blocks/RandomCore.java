@@ -35,60 +35,24 @@ public class RandomCore extends CoreBlock implements RandomBlock{
         generate();
     }
 
-    @Override
-    public TechTree.TechNode generateNode() {
-        if (id == 0) return null; // no need to generate, root
-        techNode = new TechTree.TechNode(
-                last == null ? TechTree.context() : last.techNode,
-                this,
-                researchRequirements()
-        );
-        last = this;
-        return techNode;
-    }
-
-    @Override
-    public int getTier(){
-        return id * 3 + 1;
-    }
-    
-    @Override
-    public void setStats() {
-        super.setStats();
-        stats.add(RMVars.seedStat, RMVars.seedStatValue);
-    }
-    
     public void generate(){
         if (id == 0) {
             isFirstTier = alwaysUnlocked = true;
             last = null;
         }
-
         stats = new Stats();
+
         size = Math.min(id + 3, 16);
         itemCapacity = Mathf.round(r.random(1000, 3000) * size, 100);
         RandomCore lastBlock = (RandomCore) BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore && ((RandomCore)b).id == this.id - 1);
-        requirements(Category.effect, ItemMapper.getItemStacks(getTier() - 1, r.random(3, 5), () -> Mathf.round(Math.min(r.random(300, 1000) * size, (lastBlock == null ? this : lastBlock).itemCapacity), 100), r));
+        requirements(Category.effect, ItemMapper.getItemStacks(getTier(), r.random(3, 5), () -> Mathf.round(Math.min(r.random(300, 1000) * size, (lastBlock == null ? this : lastBlock).itemCapacity), 100), r));
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
+        researchCostMultiplier = 0.1f;
+
         unitType = types.get(id, UnitTypes.oct);
         health = Mathf.round(r.random(300, 1000) * size * getTier(), 100);
         armor = id * 2;
         unitCapModifier = 15 * getTier();
-        researchCostMultiplier = 0.1f;
-    }
-
-    @Override
-    public void loadIcon() {}
-
-    @Override
-    public void load() {
-        super.load();
-        if (pixmapLoaded) applyIcons();
-    }
-
-    public void applyIcons() {
-        region = fullIcon = uiIcon = pixmapRegion;
-        teamRegion = pixmapTeam;
     }
 
     private TextureRegion pixmapRegion;
@@ -103,13 +67,51 @@ public class RandomCore extends CoreBlock implements RandomBlock{
         pixmapLoaded = true;
     }
 
+    public void reloadIcons() {
+        createSprites(coreSprites.get(3).random(192, 96, cr));
+        applyIcons();
+    }
+
     @Override
     public void createIcons(MultiPacker packer) {
         createSprites(coreSprites.get(3).random(packer, 192, 96, cr));
     }
 
-    public void reloadIcons() {
-        createSprites(coreSprites.get(3).random(192, 96, cr));
-        applyIcons();
+    @Override
+    public void load() {
+        super.load();
+        if (pixmapLoaded) applyIcons();
+    }
+
+    public void applyIcons() {
+        region = fullIcon = uiIcon = pixmapRegion;
+        teamRegion = pixmapTeam;
+    }
+
+    @Override
+    public void loadIcon() {}
+
+    @Override
+    public int getTier(){
+        return id * 3 + 1;
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
+        stats.add(RMVars.seedStat, RMVars.seedStatValue);
+        stats.add(tierStat, t -> t.add(Integer.toString(getTier())));
+    }
+
+    @Override
+    public TechTree.TechNode generateNode() {
+        if (id == 0) return null; // no need to generate, root
+        techNode = new TechTree.TechNode(
+                last == null ? TechTree.context() : last.techNode,
+                this,
+                researchRequirements()
+        );
+        last = this;
+        return techNode;
     }
 }

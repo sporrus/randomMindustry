@@ -7,6 +7,8 @@ import arc.struct.*;
 import mindustry.game.*;
 import randomMindustry.random.*;
 
+import static mindustry.Vars.*;
+
 public class TextureManager {
     public static Color teamDark = Color.valueOf("9e8080ff");
     public static Color teamMid = Color.valueOf("dbc5c5ff");
@@ -52,5 +54,15 @@ public class TextureManager {
             else if (color.equals(teamLight)) color.set(newLight);
             pixmap.set(x, y, color);
         });
+    }
+
+    public static void shadow(Pixmap pixmap) {
+        Pixmap shadow = pixmap.crop(0, 0, pixmap.width, pixmap.height);
+        int offset = pixmap.width / tilesize - 1;
+        int shadowColor = Color.rgba8888(0, 0, 0, 0.3f);
+        for(int x = 0; x < pixmap.width; x++)
+            for(int y = offset; y < pixmap.height; y++)
+                if(shadow.getA(x, y) == 0 && shadow.getA(x, y - offset) != 0)
+                    pixmap.set(x, y, shadowColor);
     }
 }

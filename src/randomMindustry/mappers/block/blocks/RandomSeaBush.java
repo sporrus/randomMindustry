@@ -21,21 +21,9 @@ public class RandomSeaBush extends SeaBush implements RandomBlock{
         generate();
     }
 
-    // skul
-    @Override
-    public TechTree.TechNode generateNode() {
-        return null;
-    }
-
-    // useless
-    @Override
-    public int getTier(){
-        return 0;
-    }
-    
     public void generate(){
-        variants = 0;
-        
+        variants = 1;
+
         lobesMin = r.random(2, 4);
         lobesMax = r.random(8, 10);
         magMin = r.random(2f, 5f);
@@ -46,18 +34,6 @@ public class RandomSeaBush extends SeaBush implements RandomBlock{
         spread = r.random(40f);
         color = new Color(cr.random(0.3f, 1f), cr.random(0.3f, 1f), cr.random(0.3f, 1f));
     }
-    
-    @Override
-    public void load(){
-        super.load();
-        
-        if(pixmapLoaded) applyIcons();
-    }
-    
-    public void applyIcons(){
-        region = fullIcon = uiIcon = botRegion = pixmapRegion;
-        centerRegion = pixmapCenter;
-    }
 
     private TextureRegion pixmapRegion, pixmapCenter;
     private boolean pixmapLoaded = false;
@@ -67,14 +43,42 @@ public class RandomSeaBush extends SeaBush implements RandomBlock{
         pixmapCenter = TextureManager.alloc(from.crop(53, 52, 53, 52));
         pixmapLoaded = true;
     }
-    
+
+    @Override
+    public void reloadIcons(){
+        createSprites(plantSprites.random(106, 52, cr));
+        applyIcons();
+    }
+
     @Override
     public void createIcons(MultiPacker packer){
         createSprites(plantSprites.random(packer, 106, 52, cr));
     }
-    
-    public void reloadIcons(){
-        createSprites(plantSprites.random(106, 52, cr));
-        applyIcons();
+
+    @Override
+    public void load(){
+        super.load();
+
+        if(pixmapLoaded) applyIcons();
+    }
+
+    public void applyIcons(){
+        region = fullIcon = uiIcon = botRegion = pixmapRegion;
+        centerRegion = pixmapCenter;
+    }
+
+    @Override
+    public void loadIcon() {}
+
+    // useless
+    @Override
+    public int getTier(){
+        return 0;
+    }
+
+    // skul
+    @Override
+    public TechTree.TechNode generateNode() {
+        return null;
     }
 }

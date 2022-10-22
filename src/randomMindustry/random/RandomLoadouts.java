@@ -15,7 +15,7 @@ public class RandomLoadouts {
             Seq<Schematic.Stile> tiles = Seq.with(new Schematic.Stile(c, 0, 0, null, (byte) 0));
             Schematic schematic = new Schematic(tiles, new StringMap(), c.size, c.size);
             loadouts.add(schematic);
-            if (!Vars.headless) Vars.schematics.getLoadouts().put(c, Seq.with(schematic));
+            Vars.schematics.getLoadouts().put(c, Seq.with(schematic));
         });
     }
 }

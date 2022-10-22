@@ -20,15 +20,13 @@ import randomMindustry.ui.Settings;
 import static randomMindustry.mappers.block.BlockMapper.r;
 
 public class Main extends Mod {
-    public static Planet random, fakesun;
-    
     public Main() {
 
     }
 
     @Override
     public void init() {
-        Vars.content.planets().select(p -> p != random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
+        Vars.content.planets().select(p -> p != RandomPlanets.random).each(p -> p.hiddenItems.addAll(ItemMapper.generatedItems));
         if (!Vars.headless) {
             Settings.load();
             TextureManager.init();
@@ -40,17 +38,16 @@ public class Main extends Mod {
                     Log.err("error parsing seed packet", e);
                 }
             });
-        } else {
-            Events.on(EventType.PlayerJoin.class, e -> {
-                Call.clientPacketReliable(e.player.con, "seed", String.valueOf(SeedManager.getSeed()));
-            });
-            Events.on(EventType.WorldLoadEvent.class, e -> {
-                SeedManager.generateSeed();
-                reload();
-                Call.clientPacketReliable("seed", String.valueOf(SeedManager.getSeed()));
-                Call.infoPopup("selected seed:" + SeedManager.getSeed(), 60, Align.left, 0, 0, 0, 0);
-            });
         }
+        Events.on(EventType.PlayerJoin.class, e -> {
+            Call.clientPacketReliable(e.player.con, "seed", String.valueOf(SeedManager.getSeed()));
+        });
+        Events.on(EventType.WorldLoadEvent.class, e -> {
+            SeedManager.generateSeed();
+            reload();
+            Call.clientPacketReliable("seed", String.valueOf(SeedManager.getSeed()));
+            Call.infoPopup("selected seed:" + SeedManager.getSeed(), 60, Align.left, 0, 0, 0, 0);
+        });
 
 //        Events.on(EventType.SaveLoadEvent.class, e -> Core.app.post(() -> {
 //            if (Vars.state.isCampaign()) {
@@ -77,6 +74,7 @@ public class Main extends Mod {
 //                Vars.state.rules.tags.put("rm-seed", String.valueOf(seed));
 //            }
 //        }));
+
 // debug atlas:
 //        final int[] i = {0};
 //        TextureManager.getAllTextures().each((t) -> {
@@ -115,57 +113,7 @@ public class Main extends Mod {
         ItemMapper.generateContent();
         BlockMapper.generateContent();
         RandomLoadouts.load();
-        
-        fakesun = new Planet("rm-fakesun", Planets.sun, 4f){{
-            bloom = true;
-            accessible = false;
-            orbitRadius = 500f;
-            
-            meshLoader = () -> new SunMesh(
-                this, 4,
-                5, 0.3, 1.7, 1.2, 1,
-                1.1f,
-                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f))
-            );
-        }};
-        
-        random = new Planet("rm-random", fakesun, 1f, 3){{
-            localizedName = "Random";
-            generator = new RandomPlanetGenerator();
-            meshLoader = () -> new HexMesh(this, 6);
-            cloudMeshLoader = () -> new MultiMesh(
-                    new HexSkyMesh(this, (int) SeedManager.getSeed(), 0.15f, 0.13f, 5, new Color().set(Team.crux.color.cpy()).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
-                    new HexSkyMesh(this, (int) SeedManager.getSeed(), 0.6f, 0.16f, 5, Color.white.cpy().lerp(Team.crux.color.cpy(), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
-            );
-            launchCapacityMultiplier = 0.5f;
-            sectorSeed = (int) SeedManager.getSeed();
-            allowWaves = true;
-            allowWaveSimulation = true;
-            allowSectorInvasion = true;
-            allowLaunchSchematics = true;
-            enemyCoreSpawnReplace = true;
-            allowLaunchLoadout = true;
-            ruleSetter = r -> {
-                r.waveTeam = Team.green;
-                r.placeRangeCheck = false;
-                r.attributes.clear();
-                r.showSpawns = true;
-            };
-            atmosphereColor = Team.crux.color.cpy().a(0.65f);
-            atmosphereRadIn = 0.02f;
-            atmosphereRadOut = 0.3f;
-            startSector = 1;
-            alwaysUnlocked = true;
-            defaultCore = (RandomCore)BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0);
-            landCloudColor = Team.crux.color.cpy().a(0.5f);
-            hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
-        }};
-        
-        RandomTechTree.load();
+        RandomPlanets.load();
+        if (!Vars.headless) RandomTechTree.load();
     }
 }
