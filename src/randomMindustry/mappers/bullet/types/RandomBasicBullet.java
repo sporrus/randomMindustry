@@ -4,7 +4,7 @@ import arc.graphics.*;
 import mindustry.entities.bullet.*;
 import randomMindustry.mappers.item.*;
 
-import static mindustry.entities.bullet.BulletMapper.r;
+import static randomMindustry.mappers.bullet.BulletMapper.r;
 
 public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
     public final int id;
