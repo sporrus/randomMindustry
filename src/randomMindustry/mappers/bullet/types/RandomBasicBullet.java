@@ -10,7 +10,7 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
     public final int id;
     public boolean
     randomizeColor = true,
-    isUsed = false; // find better option
+    isUsed = false;
     
     public RandomBasicBullet(float id){
         super(0f, 0f);
