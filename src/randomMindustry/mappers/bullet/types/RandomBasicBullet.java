@@ -1,40 +1,29 @@
 package randomMindustry.mappers.bullet.types;
 
-import arc.graphics.*;
 import mindustry.entities.bullet.*;
-import randomMindustry.mappers.item.*;
 
-import static randomMindustry.mappers.bullet.BulletMapper.r;
+import static randomMindustry.mappers.bullet.BulletMapper.*;
 
 public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
     public final int id;
-    public boolean
-    randomizeColor = true,
-    isUsed = false; // find better option
     
     public RandomBasicBullet(int id){
         super(0f, 0f);
         this.id = id;
-        gen();
+        generate();
     }
     
     @Override
     public int tier(){
         return id + 1;
     }
-    
-    @Override
+
     public int tier2(){
-        return tier() < 3 ? 1 : (int)Math.round(tier()/3);
+        return (int) Math.ceil(tier()/3f);
     }
     
     @Override
-    public void gen(){
-        if(randomizeColor){
-            Color color = new Color(r.random(0.6f, 1f), r.random(0.6f, 1f), r.random(0.6f, 1f));
-            backColor = trailColor = hitColor = healColor = lightningColor = color;
-            frontColor = color.cpy().mul(1.5f);
-        }
+    public void generate() {
         damage = (float)Math.floor(tier2() * r.random(1f, 10f) + r.random(-tier2(), tier2()) / 4f);
         speed = r.random(1f, 10f) * tier2();
         width = r.random(10f, 20f);
@@ -42,7 +31,7 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
         
         if(r.chance(0.5f)){
             trailWidth = width;
-            trailLength = r.random(height * 2.5f, height * 4.5f) * tier();
+            trailLength = (int) (r.random(height * 2.5f, height * 4.5f) * tier());
         }else{
             trailWidth = trailLength = 0;
         }
@@ -63,11 +52,11 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
             lightningLength = r.random(2, 10) * tier2();
             lightningDamage = damage * r.random(0.25f, 0.5f) * tier2();
         }else{
-            lightning = lightningLength = lightningDamage = 0;
+            lightningDamage = lightning = lightningLength = 0;
         }
         
-        if(r.chance(0.35f)) healPercent = r.random(5f, 10f) * tier2();
-        else healPercent = 0;
+        if(r.chance(0.35f)) healAmount = r.random(5f, 10f) * damage;
+        else healAmount = 0;
         
         if(r.chance(0.35f)){
             weaveScale = r.random(5f, 10f);
