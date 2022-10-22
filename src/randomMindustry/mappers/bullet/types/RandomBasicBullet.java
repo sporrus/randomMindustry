@@ -30,7 +30,7 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
         
         if (r.chance(0.5f)) {
             trailWidth = width;
-            trailLength = r.random(height * 2.5, height * 4.5);
+            trailLength = (int)r.random(height * 2.5f, height * 4.5f);
         } else trailWidth = trailLength = 0;
         
         if (r.chance(0.35f)) homingPower = r.random(0.025f, 0.2f) * tier;
