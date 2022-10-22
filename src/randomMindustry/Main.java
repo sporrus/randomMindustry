@@ -43,10 +43,12 @@ public class Main extends Mod {
             Call.clientPacketReliable(e.player.con, "seed", String.valueOf(SeedManager.getSeed()));
         });
         Events.on(EventType.WorldLoadEvent.class, e -> {
-            SeedManager.generateSeed();
-            reload();
+            if (Vars.headless) {
+                SeedManager.generateSeed();
+                reload();
+            }
             Call.clientPacketReliable("seed", String.valueOf(SeedManager.getSeed()));
-            Call.infoPopup("selected seed:" + SeedManager.getSeed(), 60, Align.left, 0, 0, 0, 0);
+            Log.info("selected seed:" + SeedManager.getSeed());
         });
 
 //        Events.on(EventType.SaveLoadEvent.class, e -> Core.app.post(() -> {
