@@ -5,5 +5,6 @@ The randomness is limitless... I think...
 Join our [discord server](https://discord.gg/ztC6WJUxZK)!
 
 # Contributors
-- BlueWolf3682 - Item Sprites
+- BlueWolf3682 - Sprites
 - kapzduke - Sprites
+- stacktrace-error - Sprites
