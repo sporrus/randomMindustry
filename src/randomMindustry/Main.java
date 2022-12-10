@@ -116,6 +116,7 @@ public class Main extends Mod {
         BlockMapper.generateContent();
         RandomLoadouts.load();
         RandomPlanets.load();
+        RandomPlanets.random.orbitOffset = RandomPlanets.star.orbitOffset = 0f;
         if (!Vars.headless) RandomTechTree.load();
     }
 }
