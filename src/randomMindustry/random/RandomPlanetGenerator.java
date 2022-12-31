@@ -64,6 +64,8 @@ public class RandomPlanetGenerator extends PlanetGenerator{
 
     float water = 2f / arr[0].length;
 
+    defaultLoadout = RandomLoadouts.loadouts.first();
+
     float rawHeight(Vec3 position){
         position = Tmp.v33.set(position).scl(scl);
         return (Mathf.pow(Simplex.noise3d(seed, 7, 0.5f, 1f/3f, position.x, position.y, position.z), 2.3f) + waterOffset) / (1f + waterOffset);
