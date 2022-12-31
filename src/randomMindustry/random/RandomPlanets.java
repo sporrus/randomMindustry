@@ -62,7 +62,6 @@ public class RandomPlanets {
             startSector = 1;
             alwaysUnlocked = true;
             defaultCore = (RandomCore) BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0);
-            defaultLoadout = RandomLoadouts.loadouts.first();
             landCloudColor = Team.crux.color.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
         }};
