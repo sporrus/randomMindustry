@@ -649,10 +649,5 @@ public class RandomPlanetGenerator extends PlanetGenerator{
             basegen.postGenerate();
         }
     }
-
-    @Override
-    public Schematic getDefaultLoadout() {
-        return RandomLoadouts.loadouts.first();
-    }
 }
 
