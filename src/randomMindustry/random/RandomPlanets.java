@@ -36,7 +36,9 @@ public class RandomPlanets {
 
         random = new Planet("rm-random", star, 1f, 3){{
             localizedName = "Random";
-            generator = new RandomPlanetGenerator();
+            generator = new RandomPlanetGenerator(){{
+                defaultLoadout = RandomLoadouts.loadouts.first();
+            }};
             meshLoader = () -> new HexMesh(this, 6);
             cloudMeshLoader = () -> new MultiMesh(
                     new HexSkyMesh(this, (int) SeedManager.getSeed(), 0.15f, 0.13f, 5, new Color().set(Team.crux.color.cpy()).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
@@ -61,9 +63,10 @@ public class RandomPlanets {
             atmosphereRadOut = 0.3f;
             startSector = 1;
             alwaysUnlocked = true;
-            defaultCore = (RandomCore) BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0);
+            defaultCore = (RandomCore)BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0);
             landCloudColor = Team.crux.color.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
+            solarSystem = star;
         }};
     }
 }
