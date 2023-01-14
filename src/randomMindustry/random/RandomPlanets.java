@@ -20,6 +20,7 @@ public class RandomPlanets {
             bloom = true;
             accessible = false;
             orbitRadius = 500f;
+            drawOrbit = false;
 
             meshLoader = () -> new SunMesh(
                     this, 4,
