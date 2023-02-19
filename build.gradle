@@ -30,9 +30,9 @@ allprojects{
 }
 
 dependencies{
-    compileOnly "com.github.anuken.arc:arc-core:v141.1"
-    compileOnly "com.github.anuken.arc:flabel:v141.1"
-    compileOnly "com.github.anuken.mindustry:core:v141.1"
+    compileOnly "com.github.anuken.arc:arc-core:v141.3"
+    compileOnly "com.github.anuken.arc:flabel:v141.3"
+    compileOnly "com.github.anuken.mindustry:core:v141.3"
     annotationProcessor "com.github.anuken:jabel:0.9.0"
 }
 
