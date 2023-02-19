@@ -10,6 +10,7 @@ import mindustry.gen.*;
 import mindustry.graphics.g3d.*;
 import mindustry.mod.*;
 import mindustry.type.*;
+import mindustry.ui.dialogs.*;
 import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
@@ -91,6 +92,15 @@ public class Main extends Mod {
 //                Log.info("      " + item.name + (pack.locked(item) ? " [red]LOCKED[]" : ""));
 //            }
 //        }
+        Events.on(EventType.ClientLoadEvent.class, e -> {
+            Time.runTask(10f, () -> {
+                BaseDialog temp = new BaseDialog("You found a note!");
+                temp.cont.add("uhhhh random mindustry alpha version v2, bugs").row();
+                temp.cont.add("- [green]Mythril[]").row();
+                temp.cont.button("Fascinating note...", temp::hide).size(180f, 50f);
+                temp.show();
+            });
+        })
     }
 
     @Override
