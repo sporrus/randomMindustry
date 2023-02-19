@@ -100,7 +100,7 @@ public class Main extends Mod {
                 temp.cont.button("Fascinating note...", temp::hide).size(180f, 50f);
                 temp.show();
             });
-        })
+        });
     }
 
     @Override
