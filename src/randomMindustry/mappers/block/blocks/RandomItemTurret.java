@@ -53,7 +53,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
 
         health = Mathf.round(r.random(125, 175) * size * getTier(), 5);
-        reload = r.random(15f, 90f);
+        reload = r.random(5f, 60f);
         range = r.random(112f, Math.max(800f * getTier() / 20f, 160f));
         rotateSpeed = r.random(0.5f, 5f);
         inaccuracy = r.random(1f, 90f / getTier() * 10f / reload);
@@ -69,7 +69,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
             bullet.damage = damage;
             bullet.speed = speed;
             if ((bullet.healAmount > 0 || bullet.healPercent > 0) && targetHealing == false) targetHealing = true;
-            bullet.trailColor = item.color;
+            bullet.trailColor = bullet.lightningColor = item.color;
             bullet.hitColor = item.color.cpy().mul(1.5f);
 
             if (bullet instanceof BasicBulletType ba) {
