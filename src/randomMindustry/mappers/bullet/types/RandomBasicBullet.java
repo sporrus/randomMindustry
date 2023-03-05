@@ -25,7 +25,7 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
 
         damage = (float)Math.floor(tier * r.random(1f, 10f) + r.random(-tier, tier) / 4f);
         speed = r.random(1f, 10f) * tier;
-        width = r.random(5f, 10f);
+        width = r.random(3f, 8f);
         height = r.random(width, width + 2f);
         
         if (r.chance(0.5f)) {
