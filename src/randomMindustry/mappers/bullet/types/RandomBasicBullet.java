@@ -50,8 +50,13 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
             lightningDamage = damage * r.random(0.25f, 0.5f);
         } else lightningDamage = lightning = lightningLength = 0;
         
-        if (r.chance(0.35f)) healAmount = r.random(0.25f, 0.75f) * damage;
-        else healAmount = 0;
+        if (r.chance(0.35f)) {
+            healAmount = r.random(0.25f, 0.75f) * damage;
+            targetHealing = true;
+        } else {
+            healAmount = 0;
+            targetHealing = false;
+        }
         
         if (r.chance(0.35f)) {
             weaveScale = r.random(5f, 10f);
