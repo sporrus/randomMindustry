@@ -68,12 +68,15 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
             BulletType bullet = BulletMapper.random(getTier(), this);
             bullet.damage = damage;
             bullet.speed = speed;
-            if ((bullet.healAmount > 0 || bullet.healPercent > 0) && targetHealing = false) targetHealing = true;
+            if ((bullet.healAmount > 0 || bullet.healPercent > 0) && targetHealing == false) targetHealing = true;
             bullet.trailColor = item.color;
-            if (bullet instanceof BasicBulletType) {
-                bullet.backColor = item.color;
-                bullet.frontColor = bullet.hitColor = item.color.cpy().mul(1.5f);
+            bullet.hitColor = item.color.cpy().mul(1.5f);
+
+            if (bullet instanceof BasicBulletType ba) {
+                ba.backColor = item.color;
+                ba.frontColor = item.color.cpy().mul(1.5f);
             }
+            
             ammoTypes.put(item, bullet);
         }
         limitRange();
