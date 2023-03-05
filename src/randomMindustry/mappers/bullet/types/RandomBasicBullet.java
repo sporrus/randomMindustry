@@ -52,10 +52,10 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
         
         if (r.chance(0.35f)) {
             healAmount = r.random(0.25f, 0.75f) * damage;
-            targetHealing = true;
+            
         } else {
             healAmount = 0;
-            targetHealing = false;
+            
         }
         
         if (r.chance(0.35f)) {
