@@ -17,15 +17,19 @@ import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
+import randomMindustry.random.*;
 
 import static mindustry.Vars.*;
 
 public class RandomPlanetGenerator extends PlanetGenerator{
     //alternate, less direct generation (wip)
     public static boolean alt = false;
+    
+    private static Color lastColor;
 
     public RandomPlanetGenerator() {
         rand = new SyncedRand();
+        lastColor = RandomUtil.genColor(rand);
     }
 
     RandomBaseGenerator basegen = new RandomBaseGenerator();
@@ -107,10 +111,10 @@ public class RandomPlanetGenerator extends PlanetGenerator{
 
     @Override
     public Color getColor(Vec3 position){
-        Block block = getBlock(position);
-        //replace salt with sand color
+        /*Block block = getBlock(position);
         if(block == Blocks.salt) return Blocks.sand.mapColor;
-        return Tmp.c1.set(block.mapColor).a(1f - block.albedo);
+        return Tmp.c1.set(block.mapColor).a(1f - block.albedo);*/
+        return lastColor.shiftHue(rand.random(-10f, 10f)).cpy();
     }
 
     @Override
