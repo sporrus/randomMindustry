@@ -13,6 +13,8 @@ import randomMindustry.mappers.item.*;
 import static randomMindustry.mappers.block.BlockMapper.*;
 
 public class RandomPlanets {
+    public static final SyncedRand r = new SyncedRand();
+    
     public static Planet random, star;
 
     public static void load() {
@@ -46,7 +48,7 @@ public class RandomPlanets {
                     new HexSkyMesh(this, (int) SeedManager.getSeed(), 0.6f, 0.16f, 5, Color.white.cpy().lerp(Team.crux.color.cpy(), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
             );
             launchCapacityMultiplier = 0.5f;
-            sectorSeed = (int) SeedManager.getSeed();
+            sectorSeed = r.random(Integer.MIN_VALUE, Integer.MAX_VALUE);
             allowWaves = true;
             allowWaveSimulation = true;
             allowSectorInvasion = true;
