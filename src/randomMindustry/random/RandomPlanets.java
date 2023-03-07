@@ -35,7 +35,7 @@ public class RandomPlanets {
                 lastColor.shiftHue(r.random(-10f, 10f)).cpy()),
                 lastColor.shiftHue(r.random(-10f, 10f)).cpy()),
                 lastColor.shiftHue(r.random(-10f, 10f)).cpy()),
-                lastColor.shiftHue(r.random(-10f, 10f)).cpy())
+                lastColor.shiftHue(r.random(-10f, 10f)).cpy());
             );
         }};
 
@@ -50,7 +50,7 @@ public class RandomPlanets {
             
             cloudMeshLoader = () -> new MultiMesh(
                 new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.15f, 0.13f, 5, lastColor.shiftHue(r.random(-10f, 10f)).cpy()).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
-                new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(lastColor.shiftHue(r.random(-10f, 10f)).cpy()), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
+                new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(lastColor.shiftHue(r.random(-10f, 10f)).cpy()), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f);
             );
             launchCapacityMultiplier = 0.5f;
             sectorSeed = r.random(1, Integer.MAX_VALUE);
