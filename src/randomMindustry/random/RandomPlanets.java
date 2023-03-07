@@ -92,6 +92,6 @@ public class RandomPlanets {
             new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(RandomUtil.genColor(r), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
         );*/
         random.atmosphereColor = RandomUtil.genColor(r).a(0.65f);
-        random.landCloudColor = random.atmposphereColor.cpy().a(0.5f);
+        random.landCloudColor = random.atmosphereColor.cpy().a(0.5f);
     }
 }
