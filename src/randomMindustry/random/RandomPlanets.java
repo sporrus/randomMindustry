@@ -10,7 +10,7 @@ import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
 
-import static randomMindustry.mappers.block.BlockMapper.*;
+
 
 public class RandomPlanets {
     public static final SyncedRand r = new SyncedRand();
