@@ -25,15 +25,15 @@ public class RandomPlanets {
             drawOrbit = false;
 
             meshLoader = () -> new SunMesh(
-                    this, 4,
-                    5, 0.3, 1.7, 1.2, 1,
-                    1.1f,
-                    new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                    new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                    new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                    new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                    new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f)),
-                    new Color(r.random(0.5f, 1f), r.random(0.5f, 1f), r.random(0.5f, 1f))
+                this, 4,
+                5, 0.3, 1.7, 1.2, 1,
+                1.1f,
+                RandomUtil.genColor(r),
+                RandomUtil.genColor(r),
+                RandomUtil.genColor(r),
+                RandomUtil.genColor(r),
+                RandomUtil.genColor(r),
+                RandomUtil.genColor(r)
             );
         }};
 
@@ -44,8 +44,8 @@ public class RandomPlanets {
             }};
             meshLoader = () -> new HexMesh(this, 6);
             cloudMeshLoader = () -> new MultiMesh(
-                    new HexSkyMesh(this, (int) SeedManager.getSeed(), 0.15f, 0.13f, 5, new Color().set(Team.crux.color.cpy()).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
-                    new HexSkyMesh(this, (int) SeedManager.getSeed(), 0.6f, 0.16f, 5, Color.white.cpy().lerp(Team.crux.color.cpy(), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
+                new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.15f, 0.13f, 5, RandomUtil.genColor(r).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
+                new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(RandomUtil.genColor(r), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
             );
             launchCapacityMultiplier = 0.5f;
             sectorSeed = r.random(1, Integer.MAX_VALUE);
@@ -61,15 +61,37 @@ public class RandomPlanets {
                 r.attributes.clear();
                 r.showSpawns = true;
             };
-            atmosphereColor = Team.crux.color.cpy().a(0.65f);
+            atmosphereColor = RandomUtil.genColor(r).a(0.65f);
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.3f;
             startSector = 1;
             alwaysUnlocked = true;
             defaultCore = (RandomCore)BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0);
-            landCloudColor = Team.crux.color.cpy().a(0.5f);
+            landCloudColor = atmposphereColor.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
             solarSystem = star;
         }};
+    }
+    
+    // needs better version
+    public static void reload(){
+        star.meshLoader = () -> new SunMesh(
+            this, 4,
+            5, 0.3, 1.7, 1.2, 1,
+            1.1f,
+            RandomUtil.genColor(r),
+            RandomUtil.genColor(r),
+            RandomUtil.genColor(r),
+            RandomUtil.genColor(r),
+            RandomUtil.genColor(r),
+            RandomUtil.genColor(r)
+        );
+        
+        random.cloudMeshLoader = () -> new MultiMesh(
+            new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.15f, 0.13f, 5, RandomUtil.genColor(r).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
+            new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(RandomUtil.genColor(r), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
+        );
+        random.atmosphereColor = RandomUtil.genColor(r).a(0.65f);
+        random.landCloudColor = random.atmposphereColor.cpy().a(0.5f);
     }
 }
