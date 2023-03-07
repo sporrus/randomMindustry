@@ -15,7 +15,7 @@ public class RandomUtil {
         }
     }
     
-    public static Color randColor(Rand rand){
+    public static Color randColor(SyncedRand rand){
         return new Color(rand.random(0.35f, 1f), rand.random(0.35f, 1f), rand.random(0.35f, 1f));
     }
 }
