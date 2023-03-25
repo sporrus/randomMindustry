@@ -45,9 +45,6 @@ public class RandomPlanets {
 
         random = new Planet("rm-random", star, 1f, 3){{
             localizedName = "Random";
-            generator = new RandomPlanetGenerator(){{
-                defaultLoadout = RandomLoadouts.loadouts.first();
-            }};
             meshLoader = () -> new HexMesh(this, 6);
             
             Color lastColor = RandomUtil.genColor(r);
@@ -58,6 +55,9 @@ public class RandomPlanets {
             );
             launchCapacityMultiplier = 0.5f;
             sectorSeed = planetSeed = r.random(1, Integer.MAX_VALUE);
+            generator = new RandomPlanetGenerator(){{
+                defaultLoadout = RandomLoadouts.loadouts.first();
+            }};
             allowWaves = true;
             allowWaveSimulation = true;
             allowSectorInvasion = true;
