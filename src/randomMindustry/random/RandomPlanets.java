@@ -30,12 +30,12 @@ public class RandomPlanets {
                 this, 4,
                 5, 0.3, 1.7, 1.2, 1,
                 1.1f,
-                lastColor.shiftHue(r.random(-10f, 10f)).cpy(),
-                lastColor.shiftHue(r.random(-10f, 10f)).cpy(),
-                lastColor.shiftHue(r.random(-10f, 10f)).cpy(),
-                lastColor.shiftHue(r.random(-10f, 10f)).cpy(),
-                lastColor.shiftHue(r.random(-10f, 10f)).cpy(),
-                lastColor.shiftHue(r.random(-10f, 10f)).cpy()
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy()
             );
         }};
 
