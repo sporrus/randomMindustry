@@ -1,6 +1,7 @@
 package randomMindustry.random;
 
 import arc.graphics.*;
+import arc.struct.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.game.*;
@@ -99,5 +100,10 @@ public class RandomPlanets {
         random.sectorSeed = r.random(1, Integer.MAX_VALUE);
         random.atmosphereColor = RandomUtil.genColor(r).a(0.65f);
         random.landCloudColor = random.atmosphereColor.cpy().a(0.5f);
+    }
+    
+    public static Team genTeam(Team except){
+        Seq<Team> teams = new Seq<>(Team.all).select(t -> t != except);
+        return teams.random(r);
     }
 }
