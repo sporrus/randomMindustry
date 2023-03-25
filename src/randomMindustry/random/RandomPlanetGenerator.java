@@ -114,7 +114,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
         /*Block block = getBlock(position);
         if(block == Blocks.salt) return Blocks.sand.mapColor;
         return Tmp.c1.set(block.mapColor).a(1f - block.albedo);*/
-        return lastColor.shiftHue(rand.random(-10f, 10f)).cpy();
+        return lastColor.shiftHue(rand.random(-2f, 2f)).cpy();
     }
 
     @Override
