@@ -62,7 +62,8 @@ public class RandomPlanets {
             enemyCoreSpawnReplace = true;
             allowLaunchLoadout = true;
             ruleSetter = r -> {
-                r.waveTeam = Team.green;
+                r.defaultTeam = genTeam(Team.derelict);
+                r.waveTeam = genTeam(r.defaultTeam);
                 r.placeRangeCheck = false;
                 r.attributes.clear();
                 r.showSpawns = true;
@@ -103,7 +104,7 @@ public class RandomPlanets {
     }
     
     public static Team genTeam(Team except){
-        Seq<Team> teams = new Seq<>(Team.all).select(t -> t != except);
+        Seq<Team> teams = new Seq<>(Team.all).select(t -> t != except && t != Team.derelict);
         return teams.random(r);
     }
 }
