@@ -27,8 +27,9 @@ public class RandomPlanetGenerator extends PlanetGenerator{
     
     private static Color lastColor;
 
-    public RandomPlanetGenerator() {
+    public RandomPlanetGenerator(Planet planet) {
         rand = new SyncedRand();
+        seed = baseSeed = planet.sectorSeed;
     }
 
     RandomBaseGenerator basegen = new RandomBaseGenerator();

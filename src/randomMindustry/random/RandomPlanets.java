@@ -43,9 +43,8 @@ public class RandomPlanets {
         random = new Planet("rm-random", star, 1f, 3){{
             localizedName = "Random";
             sectorSeed = r.random(1, Integer.MAX_VALUE);
-            generator = new RandomPlanetGenerator(){{
+            generator = new RandomPlanetGenerator(this){{
                 defaultLoadout = RandomLoadouts.loadouts.first();
-                seed = baseSeed = sectorSeed;
             }};
             meshLoader = () -> new HexMesh(this, 6);
             
@@ -111,9 +110,8 @@ public class RandomPlanets {
             r.showSpawns = true;
         };
         random.sectorSeed = r.random(1, Integer.MAX_VALUE);
-        random.generator = new RandomPlanetGenerator(){{
+        random.generator = new RandomPlanetGenerator(random){{
             defaultLoadout = RandomLoadouts.loadouts.first();
-            seed = baseSeed = random.sectorSeed;
         }};
         random.atmosphereColor = RandomUtil.genColor(r).a(0.65f);
         random.landCloudColor = random.atmosphereColor.cpy().a(0.5f);
