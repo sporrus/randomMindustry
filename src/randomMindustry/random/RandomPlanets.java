@@ -61,9 +61,11 @@ public class RandomPlanets {
             allowLaunchSchematics = true;
             enemyCoreSpawnReplace = true;
             allowLaunchLoadout = true;
+            Team def = genTeam(Team.derelict);
+            Team wave = genTeam(def);
             ruleSetter = r -> {
-                r.defaultTeam = genTeam(Team.derelict);
-                r.waveTeam = genTeam(r.defaultTeam);
+                r.defaultTeam = def;
+                r.waveTeam = wave;
                 r.placeRangeCheck = false;
                 r.attributes.clear();
                 r.showSpawns = true;
@@ -98,6 +100,15 @@ public class RandomPlanets {
             new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.15f, 0.13f, 5, RandomUtil.genColor(r).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
             new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(RandomUtil.genColor(r), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
         );*/
+        Team def = genTeam(Team.derelict);
+        Team wave = genTeam(def);
+        random.ruleSetter = r -> {
+            r.defaultTeam = def;
+            r.waveTeam = wave;
+            r.placeRangeCheck = false;
+            r.attributes.clear();
+            r.showSpawns = true;
+        };
         random.sectorSeed = r.random(1, Integer.MAX_VALUE);
         random.atmosphereColor = RandomUtil.genColor(r).a(0.65f);
         random.landCloudColor = random.atmosphereColor.cpy().a(0.5f);
