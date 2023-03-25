@@ -16,6 +16,9 @@ import randomMindustry.mappers.item.*;
 public class RandomPlanets {
     public static final SyncedRand r = new SyncedRand();
     
+    /* There's probably a better way... */
+    public static int planetSeed = 0;
+    
     public static Planet random, star;
 
     public static void load() {
@@ -54,7 +57,7 @@ public class RandomPlanets {
                 new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(lastColor.shiftHue(r.random(-10f, 10f)).cpy(), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
             );
             launchCapacityMultiplier = 0.5f;
-            sectorSeed = r.random(1, Integer.MAX_VALUE);
+            sectorSeed = planetSeed = r.random(1, Integer.MAX_VALUE);
             allowWaves = true;
             allowWaveSimulation = true;
             allowSectorInvasion = true;
@@ -109,7 +112,7 @@ public class RandomPlanets {
             r.attributes.clear();
             r.showSpawns = true;
         };
-        random.sectorSeed = r.random(1, Integer.MAX_VALUE);
+        random.sectorSeed = planetSeed = r.random(1, Integer.MAX_VALUE);
         random.atmosphereColor = RandomUtil.genColor(r).a(0.65f);
         random.landCloudColor = random.atmosphereColor.cpy().a(0.5f);
     }
