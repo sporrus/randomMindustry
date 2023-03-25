@@ -110,7 +110,7 @@ public class RandomPlanets {
             r.attributes.clear();
             r.showSpawns = true;
         };
-        random.sectorSeed = planetSeed = r.random(1, Integer.MAX_VALUE);
+        random.sectorSeed = r.random(1, Integer.MAX_VALUE);
         random.generator = new RandomPlanetGenerator(){{
             defaultLoadout = RandomLoadouts.loadouts.first();
             seed = baseSeed = random.sectorSeed;
