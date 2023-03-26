@@ -40,7 +40,7 @@ public class RandomWall extends Wall implements RandomBlock {
 
         health = Mathf.round(r.random(150, 450) * size * getTier(), 5);
 
-        localizedName = mainItem.localizedName + " Wall";
+        localizedName = mainItem.localizedName.split(" ")[0] + " Wall";
     }
 
     private TextureRegion pixmapRegion;
