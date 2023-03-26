@@ -15,7 +15,7 @@ public class StringGenerator{
         "y", "z"
     );
     
-    public final Seq<String> template = Seq.with("cvc");
+    public final Seq<String> template = Seq.with("cv");
     
     public String generateSyllable(){
         String tmp = template.random(r);
