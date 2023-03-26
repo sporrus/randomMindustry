@@ -37,7 +37,7 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
         health = Mathf.round(r.random(30, 50) * getTier(), 1);
         speed = 16f / getTier();
 
-        localizedName = mainItem.localizedName + " Router";
+        localizedName = mainItem.localizedName.split(" ")[0] + " Router";
     }
 
     private TextureRegion pixmapRegion;

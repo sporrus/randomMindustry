@@ -39,7 +39,7 @@ public class RandomItemBridge extends BufferedItemBridge implements RandomBlock 
         range = getTier() + 2;
         speed = 16f / getTier();
 
-        localizedName = mainItem.localizedName + " Bridge";
+        localizedName = mainItem.localizedName.split(" ")[0] + " Bridge";
     }
 
     private boolean pixmapLoaded = false;

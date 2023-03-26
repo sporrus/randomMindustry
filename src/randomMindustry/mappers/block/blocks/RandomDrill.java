@@ -43,8 +43,10 @@ public class RandomDrill extends Drill implements RandomBlock {
         tier = id + 1;
         health = Mathf.round(r.random(20, 100) * getTier() * size, 5);
         drillTime = 600f / tier;
-
-        localizedName = mainItem.localizedName + " Drill";
+        
+        // better names
+        Seq<String> stringTiers = Seq.with("Drill", "Bore", "Auger", "Excavator", "Trencher", "Destructor", "Crusher", "Terraformer", "Ore Ender");
+        localizedName = mainItem.localizedName.split(" ")[0] + " " + stringTiers.get(Math.min(id, stringTiers.size));
     }
 
     private TextureRegion pixmapRegion;
