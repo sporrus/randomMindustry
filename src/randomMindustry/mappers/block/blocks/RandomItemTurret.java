@@ -80,8 +80,9 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
             ammoTypes.put(item, bullet);
         }
         limitRange();
-
-        localizedName = mainItem.localizedName + " " + Seq.with("Turret", "Tower", "Gun", "Catapult").random();
+        
+        // better turret names possibly
+        localizedName = mainItem.localizedName.split(" ")[0] + " " + Seq.with("Turret", "Tower", "Gun", "Catapult").random();
     }
 
     private boolean pixmapLoaded = false;
