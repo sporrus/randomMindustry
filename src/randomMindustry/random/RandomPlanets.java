@@ -10,11 +10,11 @@ import mindustry.type.*;
 import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
-
-
+import randomMindustry.string.*;
 
 public class RandomPlanets {
     public static final SyncedRand r = new SyncedRand();
+    public static final PlanetStringGenerator nameGen = new PlanetStringGenerator();
     
     public static Planet random, star;
 
@@ -41,7 +41,7 @@ public class RandomPlanets {
         }};
 
         random = new Planet("rm-random", star, 1f, 3){{
-            localizedName = "Random";
+            localizedName = nameGen.generateName();
             sectorSeed = r.random(1, Integer.MAX_VALUE);
             generator = new RandomPlanetGenerator(this){{
                 defaultLoadout = RandomLoadouts.loadouts.first();
@@ -100,6 +100,7 @@ public class RandomPlanets {
             new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.15f, 0.13f, 5, RandomUtil.genColor(r).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
             new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(RandomUtil.genColor(r), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
         );*/
+        random.localizedName = nameGen.generateName();
         Team def = genTeam(Team.derelict);
         Team wave = genTeam(def);
         random.ruleSetter = r -> {
