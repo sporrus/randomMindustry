@@ -25,7 +25,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
     //alternate, less direct generation (wip)
     public static boolean alt = false;
     
-    private static Color lastColor;
+    private Color lastColor;
 
     public RandomPlanetGenerator(Planet planet) {
         rand = new SyncedRand();
