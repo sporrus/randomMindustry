@@ -25,8 +25,8 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
 
         damage = (float)Math.floor(tier * r.random(1f, 10f) + r.random(-tier, tier) / 4f);
         speed = r.random(1f, 10f) * tier;
-        width = r.random(10f, 20f);
-        height = r.random(width + 5, width + 20);
+        width = r.random(3f, 8f);
+        height = r.random(width, width + 2f);
         
         if (r.chance(0.5f)) {
             trailWidth = width;
@@ -50,8 +50,13 @@ public class RandomBasicBullet extends BasicBulletType implements RandomBullet{
             lightningDamage = damage * r.random(0.25f, 0.5f);
         } else lightningDamage = lightning = lightningLength = 0;
         
-        if (r.chance(0.35f)) healAmount = r.random(0.25f, 0.75f) * damage;
-        else healAmount = 0;
+        if (r.chance(0.35f)) {
+            healAmount = r.random(0.25f, 0.75f) * damage;
+            collidesTeam = collidesTiles = true;
+        } else {
+            healAmount = 0;
+            collidesTeam = collidesTiles = false;
+        }
         
         if (r.chance(0.35f)) {
             weaveScale = r.random(5f, 10f);

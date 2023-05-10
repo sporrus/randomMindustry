@@ -113,6 +113,7 @@ public class Main extends Mod {
         if (!Vars.headless) TextureManager.reload();
         ItemMapper.reloadContent();
         BlockMapper.reloadContent();
+        RandomPlanets.reload();
     }
 
     @Override

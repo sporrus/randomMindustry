@@ -2,9 +2,9 @@ displayName: Random Mindustry
 name: random-mindustry
 author: Sporrus Team
 main: randomMindustry.Main
-subtitle: "v2.0.0-alpha | Completely rewritten!"
+subtitle: "v2.0.1-alpha | Completely rewritten!"
 description: "Randomizes almost everything!\nJoin our discord! https://discord.gg/ztC6WJUxZK\n\nEPILEPSY WARNING!"
-version: 2.0.0-alpha
+version: 2.0.1-alpha
 minGameVersion: 141.3
 java: true
 repo: sporrus/randomMindustry

@@ -1,5 +1,6 @@
 package randomMindustry.random;
 
+import arc.graphics.*;
 import arc.math.*;
 import arc.struct.Seq;
 
@@ -12,5 +13,9 @@ public class RandomUtil {
             items[i] = items[ii];
             items[ii] = temp;
         }
+    }
+    
+    public static Color genColor(Rand rand){
+        return new Color(rand.random(0.35f, 1f), rand.random(0.35f, 1f), rand.random(0.35f, 1f));
     }
 }

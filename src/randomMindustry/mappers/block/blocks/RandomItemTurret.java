@@ -53,7 +53,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
         mainItem = Seq.with(requirements).sort((a, b) -> ((CustomItem) b.item).globalTier - ((CustomItem) a.item).globalTier).get(0).item;
 
         health = Mathf.round(r.random(125, 175) * size * getTier(), 5);
-        reload = r.random(1f, 30f);
+        reload = r.random(5f, 60f);
         range = r.random(112f, Math.max(800f * getTier() / 20f, 160f));
         rotateSpeed = r.random(0.5f, 5f);
         inaccuracy = r.random(1f, 90f / getTier() * 10f / reload);
@@ -68,13 +68,21 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
             BulletType bullet = BulletMapper.random(getTier(), this);
             bullet.damage = damage;
             bullet.speed = speed;
-//            bullet.backColor = item.color;
-//            bullet.frontColor = bullet.hitColor = item.color.cpy().mul(1.5f);
+            if ((bullet.healAmount > 0 || bullet.healPercent > 0) && targetHealing == false) targetHealing = true;
+            bullet.trailColor = bullet.lightningColor = item.color;
+            bullet.hitColor = item.color.cpy().mul(1.5f);
+
+            if (bullet instanceof BasicBulletType ba) {
+                ba.backColor = item.color;
+                ba.frontColor = item.color.cpy().mul(1.5f);
+            }
+            
             ammoTypes.put(item, bullet);
         }
         limitRange();
-
-        localizedName = mainItem.localizedName + " " + Seq.with("Turret", "Tower", "Gun", "Catapult").random();
+        
+        // better turret names possibly
+        localizedName = mainItem.localizedName.split(" ")[0] + " " + Seq.with("Turret", "Tower", "Gun", "Catapult").random();
     }
 
     private boolean pixmapLoaded = false;

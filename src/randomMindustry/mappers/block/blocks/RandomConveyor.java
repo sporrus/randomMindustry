@@ -43,7 +43,7 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
         speed = 0.03f * getTier();
         displayedSpeed = speed * 136;
 
-        localizedName = mainItem.localizedName + " Conveyor";
+        localizedName = mainItem.localizedName.split(" ")[0] + " Conveyor";
     }
 
     private TextureRegion[][] pixmapRegions;

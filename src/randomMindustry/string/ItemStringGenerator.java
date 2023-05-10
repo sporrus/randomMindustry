@@ -19,7 +19,7 @@ public class ItemStringGenerator extends StringGenerator{
                 " " + fraction(item.explosiveness) + " explosive." +
                 " " + fraction(item.radioactivity) + " radioactive." +
                 " " + fraction(item.flammability) + " flammable." +
-                " " + fraction(item.charge) + " conductive.";
+                " " + fraction(item.charge) + " conductive. (Inaccurate, Temporary)";
     }
     
     private String generateSuffix(){
