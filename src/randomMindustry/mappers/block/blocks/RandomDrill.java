@@ -48,7 +48,7 @@ public class RandomDrill extends Drill implements RandomBlock {
         
         Seq<String> stringTiers = Seq.with("Drill", "Bore", "Auger", "Excavator", "Trencher", "Destructor", "Crusher", "Terraformer", "Ore Ender");
         // localizedName = mainItem.localizedName.split(" ")[0] + " " + stringTiers.get(Math.min(id, stringTiers.size));
-        localizedName = stringTiers.random(r);
+        localizedName = mainItem.localizedName.split(" ")[0] + " " + stringTiers.random(r);
     }
 
     private TextureRegion pixmapRegion;
