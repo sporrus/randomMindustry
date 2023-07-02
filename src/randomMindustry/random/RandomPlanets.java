@@ -41,7 +41,7 @@ public class RandomPlanets {
             );
         }};
 
-        random = new Planet("rm-random", star, 1f, 3){{
+        random = new Planet("rm-random", Planets.sun, 1f, 3){{
             localizedName = nameGen.generateName();
             sectorSeed = r.random(1, Integer.MAX_VALUE);
             generator = new RandomPlanetGenerator(this){{
