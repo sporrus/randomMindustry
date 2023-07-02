@@ -21,6 +21,7 @@ public class RandomPlanets {
     public static void load() {
         star = new Planet("rm-star", Planets.sun, 4f){{
             bloom = true;
+            alwaysUnlocked = true;
             accessible = false;
             orbitRadius = 500f;
             drawOrbit = false;
