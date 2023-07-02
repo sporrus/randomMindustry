@@ -15,6 +15,7 @@ import mindustry.maps.generators.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
+import randomMindustry.mappers.block.*;
 import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.random.*;
@@ -532,7 +533,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                 }
 
                 if(rand.chance(0.01) && floor.asFloor().hasSurface() && block == Blocks.air){
-                    block = dec.get(floor, floor.asFloor().decoration);
+                    block = BlockMapper.generatedBlocks.select(b -> b instanceof RandomSeaBush).random(rand);
                 }
             }
         });
