@@ -60,7 +60,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     private boolean pixmapLoaded = false;
     public void createSprites(Pixmap from) {
         Pixmap region = from.crop(0, 0, 96, 96);
-        Pixmap team = from.crop(96, 96, 96, 96);
+        Pixmap team = from.crop(96, 0, 96, 96);
         TextureManager.recolorRegion(region, mainItem.color);
         pixmapRegion = TextureManager.alloc(region);
         pixmapTeam = TextureManager.alloc(team);
