@@ -22,7 +22,6 @@ public class RandomPlanets {
         star = new Planet("rm-star", Planets.sun, 4f){{
             localizedName = "Very Awesome Star";
             bloom = true;
-            alwaysUnlocked = true;
             accessible = false;
             orbitRadius = 500f;
             drawOrbit = false;
@@ -82,6 +81,7 @@ public class RandomPlanets {
             landCloudColor = atmosphereColor.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
             solarSystem = star;
+            Planets.serpulo.launchCandidates.add(this);
         }};
     }
     
