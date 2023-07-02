@@ -75,6 +75,7 @@ public class RandomPlanets {
             atmosphereRadOut = 0.3f;
             startSector = 1;
             alwaysUnlocked = true;
+            accessible = true;
             defaultCore = (RandomCore)BlockMapper.generatedBlocks.find(b -> b instanceof RandomCore c && c.id == 0);
             landCloudColor = atmosphereColor.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
