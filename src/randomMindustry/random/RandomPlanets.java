@@ -20,6 +20,7 @@ public class RandomPlanets {
 
     public static void load() {
         star = new Planet("rm-star", Planets.sun, 4f){{
+            localizedName = "Very Awesome Star";
             bloom = true;
             alwaysUnlocked = true;
             accessible = false;
