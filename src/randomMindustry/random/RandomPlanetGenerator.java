@@ -533,7 +533,7 @@ public class RandomPlanetGenerator extends PlanetGenerator{
                 }
 
                 if(rand.chance(0.01) && floor.asFloor().hasSurface() && block == Blocks.air){
-                    block = BlockMapper.generatedBlocks.select(b -> b instanceof RandomSeaBush).random(rand);
+                    block = BlockMapper.generatedBlocks.copy().map(b -> (Block)b).select(b -> b instanceof RandomSeaBush).random(rand);
                 }
             }
         });
