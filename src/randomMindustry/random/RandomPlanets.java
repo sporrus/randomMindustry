@@ -81,7 +81,6 @@ public class RandomPlanets {
             landCloudColor = atmosphereColor.cpy().a(0.5f);
             hiddenItems.addAll(Vars.content.items()).removeAll(ItemMapper.generatedItems);
             solarSystem = star;
-            Planets.serpulo.launchCandidates.add(this);
         }};
     }
     
