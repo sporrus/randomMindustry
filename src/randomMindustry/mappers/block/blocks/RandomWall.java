@@ -32,6 +32,7 @@ public class RandomWall extends Wall implements RandomBlock {
             last.clear();
         }
         stats = new Stats();
+        techNode = null;
 
         size = r.random(1, 2);
         requirements(Category.defense, ItemMapper.getItemStacks(getTier(), r.random(1, 3), () -> 6 * size * size, r));
@@ -89,9 +90,10 @@ public class RandomWall extends Wall implements RandomBlock {
 
     @Override
     public TechTree.TechNode generateNode() {
+        if (techNode != null) return techNode;
         RandomItemTurret itur = (RandomItemTurret) generatedBlocks.select(b -> b instanceof RandomItemTurret).find(b -> ((RandomItemTurret)b).id == 0);
         techNode = new TechTree.TechNode(
-                last.size == 0 ? itur.techNode : last.random(r).techNode,
+                last.size == 0 ? itur.generateNode() : last.random(r).techNode,
                 this,
                 researchRequirements()
         );

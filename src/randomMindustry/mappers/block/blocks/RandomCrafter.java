@@ -36,6 +36,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
             last.clear();
         }
         stats = new Stats();
+        techNode = null;
         // cancer 2
         Consume[] consumes = consumers.clone();
         consumers = new Consume[0];
@@ -116,6 +117,7 @@ public class RandomCrafter extends GenericCrafter implements RandomBlock {
 
     @Override
     public TechTree.TechNode generateNode() {
+        if (techNode != null) return techNode;
         techNode = new TechTree.TechNode(
                 last.size == 0 ? TechTree.context() : last.random(r).techNode,
                 this,

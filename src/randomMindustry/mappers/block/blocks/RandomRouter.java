@@ -29,6 +29,7 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
 
     public void generate() {
         stats = new Stats();
+        techNode = null;
 
         size = 1;
         requirements(Category.distribution, ItemMapper.getItemStacks(getTier(), r.random(1, 3), () -> r.random(1, 3), r));
@@ -87,6 +88,7 @@ public class RandomRouter extends DuctRouter implements RandomBlock {
 
     @Override
     public TechTree.TechNode generateNode() {
+        if (techNode != null) return techNode;
         RandomConveyor conv = (RandomConveyor) generatedBlocks.select(b -> b instanceof RandomConveyor).find(b -> ((RandomConveyor)b).id == id);
         techNode = new TechTree.TechNode(
                 conv.techNode,

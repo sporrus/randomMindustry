@@ -41,7 +41,9 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
             alwaysUnlocked = true;
             last.clear();
         }
+        last.clear();
         stats = new Stats();
+        techNode = null;
         // cancer
         Consume[] consumes = consumers.clone();
         consumers = new Consume[0];
@@ -140,6 +142,7 @@ public class RandomItemTurret extends ItemTurret implements RandomBlock {
 
     @Override
     public TechTree.TechNode generateNode() {
+        if (techNode != null) return techNode;
         techNode = new TechTree.TechNode(
                 last.size == 0 ? TechTree.context() : last.random(r).techNode,
                 this,

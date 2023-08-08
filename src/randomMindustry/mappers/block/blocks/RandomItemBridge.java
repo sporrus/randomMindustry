@@ -29,6 +29,7 @@ public class RandomItemBridge extends BufferedItemBridge implements RandomBlock 
 
     public void generate() {
         stats = new Stats();
+        techNode = null;
 
         size = 1;
         requirements(Category.distribution, ItemMapper.getItemStacks(getTier(), r.random(1, 2), () -> r.random(1, 10), r));
@@ -96,6 +97,7 @@ public class RandomItemBridge extends BufferedItemBridge implements RandomBlock 
 
     @Override
     public TechTree.TechNode generateNode() {
+        if (techNode != null) return techNode;
         RandomRouter router = (RandomRouter) generatedBlocks.select(b -> b instanceof RandomRouter).find(b -> ((RandomRouter)b).id == id);
         techNode = new TechTree.TechNode(
                 router.techNode,

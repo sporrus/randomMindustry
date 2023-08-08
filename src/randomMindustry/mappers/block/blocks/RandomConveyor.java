@@ -34,6 +34,7 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
             last.clear();
         }
         stats = new Stats();
+        techNode = null;
 
         size = 1;
         requirements(Category.distribution, ItemMapper.getItemStacks(getTier(), r.random(1, 2), () -> 1, r));
@@ -100,6 +101,7 @@ public class RandomConveyor extends Conveyor implements RandomBlock {
 
     @Override
     public TechTree.TechNode generateNode() {
+        if (techNode != null) return techNode;
         techNode = new TechTree.TechNode(
                 last.size == 0 ? TechTree.context() : last.random(r).techNode,
                 this,

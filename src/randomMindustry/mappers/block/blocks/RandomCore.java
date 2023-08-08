@@ -41,6 +41,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
             last = null;
         }
         stats = new Stats();
+        techNode = null;
 
         size = Math.min(id + 3, 16);
         itemCapacity = Mathf.round(r.random(1000, 3000) * size, 100);
@@ -106,6 +107,7 @@ public class RandomCore extends CoreBlock implements RandomBlock{
     @Override
     public TechTree.TechNode generateNode() {
         if (id == 0) return null; // no need to generate, root
+        if (techNode != null) return techNode;
         techNode = new TechTree.TechNode(
                 last == null ? TechTree.context() : last.techNode,
                 this,

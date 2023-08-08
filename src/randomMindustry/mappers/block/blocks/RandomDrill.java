@@ -35,6 +35,7 @@ public class RandomDrill extends Drill implements RandomBlock {
             last.clear();
         }
         stats = new Stats();
+        techNode = null;
 
         size = 2;
         requirements(Category.production, ItemMapper.getItemStacks(getTier(), r.random(1, 5), () -> Mathf.round(r.random(6, 12) * size, 2), r));
@@ -112,6 +113,7 @@ public class RandomDrill extends Drill implements RandomBlock {
 
     @Override
     public TechTree.TechNode generateNode() {
+        if (techNode != null) return techNode;
         techNode = new TechTree.TechNode(
                 last.size == 0 ? TechTree.context() : last.random(r).techNode,
                 this,
