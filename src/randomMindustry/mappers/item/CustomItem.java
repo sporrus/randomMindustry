@@ -41,7 +41,7 @@ public class CustomItem extends Item {
         globalTier += 1;
 
         hardness = localTier + 1;
-        // explosiveness = r.random(100) / 100f;
+        if(id > 4) explosiveness = r.random(100) / 100f;
         radioactivity = r.random(100) / 100f;
         flammability = r.random(100) / 100f;
         charge = r.random(100) / 100f;
