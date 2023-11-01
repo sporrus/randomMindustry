@@ -2,9 +2,11 @@ package randomMindustry.mappers.block.blocks;
 
 import arc.*;
 import arc.graphics.*;
+import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
 import mindustry.content.*;
+import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.consumers.*;
