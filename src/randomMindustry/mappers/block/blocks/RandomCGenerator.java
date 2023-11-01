@@ -23,7 +23,7 @@ public class RandomCGenerator extends ConsumeGenerator implements RandomBlock{
     public int consumeType;
     public boolean handleExplosive;
     
-    public class RandomCGenerator(String name, int id){
+    public RandomCGenerator(String name, int id){
         super(name + id);
         this.id = id;
         generate();
@@ -138,6 +138,6 @@ public class RandomCGenerator extends ConsumeGenerator implements RandomBlock{
             case 0 -> "flammable";
             case 1 -> "charged";
             case 2 -> "radioactive";
-        }
+        };
     }
 }
