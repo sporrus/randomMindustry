@@ -22,7 +22,9 @@ public class BlockMapper {
             generatedBlocks.add(new RandomCrafter("random-crafter-", i));
         for(int i = 0; i < ItemMapper.maxTier / 3; i++)
             generatedBlocks.add(new RandomCore("random-core-", i));
-
+        for(int i = 0; i < ItemMapper.maxTier / 2; i++)
+            generatedBlocks.add(new RandomCGenerator("random-cgen-", i));
+        
         for (int i = 0; i < ItemMapper.maxTier; i++)
             generatedBlocks.add(new RandomConveyor("random-conveyor-", i));
         for (int i = 0; i < ItemMapper.maxTier; i++)
