@@ -62,7 +62,7 @@ public class RandomCGenerator extends ConsumeGenerator implements RandomBlock{
         if(!headless){
             localizedName = Core.bundle.format("cgen.rm-name", mainItem.localizedName);
             description = Core.bundle.format("cgen.rm-description", powerString(), materialString());
-            if(id > 4) description += " " + handleExplosive ? Core.bundle.get("cantexplode") : Core.bundle.get("canexplode");
+            if(id > 4) description += " " + (handleExplosive ? Core.bundle.get("cantexplode") : Core.bundle.get("canexplode"));
         }
     }
     
@@ -79,13 +79,13 @@ public class RandomCGenerator extends ConsumeGenerator implements RandomBlock{
     }
     
     public void reloadIcons(){
-        createSprites(cgenSprites.random(size * 32, size * 64, cr));
+        createSprites(cgenSprites.get(size).random(size * 32, size * 64, cr));
         applyIcons();
     }
     
     @Override
     public void createIcons(MultiPacker packer){
-        createSprites(cgenSprites.random(packer, size * 32, size * 64, cr));
+        createSprites(cgenSprites.get(size).random(packer, size * 32, size * 64, cr));
     }
     
     @Override
