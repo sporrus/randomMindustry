@@ -33,6 +33,11 @@ public class RMVars{
     public static ObjectMap<Integer, TextureGrid> coreSprites = ObjectMap.of(
             3, new TextureGrid("random-mindustry-cores3")
     );
+    public static ObjectMap<Integer, TextureGrid> cgenSprites = ObjectMap.of(
+            1, new TextureGrid("random-mindustry-cgens1"),
+            2, new TextureGrid("random-mindustry-cgens2"),
+            3, new TextureGrid("random-mindustry-cgens3")
+    );
     public static TextureGrid oreSprites = new TextureGrid("random-mindustry-ores");
     public static TextureGrid drillSprites = new TextureGrid("random-mindustry-drills");
     public static TextureGrid routerSprites = new TextureGrid("random-mindustry-routers");
