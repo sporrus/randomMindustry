@@ -140,6 +140,7 @@ public class RandomCGenerator extends ConsumeGenerator implements RandomBlock{
             case 0 -> "flammable";
             case 1 -> "charged";
             case 2 -> "radioactive";
+            default -> "how";
         };
     }
 }
