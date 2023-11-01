@@ -71,8 +71,8 @@ public class RandomCGenerator extends ConsumeGenerator implements RandomBlock{
     private boolean pixmapLoaded = false;
     public void createSprites(Pixmap from){
         TextureManager.recolorRegion(from, mainItem.color);
-        Pixmap region = from.crop(0, size * 32, size * 32, size * 32);
-        Pixmap topRegion = from.crop(0, 0, size * 32, size * 32);
+        Pixmap region = from.crop(0, 0, size * 32, size * 32);
+        Pixmap topRegion = from.crop(0, size * 32, size * 32, size * 32);
         pixmapRegion = TextureManager.alloc(region);
         pixmapTopRegion = TextureManager.alloc(topRegion);
         pixmapLoaded = true;
