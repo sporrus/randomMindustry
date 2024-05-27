@@ -19,12 +19,12 @@ public class RandomPlanets {
     public static Planet random, star;
 
     public static void load() {
-        star = new Planet("rm-star", Planets.sun, 4f){{
+        star = new Planet("rm-star", null, 4f){{
             localizedName = "Very Awesome Star";
             bloom = true;
             accessible = false;
-            orbitRadius = 500f;
             drawOrbit = false;
+            solarSystem = this;
             
             Color lastColor = RandomUtil.genColor(r);
 
