@@ -16,10 +16,26 @@ public class StringGenerator{
         "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x",
         "y", "z"
     );
-
-    public final ObjectMap<String, String> bestVowels = ObjectMap.with(
-        "b", Seq.with("a", "e"),
-        "c", Seq.with("a", "o")
+    
+    public final ObjectMap<String, String> avoidConsonants = ObjectMap.with(
+        "a", Seq.with("j", "q", "x", "z"),
+        "e", Seq.with("j", "q", "x", "z"),
+        "i", Seq.with("j", "q", "x", "z"),
+        "o", Seq.with("j", "q", "x", "z"),
+        "u", Seq.with("j", "q", "x", "z")
+    );
+    
+    public final ObjectMap<String, String> avoidVowels = ObjectMap.with(
+        "c", Seq.with("e", "i"),
+        "g", Seq.with("e", "i"),
+        "h", Seq.with("u"),
+        "j", Seq.with("e", "i"),
+        "k", Seq.with("e"),
+        "q", Seq.with("e", "i"),
+        "v", Seq.with("o", "u"),
+        "w", Seq.with("i"),
+        "y", Seq.with("i"),
+        "z", Seq.with("a")
     );
 
     public final Seq<String> initialTmp = Seq.with(
@@ -39,9 +55,17 @@ public class StringGenerator{
         for(int i = 0; i < tmp.length(); i++){
             String letter;
             if(tmp.charAt(i) == 'c'){
-                letter = consonants.random(r);
+                Seq<String> picked = consonants.copy();
+                if(avoidConsonants.containsKey(lastLetter)){
+                    picked.removeAll(avoidConsonants.get(lastLetter));
+                }
+                letter = picked.random(r);
             }else{
-                letter = vowels.random(r);
+                Seq<String> picked = vowels.copy()
+                if(avoidVowels.containsKey(lastLetter)){
+                    picked.removeAll(avoidVowels.get(lastLetter));
+                }
+                letter = picked.random(r);
             }
             out.append(letter);
             lastLetter = letter;
