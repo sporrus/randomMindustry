@@ -22,18 +22,22 @@ public class StringGenerator{
     );
 
     public String generateSyllable(){
-        String tmp;
         if(consonants.contains(lastSyllable)){ //TODO: add complementing consonants
-            tmp = "vc";
+            String tmp = "vc";
         }else if(vowels.contains(lastSyllable)){
-            tmp = "cvc";
+            String tmp = "cvc";
         }else{
-            tmp = initialTmp.random(r);
+            String tmp = initialTmp.random(r);
         }
         StringBuilder out = new StringBuilder();
         for(int i = 0; i < tmp.length(); i++){
-            if(tmp.charAt(i) == 'c') out.append(consonants.random(r));
-            else out.append(vowels.random(r));
+            if(tmp.charAt(i) == 'c'){
+                String syllable = consonants.random(r);
+            }else{
+                String syllable = vowels.random(r);
+            }
+            out.append(syllable);
+            lastSyllable = syllable;
         }
         return out.toString();
     }
@@ -41,7 +45,7 @@ public class StringGenerator{
     public String generateWord(int size){
         StringBuilder out = new StringBuilder();
         for(int i = 0; i < size; i++) out.append(generateSyllable());
-        lastSyllable = false;
+        lastSyllable = null;
         return out.toString();
     }
     
