@@ -61,7 +61,7 @@ public class StringGenerator{
                 }
                 letter = picked.random(r);
             }else{
-                Seq<String> picked = vowels.copy()
+                Seq<String> picked = vowels.copy();
                 if(avoidVowels.containsKey(lastLetter)){
                     picked.removeAll(avoidVowels.get(lastLetter));
                 }
