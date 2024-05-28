@@ -17,7 +17,7 @@ public class StringGenerator{
         "y", "z"
     );
     
-    public final ObjectMap<String, String> avoidConsonants = ObjectMap.with(
+    public final ObjectMap<String, String> avoidConsonants = ObjectMap.of(
         "a", Seq.with("j", "q", "x", "z"),
         "e", Seq.with("j", "q", "x", "z"),
         "i", Seq.with("j", "q", "x", "z"),
@@ -25,7 +25,7 @@ public class StringGenerator{
         "u", Seq.with("j", "q", "x", "z")
     );
     
-    public final ObjectMap<String, String> avoidVowels = ObjectMap.with(
+    public final ObjectMap<String, String> avoidVowels = ObjectMap.of(
         "c", Seq.with("e", "i"),
         "g", Seq.with("e", "i"),
         "h", Seq.with("u"),
