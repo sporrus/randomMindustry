@@ -8,7 +8,7 @@ public class ItemStringGenerator extends StringGenerator{
         StringBuilder out = new StringBuilder();
         out.append(upperCaseFirst(generateWord(2)));
         if(r.chance(0.5f)){
-            String last = out.toString().charAt(out.toString().length() - 1);
+            String last = String.valueOf(out.toString().charAt(out.toString().length() - 1));
             if(vowel(last)){
                 Seq<String> picked = consonants.copy();
                 picked.removeAll(avoidConsonants.get(last));
