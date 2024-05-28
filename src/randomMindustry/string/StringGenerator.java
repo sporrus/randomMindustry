@@ -22,19 +22,21 @@ public class StringGenerator{
     );
 
     public String generateSyllable(){
+        String tmp;
         if(consonants.contains(lastSyllable)){ //TODO: add complementing consonants
-            String tmp = "vc";
+            tmp = "vc";
         }else if(vowels.contains(lastSyllable)){
-            String tmp = "cvc";
+            tmp = "cvc";
         }else{
-            String tmp = initialTmp.random(r);
+            tmp = initialTmp.random(r);
         }
         StringBuilder out = new StringBuilder();
         for(int i = 0; i < tmp.length(); i++){
+            String syllable;
             if(tmp.charAt(i) == 'c'){
-                String syllable = consonants.random(r);
+                syllable = consonants.random(r);
             }else{
-                String syllable = vowels.random(r);
+                syllable = vowels.random(r);
             }
             out.append(syllable);
             lastSyllable = syllable;
