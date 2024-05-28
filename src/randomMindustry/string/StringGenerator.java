@@ -17,15 +17,20 @@ public class StringGenerator{
         "y", "z"
     );
 
+    public final ObjectMap<String, String> bestVowels = ObjectMap.with(
+        "b", Seq.with("a", "e"),
+        "c", Seq.with("a", "o")
+    );
+
     public final Seq<String> initialTmp = Seq.with(
         "cvc", "vcv", "cv", "vc", "c", "v"
     );
 
     public String generateSyllable(){
         String tmp;
-        if(consonants.contains(lastLetter)){ //TODO: add complementing consonants
+        if(consonant(lastLetter)){ //TODO: add complementing consonants
             tmp = "vc";
-        }else if(vowels.contains(lastLetter)){
+        }else if(vowel(lastLetter)){
             tmp = "cvc";
         }else{
             tmp = initialTmp.random(r);
@@ -53,5 +58,13 @@ public class StringGenerator{
     
     public String upperCaseFirst(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
+    }
+
+    public boolean consonant(String l){
+        return consonants.contains(l);
+    }
+
+    public boolean vowel(String l){
+        return vowels.contains(l);
     }
 }
