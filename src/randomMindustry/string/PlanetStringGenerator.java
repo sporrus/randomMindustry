@@ -3,7 +3,7 @@ package randomMindustry.string;
 public class PlanetStringGenerator extends StringGenerator{
     public String generateName(){
         StringBuilder out = new StringBuilder();
-        out.append(upperCaseFirst(generateWord(r.random(3, 6))));
+        out.append(upperCaseFirst(generateWord(r.random(2, 4))));
         return out.toString();
     }
 }
