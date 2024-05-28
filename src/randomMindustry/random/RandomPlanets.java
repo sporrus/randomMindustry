@@ -19,29 +19,29 @@ public class RandomPlanets {
     public static Planet random, star;
 
     public static void load() {
-        star = new Planet("rm-star", null, 4f){{
-            localizedName = "Very Awesome Star";
+        star = new Planet("star", null, 4f){{
+            localizedName = nameGen.generateName();
             bloom = true;
             accessible = false;
-            drawOrbit = false;
             solarSystem = this;
             
             Color lastColor = RandomUtil.genColor(r);
 
+            float mul = 1.25f;
             meshLoader = () -> new SunMesh(
                 this, 4,
                 5, 0.3, 1.7, 1.2, 1,
                 1.1f,
-                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
-                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
-                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
-                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
-                lastColor.shiftHue(r.random(-2f, 2f)).cpy(),
-                lastColor.shiftHue(r.random(-2f, 2f)).cpy()
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy().mul(mul),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy().mul(mul),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy().mul(mul),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy().mul(mul),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy().mul(mul),
+                lastColor.shiftHue(r.random(-2f, 2f)).cpy().mul(mul)
             );
         }};
 
-        random = new Planet("rm-random", star, 1f, 3){{
+        random = new Planet("random", star, 1f, 3){{
             localizedName = nameGen.generateName();
             sectorSeed = r.random(1, Integer.MAX_VALUE);
             generator = new RandomPlanetGenerator(this){{
