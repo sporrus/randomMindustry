@@ -18,7 +18,7 @@ public class StringGenerator{
     );
 
     public final Seq<String> initialTmp = Seq.with(
-        "cvc", "vc", "cv", "c", "v"
+        "cvc", "vcv", "cv", "vc", "c", "v"
     );
 
     public String generateSyllable(){
