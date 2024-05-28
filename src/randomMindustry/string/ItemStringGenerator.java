@@ -8,9 +8,11 @@ public class ItemStringGenerator extends StringGenerator{
         StringBuilder out = new StringBuilder();
         out.append(upperCaseFirst(generateWord(2)));
         if(r.chance(0.5f)){
-            String last = out.toString().charAt(out.toString().length - 1);
+            String last = out.toString().charAt(out.toString().length() - 1);
             if(vowel(last)){
-                String append = consonants.copy().removeAll(avoidConsonants.get(last));
+                Seq<String> picked = consonants.copy();
+                picked.removeAll(avoidConsonants.get(last));
+                String append = picked.random(r);
                 out.append(append);
             }
             out.append(generateSuffix());
