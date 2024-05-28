@@ -42,12 +42,20 @@ public class StringGenerator{
         "cvc", "vcv", "cv", "vc", "c", "v"
     );
 
+    public final Seq<String> consonantTmp = Seq.with(
+        "vcv", "vc"
+    );
+
+    public final Seq<String> vowelTmp = Seq.with(
+        "cvc", "cv"
+    );
+
     public String generateSyllable(){
         String tmp;
         if(consonant(lastLetter)){ //TODO: add complementing consonants
-            tmp = "vc";
+            tmp = consonantTmp.random(r);
         }else if(vowel(lastLetter)){
-            tmp = "cvc";
+            tmp = vowelTmp.random(r);
         }else{
             tmp = initialTmp.random(r);
         }
