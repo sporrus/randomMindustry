@@ -56,13 +56,13 @@ public class StringGenerator{
             String letter;
             if(tmp.charAt(i) == 'c'){
                 Seq<String> picked = consonants.copy();
-                if(avoidConsonants.containsKey(lastLetter)){
+                if(lastLetter != null && avoidConsonants.containsKey(lastLetter)){
                     picked.removeAll(avoidConsonants.get(lastLetter));
                 }
                 letter = picked.random(r);
             }else{
                 Seq<String> picked = vowels.copy();
-                if(avoidVowels.containsKey(lastLetter)){
+                if(lastLetter != null && avoidVowels.containsKey(lastLetter)){
                     picked.removeAll(avoidVowels.get(lastLetter));
                 }
                 letter = picked.random(r);
