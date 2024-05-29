@@ -6,7 +6,7 @@ import randomMindustry.string.*;
 public class DrillStringGenerator extends StringGenerator{
     public String generateName(int tier){
         StringBuilder out = new StringBuilder();
-        out.append(upperCaseFirst(generateWord(r.random(1, 2))));
+        out.append(upperCaseFirst(generateWord(2)));
         if(r.chance(0.5f)){
             String last = String.valueOf(out.toString().charAt(out.toString().length() - 1));
             if(vowel(last)){
