@@ -27,7 +27,7 @@ public class RandomPlanets {
             
             Color lastColor = RandomUtil.genColor(r);
 
-            float mul = 1.25f;
+            float mul = 1.125f;
             meshLoader = () -> new SunMesh(
                 this, 4,
                 5, 0.3, 1.7, 1.2, 1,
