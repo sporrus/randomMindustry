@@ -12,15 +12,16 @@ import randomMindustry.mappers.block.blocks.*;
 import randomMindustry.mappers.item.*;
 import randomMindustry.string.*;
 
+import static randomMindustry.RMVars.*;
+
 public class RandomPlanets {
     public static final SyncedRand r = new SyncedRand();
-    public static final PlanetStringGenerator nameGen = new PlanetStringGenerator();
     
     public static Planet random, star;
 
     public static void load() {
         star = new Planet("star", null, 4f){{
-            localizedName = nameGen.generateName();
+            localizedName = planetStringGen.generateName();
             bloom = true;
             accessible = false;
             solarSystem = this;
@@ -42,7 +43,7 @@ public class RandomPlanets {
         }};
 
         random = new Planet("random", star, 1f, 3){{
-            localizedName = nameGen.generateName();
+            localizedName = planetStringGen.generateName();
             sectorSeed = r.random(1, Integer.MAX_VALUE);
             generator = new RandomPlanetGenerator(this){{
                 defaultLoadout = RandomLoadouts.loadouts.first();
