@@ -37,7 +37,7 @@ public class DrillStringGenerator extends StringGenerator{
             Seq.with("shredder", "carver"),
             Seq.with("quaker", "rumbler"),
             Seq.with("demolisher", "devastator"),
-            Seq.with("obliterator", "annihilator"),
+            Seq.with("obliterator", "annihilator")
         );
         
         if(tier >= 3){
@@ -51,7 +51,7 @@ public class DrillStringGenerator extends StringGenerator{
                     Seq.with("exo", "exa"),
                     Seq.with("tita", "ultra"),
                     Seq.with("omega", "peta"),
-                    Seq.with("omni", "infini"),
+                    Seq.with("omni", "infini")
                 );
                 
                 out.append(tiers.get(tier).random(r));
