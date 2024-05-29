@@ -4,10 +4,16 @@ import arc.struct.*;
 import mindustry.world.meta.*;
 import randomMindustry.random.*;
 import randomMindustry.string.*;
+import randomMindustry.string.block.*;
 import randomMindustry.texture.*;
 
 public class RMVars{
     public static ItemStringGenerator itemStringGen = new ItemStringGenerator();
+
+    public static DrillStringGenerator drillStringGen = new DrillStringGenerator();
+
+    public static PlanetStringGenerator planetStringGen = new PlanetStringGenerator();
+    
     public static StatCat rmStats = new StatCat("rm");
     public static Stat
             seedStat = new Stat("rm-seed", rmStats),
