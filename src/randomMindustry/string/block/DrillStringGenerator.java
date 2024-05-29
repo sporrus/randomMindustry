@@ -2,7 +2,7 @@ package randomMindustry.string.block;
 
 import arc.struct.*;
 
-public DrillStringGenerator extends StringGenerator{
+public class DrillStringGenerator extends StringGenerator{
     public String generateName(int tier){
         StringBuilder out = new StringBuilder();
         out.append(upperCaseFirst(generateWord(r.random(1, 2))));
