@@ -7,14 +7,16 @@ public class DrillStringGenerator extends StringGenerator{
     public String generateName(int tier){
         StringBuilder out = new StringBuilder();
         out.append(upperCaseFirst(generateWord(r.random(1, 2))));
-        String last = String.valueOf(out.toString().charAt(out.toString().length() - 1));
-        if(consonant(last)){
-            Seq<String> picked = vowels.copy();
-            picked.removeAll(avoidVowels.get(last));
-            String append = picked.random(r);
-            out.append(append);
+        if(r.chance(0.5f)){
+            String last = String.valueOf(out.toString().charAt(out.toString().length() - 1));
+            if(consonant(last)){
+                Seq<String> picked = vowels.copy();
+                picked.removeAll(avoidVowels.get(last));
+                String append = picked.random(r);
+                out.append(append);
+            }
+            out.append(generateSuffix());
         }
-        out.append(generateSuffix());
         out.append(" ").append(generateType(tier));
         return out.toString();
     }
