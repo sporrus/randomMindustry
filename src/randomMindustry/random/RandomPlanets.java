@@ -103,7 +103,7 @@ public class RandomPlanets {
             new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.15f, 0.13f, 5, RandomUtil.genColor(r).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
             new HexSkyMesh(this, r.random(1, Integer.MAX_VALUE), 0.6f, 0.16f, 5, Color.white.cpy().lerp(RandomUtil.genColor(r), 0.55f).a(0.75f), 2, 0.45f, 1f, 0.41f)
         );*/
-        random.localizedName = nameGen.generateName();
+        random.localizedName = planetStringGen.generateName();
         Team def = genTeam(Team.derelict);
         Team wave = genTeam(def);
         random.ruleSetter = r -> {
