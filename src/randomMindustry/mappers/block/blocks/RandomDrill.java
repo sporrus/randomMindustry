@@ -45,7 +45,7 @@ public class RandomDrill extends Drill implements RandomBlock {
         health = Mathf.round(r.random(20, 100) * getTier() * size, 5);
         drillTime = 600f / tier;
         
-        localizedName = drillStringGen.generate(tier);
+        localizedName = drillStringGen.generateName(tier);
     }
 
     private TextureRegion pixmapRegion;
