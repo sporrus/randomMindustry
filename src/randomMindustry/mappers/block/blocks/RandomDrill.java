@@ -45,11 +45,7 @@ public class RandomDrill extends Drill implements RandomBlock {
         health = Mathf.round(r.random(20, 100) * getTier() * size, 5);
         drillTime = 600f / tier;
         
-        // need better names (applies to other stuff and things)
-        
-        Seq<String> stringTiers = Seq.with("Drill", "Bore", "Auger", "Excavator", "Trencher", "Destructor", "Crusher", "Terraformer", "Ore Ender");
-        // localizedName = mainItem.localizedName.split(" ")[0] + " " + stringTiers.get(Math.min(id, stringTiers.size));
-        localizedName = mainItem.localizedName.split(" ")[0] + " " + stringTiers.random(r);
+        localizedName = drillStringGen.generate(tier);
     }
 
     private TextureRegion pixmapRegion;
@@ -101,7 +97,7 @@ public class RandomDrill extends Drill implements RandomBlock {
 
     @Override
     public int getTier() {
-        return id * 2;
+        return tier * 2;
     }
 
     @Override
