@@ -1,6 +1,7 @@
 package randomMindustry.string.block;
 
 import arc.struct.*;
+import randomMindustry.string.*;
 
 public class DrillStringGenerator extends StringGenerator{
     public String generateName(int tier){
