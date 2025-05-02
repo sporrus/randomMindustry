@@ -44,6 +44,9 @@ public class ItemMapper {
                 TextureGenerator.changeHue(item.uiIcon, hue);
             }
             item.init();
+            
+            item.shownPlanets.addAll(Vars.content.planets());
+            item.databaseTabs.addAll(Vars.content.planets());
         }));
         Seq<Item> unselectedItems = Vars.content.items().copy();
         unselectedItems.removeAll(selectedItems::contains);
@@ -51,6 +54,9 @@ public class ItemMapper {
             i.alwaysUnlocked = false;
             i.hidden = true;
             i.buildable = false;
+            
+            item.shownPlanets.clear();
+            item.databaseTabs.clear();
         });
         ItemPack all = new ItemPack("all", 0, 0, selectedItems.toArray(Item.class));
 
@@ -78,10 +84,7 @@ public class ItemMapper {
         ));
 
         Items.erekirOnlyItems.clear().addAll(unselectedItems);
-        // TODO: this is really bad, make every planet have its own set of items
-        Vars.content.planets().each((p) -> p.hiddenItems.clear().addAll(unselectedItems));
-        Vars.state.rules.hiddenBuildItems.clear();
-        Vars.state.rules.hiddenBuildItems.addAll(unselectedItems);
+        // it kind of happened? now every item has its own set of planets
 
         ItemPack ores = combine(false, getPackByTier(0), getPackByTier(1), getPackByTier(3), getPackByTier(5));
         new Seq<>(new Block[]{Blocks.oreCopper, Blocks.oreLead, Blocks.oreScrap, Blocks.oreCoal, Blocks.sand, Blocks.oreTitanium, Blocks.oreThorium}).each(b -> {
