@@ -50,13 +50,13 @@ public class ItemMapper {
         }));
         Seq<Item> unselectedItems = Vars.content.items().copy();
         unselectedItems.removeAll(selectedItems::contains);
-        unselectedItems.each((i) -> {
+        unselectedItems.each(i -> {
             i.alwaysUnlocked = false;
             i.hidden = true;
             i.buildable = false;
             
-            item.shownPlanets.clear();
-            item.databaseTabs.clear();
+            i.shownPlanets.clear();
+            i.databaseTabs.clear();
         });
         ItemPack all = new ItemPack("all", 0, 0, selectedItems.toArray(Item.class));
 
