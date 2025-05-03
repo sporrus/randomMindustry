@@ -28,7 +28,6 @@ public class Main extends Mod {
     }
 
     public static void client() {
-        ui.paused.buttons.button("@rm-menu", (Drawable) atlas.getDrawable("random-mindustry-dice"), Dialogs.menuDialog::show).width(220f).height(55).pad(5f).row();
         if (settings.getBool("rm-book-collected", false)) setupButtons();
         SettingsLoader.init();
         load();
