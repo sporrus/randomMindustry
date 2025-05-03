@@ -7,8 +7,6 @@ import arc.graphics.g2d.TextureRegion;
 import arc.struct.Seq;
 import arc.util.Log;
 
-import static mindustry.Vars.*;
-
 import java.util.function.BiConsumer;
 
 public class TextureGenerator {
@@ -30,9 +28,7 @@ public class TextureGenerator {
     }
 
     public static void changeHue(TextureRegion region, float hue) {
-        if(!mobile) return;
-        
-        if (oldTexture != region.texture) {
+        /* if (oldTexture != region.texture) {
             pixmap = region.texture.getTextureData().consumePixmap();
             oldTexture = region.texture;
         }
@@ -43,7 +39,7 @@ public class TextureGenerator {
             color.hue(hue);
             newPixmap.set(x, y, color);
         });
-        oldTexture.draw(newPixmap, region.getX(), region.getY());
+        oldTexture.draw(newPixmap, region.getX(), region.getY()); */
     }
 
     public static boolean isGray(Color color) {
